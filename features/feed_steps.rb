@@ -1,6 +1,7 @@
 
-Given(/^a platform with the nickname (.+)$/) do |name|
-  puts "get platform #{name}"
+Given(/^a platform with the nickname (.+)$/) do |key|
+  puts "get platform #{key}"
+  FactoryBot.create(:platform, key: name)
 end
 
 Given("the tag murlo") do
