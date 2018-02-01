@@ -14,5 +14,5 @@ Feature: View Feed
            
   Scenario: get latest episodes for a platform
     Given a platform with episodes
-     When I view the platform's feed 
-     Then I should get a list of episodes
+     When I view the platform's episodes property
+     Then there should be some episodes
