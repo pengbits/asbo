@@ -1,17 +1,15 @@
 
-Given(/^a platform with the nickname (.+)$/) do |name|
-  puts "get platform #{name}"
-end
-
-Given("the tag murlo") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("a platform") do
+  FactoryBot.create(:platform)
 end
 
 When("I view the feed") do
-  pending # Write code here that turns the phrase above into concrete actions
+  # p = FactoryBot.attributes_for(:platform)
+  @platform = FactoryBot.create(:platform_with_episodes, episodes_count: 5)
+  expect(@platform.episodes.length).to eq(5)
 end
 
-Then("I should get one or more episodes of a show on nts with murlo in it's name") do
+Then("I should get one or more episodes of shows for the platform") do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
