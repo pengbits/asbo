@@ -5,5 +5,5 @@ Feature: View Feed
    
 Scenario: View Latest NTS episodes
   Given The platform exists, and has some episodes
-   When I view the feed page for the platform
-   Then I should get one or more episodes of shows
+  When I view the feed page for the platform
+  Then I should get one or more episodes of shows
