@@ -3,8 +3,7 @@ Feature: View Feed
    I want to view them in list, filtered by a phrase or keyword
    
    
-Scenario: nts.live feed with filter murlo
+Scenario: nts.live feed
   Given a platform with the nickname nts
-    And the tag murlo
    When I view the feed
-   Then I should get one or more episodes of a show on nts with murlo in it's name
+   Then I should get one or more episodes of shows on nts
