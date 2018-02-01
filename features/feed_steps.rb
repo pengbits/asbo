@@ -1,6 +1,6 @@
 
-Given("a platform with the nickname nts") do
-  puts "get platform 'nts'"
+Given(/^a platform with the nickname (.+)$/) do |name|
+  puts "get platform #{name}"
 end
 
 Given("the tag murlo") do
