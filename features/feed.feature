@@ -1,9 +1,18 @@
 Feature: View Feed
-   In order to reduce a large collection of radio episodes (on a third party platform) to a manageable list
-   I want to view them in list, filtered by a phrase or keyword
+   In order to reduce a large collection of episodes to a manageable list
+   I want to view a subset of them
    
-   
-Scenario: with a valid platofrm
-  Given a platform
-   When I view the feed
-   Then I should get one or more episodes of shows for the platform
+
+   Scenario: With a valid platform
+     Given the following platforms:
+        |name|key|
+        |nts.live|nts|
+        |rinse.fm|rinse|
+        |radarradio|radar|
+      When I load the platform endpoint with key: "nts"
+      Then The response should be a JSON representation of the platform
+           
+  Scenario: get latest episodes for a platform
+    Given a platform with episodes
+     When I view the platform's episodes property
+     Then there should be some episodes
