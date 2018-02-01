@@ -1,9 +1,9 @@
 Feature: View Feed
-   In order to reduce a large collection of radio episodes (on a third party platform) to a manageable list
-   I want to view them in list, filtered by a phrase or keyword
+   In order to reduce a large collection of episodes to a manageable list
+   I want to view a subset of them
    
    
-Scenario: with a valid platofrm
-  Given a platform
-   When I view the feed
-   Then I should get one or more episodes of shows for the platform
+Scenario: View Latest NTS episodes
+  Given The platform exists, and has some episodes
+   When I view the feed page for the platform
+   Then I should get one or more episodes of shows
