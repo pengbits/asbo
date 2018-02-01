@@ -12,7 +12,7 @@ Feature: View Feed
       When I load the platform endpoint with key: "nts"
       Then The response should be a JSON representation of the platform
            
-  # Scenario: View Latest NTS episodes
-    # Given The platform exists, and has some episodes
-     # When I view the feed page for the platform
-     # Then I should get one or more episodes of shows
+  Scenario: get latest episodes for a platform
+    Given a platform with episodes
+     When I view the platform's feed 
+     Then I should get a list of episodes
