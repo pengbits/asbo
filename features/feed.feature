@@ -15,8 +15,8 @@ Feature: View Feed
     Given a platform with episodes
      When I view the platform's episodes property
      Then there should be some episodes
-     
-     
+  
+  @filter
   Scenario: filter episodes by a search term
     Given a platform with episodes
       And a search term: 'murlo'
