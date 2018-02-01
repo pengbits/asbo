@@ -4,6 +4,6 @@ Feature: View Feed
    
    
 Scenario: nts.live feed
-  Given a platform with the nickname nts
+  Given a platform with the nickname rinse.fm
    When I view the feed
    Then I should get one or more episodes of shows on nts
