@@ -3,10 +3,9 @@ require 'Nokogiri'
 class Episode < ApplicationRecord
   belongs_to :platform
   
-  def get attribute_selector_map 
-    
-  end
-  
+  # todo 
+  # this seems a little much for the episode itself..
+  # perhaps a Parser singleton or else just move to Platform? 
   def self.from_html(html)
     @doc = Nokogiri::HTML(html)
     @collection = @doc.css('.nts-grid-item').collect do |item|
@@ -18,11 +17,5 @@ class Episode < ApplicationRecord
       })
     end
     @collection.length == 1 ? @collection.last : @collection
-    
-    # puts @doc
-  end
-  
-  def to_json(opts={})
-    super.to_json(opts || {only: [:name,:image,:url,:date]})
   end
 end
