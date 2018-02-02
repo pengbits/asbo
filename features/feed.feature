@@ -36,5 +36,5 @@ Feature: View Feed
         |Mosca & Giant Swan 31.01.18 Radio Episode|/shows/mosca/episodes/mosca-30th-january-2018|https:\/\/media.ntslive.co.uk/resize/800x800/73a264a1-9ee3-46b1-8dd3-2163dac6e1c6_1457222400.jpeg|
       
       And a search term: 'murlo'
-     When I view the platform's episodes property with a filter
-     Then it should only include episodes with 'murlo' in their name
+     When I view the platform's episodes_with_name_matching property
+     Then it should include some episodes with the search term in their name
