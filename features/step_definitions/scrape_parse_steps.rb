@@ -3,10 +3,10 @@ Given("this html for the episode") do |html|
 end
 
 When("I parse the HTML") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @episode = Episode.from_html(@html)
 end
 
-Then("I should get an object with these attributes:") do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I should get an object with these attributes:") do |attrs|
+  @attrs = JSON.parse(attrs)
+  expect(@episode).to have_attributes(@attrs)
 end

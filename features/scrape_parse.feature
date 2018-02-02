@@ -38,5 +38,11 @@ Feature: Scrape and Parse Episodes
        """
      When I parse the HTML
      Then I should get an object with these attributes:
-       |name|image|date|url|
-       |Murlo 31.01.18 Radio Episode|https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg|01.31.18|https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/|
+        """
+        {
+          "name":"Murlo 31.01.18 Radio Episode",
+          "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
+          "date":"31.01.18",
+          "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"
+        }
+        """
