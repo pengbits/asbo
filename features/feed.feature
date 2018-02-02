@@ -1,6 +1,7 @@
 Feature: View Feed
-   In order to reduce a large collection of episodes to a manageable list
-   I want to view a subset of them
+   In order to reduce a large collection of podcast episodes on an external platform (in html format)
+   to a manageable list suitable for consumption by a local app (in JSON format)
+   I want to reduce them to a subset and coerce into JSON/RSS
   
    Scenario: With a valid platform
      Given the following platforms:
@@ -18,7 +19,8 @@ Feature: View Feed
   
   @filter
   Scenario: filter episodes by a search term
-    Given a platform with episodes
+    Given a platform
+      And episodes
       And a search term: 'murlo'
      When I view the platform's episodes property with a filter
      Then it should only include episodes with 'murlo' in their name
