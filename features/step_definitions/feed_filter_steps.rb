@@ -1,11 +1,12 @@
-
 Given("a platform") do
   @platform = Platform.create!(:key => 'nts', :name => 'nts.live')
   puts @platform.id
 end
 
-Given("episodes") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("episodes") do |episode_attrs|
+  # @platform.episodes = Episode.create!(eps.hashes)
+  @platform.episodes.build episode_attrs.hashes
+  @platform.save!
 end
 
 
