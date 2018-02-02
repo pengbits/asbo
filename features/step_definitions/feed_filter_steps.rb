@@ -17,6 +17,8 @@ When("I view the platform's episodes_with_name_matching property") do
 end
 
 Then("it should include some episodes with the search term in their name") do 
+  puts "found #{@episodes.length} matches"
+  puts @episodes.collect {|ep| ep.name }.join(", ")
   expect(@episodes.length).not_to be_zero
   # pending # Write code here that turns the phrase above into concrete actions
 end
