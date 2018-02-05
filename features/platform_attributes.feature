@@ -5,7 +5,7 @@ Feature: Store scraping rules in platform
 
   @attr
   Scenario: Parse Rinse.fm markup
-    Given this attribute map for platform
+    Given this attribute map for the platform
       """
       {
         "id": "2",
