@@ -8,7 +8,7 @@ class Platform < ApplicationRecord
 
   def create_episodes_from_html(doc)
     @doc = Nokogiri::HTML(doc)
-    eps = @doc.css('.nts-grid-item').collect { |item| episode_attrs(item) }
+    eps = @doc.css(attribute_map['item']).collect { |item| episode_attrs(item) }
     episodes.create(eps)
   end
   
@@ -16,7 +16,7 @@ class Platform < ApplicationRecord
     episode_attrs = attribute_map.inject({}) do |ep, pair|
       prop  = pair[0]
       query = pair[1]
-      
+
       # dont treat the wrapper element as a property
       if prop != 'item' 
         # selectors with attributes (.wibble[src]) need to be treated accordingly
