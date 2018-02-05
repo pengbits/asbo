@@ -9,7 +9,7 @@ class Platform < ApplicationRecord
   def get_episodes_from_html(doc)
     @doc = Nokogiri::HTML(doc)
     @eps = @doc.css('.nts-grid-item').collect do |item|
-      Episode.new(episode_attrs(item))
+      episodes.push(Episode.new(episode_attrs(item)))
     end
   end
   

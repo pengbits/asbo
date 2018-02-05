@@ -7,7 +7,8 @@ Given("this html") do |html|
 end
 
 When("i call get_episodes_from_html on the platform") do
-  puts @platform.get_episodes_from_html(@html)
+  @platform.get_episodes_from_html(@html)
+  expect(@platform.episodes).not_to be_empty
 end
 
 Then("I should get an episode with these attributes:") do |attrs|
