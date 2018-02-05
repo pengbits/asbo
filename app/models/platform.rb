@@ -6,11 +6,10 @@ class Platform < ApplicationRecord
   attr_accessor :attribute_map
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
-  def get_episodes_from_html(doc)
+  def create_episodes_from_html(doc)
     @doc = Nokogiri::HTML(doc)
-    @eps = @doc.css('.nts-grid-item').collect do |item|
-      episodes.push(Episode.new(episode_attrs(item)))
-    end
+    eps = @doc.css('.nts-grid-item').collect { |item| episode_attrs(item) }
+    episodes.create(eps)
   end
   
   def episode_attrs(item)
@@ -18,14 +17,15 @@ class Platform < ApplicationRecord
       prop  = pair[0]
       query = pair[1]
       
-      if prop != 'item'
+      # dont treat the wrapper element as a property
+      if prop != 'item' 
+        # selectors with attributes (.wibble[src]) need to be treated accordingly
         match = SELECTOR_WITH_ATTR_REGEX.match(query)
-        if !!match
-          ep[prop] = item.css(match[1]).attr(match[2]).to_s
-        else
+        ep[prop] = !!match ?
+          item.css(match[1]).attr(match[2]).to_s :
           ep[prop] = item.css(query).text.to_s
-        end
       end
+        
       ep
     end
   end

@@ -6,12 +6,12 @@ Given("this html") do |html|
   @html = html
 end
 
-When("i call get_episodes_from_html on the platform") do
-  @platform.get_episodes_from_html(@html)
+When("i call create_episodes_from_html on the platform") do
+  @platform.create_episodes_from_html(@html)
   expect(@platform.episodes).not_to be_empty
 end
 
-Then("I should get an episode with these attributes:") do |attrs|
+Then("I should get an episode with these attributes") do |attrs|
   @attrs = JSON.parse(attrs)
   expect(@platform.episodes.first).to have_attributes(@attrs)
 end

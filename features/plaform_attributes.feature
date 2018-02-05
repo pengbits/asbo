@@ -4,7 +4,7 @@ Feature: Store scraping rules in platform
   And share the implementation across different platforms
 
   @attr
-  Scenario: NTS and Rinse have different markup, same content model
+  Scenario: Parse NTS.live markup
     Given this attribute map for the platform
       """
       {
@@ -49,10 +49,11 @@ Feature: Store scraping rules in platform
         </div>
       </div>
       """
-    When i call get_episodes_from_html on the platform
-    Then I should get an episode with these attributes:
+    When i call create_episodes_from_html on the platform
+    Then I should get an episode with these attributes
        """
        {
+         "platform_id" : 1,
          "name":"Murlo 31.01.18 Radio Episode",
          "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
          "date":"31.01.18",
