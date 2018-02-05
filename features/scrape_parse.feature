@@ -1,8 +1,9 @@
 Feature: Scrape and Parse Episodes
-   In order to analyze and manipulate episodic content that is outside our domain (external platform)
-   I want to scrape the plaform's list of episodes in HTML format
-   And convert each entry in the list into JSON format
-   And persist each item to the database
+   In order to analyze and manipulate podcasts that are outside our domain (HTML format on an external website)
+   I want to scrape the platform's list of episodes in HTML format
+   And parse each entry in the list into JSON format
+   And convert each enrtry int instances of Episode model
+   And save them to the database
    
    @scrape
    Scenario: Parsing an Episode's HTML entry on NTS.live
