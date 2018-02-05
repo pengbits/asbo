@@ -19,8 +19,9 @@ class Platform < ApplicationRecord
       query = pair[1]
       
       if prop != 'item'
-        if query =~ SELECTOR_WITH_ATTR_REGEX
-          ep[query] = 'todo:attr not supported'
+        match = SELECTOR_WITH_ATTR_REGEX.match(query)
+        if !!match
+          ep[prop] = item.css(match[1]).attr(match[2]).to_s
         else
           ep[prop] = item.css(query).text.to_s
         end
