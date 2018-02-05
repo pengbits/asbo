@@ -7,15 +7,17 @@ Feature: Store scraping rules in platform
   Scenario: NTS and Rinse have different markup, same content model
     Given this attribute map for the platform
       """
+      {
         "id": "1",
         "name": "nts.live",
-        "attribute_map": {
+        "attribute_map" : {
           "item" : ".nts-grid-item",
           "name" : ".nts-grid-item__img img[alt]",
           "image": ".nts-grid-item__img img[src]",
           "url"  : ".nts-grid-item__img__play-btn[data-src]",
           "date" : ".nts-grid-item__subtitle__left"
         }
+      }
       """
     And this html
       """
@@ -36,7 +38,7 @@ Feature: Store scraping rules in platform
         <button class="nts-btn mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/" data-permalink="/shows/murlo/episodes/murlo-31st-january-2018"><span class="icon icon-play text-bold"></span></button> <a class="nts-app nts-btn" href="/shows/murlo/episodes/murlo-31st-january-2018">TRACKLIST</a></div>
       </div>
       """
-    When i call to_episode on the platform
+    When i call get_episodes_from_html on the platform
     Then I should get an episode with these attributes:
        """
        {

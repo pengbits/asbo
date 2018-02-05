@@ -1,13 +1,13 @@
-Given("this attribute map for the platform") do |map|
-  pending # Write code here that turns the phrase above into concrete actions
+Given("this attribute map for the platform") do |attrs|
+  @platform = Platform.create(JSON.parse(attrs))
 end
 
-Given("this html") do |htm|
-  pending # Write code here that turns the phrase above into concrete actions
+Given("this html") do |html|
+  @html = html
 end
 
-When("i call to_episode on the platform") do
-  pending # @platform.to_episode
+When("i call get_episodes_from_html on the platform") do
+  @platform.get_episodes_from_html(@html)
 end
 
 Then("I should get an episode with these attributes:") do |attrs|
