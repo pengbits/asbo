@@ -40,7 +40,7 @@ Feature: Store scraping rules in platform
         <!-- snip -->
       </div>
       """
-    When i call create_episodes_from_html on the platform
+    When I call create_episodes_from_html on the platform
     Then I should get an episode with these attributes
        """
        {

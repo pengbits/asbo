@@ -6,7 +6,7 @@ Given("this html") do |html|
   @html = html
 end
 
-When("i call create_episodes_from_html on the platform") do
+When("I call create_episodes_from_html on the platform") do
   @platform.create_episodes_from_html(@html)
   expect(@platform.episodes).not_to be_empty
 end
