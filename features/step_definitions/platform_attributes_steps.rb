@@ -12,7 +12,6 @@ When("i call get_episodes_from_html on the platform") do
 end
 
 Then("I should get an episode with these attributes:") do |attrs|
-  # @attrs = JSON.parse(attrs)
-  # expect(@episode).to have_attributes(@attrs)
-  pending
+  @attrs = JSON.parse(attrs)
+  expect(@platform.episodes.first).to have_attributes(@attrs)
 end
