@@ -3,7 +3,6 @@ require 'Nokogiri'
 class Platform < ApplicationRecord
   has_many :episodes
   
-  attr_accessor :attribute_map
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
   def create_episodes_from_html(doc)
