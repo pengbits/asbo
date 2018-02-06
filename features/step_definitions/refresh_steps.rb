@@ -7,7 +7,8 @@ When("I refresh the Platform") do
 end
 
 Then("the episodes list should contain new episodes") do
-  expect(@platform.episodes.length).not_to be_zero 
-
+  ep_length = @platform.episodes.length
+  expect(ep_length).not_to be_zero 
+  puts rand(ep_length)
 end
 
