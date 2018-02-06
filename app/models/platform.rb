@@ -35,4 +35,8 @@ class Platform < ApplicationRecord
       ep.name.downcase.include?(query)
     end
   end
+  
+  def to_json(opts={})
+    super opts || {}
+  end
 end

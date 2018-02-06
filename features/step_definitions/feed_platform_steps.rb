@@ -8,7 +8,6 @@ When("I load the platform endpoint with key: {string}") do |key|
   get "/platforms/#{key}"
   @params = {:key => key}
   @response = last_response.body
-  
 end
 
 Then("The response should be a JSON representation of the platform") do
