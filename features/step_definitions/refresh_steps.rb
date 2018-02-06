@@ -7,8 +7,8 @@ Given("this document html") do |string|
 end
 
 
-When("I add some episodes") do
-  @platform.create_episodes_from_html @doc_html
+When("I add some episodes") do |episodes|
+  pending
 end
 
 When("I refresh the Platform") do
@@ -17,12 +17,15 @@ end
 
 Then("the episodes list should contain some episodes") do
   @last_length = @platform.episodes.length
-  puts "found #{@last_length} episodes"
   expect(@last_length).not_to be_zero
 end
 
 Then("only new episodes are added to the platform") do
-  puts @platform.episodes.collect {|p| p.name }
+  # assuming that calling refresh only seconds later
+  # will not result in an increase of ep length
+  # since there aren't any new episodes in the feed!
+  # expect(@platform.episodes.length).to eq(@last_length)
+  pending
 end
 
 
