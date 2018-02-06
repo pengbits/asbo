@@ -17,7 +17,8 @@ class Client
       body: @response.body
     }:{
       success: false,
-      code: @response.code
+      code: @response.code,
+      message: @response.message
     })
   end
 end

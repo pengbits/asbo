@@ -7,6 +7,7 @@ When("I refresh the Platform") do
 end
 
 Then("the episodes list should contain new episodes") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@platform.episodes.length).not_to be_zero 
+
 end
 

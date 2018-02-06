@@ -17,6 +17,7 @@ class Platform < ApplicationRecord
     else
       @doc = Nokogiri::HTML(doc)
       eps = @doc.css(attr_map['item']).collect { |item| episode_attrs(item) }
+      # todo: reject incoming items that have same names and dates as entries in the db
       episodes.create(eps)
     end
   end
@@ -50,6 +51,10 @@ class Platform < ApplicationRecord
   end
   
   def ready(result)
-    puts result[:success]
+    if result[:success]
+      create_episodes_from_html result[:body]
+    else
+      raise "#{result[:code]} error\n #{result[:message]} "
+    end
   end
 end
