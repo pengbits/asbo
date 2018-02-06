@@ -1,10 +1,15 @@
-require 'Nokogiri'
+require 'client'
 
 class Platform < ApplicationRecord
   has_many :episodes
   serialize :attr_map
   
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
+
+  def initialize(opts={})
+    super(opts)
+    @client = Client.new({:url => url, :listener => self})
+  end
 
   def create_episodes_from_html(doc)
     if attr_map.nil?
@@ -40,7 +45,11 @@ class Platform < ApplicationRecord
     end
   end
   
-  def to_json(opts={})
-    super opts || {}
+  def refresh
+    @client.get
+  end
+  
+  def ready(result)
+    puts result[:success]
   end
 end
