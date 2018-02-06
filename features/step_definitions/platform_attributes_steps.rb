@@ -1,5 +1,5 @@
 Given("this attribute map for the platform") do |attrs|
-    @platform = Platform.create(JSON.parse(attrs))
+  @platform = Platform.create(JSON.parse(attrs))
 end
 
 Given("this html") do |html|
