@@ -10,7 +10,7 @@ Feature: Store scraping rules in platform
       {
         "id": "1",
         "name": "nts.live",
-        "attribute_map" : {
+        "attr_map" : {
           "item" : ".nts-grid-item",
           "name" : ".nts-grid-item__img img[alt]",
           "image": ".nts-grid-item__img img[src]",

@@ -10,7 +10,7 @@ Feature: Store scraping rules in platform
       {
         "id": "2",
         "name": "rinse.fm",
-        "attribute_map" : {
+        "attr_map" : {
           "item" : ".podcast-list-item",
           "name" : "h3",
           "image": ".listen.soundcloud a[data-img=src]",
