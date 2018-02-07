@@ -6,7 +6,6 @@ Given("this html") do |html|
   @html = html
 end
 
-
 Given("these attribute maps for the platforms") do |attr_array|
   @platforms = Platform.create(JSON.parse(attr_array))
 end
@@ -21,7 +20,6 @@ When(/^I call create_episodes_from_html on platform\s*(\d+)*$/) do |index|
   @html     = @doc ? @doc[i] : @html
   @platform.create_episodes_from_html(@html)
   expect(@platform.episodes).not_to be_empty
-  puts @platform.episodes.to_json
 end
 
 Then("I should get an episode with these attributes") do |attrs|
