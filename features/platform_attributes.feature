@@ -3,52 +3,108 @@ Feature: Store scraping rules in platform
   I want to abstract the rules into an attribute map
   And share the implementation across different platforms
 
-  @attr
-  Scenario: Parse Rinse.fm markup
-    Given this attribute map for the platform
-      """
-      {
-        "id": "2",
-        "name": "rinse.fm",
-        "url"  : "http://rinse.fm/podcasts",
-        "attr_map" : {
-          "item" : ".podcast-list-item",
-          "name" : "h3",
-          "image": ".listen.soundcloud a[data-img=src]",
-          "url"  : ".listen.soundcloud a[href]",
-          "date" : ".listen.soundcloud a[data-air-day]"
-        }
+  Background:
+    Given these attribute maps for the platforms
+    """
+    [{
+      "id": "1",
+      "name": "nts.live",
+      "url"  : "https://www.nts.live/recently-added",
+      "attr_map" : {
+        "item" : ".nts-grid-item",
+        "name" : ".nts-grid-item__img img[alt]",
+        "image": ".nts-grid-item__img img[src]",
+        "url"  : ".nts-grid-item__img__play-btn[data-src]",
+        "date" : ".nts-grid-item__subtitle__left"
       }
-      """
-    And this html
-      """
-      <div class="borderbottom left podcast-list-item" id="swamp81040218">
-        <div class="left w8-16">
-          <h3 class="darkgrey tstarheavyupper px15 mb8">Swamp 81 with Loefah &amp; Piezo </h3>
-          <div class="listen icon soundcloud">
-            <a href="https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81" nclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'soundcloud_podcastpage', 'Podcast: Swamp 81 with Loefah &amp; Piezo');" class="bgsoundcloudorange soundcloud-link" data-airtime="17"
-              data-air-day="2018-02-04" data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
-            <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" class="bglightblue alt-link" style="display:none" data-airtime="17" data-air-day="2018-02-04" data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
-          </div>
-          <div class="listen icon">
-            <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" class="bglightblue" onclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'podcastpage', 'Podcast: Swamp 81 with Loefah &amp; Piezo');" data-airtime="17" data-air-day="2018-02-04"
-              data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
-          </div>
-          <div class="download icon">
-            <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" download="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" target="_blank" class="bglavender" title="Right Click and Save As to Download">&nbsp;</a>
+    },{
+      "id": "2",
+      "name": "rinse.fm",
+      "url"  : "http://rinse.fm/podcasts",
+      "attr_map" : {
+        "item" : ".podcast-list-item",
+        "name" : "h3",
+        "image": ".listen.soundcloud a[data-img=src]",
+        "url"  : ".listen.soundcloud a[href]",
+        "date" : ".listen.soundcloud a[data-air-day]"
+      }
+    }]
+    """
+    
+    And this html for each
+    """
+    <div class="nts-grid-item">
+      <div class="nts-grid-item__img"><img src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" data-src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 31.01.18 Radio Episode"
+          class="img preload-img">
+        <div class="nts-grid-item__img__overlay">
+          <div class="nts-grid-item__img__play-btn mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/" data-permalink="/shows/murlo/episodes/murlo-31st-january-2018"><span class="nts-grid-item__img__play-btn__text"><span class="icon icon-play text-bold"></span></span>
           </div>
         </div>
-        <!-- snip -->
       </div>
-      """
-    When I call create_episodes_from_html on the platform
+      <div class="nts-grid-item__img nts-grid-item__img--link nts-app" data-href="/shows/murlo/episodes/murlo-31st-january-2018"><img src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" data-src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 31.01.18 Radio Episode"
+          class="img preload-img"></div>
+      <a href="/shows/murlo/episodes/murlo-31st-january-2018" class="nts-app nts-link nts-link--nohover">
+        <div class="nts-grid-item__header text-bold nts-link nts-link--highlighted">
+          <div class="nts-grid-item__title">Murlo</div>
+          <div class="nts-grid-item__subtitle">
+            <p class="nts-grid-item__subtitle__left">31.01.18</p>
+            <p class="nts-grid-item__subtitle__right">LDN</p>
+          </div>
+        </div>
+      </a>
+      <div class="nts-grid-item__footer">
+        <div class="nts-grid-item__genres"> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event" data-tag-id="caribbean-dancehall" href="/explore/genre/caribbean-dancehall">Dancehall</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event"
+            data-tag-id="ukdance-ukgarage" href="/explore/genre/ukdance-ukgarage">Garage</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event" data-tag-id="ukdance-grime" href="/explore/genre/ukdance-grime">Grime</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event"
+            data-tag-id="caribbean-soca" href="/explore/genre/caribbean-soca">Soca</a> </div>
+        <div class="nts-grid-item__action-btns">
+          <button class="nts-btn mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/" data-permalink="/shows/murlo/episodes/murlo-31st-january-2018"><span class="icon icon-play text-bold"></span></button> <a class="nts-app nts-btn" href="/shows/murlo/episodes/murlo-31st-january-2018">TRACKLIST</a></div>
+      </div>
+    </div>
+    _BREAK_
+    <div class="borderbottom left podcast-list-item" id="swamp81040218">
+      <div class="left w8-16">
+        <h3 class="darkgrey tstarheavyupper px15 mb8">Swamp 81 with Loefah &amp; Piezo </h3>
+        <div class="listen icon soundcloud">
+          <a href="https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81" nclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'soundcloud_podcastpage', 'Podcast: Swamp 81 with Loefah &amp; Piezo');" class="bgsoundcloudorange soundcloud-link" data-airtime="17"
+            data-air-day="2018-02-04" data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
+          <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" class="bglightblue alt-link" style="display:none" data-airtime="17" data-air-day="2018-02-04" data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
+        </div>
+        <div class="listen icon">
+          <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" class="bglightblue" onclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'podcastpage', 'Podcast: Swamp 81 with Loefah &amp; Piezo');" data-airtime="17" data-air-day="2018-02-04"
+            data-artist="Swamp 81 with Loefah &amp; Piezo" data-img-src="http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png">&nbsp;</a>
+        </div>
+        <div class="download icon">
+          <a href="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" download="http://podcast.dgen.net/rinsefm/podcast/Swamp81040218.mp3" target="_blank" class="bglavender" title="Right Click and Save As to Download">&nbsp;</a>
+        </div>
+      </div>
+      <!-- snip -->
+    </div>
+    """
+
+  @attr
+  Scenario: Parse NTS.live 
+    When I call create_episodes_from_html on platform 1
     Then I should get an episode with these attributes
-       """
-       {
-         "name":"Swamp 81 with Loefah \u0026 Piezo ",
-         "platform_id":2,
-         "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
-         "image":"",
-         "date":"2018-02-04"
-        }
-       """
+      """
+      {
+        "platform_id" : 1,
+        "name":"Murlo 31.01.18 Radio Episode",
+        "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
+        "date":"31.01.18",
+        "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"
+      }
+      """
+
+  @attr
+  Scenario: Parse rinse.fm
+    When I call create_episodes_from_html on platform 2
+    Then I should get an episode with these attributes
+      """
+      {
+        "name":"Swamp 81 with Loefah \u0026 Piezo ",
+        "platform_id":2,
+        "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
+        "image":"",
+        "date":"2018-02-04"
+       }
+      """

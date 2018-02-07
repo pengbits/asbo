@@ -159,5 +159,5 @@ alt="Slime w/ Little 05.02.18 Radio Episode"
       |JAYDA G 06.02.18 Radio Episode|06.02.18|
       |Donna Leake 06.02.18 Radio Episode|06.02.18|
    
-    When I call create_episodes_from_html on the platform
+    When I call create_episodes_from_html on platform
     Then only the two new episodes are added to the platform
