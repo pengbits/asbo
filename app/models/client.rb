@@ -3,7 +3,7 @@ class Client
 
   def initialize(opts={})
     if opts[:url].nil? || opts[:listener].nil?
-      raise "can't create a client in Platform withotu setting a url and listener"
+      raise "can't create a client in Platform without setting a url and listener"
     else
       @url = opts[:url]
       @listener = opts[:listener]

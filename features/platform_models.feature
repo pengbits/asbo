@@ -10,6 +10,7 @@ Feature: Add a Platform
      {
        "name": "nts.live",
        "key":"nts",
+       "url"  : "https://www.nts.live/recently-added",
        "attr_map" : {
          "item" : ".nts-grid-item",
          "name" : ".nts-grid-item__img img[alt]",
