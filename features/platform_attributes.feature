@@ -10,6 +10,7 @@ Feature: Store scraping rules in platform
       {
         "id": "2",
         "name": "rinse.fm",
+        "url"  : "http://rinse.fm/podcasts",
         "attr_map" : {
           "item" : ".podcast-list-item",
           "name" : "h3",

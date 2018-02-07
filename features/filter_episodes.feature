@@ -3,23 +3,22 @@ Feature: View Feed
    to a manageable list suitable for consumption by a local app (in JSON format)
    I want to reduce them to a subset and coerce into JSON/RSS
   
-   Scenario: With a valid platform
-     Given the following platforms:
-        |name|key|
-        |nts.live|nts|
-        |rinse.fm|rinse|
-        |radarradio|radar|
-      When I load the platform endpoint with key: "nts"
-      Then The response should be a JSON representation of the platform
-           
-  Scenario: get latest episodes for a platform
-    Given a platform with episodes
-     When I view the platform's episodes property
-     Then there should be some episodes
-  
   @filter
   Scenario: filter episodes by a search term
-    Given a platform
+    Given a Platform with these attributes
+      """
+      {
+        "name" : "NTS live",
+        "url"  : "https://www.nts.live/recently-added",
+        "attr_map" : {
+          "item" : ".nts-grid-item",
+          "name" : ".nts-grid-item__img img[alt]",
+          "image": ".nts-grid-item__img img[src]",
+          "url"  : ".nts-grid-item__img__play-btn[data-src]",
+          "date" : ".nts-grid-item__subtitle__left"
+        }
+      }
+      """
       And episodes
         |name|url|image|
         |From Sun City w/ Ukudada 01.02.18 Radio Episode|/shows/from-sun-city/episodes/from-sun-city-1st-february-2018|https:\/\/media.ntslive.co.uk/resize/800x800/8733c632-7e4d-4691-8220-1065a319fa77_1493251200.jpeg|

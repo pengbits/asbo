@@ -1,4 +1,4 @@
-require 'Nokogiri'
+require 'client'
 
 class Platform < ApplicationRecord
   has_many :episodes
@@ -6,12 +6,21 @@ class Platform < ApplicationRecord
   
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
+  def initialize(opts={})
+    super(opts)
+    @client = Client.new({:url => url, :listener => self})
+  end
+
   def create_episodes_from_html(doc)
     if attr_map.nil?
       raise "can't create episodes without defining an attr_map"
     else
       @doc = Nokogiri::HTML(doc)
-      eps = @doc.css(attr_map['item']).collect { |item| episode_attrs(item) }
+      eps = @doc.css(attr_map['item']).collect do |item| 
+        episode_attrs(item)
+      end.reject do |item|
+        episodes.exists?(name: item['name'])
+      end
       episodes.create(eps)
     end
   end
@@ -40,7 +49,15 @@ class Platform < ApplicationRecord
     end
   end
   
-  def to_json(opts={})
-    super opts || {}
+  def refresh
+    @client.get
+  end
+  
+  def ready(result)
+    if result[:success]
+      create_episodes_from_html result[:body]
+    else
+      raise "#{result[:code]} error\n #{result[:message]} "
+    end
   end
 end
