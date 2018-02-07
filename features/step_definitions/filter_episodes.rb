@@ -1,12 +1,7 @@
-Given("a platform") do
-  @platform = Platform.create!(:key => 'nts', :name => 'nts.live')
-end
-
 Given("episodes") do |episode_attrs|
   @platform.episodes.build episode_attrs.hashes
   @platform.save!
 end
-
 
 Given("a search term: {string}") do |string|
   @query = string
