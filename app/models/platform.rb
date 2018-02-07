@@ -16,8 +16,11 @@ class Platform < ApplicationRecord
       raise "can't create episodes without defining an attr_map"
     else
       @doc = Nokogiri::HTML(doc)
-      eps = @doc.css(attr_map['item']).collect { |item| episode_attrs(item) }
-      # todo: reject incoming items that have same names and dates as entries in the db
+      eps = @doc.css(attr_map['item']).collect do |item| 
+        episode_attrs(item)
+      end.reject do |item|
+        episodes.exists?(name: item['name'])
+      end
       episodes.create(eps)
     end
   end
