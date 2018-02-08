@@ -513,3 +513,5 @@ Feature: Combine episodes from different Platforms
       "date": "2018-01-31"
     }]
     """
+    When I view list sorted by date
+    Then the list should include episodes from both rinse and nts
