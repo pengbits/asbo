@@ -15,11 +15,11 @@ Then("the episodes list should contain some episodes") do
   expect(@platform.episodes.length).not_to be_zero
 end
 
-Then("only the two new episodes are added to the platform") do
+Then("only the {int} new episodes are added to the platform") do |additions|
   # assuming that calling refresh only seconds later
   # will not result in an increase of ep length
   # since there aren't any new episodes in the feed!
-  expect(@platform.episodes.length).to eq(@ep_count+2)
+  expect(@platform.episodes.length).to eq(@ep_count+additions)
 end
 
 

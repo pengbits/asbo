@@ -16,7 +16,7 @@ Feature: Add a Platform
          "name" : ".nts-grid-item__img img[alt]",
          "image": ".nts-grid-item__img img[src]",
          "url"  : ".nts-grid-item__img__play-btn[data-src]",
-         "date" : ".nts-grid-item__subtitle__left"
+         "date_str" : ".nts-grid-item__subtitle__left"
        }
      }
      """

@@ -1,15 +1,17 @@
 class Episode < ApplicationRecord
   belongs_to :platform
   validates :date, presence: true
-  before_save :parse_date
+  before_validation :parse_date
+  attr_accessor :date_str
   
   def as_json(opts={})
     super(opts.merge({:except => [:created_at,:updated_at]}))
   end
   
   def parse_date
+    # puts @date_str
     if platform && platform.date_format
-      self.date_proper = Date.strptime(self.date, platform.date_format)
+      self.date = Date.strptime(@date_str, platform.date_format)
     else
       raise "can't parse_date if date_format is not set on platform"
     end

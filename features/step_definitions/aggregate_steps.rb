@@ -2,11 +2,13 @@ Given("these platforms") do
   Platform.create([{
     name: "nts.live",
     key:  "nts",
-    url:  "https://www.nts.live/recently-added"
+    url:  "https://www.nts.live/recently-added",
+    date_format: "%d.%m.%y"
   },{
     name: "rinse.fm",
     key:  "rinse",
-    url:  "http://rinse.fm/podcasts"
+    url:  "http://rinse.fm/podcasts",
+    date_format: "%d-%m-%Y"
   }])
 end
 
