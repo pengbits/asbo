@@ -6,8 +6,8 @@ Feature: Handle Dates
   
   @date
   Scenario: Parse dates
-    Given this the date '07.02.18'
-    And the date format %d.%m.%y
+    Given this date '07.02.18'
+    And this date format '%d.%m.%y'
     When I set the date for the episode
     Then the date_proper will be correct
     
