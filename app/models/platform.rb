@@ -9,12 +9,10 @@ class Platform < ApplicationRecord
 
   def initialize(opts={})
     super(opts)
-    puts "hello from Platform#init"
     init_client
   end
 
   after_find do
-    puts "found platform"
     init_client
   end
   
