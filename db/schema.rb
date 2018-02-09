@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206170739) do
+ActiveRecord::Schema.define(version: 20180208215512) do
 
   create_table "episodes", force: :cascade do |t|
     t.string "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180206170739) do
     t.integer "platform_id"
     t.string "url"
     t.string "image"
-    t.string "date"
+    t.date "date"
   end
 
   create_table "platforms", force: :cascade do |t|
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20180206170739) do
     t.datetime "updated_at", null: false
     t.text "attr_map"
     t.string "url"
+    t.string "date_format"
   end
 
 end
