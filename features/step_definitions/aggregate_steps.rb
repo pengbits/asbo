@@ -19,9 +19,14 @@ end
 
 When("I view list sorted by date") do
   @episodes = Episode.order(:date)
-  @episodes.each {|ep| puts "#{ep.date} #{ep.name}"}
+  # @episodes.each {|ep| puts "#{ep.platform.name} #{ep.date} #{ep.name}"}
 end
 
 Then("the list should include episodes from both rinse and nts") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @nts_eps   = @episodes.select{|ep| ep.platform_id == 1}
+  @rinse_eps = @episodes.select{|ep| ep.platform_id == 2}
+  expect(@nts_eps).not_to be_empty
+  expect(@rinse_eps).not_to be_empty
+  puts "found the following episodes: nts#{@nts_eps.length}, rinse:#{@rinse_eps.length}"
+  
 end
