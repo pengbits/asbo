@@ -10,6 +10,7 @@ class Episode < ApplicationRecord
   
   def parse_date
     # puts "episode#parse_date '#{@date_str}' with '#{platform.date_format}'"
+
     if platform && platform.date_format
       self.date = Date.strptime(@date_str, platform.date_format)
     else
