@@ -3,18 +3,19 @@ require 'client'
 class Platform < ApplicationRecord
   has_many :episodes
   serialize :attr_map
+  validates :url, presence: true
+  
   attr_reader :client
   
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
   def initialize(opts={})
     super(opts)
-    puts "hello from Platform#init"
+    # puts "plaform.init #{url}"
     init_client
   end
-
+  
   after_find do
-    puts "found platform"
     init_client
   end
   

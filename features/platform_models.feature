@@ -3,8 +3,7 @@ Feature: Add a Platform
    As a User
    I want to add a platform
    
-   @platform @model
-   Scenario: Add a Platform successfully
+   Background:
      Given these attributes 
      """
      {
@@ -20,5 +19,23 @@ Feature: Add a Platform
        }
      }
      """
-     When I save it
-     Then I should see the new platform in the list
+     
+  @platform @model
+  Scenario: Add a Platform via console
+    When I save it
+    Then I should see the new platform in the list
+
+  @platform @http @post
+  Scenario: Add a Platform via POST
+    When I make a POST request to platforms endpoint with valid JSON
+    """
+    {
+      "platform" : {
+        "name" : "Radar Radio",
+        "key" : "radar",
+        "url" : "http://www.radarradio.com/podcasts"
+      }
+    }
+    """
+    Then I should get a valid response containing the platform
+      

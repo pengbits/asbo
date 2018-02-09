@@ -12,3 +12,13 @@ Then("I should see the new platform in the list") do
   expect(@response).to include(@platform.to_json)
 end
 
+When("I make a POST request to platforms endpoint with valid JSON") do |json|
+  @json = JSON.parse(json)
+  post platforms_path, @json
+end
+
+Then("I should get a valid response containing the platform") do
+  @response = last_response.body
+  puts @response
+  expect(@response).to be_truthy
+end
