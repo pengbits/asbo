@@ -1,7 +1,7 @@
 class PlatformsController < ApplicationController
   def index
     @platforms = Platform.all
-    render json: @platforms.to_json
+    render json: @platforms
   end
 
   def show
