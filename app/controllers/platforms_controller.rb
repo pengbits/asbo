@@ -5,8 +5,20 @@ class PlatformsController < ApplicationController
   end
 
   def show
-    @platform = Platform.find_by_key(params[:key])
+    platform_params
     render json: @platform.to_json
+  end
+  
+  def refresh
+    platform_params
+    puts @platform.client
+    @platform.refresh
+    render json: @platform.episodes
+  end
+  
+  private
+  def platform_params
+    @platform = Platform.find_by_key(params[:key])
   end
   
 end

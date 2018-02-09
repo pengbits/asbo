@@ -3,6 +3,7 @@ require 'client'
 class Platform < ApplicationRecord
   has_many :episodes
   serialize :attr_map
+  attr_reader :client
   
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
