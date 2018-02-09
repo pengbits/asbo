@@ -9,5 +9,5 @@ Feature: Handle Dates
     Given this date '07.02.18'
     And this date format '%d.%m.%y'
     When I set the date_str for the episode
-    Then the date will be correct
+    Then episode.date.to_s will be '2018-02-07'
     

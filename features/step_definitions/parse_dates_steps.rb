@@ -13,17 +13,13 @@ When("I set the date_str for the episode") do
     date_format: @date_format
   })
   @platform.episodes.create({
-    name: "Ossia 06.02.18 Radio Episode",
-    date_str: "06.02.18"
+    name: "Ossia #{@date_str} {Radio Episode",
+    date_str: @date_str
   })
 
   @episode = @platform.episodes.first
 end
 
-Then("the date will be correct") do
-  # puts @episode.date
-  # puts @episode.date_proper
-  # @date = Date.strptime(@episode.date, @platform.date_format)
-  puts @date
-  # expect(@date).to eq(@episode.date_proper)
+Then("episode.date.to_s will be {string}") do |date|
+  expect(@episode.date.to_s).to eq(date)
 end
