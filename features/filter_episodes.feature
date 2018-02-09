@@ -1,4 +1,4 @@
-Feature: View Feed
+Feature: Filter Episodes
    In order to reduce a large collection of podcast episodes on an external platform (in html format)
    to a manageable list suitable for consumption by a local app (in JSON format)
    I want to reduce them to a subset and coerce into JSON/RSS

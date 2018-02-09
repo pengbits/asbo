@@ -3,11 +3,22 @@ require 'client'
 class Platform < ApplicationRecord
   has_many :episodes
   serialize :attr_map
+  attr_reader :client
   
   SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
   def initialize(opts={})
     super(opts)
+    puts "hello from Platform#init"
+    init_client
+  end
+
+  after_find do
+    puts "found platform"
+    init_client
+  end
+  
+  def init_client
     @client = Client.new({:url => url, :listener => self})
   end
 
@@ -22,6 +33,7 @@ class Platform < ApplicationRecord
         episodes.exists?(name: item['name'])
       end
       episodes.create(eps)
+      episodes
     end
   end
   
@@ -38,7 +50,7 @@ class Platform < ApplicationRecord
           item.css(match[1]).attr(match[2]).to_s :
           ep[prop] = item.css(query).text.to_s
       end
-        
+      
       ep
     end
   end
@@ -54,8 +66,9 @@ class Platform < ApplicationRecord
   end
   
   def ready(result)
+    puts "platform#ready"
     if result[:success]
-      create_episodes_from_html result[:body]
+      return create_episodes_from_html result[:body]
     else
       raise "#{result[:code]} error\n #{result[:message]} "
     end

@@ -11,6 +11,7 @@ class Client
   end
   
   def get
+    puts "client#get #{@url}"
     @response = HTTParty.get(@url)
     @listener.ready((@response.code == 200 )? {
       success: true,
