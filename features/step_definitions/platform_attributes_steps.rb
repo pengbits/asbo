@@ -23,8 +23,12 @@ When(/^I call create_episodes_from_html on platform\s*(\d+)*$/) do |index|
 end
 
 Then("I should get an episode with these attributes") do |attrs|
-  @attrs = JSON.parse(attrs)
-  @episode = @platform.episodes.first
-  expect(@episode).to have_attributes(@attrs)
-  # puts "found '#{@episode.name}' on '#{@platform.name}'"
+  @attrs    = JSON.parse(attrs)
+  @platform = @platform || @platforms.find {|p|p.id == attrs['platform_id']}
+  @episode  = @platform.episodes.first
+  # iterate over attributes so we can specify date format for comparison
+  @ep_attrs = @episode.attributes.merge({
+    "date" => @episode.attributes['date'].to_s
+  })
+  expect(@ep_attrs).to include(@attrs)
 end

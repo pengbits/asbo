@@ -8,7 +8,7 @@ Given("these platforms") do
     name: "rinse.fm",
     key:  "rinse",
     url:  "http://rinse.fm/podcasts",
-    date_format: "%d-%m-%Y"
+    date_format: "%Y-%m-%d"
   }])
 end
 

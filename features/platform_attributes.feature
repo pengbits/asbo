@@ -10,6 +10,7 @@ Feature: Store scraping rules in platform
       "id": "1",
       "name": "nts.live",
       "url"  : "https://www.nts.live/recently-added",
+      "date_format" : "%d.%m.%y",
       "attr_map" : {
         "item" : ".nts-grid-item",
         "name" : ".nts-grid-item__img img[alt]",
@@ -21,6 +22,7 @@ Feature: Store scraping rules in platform
       "id": "2",
       "name": "rinse.fm",
       "url"  : "http://rinse.fm/podcasts",
+      "date_format" : "%Y-%m-%d",
       "attr_map" : {
         "item" : ".podcast-list-item",
         "name" : "h3",
@@ -90,7 +92,7 @@ Feature: Store scraping rules in platform
         "platform_id" : 1,
         "name":"Murlo 31.01.18 Radio Episode",
         "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
-        "date_str":"31.01.18",
+        "date": "2018-01-31",
         "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"
       }
       """
@@ -101,10 +103,10 @@ Feature: Store scraping rules in platform
     Then I should get an episode with these attributes
       """
       {
-        "name":"Swamp 81 with Loefah \u0026 Piezo ",
         "platform_id":2,
+        "name":"Swamp 81 with Loefah \u0026 Piezo ",
         "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
         "image":"",
-        "date_str":"2018-02-04"
+        "date":"2018-02-04"
        }
       """
