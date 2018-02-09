@@ -30,10 +30,12 @@ Feature: Add a Platform
     When I make a POST request to platforms endpoint with valid JSON
     """
     {
-      "name" : "Radar Radio",
-      "key" : "radar",
-      "url" : "http://www.radarradio.com/podcasts"
+      "platform" : {
+        "name" : "Radar Radio",
+        "key" : "radar",
+        "url" : "http://www.radarradio.com/podcasts"
+      }
     }
     """
-    Then I should see the new platform in the list
+    Then I should get a valid response containing the platform
       
