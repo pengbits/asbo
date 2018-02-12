@@ -8,20 +8,20 @@ Scenario: nts pagination
   Given a platform with pagination rules
   """
   {
-    "id": "1",
-    "name": "nts.live",
-    "url"  : "https://www.nts.live/recently-added",
-    "date_format" : "%d.%m.%y",
+    "id": "2",
+    "name": "rinse.fm",
+    "url"  : "http://rinse.fm/podcasts?foo=true",
+    "date_format" : "%Y-%m-%d",
     "attr_map" : {
-      "item" : ".nts-grid-item",
-      "name" : ".nts-grid-item__img img[alt]",
-      "image": ".nts-grid-item__img img[src]",
-      "url"  : ".nts-grid-item__img__play-btn[data-src]",
-      "date_str" : ".nts-grid-item__subtitle__left"
+      "item" : ".podcast-list-item",
+      "name" : "h3",
+      "image": ".listen.soundcloud a[data-img=src]",
+      "url"  : ".listen.soundcloud a[href]",
+      "date_str" : ".listen.soundcloud a[data-air-day]"
     },
     "pagination": {
-      "url" : "/page/:page",
-      "itemsPerPage" : 12
+      "param" : "page",
+      "itemsPerPage" : 60
     }
   }
   """  

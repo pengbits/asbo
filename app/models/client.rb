@@ -1,3 +1,5 @@
+require 'uri'
+
 class Client
   include HTTParty
   # todo - handle pagination options?
@@ -40,8 +42,11 @@ class Client
     
     if(strategy == 'url' && pattern =~ /:page/) 
       return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
-    elsif (strategy == 'param' && !!@pagination['param'])
-      raise "must provider properly formatted url or param option"
+    elsif (strategy == 'param' && !!pattern)
+      edit = URI(base_url)
+      join = edit.query.nil? ? '?' : '&'
+      edit.query << "#{join}#{pattern}=#{page}" 
+      return edit.to_s
     end
     
     base_url
