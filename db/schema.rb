@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208215512) do
+ActiveRecord::Schema.define(version: 20180212201320) do
 
   create_table "episodes", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180208215512) do
     t.text "attr_map"
     t.string "url"
     t.string "date_format"
+    t.text "pagination"
   end
 
 end

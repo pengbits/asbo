@@ -5,7 +5,7 @@ I want to include a ?page parameter in the request
 
 @pagination
 Scenario: nts pagination
-  Given a plaform with pagination rules
+  Given a platform with pagination rules
   """
   {
     "id": "1",

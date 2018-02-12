@@ -2,7 +2,7 @@ require 'client'
 
 class Platform < ApplicationRecord
   has_many :episodes
-  serialize :attr_map
+  serialize [:attr_map, :pagination]
   validates :url, presence: true
   
   attr_reader :client
