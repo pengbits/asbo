@@ -31,7 +31,7 @@ class Platform < ApplicationRecord
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
       end.reject do |item|
-        episodes.exists?(name: item['name'])
+        episodes.any? ? episodes.exists?(name: item['name']) : false
       end
       episodes.create(eps)
       episodes
@@ -47,9 +47,11 @@ class Platform < ApplicationRecord
       if prop != 'item' 
         # selectors with attributes (.wibble[src]) need to be treated accordingly
         match = SELECTOR_WITH_ATTR_REGEX.match(query)
-        ep[prop] = !!match ?
-          item.css(match[1]).attr(match[2]).to_s :
-          ep[prop] = item.css(query).text.to_s
+        value = !!match ?
+          item.css(match[1]).attr(match[2]).to_s : 
+          item.css(query).text.to_s
+
+        ep[prop] = value.gsub(/(^\n)*(\n$)*/,"")
       end
       
       ep
