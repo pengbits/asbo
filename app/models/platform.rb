@@ -51,7 +51,7 @@ class Platform < ApplicationRecord
           item.css(match[1]).attr(match[2]).to_s : 
           item.css(query).text.to_s
 
-        ep[prop] = value.gsub(/(^\n)*(\n$)*/,"")
+        ep[prop] = value.gsub(/(^\n)*(\n$)*(\s$)*/,"")
       end
       
       ep
@@ -64,6 +64,7 @@ class Platform < ApplicationRecord
     end
   end
   
+  # todo: pagination
   def refresh
     @client.get
   end
