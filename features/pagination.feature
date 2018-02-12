@@ -23,6 +23,7 @@ Scenario: nts pagination
       "url" : ":base_ur/page/:page",
       "itemsPerPage" : 12
     }
+  }
   """  
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
