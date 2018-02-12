@@ -19,8 +19,8 @@ Scenario: nts pagination
       "url"  : ".nts-grid-item__img__play-btn[data-src]",
       "date_str" : ".nts-grid-item__subtitle__left"
     },
-    "pagination":{
-      "url" : ":base_ur/page/:page",
+    "pagination": {
+      "url" : "/page/:page",
       "itemsPerPage" : 12
     }
   }

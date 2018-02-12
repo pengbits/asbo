@@ -2,7 +2,8 @@ require 'client'
 
 class Platform < ApplicationRecord
   has_many :episodes
-  serialize [:attr_map, :pagination]
+  serialize :attr_map
+  serialize :pagination
   validates :url, presence: true
   
   attr_reader :client
@@ -20,7 +21,11 @@ class Platform < ApplicationRecord
   end
   
   def init_client
-    @client = Client.new({:url => url, :listener => self})
+    @client = Client.new({
+      :url => url, 
+      :pagination => pagination,
+      :listener => self
+    })
   end
 
   def create_episodes_from_html(doc)
@@ -64,9 +69,8 @@ class Platform < ApplicationRecord
     end
   end
   
-  # todo: pagination
-  def refresh
-    @client.get
+  def refresh(opts={})
+    @client.get opts
   end
   
   def ready(result)

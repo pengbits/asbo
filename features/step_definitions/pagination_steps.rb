@@ -1,12 +1,17 @@
 Given("a platform with pagination rules") do |attrs|
-  @platform = Platform.create(JSON.parse(attrs))
+  @provider_attrs = JSON.parse(attrs)
+  @platform = Platform.create(@provider_attrs)
 end
 
 When("I call refresh with a page parameter") do
-  @platform.refresh(:page => 3)
-  pending # Write code here that turns the phrase above into concrete actions
+  @page_num = 3
+  (1..3).each do |i|
+    @platform.refresh(:page => i)
+  end
 end
 
 Then("the platform should have the correct episodes") do
-  pending # Write code here that turns the phrase above into concrete actions
+  item_count = @page_num * @provider_attrs['pagination']['itemsPerPage']
+  expect(@platform.episodes.length).to eq(item_count)
+  puts @platform.episodes.collect {|p| p.name}
 end
