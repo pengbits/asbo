@@ -5,7 +5,8 @@ class PlatformsController < ApplicationController
   end
 
   def show
-    render json: platform_from_params.to_json
+    platform_from_key_param
+    render json: @platform.to_json({:include => :episodes })
   end
   
   def create
@@ -18,22 +19,16 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
-  
+  # todo - handle pagination
   def refresh
-    platform_from_params.refresh
-    redirect_to platform_with_episodes_path(key: @platform.key)
+    platform_from_key_param.refresh
+    redirect_to platform_path(key: @platform.key)
     puts "#{@platform.key}.refresh() found #{@platform.episodes.length} episodes"
-    # render json: {episodes: @platform.episodes}
-  end
-  
-  def show_with_episodes
-    platform_from_params
-    render json: @platform.to_json({:include => :episodes })
   end
   
   private
   
-  def platform_from_params
+  def platform_from_key_param
     @platform = Platform.find_by_key(params[:key])
     @platform
   end
