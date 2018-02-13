@@ -24,5 +24,7 @@ When("I visit {string}") do |url_with_page_param|
 end
 
 Then("the response should include the correct episodes") do
-  # pending # Write code here that turns the phrase above into concrete actions
+  # need a way to check for episodes being distinct from the first page,
+  # perhaps by making a default request first?
+  pending
 end

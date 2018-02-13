@@ -21,7 +21,10 @@ class PlatformsController < ApplicationController
   
   # todo - handle pagination
   def refresh
-    platform_from_key_param.refresh
+    platform_from_key_param
+    opts = {}
+    opts[:page] = params[:page] unless params[:page].nil?
+    @platform.refresh opts
     redirect_to platform_path(key: @platform.key)
     puts "#{@platform.key}.refresh() found #{@platform.episodes.length} episodes"
   end
@@ -29,7 +32,6 @@ class PlatformsController < ApplicationController
   private
   
   def platform_from_key_param
-    puts params[:key]
     @platform = Platform.find_by_key(params[:key])
     @platform
   end

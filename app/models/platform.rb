@@ -79,6 +79,7 @@ class Platform < ApplicationRecord
   end
   
   def refresh(opts={})
+    puts "platform#refresh #{opts}"
     @client.get opts
   end
   

@@ -9,6 +9,7 @@ Background:
   {
     "id": "2",
     "name": "rinse.fm",
+    "key": "rinse",
     "url"  : "http://rinse.fm/podcasts",
     "date_format" : "%Y-%m-%d",
     "attr_map" : {
