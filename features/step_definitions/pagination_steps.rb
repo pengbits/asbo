@@ -14,5 +14,15 @@ Then("the platform should have the correct episodes") do
   item_count = @page_num * @provider_attrs['pagination']['itemsPerPage']
   # puts @platform.episodes.collect {|p| p.name}
   expect(@platform.episodes.length).to eq(item_count)
-  
+end
+
+When("I visit {string}") do |url_with_page_param|
+  get url_with_page_param
+  @response = last_response.body
+  puts @response
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("the response should include the correct episodes") do
+  # pending # Write code here that turns the phrase above into concrete actions
 end
