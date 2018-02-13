@@ -29,6 +29,7 @@ class PlatformsController < ApplicationController
   private
   
   def platform_from_key_param
+    puts params[:key]
     @platform = Platform.find_by_key(params[:key])
     @platform
   end
