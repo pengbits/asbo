@@ -44,8 +44,8 @@ class Client
       return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
     elsif (strategy == 'param' && !!pattern)
       edit = URI(base_url)
-      join = edit.query.nil? ? '?' : '&'
-      edit.query << "#{join}#{pattern}=#{page}" 
+      join = edit.query.nil? ? '' : '&'
+      edit.query = "#{edit.query}#{join}#{pattern}=#{page}" 
       return edit.to_s
     end
     

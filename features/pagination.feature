@@ -10,7 +10,7 @@ Scenario: nts pagination
   {
     "id": "2",
     "name": "rinse.fm",
-    "url"  : "http://rinse.fm/podcasts?foo=true",
+    "url"  : "http://rinse.fm/podcasts",
     "date_format" : "%Y-%m-%d",
     "attr_map" : {
       "item" : ".podcast-list-item",

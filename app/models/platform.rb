@@ -35,13 +35,22 @@ class Platform < ApplicationRecord
       @doc = Nokogiri::HTML(doc)
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
-      end.reject do |item|
-        episodes.any? ? episodes.exists?(name: item['name']) : false
+      end.select do |item|
+        episode_not_in_collection? item
       end
       episodes.create(eps)
       episodes
     end
   end
+  
+  def episode_not_in_collection?(item)
+    episodes.empty? ?
+      true : !episodes.exists?({
+        date: item['date_str'],
+        name: item['name']
+      })
+  end
+  
   
   def episode_attrs(item)
     episode_attrs = attr_map.inject({}) do |ep, pair|
