@@ -5,6 +5,7 @@ end
 
 When("I call refresh with a page parameter") do
   @page_num = 3
+  @results_by_page = {}
   (1..3).each do |i|
     @platform.refresh(:page => i)
   end
@@ -17,14 +18,19 @@ Then("the platform should have the correct episodes") do
 end
 
 When("I visit {string}") do |url_with_page_param|
+  page = url_with_page_param.split('?page=')[1]
   get url_with_page_param
-  @response = last_response.body
-  puts @response
-  # pending # Write code here that turns the phrase above into concrete actions
+  
+  @responses = @responses || {} 
+  @responses[page] = JSON.parse(last_response.body)['episodes']
 end
 
-Then("the response should include the correct episodes") do
-  # need a way to check for episodes being distinct from the first page,
-  # perhaps by making a default request first?
-  pending
+Then("each response should contain different episodes") do
+  if @responses.keys.length > 1
+    alpha = @responses.keys.first
+    beta  = @responses.keys.last
+    
+    puts "comparing @responses[#{alpha}] and @responses[#{beta}]"
+    expect(@responses[alpha]).not_to match_array(@responses[beta])
+  end
 end

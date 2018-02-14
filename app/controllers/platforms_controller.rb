@@ -6,7 +6,7 @@ class PlatformsController < ApplicationController
 
   def show
     platform_from_key_param
-    render json: @platform.to_json({:include => :episodes })
+    render_json_with_episodes
   end
   
   def create
@@ -25,8 +25,11 @@ class PlatformsController < ApplicationController
     opts = {}
     opts[:page] = params[:page] unless params[:page].nil?
     @platform.refresh opts
-    redirect_to platform_path(key: @platform.key)
-    puts "#{@platform.key}.refresh() found #{@platform.episodes.length} episodes"
+    
+    respond_to do |format|
+      format.json {    render_json_with_episodes}
+      format.html {redirect_to platform_path(key: @platform.key) }
+    end
   end
   
   private
@@ -40,4 +43,7 @@ class PlatformsController < ApplicationController
     params.require(:platform).permit(:name,:date_format,:url,:attr_map,:key)
   end
   
+  def render_json_with_episodes
+    render json: @platform.to_json({:include => :episodes })
+  end
 end

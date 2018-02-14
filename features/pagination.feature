@@ -34,5 +34,6 @@ Scenario: nts pagination
   
 @pagination @routes
 Scenario: pagination routes
-  When I visit '/platforms/rinse/refresh?page=3'
-  Then the response should include the correct episodes
+  When I visit '/platforms/rinse/refresh.json?page=1'
+  And  I visit '/platforms/rinse/refresh.json?page=3'
+  Then each response should contain different episodes
