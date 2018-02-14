@@ -20,9 +20,6 @@ When(/^I call create_episodes_from_html on platform\s*(\d+)*$/) do |index|
   @html     = @doc ? @doc[i] : @html
 
   @platform.create_episodes_from_html(@html)
-  puts @platform.episodes.length
-  puts @platform.episodes.collect {|e| "|#{e.name}|#{e.date}|"}.join "\n"
-
   expect(@platform.episodes).not_to be_empty
 end
 

@@ -381,9 +381,10 @@ Feature: Refresh Platform
       |Zuli & Marwa 13.02.18 Radio Episode|13.02.18|
       |Jazzman 13.02.18 Radio Episode|13.02.18|
       |Noise In My Head w/ PLO Man  13.02.18 Radio Episode|13.02.18|
-      |Ted Draws - 1997 Special 13.02.18 Radio Episode|13.02.18|
-      |Obongjayar 13.02.18 Radio Episode|13.02.18|
-      |Nabihah Iqbal  13.02.18 Radio Episode|13.02.18|
    
     When I call create_episodes_from_html on platform
     Then only the new episodes are added to the platform
+      |name|date_str|
+      |Ted Draws - 1997 Special 13.02.18 Radio Episode|13.02.18|
+      |Obongjayar 13.02.18 Radio Episode|13.02.18|
+      |Nabihah Iqbal  13.02.18 Radio Episode|13.02.18|
