@@ -41,6 +41,8 @@ class Client
     strategy = !!@pagination && !!@pagination['param'] ? 'param' : nil
     
     if strategy
+      pattern = @pagination[strategy]
+      
       if(strategy == 'url' && pattern =~ /:page/) 
         return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
       elsif (strategy == 'param' && !!pattern)
