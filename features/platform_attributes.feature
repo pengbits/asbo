@@ -37,7 +37,7 @@ Feature: Store scraping rules in platform
         "name": "radar radio",
         "key" : "radar",
         "url"  : "http://www.radarradio.com/podcasts",
-        "date_format" : "%e %b",
+        "date_format" : "%b %e",
         "attr_map" : {
           "item"      : ".latestarticle.radarradio_podcasts",
           "name"      : "h2[split(' – ',0)]",
