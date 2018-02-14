@@ -9,6 +9,7 @@ Feature: Store scraping rules in platform
     [{
       "id": "1",
       "name": "nts.live",
+      "key"  : "nts",
       "url"  : "https://www.nts.live/recently-added",
       "date_format" : "%d.%m.%y",
       "attr_map" : {
@@ -21,6 +22,7 @@ Feature: Store scraping rules in platform
     },{
       "id": "2",
       "name": "rinse.fm",
+      "key" : "rinse",
       "url"  : "http://rinse.fm/podcasts",
       "date_format" : "%Y-%m-%d",
       "attr_map" : {
@@ -29,6 +31,19 @@ Feature: Store scraping rules in platform
         "image": ".listen.soundcloud a[data-img=src]",
         "url"  : ".listen.soundcloud a[href]",
         "date_str" : ".listen.soundcloud a[data-air-day]"
+      },{
+        "id": "3",
+        "name": "radar radio",
+        "key" : "radar",
+        "url"  : "http://www.radarradio.com/podcasts",
+        "date_format" : "%e %b", # 14th Feb
+        "attr_map" : {
+          "item"      : ".latestarticle.radarradio_podcasts",
+          "name"      : "h2",
+          "image"     : "img[src]",
+          "url"       : ".radarradio_podcasts_listen_button a[href]",
+          "date_str"  : "h2"
+        }
       }
     }]
     """
@@ -81,6 +96,19 @@ Feature: Store scraping rules in platform
       </div>
       <!-- snip -->
     </div>
+    _BREAK_
+    <article class="latestarticle radarradio_podcasts">
+    	<header class="latestheader">
+    		<span><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb"><img width="2000" height="2000" src="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg 2000w, /wp-content/uploads/2018/02/Nightslugs-Feb-150x150.jpg 150w, /wp-content/uploads/2018/02/Nightslugs-Feb-300x300.jpg 300w, /wp-content/uploads/2018/02/Nightslugs-Feb-768x768.jpg 768w, /wp-content/uploads/2018/02/Nightslugs-Feb-1024x1024.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px"></a></span>
+    	</header>
+    	<section class="latestcontent">
+    		<h2><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb">Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special) – 13th Feb</a></h2>
+    		<p>
+    		</p>
+    		<div class="radarradio_podcasts_listen_button"><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb" title="Listen">Listen</a></div>
+    		<p></p>
+    	</section>
+    </article>
     """
 
   @attr
@@ -109,4 +137,18 @@ Feature: Store scraping rules in platform
         "image":"",
         "date":"2018-02-04"
        }
+      """
+  
+  @attr @radar
+  Scenario: Parse radarradio
+    When I call create_episodes_from_html on platform 3
+    Then I should get an episode with these attributes
+      """
+      {
+        "platform_id":3
+        "name":"Kamillah Rose w/ Dobby – 14th Feb",
+        "img":"/wp-content/uploads/2018/02/Kam-14th-Feb1-1.jpg",
+        "url":"/podcasts/kamillah-rose-w-dobby-14th-feb",
+        "date_str":"Kamillah Rose w/ Dobby – 14th Feb"
+      }
       """
