@@ -3,6 +3,7 @@ require 'client'
 class Platform < ApplicationRecord
   has_many :episodes
   serialize :attr_map
+  serialize :pagination
   validates :url, presence: true
   
   attr_reader :client
@@ -20,7 +21,11 @@ class Platform < ApplicationRecord
   end
   
   def init_client
-    @client = Client.new({:url => url, :listener => self})
+    @client = Client.new({
+      :url => url, 
+      :pagination => pagination,
+      :listener => self
+    })
   end
 
   def create_episodes_from_html(doc)
@@ -30,13 +35,22 @@ class Platform < ApplicationRecord
       @doc = Nokogiri::HTML(doc)
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
-      end.reject do |item|
-        episodes.any? ? episodes.exists?(name: item['name']) : false
+      end.select do |item|
+        episode_not_in_collection? item
       end
       episodes.create(eps)
       episodes
     end
   end
+  
+  def episode_not_in_collection?(item)
+    episodes.empty? ?
+      true : !episodes.exists?({
+        date: item['date_str'],
+        name: item['name']
+      })
+  end
+  
   
   def episode_attrs(item)
     episode_attrs = attr_map.inject({}) do |ep, pair|
@@ -64,9 +78,9 @@ class Platform < ApplicationRecord
     end
   end
   
-  # todo: pagination
-  def refresh
-    @client.get
+  def refresh(opts={})
+    puts "platform#refresh #{opts}"
+    @client.get opts
   end
   
   def ready(result)
