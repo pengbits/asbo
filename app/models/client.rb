@@ -37,16 +37,18 @@ class Client
   # - params to append to url
   # "param" : "p",
   def paginate(base_url, page)
-    strategy  = !!@pagination['url'] ? 'url' : 'param'
-    pattern   = @pagination[strategy] || ""
+    strategy = !!@pagination && !!pagination['url']   ? 'url'   : nil
+    strategy = !!@pagination && !!pagination['param'] ? 'param' : nil
     
-    if(strategy == 'url' && pattern =~ /:page/) 
-      return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
-    elsif (strategy == 'param' && !!pattern)
-      edit = URI(base_url)
-      join = edit.query.nil? ? '' : '&'
-      edit.query = "#{edit.query}#{join}#{pattern}=#{page}" 
-      return edit.to_s
+    if strategy
+      if(strategy == 'url' && pattern =~ /:page/) 
+        return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
+      elsif (strategy == 'param' && !!pattern)
+        edit = URI(base_url)
+        join = edit.query.nil? ? '' : '&'
+        edit.query = "#{edit.query}#{join}#{pattern}=#{page}" 
+        return edit.to_s
+      end
     end
     
     base_url
