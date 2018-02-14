@@ -104,7 +104,7 @@ Feature: Store scraping rules in platform
       """
       {
         "platform_id":2,
-        "name":"Swamp 81 with Loefah \u0026 Piezo ",
+        "name":"Swamp 81 with Loefah \u0026 Piezo",
         "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
         "image":"",
         "date":"2018-02-04"
