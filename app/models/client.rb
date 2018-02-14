@@ -37,8 +37,8 @@ class Client
   # - params to append to url
   # "param" : "p",
   def paginate(base_url, page)
-    strategy = !!@pagination && !!pagination['url']   ? 'url'   : nil
-    strategy = !!@pagination && !!pagination['param'] ? 'param' : nil
+    strategy = !!@pagination && !!@pagination['url']   ? 'url'   : nil
+    strategy = !!@pagination && !!@pagination['param'] ? 'param' : nil
     
     if strategy
       if(strategy == 'url' && pattern =~ /:page/) 
