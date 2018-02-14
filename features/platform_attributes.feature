@@ -28,24 +28,24 @@ Feature: Store scraping rules in platform
       "attr_map" : {
         "item" : ".podcast-list-item",
         "name" : "h3",
-        "image": ".listen.soundcloud a[data-img=src]",
+        "image": ".listen.soundcloud a[data-img-src]",
         "url"  : ".listen.soundcloud a[href]",
         "date_str" : ".listen.soundcloud a[data-air-day]"
-      },{
+      }
+    },{
         "id": "3",
         "name": "radar radio",
         "key" : "radar",
         "url"  : "http://www.radarradio.com/podcasts",
-        "date_format" : "%e %b", # 14th Feb
+        "date_format" : "%e %b",
         "attr_map" : {
           "item"      : ".latestarticle.radarradio_podcasts",
-          "name"      : "h2",
+          "name"      : "h2[split(' – ',0)]",
           "image"     : "img[src]",
           "url"       : ".radarradio_podcasts_listen_button a[href]",
-          "date_str"  : "h2"
+          "date_str"  : "h2[split(' – ',1)]"
         }
-      }
-    }]
+      }]
     """
     
     And this html for each

@@ -8,7 +8,6 @@ class Platform < ApplicationRecord
   
   attr_reader :client
   
-  SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
   def initialize(opts={})
     super(opts)
@@ -52,6 +51,8 @@ class Platform < ApplicationRecord
       })
   end
   
+  SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
+  SELECTOR_WITH_ATTR_SPLIT_REGEX = /^split\((.+)\)/
   
   def episode_attrs(item)
     episode_attrs = attr_map.inject({}) do |ep, pair|
@@ -62,10 +63,26 @@ class Platform < ApplicationRecord
       if prop != 'item' 
         # selectors with attributes (.wibble[src]) need to be treated accordingly
         match = SELECTOR_WITH_ATTR_REGEX.match(query)
-        value = !!match ?
-          item.css(match[1]).attr(match[2]).to_s : 
-          item.css(query).text.to_s
+        if(!match)
+          value = item.css(query).text.to_s
+        else
+          attr_element = match[1]
+          attr_query = match[2]
+          # and check for freaky split('-',1) meta attr for breaking up text values
+          # used in radar radio to separate 'night slugs – feb 13'
+          split = SELECTOR_WITH_ATTR_SPLIT_REGEX.match(attr_query)
+          if(split)
+            split_attr = split[1].split(',') # '-',0
+            split_attr_token = split_attr[0].gsub(/'/,'') # -
+            split_attr_index = split_attr[1].to_i  # 0
+            value_array = item.css(attr_element).text.split(split_attr_token)
+            value = value_array[split_attr_index]
 
+            puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
+          else
+          value = item.css(attr_element).attr(attr_query).to_s
+          end
+        end
         ep[prop] = value.gsub(/(^\n)*(\n$)*(\s$)*/,"")
       end
       
