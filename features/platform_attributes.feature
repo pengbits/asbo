@@ -37,7 +37,7 @@ Feature: Store scraping rules in platform
         "name": "radar radio",
         "key" : "radar",
         "url"  : "http://www.radarradio.com/podcasts",
-        "date_format" : "%b %e",
+        "date_format" : "%e %b",
         "attr_map" : {
           "item"      : ".latestarticle.radarradio_podcasts",
           "name"      : "h2[split(' – ',0)]",
@@ -146,9 +146,9 @@ Feature: Store scraping rules in platform
       """
       {
         "platform_id":3
-        "name":"Kamillah Rose w/ Dobby – 14th Feb",
-        "img":"/wp-content/uploads/2018/02/Kam-14th-Feb1-1.jpg",
-        "url":"/podcasts/kamillah-rose-w-dobby-14th-feb",
-        "date_str":"Kamillah Rose w/ Dobby – 14th Feb"
+        "name":"Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special)",
+        "img":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
+        "url":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
+        "date":"2018-02-13"
       }
       """

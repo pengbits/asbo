@@ -19,6 +19,8 @@ class Episode < ApplicationRecord
   end
   
   def self.parse_date(date, date_format)
-    Date.strptime(date, date_format)
+    puts "Ep#parse_date #{date} #{date_format}"
+    
+    Date.strptime(date.gsub(/(th)*(rd)*g/), date_format)
   end
 end

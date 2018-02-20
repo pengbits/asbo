@@ -26,5 +26,6 @@ When("I set the date_str for the episode") do
 end
 
 Then("episode.date.to_s will be {string}") do |date|
+  puts @episode.date
   expect(@episode.date.to_s).to eq(date)
 end

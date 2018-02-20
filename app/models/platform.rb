@@ -43,7 +43,9 @@ class Platform < ApplicationRecord
   end
   
   def episode_not_in_collection?(item)
+    puts "#{date_format} x #{item['date_str']}"
     date = Episode::parse_date(item['date_str'], date_format)
+    puts date
     episodes.empty? ?
       true : !episodes.exists?({
         date: date,
