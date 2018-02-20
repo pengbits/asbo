@@ -145,9 +145,9 @@ Feature: Store scraping rules in platform
     Then I should get an episode with these attributes
       """
       {
-        "platform_id":3
-        "name":"Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special)",
-        "img":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
+        "platform_id":3,
+        "name":"Night Slugs w/ Girl Unit & Bok Bok (Hardbody Special)",
+        "image":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
         "url":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
         "date":"2018-02-13"
       }
