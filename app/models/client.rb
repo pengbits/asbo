@@ -26,7 +26,7 @@ class Client
     })
   end
   
-  def url(page=nil)
+  def url(page=1)
     puts paginate(page)
     paginate(page)
   end
