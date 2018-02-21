@@ -4,6 +4,11 @@ end
 
 Given("this date format {string}") do |f|
   @date_format = f
+  @year_in_format = !!@date_format.match(/%([yY])/)
+end
+
+Given("this implicit year {string}") do |string|
+  @implicit_year = string # doesnt actually do anything..
 end
 
 When("I set the date_str for the episode") do

@@ -8,7 +8,6 @@ class Platform < ApplicationRecord
   
   attr_reader :client
   
-  SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
 
   def initialize(opts={})
     super(opts)
@@ -32,6 +31,7 @@ class Platform < ApplicationRecord
     if attr_map.nil?
       raise "can't create episodes without defining an attr_map"
     else
+      
       @doc = Nokogiri::HTML(doc)
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
@@ -44,7 +44,9 @@ class Platform < ApplicationRecord
   end
   
   def episode_not_in_collection?(item)
+    # puts "#{date_format} x #{item['date_str']}"
     date = Episode::parse_date(item['date_str'], date_format)
+    
     episodes.empty? ?
       true : !episodes.exists?({
         date: date,
@@ -52,6 +54,8 @@ class Platform < ApplicationRecord
       })
   end
   
+  SELECTOR_WITH_ATTR_REGEX = /(.+)\s*\[(.+)\]/
+  SELECTOR_WITH_ATTR_SPLIT_REGEX = /^split\((.+)\)/
   
   def episode_attrs(item)
     episode_attrs = attr_map.inject({}) do |ep, pair|
@@ -62,11 +66,35 @@ class Platform < ApplicationRecord
       if prop != 'item' 
         # selectors with attributes (.wibble[src]) need to be treated accordingly
         match = SELECTOR_WITH_ATTR_REGEX.match(query)
-        value = !!match ?
-          item.css(match[1]).attr(match[2]).to_s : 
-          item.css(query).text.to_s
-
-        ep[prop] = value.gsub(/(^\n)*(\n$)*(\s$)*/,"")
+        if(!match)
+          value = item.css(query).text.to_s
+        else
+          attr_element = match[1]
+          attr_query = match[2]
+          # puts "#{prop} #{attr_element} #{attr_query}"
+          # and check for freaky split('-',1) meta attr for breaking up text values
+          # used in radar radio to separate 'night slugs – feb 13'
+          split = SELECTOR_WITH_ATTR_SPLIT_REGEX.match(attr_query)
+          if(split)
+            split_attr = split[1].split(',') # '-',0
+            split_attr_token = split_attr[0].gsub(/'/,'') # -
+            split_attr_index = split_attr[1].to_i  # 0
+            value_array = item.css(attr_element).text.split(split_attr_token)
+            value = value_array[split_attr_index]
+            puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
+          else
+            
+            el = item.css(attr_element)
+            if el.empty?
+              puts "no value for #{prop} with #{attr_element}"
+              value = ""
+            else
+              value = el.attr(attr_query).to_s
+            end
+          end
+        end
+        value.gsub!(/(^\n)*(\n$)*(\s$)*/,"")
+        ep[prop] = value
       end
       
       ep

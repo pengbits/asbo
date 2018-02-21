@@ -26,7 +26,7 @@ Background:
   }
   """  
   
-@pagination
+@pagination @param
 Scenario: nts pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes

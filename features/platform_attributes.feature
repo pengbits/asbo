@@ -9,6 +9,7 @@ Feature: Store scraping rules in platform
     [{
       "id": "1",
       "name": "nts.live",
+      "key"  : "nts",
       "url"  : "https://www.nts.live/recently-added",
       "date_format" : "%d.%m.%y",
       "attr_map" : {
@@ -21,16 +22,30 @@ Feature: Store scraping rules in platform
     },{
       "id": "2",
       "name": "rinse.fm",
+      "key" : "rinse",
       "url"  : "http://rinse.fm/podcasts",
       "date_format" : "%Y-%m-%d",
       "attr_map" : {
         "item" : ".podcast-list-item",
         "name" : "h3",
-        "image": ".listen.soundcloud a[data-img=src]",
+        "image": ".listen.soundcloud a[data-img-src]",
         "url"  : ".listen.soundcloud a[href]",
         "date_str" : ".listen.soundcloud a[data-air-day]"
       }
-    }]
+    },{
+        "id": "3",
+        "name": "radar radio",
+        "key" : "radar",
+        "url"  : "http://www.radarradio.com/podcasts",
+        "date_format" : "%e %b",
+        "attr_map" : {
+          "item"      : ".latestarticle.radarradio_podcasts",
+          "name"      : "h2[split(' – ',0)]",
+          "image"     : "img[src]",
+          "url"       : ".radarradio_podcasts_listen_button a[href]",
+          "date_str"  : "h2[split(' – ',1)]"
+        }
+      }]
     """
     
     And this html for each
@@ -81,6 +96,19 @@ Feature: Store scraping rules in platform
       </div>
       <!-- snip -->
     </div>
+    _BREAK_
+    <article class="latestarticle radarradio_podcasts">
+    	<header class="latestheader">
+    		<span><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb"><img width="2000" height="2000" src="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg 2000w, /wp-content/uploads/2018/02/Nightslugs-Feb-150x150.jpg 150w, /wp-content/uploads/2018/02/Nightslugs-Feb-300x300.jpg 300w, /wp-content/uploads/2018/02/Nightslugs-Feb-768x768.jpg 768w, /wp-content/uploads/2018/02/Nightslugs-Feb-1024x1024.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px"></a></span>
+    	</header>
+    	<section class="latestcontent">
+    		<h2><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb">Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special) – 13th Feb</a></h2>
+    		<p>
+    		</p>
+    		<div class="radarradio_podcasts_listen_button"><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb" title="Listen">Listen</a></div>
+    		<p></p>
+    	</section>
+    </article>
     """
 
   @attr
@@ -106,7 +134,21 @@ Feature: Store scraping rules in platform
         "platform_id":2,
         "name":"Swamp 81 with Loefah \u0026 Piezo",
         "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
-        "image":"",
+        "image":"http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png",
         "date":"2018-02-04"
        }
+      """
+  
+  @attr @radar
+  Scenario: Parse radarradio
+    When I call create_episodes_from_html on platform 3
+    Then I should get an episode with these attributes
+      """
+      {
+        "platform_id":3,
+        "name":"Night Slugs w/ Girl Unit & Bok Bok (Hardbody Special)",
+        "image":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
+        "url":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
+        "date":"2018-02-13"
+      }
       """
