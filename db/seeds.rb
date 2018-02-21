@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+Platform.destroy_all
 Platform.create!({
   id: "1",
   name: "nts.live",
@@ -19,6 +19,10 @@ Platform.create!({
     "image"     => ".nts-grid-item__img img[src]",
     "url"       => ".nts-grid-item__img__play-btn[data-src]",
     "date_str"  => ".nts-grid-item__subtitle__left"
+  },
+  pagination: {    
+    "url"          => "/page/:page",
+    "itemsPerPage" => 12
   }
 })
 
@@ -34,5 +38,29 @@ Platform.create!({
     "image"     => ".listen.soundcloud a[data-img=src]",
     "url"       => ".listen.soundcloud a[href]",
     "date_str"  => ".listen.soundcloud a[data-air-day]"
+  },
+  pagination: {    
+    "param"        => "page",
+    "itemsPerPage" => 60
   }
 })
+
+
+Platform.create!({
+    id: "3",
+    name: "radar radio",
+    key: "radar",
+    url: "http://www.radarradio.com/podcasts",
+    date_format: "%e %b",
+    attr_map: {
+      "item"      => ".latestarticle.radarradio_podcasts",
+      "name"      => "h2[split(' – ',0)]",
+      "image"     => "img[src]",
+      "url"       => ".radarradio_podcasts_listen_button a[href]",
+      "date_str"  => "h2[split(' – ',1)]"
+    },
+    pagination: {
+      "url": "http://www.radarradio.com/wp-admin/admin-ajax.php?action=alm_query_posts&post_type=radarradio_podcasts&posts_per_page=16pageNumber=:page",
+      "itemsPerPage" : 16
+    }
+  })
