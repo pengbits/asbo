@@ -27,15 +27,14 @@ Background:
   }
   """  
 
-
 @pagination @param
-Scenario: nts pagination
+Scenario: radar pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
 
 
-@pagination @routes
-Scenario: pagination routes
-  When I visit '/platforms/rinse/refresh.json?page=1'
-  And  I visit '/platforms/rinse/refresh.json?page=3'
-  Then each response should contain different episodes
+# @pagination @routes
+# Scenario: pagination routes
+#   When I visit '/platforms/rinse/refresh.json?page=1'
+#   And  I visit '/platforms/rinse/refresh.json?page=3'
+#   Then each response should contain different episodes

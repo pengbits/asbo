@@ -19,10 +19,10 @@ class Episode < ApplicationRecord
   end
   
   def self.parse_date(date, date_format)
-    str = Episode::strip_ordinal(date.strip!)
     begin
+      str = Episode::strip_ordinal(date)
       return Date.strptime(str, date_format)
-    rescue ArgumentError
+    rescue
     end
     
   end
@@ -30,7 +30,7 @@ class Episode < ApplicationRecord
   def self.strip_ordinal(str)
     # "23rd Feb" 
     # [st,nd,rd,th] => [stndrh]{2}
-    str.gsub(/((\d+)[stndrh]{2})/,'\2')
+    str.gsub(/((\d+)[stndrh]{2})/,'\2') 
     # puts "'#{str}' => '#{stripped}'"
     # stripped 
   end

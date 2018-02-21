@@ -27,11 +27,15 @@ Background:
   """  
   
 @pagination
+Scenario: pagination options
+  When i call platform.url with a page parameter
+  Then the url is correctly formatted
+  
+@pagination @param
 Scenario: nts pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
 
-  
 @pagination @routes
 Scenario: pagination routes
   When I visit '/platforms/nts/refresh.json?page=1'

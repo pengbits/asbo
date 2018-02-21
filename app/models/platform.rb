@@ -81,7 +81,7 @@ class Platform < ApplicationRecord
             split_attr_index = split_attr[1].to_i  # 0
             value_array = item.css(attr_element).text.split(split_attr_token)
             value = value_array[split_attr_index]
-            puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
+            # puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
           else
             el = item.css(attr_element)
             if el.empty?
@@ -110,6 +110,7 @@ class Platform < ApplicationRecord
   
   def refresh(opts={})
     puts "platform#refresh #{opts}"
+    # puts "get #{@client.url(opts[':page'])}"
     @client.get opts
   end
   
