@@ -7,31 +7,33 @@ Background:
   Given a platform with pagination rules
   """
   {
-    "id": "2",
-    "name": "rinse.fm",
-    "key": "rinse",
-    "url"  : "http://rinse.fm/podcasts",
-    "date_format" : "%Y-%m-%d",
+    "id"       : 3,
+    "name"     : "radar radio",
+    "key"      : "radar",
     "attr_map" : {
-      "item" : ".podcast-list-item",
-      "name" : "h3",
-      "image": ".listen.soundcloud a[data-img=src]",
-      "url"  : ".listen.soundcloud a[href]",
-      "date_str" : ".listen.soundcloud a[data-air-day]"
+      "item"      : ".latestarticle.radarradio_podcasts",
+      "name"      : "h2[split(' – ',0)]",
+      "image"     : "img[src]",
+      "url"       : ".radarradio_podcasts_listen_button a[href]",
+      "date_str"  : "h2[split(' – ',1)]"
     },
-    "pagination": {
-      "param" : "page",
-      "itemsPerPage" : 60
+    "url"         : "http://www.radarradio.com/podcasts",
+    "date_format" : "%e %b",
+    "pagination"  : {
+      "url"           : "http://www.radarradio.com/wp-admin/admin-ajax.php?action=alm_query_posts&post_type=radarradio_podcasts&posts_per_page=16",
+      "itemsPerPage"  : 16,
+      "param"         : "pageNumber"
     }
   }
   """  
-  
+
+
 @pagination @param
 Scenario: nts pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
 
-  
+
 @pagination @routes
 Scenario: pagination routes
   When I visit '/platforms/rinse/refresh.json?page=1'

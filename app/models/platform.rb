@@ -83,7 +83,6 @@ class Platform < ApplicationRecord
             value = value_array[split_attr_index]
             puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
           else
-            
             el = item.css(attr_element)
             if el.empty?
               puts "no value for #{prop} with #{attr_element}"
@@ -93,8 +92,10 @@ class Platform < ApplicationRecord
             end
           end
         end
-        value.gsub!(/(^\n)*(\n$)*(\s$)*/,"")
-        ep[prop] = value
+        unless value.nil?
+          value.gsub!(/(^\n)*(\n$)*(\s$)*(^\s)*/,"")
+          ep[prop] = value
+        end
       end
       
       ep

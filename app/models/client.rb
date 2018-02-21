@@ -27,23 +27,28 @@ class Client
   end
   
   def url(page=nil)
-    puts paginate(@url, page)
-    paginate(@url, page)
+    puts paginate(page)
+    paginate(page)
   end
   
-  # pagination rules contain either 
-  # - url rewrite pattern
-  # "url" : "/page/:page",
+  # pagination rules could be her 
   # - params to append to url
-  # "param" : "p",
-  def paginate(base_url, page)
-    strategy = !!@pagination && !!@pagination['url']   ? 'url'   : nil
+  # {"param" : "p"}
+  # - a route (a path to add to the url)
+  # {"route" : "/page/:page"}
+  # - combination of either with a custom url for paginated results
+  # {"route" : "/page/:page", "url": "http://www.radarradio.com/wp-admin/admin-ajax.php...."}
+  # {"param" : "pageNumber",  "url": "http://www.radarradio.com/wp-admin/admin-ajax.php...."}
+  
+  def paginate(page)
+    strategy = !!@pagination && !!@pagination['route'] ? 'route' : nil
     strategy = !!@pagination && !!@pagination['param'] ? 'param' : nil
+    base_url = !!@pagination && !!@pagination['url'] ?   @pagination['url'] : @url
     
     if strategy
       pattern = @pagination[strategy]
       
-      if(strategy == 'url' && pattern =~ /:page/) 
+      if(strategy == 'route' && pattern =~ /:page/) 
         return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
       elsif (strategy == 'param' && !!pattern)
         edit = URI(base_url)

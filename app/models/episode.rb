@@ -19,7 +19,7 @@ class Episode < ApplicationRecord
   end
   
   def self.parse_date(date, date_format)
-    str = Episode::strip_ordinal(date)
+    str = Episode::strip_ordinal(date.strip!)
     begin
       return Date.strptime(str, date_format)
     rescue ArgumentError
