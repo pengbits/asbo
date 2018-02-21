@@ -20,18 +20,22 @@ Background:
       "date_str" : ".nts-grid-item__subtitle__left"
     },
     "pagination": {
-      "url" : "/page/:page",
+      "route" : "/page/:page",
       "itemsPerPage" : 12
     }
   }
   """  
   
 @pagination
+Scenario: pagination options
+  When i call platform.url with a page parameter
+  Then the url is correctly formatted
+  
+@pagination @param
 Scenario: nts pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
 
-  
 @pagination @routes
 Scenario: pagination routes
   When I visit '/platforms/nts/refresh.json?page=1'

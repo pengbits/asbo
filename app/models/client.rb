@@ -26,34 +26,39 @@ class Client
     })
   end
   
-  def url(page=nil)
-    puts paginate(@url, page)
-    paginate(@url, page)
+  def url(page=1)
+    puts paginate(page)
+    paginate(page)
   end
   
-  # pagination rules contain either 
-  # - url rewrite pattern
-  # "url" : "/page/:page",
+  # pagination rules could be her 
   # - params to append to url
-  # "param" : "p",
-  def paginate(base_url, page)
-    strategy = !!@pagination && !!@pagination['url']   ? 'url'   : nil
-    strategy = !!@pagination && !!@pagination['param'] ? 'param' : nil
-    
-    if strategy
-      pattern = @pagination[strategy]
-      
-      if(strategy == 'url' && pattern =~ /:page/) 
-        return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
-      elsif (strategy == 'param' && !!pattern)
-        edit = URI(base_url)
-        join = edit.query.nil? ? '' : '&'
-        edit.query = "#{edit.query}#{join}#{pattern}=#{page}" 
-        return edit.to_s
-      end
+  # {"param" : "page"}
+  # - a route (a path to add to the url)
+  # {"route" : "/page/:page"}
+  # - combination of either with a custom url for paginated results
+  # {"route" : "/page/:page", "url": "http://www.radarradio.com/wp-admin/admin-ajax.php...."}
+  # {"param" : "pageNumber",  "url": "http://www.radarradio.com/wp-admin/admin-ajax.php...."}
+  
+  def paginate(page)
+    if !@pagination 
+      return @url
     end
     
-    base_url
+    base_url = @pagination['url'] ? @pagination['url'] : @url
+    
+    if @pagination['route']
+      pattern = @pagination['route']
+      if pattern =~ /:page/
+        return "#{base_url}#{pattern.gsub(/:page/, page.to_s)}"
+      end
+    elsif @pagination['param']
+      pattern = @pagination['param']
+      edit = URI(base_url)
+      join = edit.query.nil? ? '' : '&'
+      edit.query = "#{edit.query}#{join}#{pattern}=#{page}" 
+      return edit.to_s
+    end
   end
   
 end
