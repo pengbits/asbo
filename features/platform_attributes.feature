@@ -134,7 +134,7 @@ Feature: Store scraping rules in platform
         "platform_id":2,
         "name":"Swamp 81 with Loefah \u0026 Piezo",
         "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
-        "image":"",
+        "image":"http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png",
         "date":"2018-02-04"
        }
       """

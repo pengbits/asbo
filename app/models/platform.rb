@@ -31,6 +31,7 @@ class Platform < ApplicationRecord
     if attr_map.nil?
       raise "can't create episodes without defining an attr_map"
     else
+      
       @doc = Nokogiri::HTML(doc)
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
@@ -43,7 +44,7 @@ class Platform < ApplicationRecord
   end
   
   def episode_not_in_collection?(item)
-    puts "#{date_format} x #{item['date_str']}"
+    # puts "#{date_format} x #{item['date_str']}"
     date = Episode::parse_date(item['date_str'], date_format)
     
     episodes.empty? ?
@@ -70,6 +71,7 @@ class Platform < ApplicationRecord
         else
           attr_element = match[1]
           attr_query = match[2]
+          # puts "#{prop} #{attr_element} #{attr_query}"
           # and check for freaky split('-',1) meta attr for breaking up text values
           # used in radar radio to separate 'night slugs – feb 13'
           split = SELECTOR_WITH_ATTR_SPLIT_REGEX.match(attr_query)
@@ -79,13 +81,20 @@ class Platform < ApplicationRecord
             split_attr_index = split_attr[1].to_i  # 0
             value_array = item.css(attr_element).text.split(split_attr_token)
             value = value_array[split_attr_index]
-
             puts "found `#{value}` in `#{prop}` with split('#{split_attr_token}',#{split_attr_index})"
           else
-          value = item.css(attr_element).attr(attr_query).to_s
+            
+            el = item.css(attr_element)
+            if el.empty?
+              puts "no value for #{prop} with #{attr_element}"
+              value = ""
+            else
+              value = el.attr(attr_query).to_s
+            end
           end
         end
-        ep[prop] = value.gsub(/(^\n)*(\n$)*(\s$)*/,"")
+        value.gsub!(/(^\n)*(\n$)*(\s$)*/,"")
+        ep[prop] = value
       end
       
       ep

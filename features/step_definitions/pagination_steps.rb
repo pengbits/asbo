@@ -14,6 +14,7 @@ end
 Then("the platform should have the correct episodes") do
   item_count = @page_num * @provider_attrs['pagination']['itemsPerPage']
   # puts @platform.episodes.collect {|p| p.name}
+  puts @platform.episodes.length
   expect(@platform.episodes.length).to eq(item_count)
 end
 
