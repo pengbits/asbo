@@ -8,10 +8,11 @@ class Client
     if opts[:url].nil? || opts[:listener].nil?
       raise "can't create a client in Platform without setting a url and listener"
     else
-      @url = opts[:url]
+      @base_url   = opts[:url]
       @pagination = opts[:pagination]
-      @listener = opts[:listener]
+      @listener   = opts[:listener]
     end
+    puts "created #{@base_url}, #{@pagination}"
   end
   
   def get(opts={})
@@ -26,8 +27,8 @@ class Client
     })
   end
   
-  def url(page=1)
-    paginate(page)
+  def url(page = nil)
+    page.nil? ? @base_url : paginate(page)
   end
   
   # pagination rules could be her 
@@ -41,9 +42,9 @@ class Client
   
   def paginate(page)
     if !@pagination 
-      return @url
+      return @base_url
     end
-    base_url = @pagination['url'] ? @pagination['url'] : @url
+    base_url = @pagination['url'] ? @pagination['url'] : @base_url
 
     if @pagination['route']
       pattern = @pagination['route']
