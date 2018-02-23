@@ -10,6 +10,10 @@ module PlatformHelper
     Platform.create get_platform_attrs(index)
   end
   
+  def get_platforms
+    Platform.create PlatformData::sample_attributes
+  end
+  
   def get_html_entry(index=nil)
     PlatformData::sample_html_entries[index || 0]
   end
