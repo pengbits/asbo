@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212201320) do
+ActiveRecord::Schema.define(version: 20180223212943) do
 
   create_table "episodes", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20180212201320) do
     t.string "url"
     t.string "image"
     t.date "date"
+    t.string "details"
+    t.string "media"
   end
 
   create_table "platforms", force: :cascade do |t|
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180212201320) do
     t.string "url"
     t.string "date_format"
     t.text "pagination"
+    t.boolean "has_details"
   end
 
 end
