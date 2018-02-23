@@ -36,8 +36,9 @@ class PlatformsController < ApplicationController
   end
   
   private
+  
   def platform_from_key_param
-    @platform = Platform.find(:key => params[:key])
+    @platform = Platform.find_by!(:key => params[:key])
     @platform
   end
   
