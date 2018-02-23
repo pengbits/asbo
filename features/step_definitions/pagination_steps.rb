@@ -1,8 +1,7 @@
-Given("a platform with pagination rules") do |attrs|
-  @provider_attrs = JSON.parse(attrs)
-  @platform = Platform.create(@provider_attrs)
+Given("the platform {string}") do |key|
+  @platform = get_platform_by_key key
+  puts @platform.name
 end
-
 
 Then("the url is correctly formatted") do
   puts @url
