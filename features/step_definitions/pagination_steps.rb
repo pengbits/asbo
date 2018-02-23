@@ -1,6 +1,5 @@
-Given("the platform {string}") do |key|
+Given /the platform key=(.+)$/ do |key|
   @platform = get_platform_by_key key
-  puts @platform.name
 end
 
 Then("the url is correctly formatted") do
