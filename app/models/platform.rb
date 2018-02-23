@@ -109,8 +109,7 @@ class Platform < ApplicationRecord
   end
   
   def refresh(opts={})
-    puts "platform#refresh #{opts}"
-    # puts "get #{@client.url(opts[':page'])}"
+    puts "platform#refresh GET #{@client.url(opts[:page])}"
     @client.get opts
   end
   

@@ -27,7 +27,6 @@ class Client
   end
   
   def url(page=1)
-    puts paginate(page)
     paginate(page)
   end
   
@@ -44,9 +43,8 @@ class Client
     if !@pagination 
       return @url
     end
-    
     base_url = @pagination['url'] ? @pagination['url'] : @url
-    
+
     if @pagination['route']
       pattern = @pagination['route']
       if pattern =~ /:page/

@@ -8,15 +8,15 @@ Then("the url is correctly formatted") do
 end
 
 When("I call refresh with a page parameter") do
-  @page_num = 2
+  @num_pages = 2
   @results_by_page = {}
-  (1..@page_num).each do |i|
+  (1..@num_pages).each do |i|
     @platform.refresh(:page => i)
   end
 end
 
 Then("the platform should have the correct episodes") do
-  item_count = @page_num * @provider_attrs['pagination']['itemsPerPage']
+  item_count = @num_pages * @platform.pagination['itemsPerPage']
   # puts @platform.episodes.collect {|p| p.name}
   puts "found #{@platform.episodes.length} episodes"
   expect(@platform.episodes.length).to eq(item_count)

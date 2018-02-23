@@ -14,7 +14,7 @@ module PlatformData
         "date_str"  => ".nts-grid-item__subtitle__left"
       },
       pagination: {    
-        "url"          => "/page/:page",
+        "route"        => "/page/:page",
         "itemsPerPage" => 12
       }
     },{
