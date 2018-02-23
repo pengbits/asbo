@@ -6,11 +6,14 @@ module PlatformData
       key: "nts",
       url: "https://www.nts.live/recently-added",
       date_format: "%d.%m.%y",
+      has_details: true,
       attr_map: {
         "item"      => ".nts-grid-item",
         "name"      => ".nts-grid-item__img img[alt]",
         "image"     => ".nts-grid-item__img img[src]",
         "url"       => ".nts-grid-item__img__play-btn[data-src]",
+        "media"     => ".nts-grid-item__img__play-btn[data-src]",
+        "details"   => ".nts-grid-item__img__play-btn[data-permalink]",
         "date_str"  => ".nts-grid-item__subtitle__left"
       },
       pagination: {    
@@ -23,11 +26,13 @@ module PlatformData
       key: "rinse",
       url: "http://rinse.fm/podcasts",
       date_format: "%Y-%m-%d",
+      has_details: false,
       attr_map: {
         "item"      => ".podcast-list-item",
         "name"      => "h3",
         "image"     => ".listen.soundcloud a[data-img-src]",
         "url"       => ".listen.soundcloud a[href]",
+        "media"     => ".listen.soundcloud a[href]",
         "date_str"  => ".listen.soundcloud a[data-air-day]"
       },
       pagination: {    
@@ -40,11 +45,13 @@ module PlatformData
       key: "radar",
       url: "http://www.radarradio.com/podcasts",
       date_format: "%e %b",
+      has_details: true,
       attr_map: {
         "item"      => ".latestarticle.radarradio_podcasts",
         "name"      => "h2[split(' – ',0)]",
         "image"     => "img[src]",
         "url"       => ".radarradio_podcasts_listen_button a[href]",
+        "details"   => ".radarradio_podcasts_listen_button a[href]",
         "date_str"  => "h2[split(' – ',1)]"
       },
       pagination: {

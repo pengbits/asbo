@@ -4,7 +4,7 @@ In order to get more context for the episode (tracklisting, download link)
 I want a link to the episode details when available
 
 @details
-Scenario: expose details for episode
+Scenario: a platform with has_details=true with include url for the details in each episode
   Given the platform key=nts
   And the platform has details=true in its configuration  
   And html for an episode
@@ -14,5 +14,5 @@ Scenario: expose details for episode
   When I parse the html
   Then the platform will contain an episode with this url
   """
-  https://www.nts.live/shows/grandmixxer/episodes/grandmixxer-22nd-february-2018
+  /shows/grandmixxer/episodes/grandmixxer-22nd-february-2018
   """
