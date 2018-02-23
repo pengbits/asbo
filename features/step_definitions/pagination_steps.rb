@@ -24,9 +24,12 @@ end
 
 When("I visit {string}") do |url_with_page_param|
   page = url_with_page_param.split('?page=')[1]
+  puts url_with_page_param
   get url_with_page_param
-  @responses = @responses || {} 
-  @responses[page] = JSON.parse(last_response.body)['episodes']
+  puts last_response.body
+  # @responses = @responses || {} 
+  # @responses[page] = JSON.parse(last_response.body) #['episodes']
+  # puts last_response.body
 end
 
 Then("each response should contain different episodes") do

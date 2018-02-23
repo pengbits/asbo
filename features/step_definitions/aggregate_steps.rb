@@ -1,5 +1,5 @@
 Given("these platforms") do
-  get_platforms
+  @platforms = get_platforms
 end
 
 Given("these episodes") do |attr_array|

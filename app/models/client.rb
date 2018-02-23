@@ -12,7 +12,6 @@ class Client
       @pagination = opts[:pagination]
       @listener   = opts[:listener]
     end
-    puts "created #{@base_url}, #{@pagination}"
   end
   
   def get(opts={})

@@ -20,7 +20,6 @@ class Platform < ApplicationRecord
   end
   
   def init_client
-    puts "init_client!"
     @client = Client.new({
       :url => url, 
       :pagination => pagination,
