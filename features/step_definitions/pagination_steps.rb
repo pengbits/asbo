@@ -18,8 +18,8 @@ end
 
 Then("the platform should have the correct episodes") do
   item_count = @page_num * @provider_attrs['pagination']['itemsPerPage']
-  puts @platform.episodes.collect {|p| p.name}
-  puts @platform.episodes.length
+  # puts @platform.episodes.collect {|p| p.name}
+  puts "found #{@platform.episodes.length} episodes"
   expect(@platform.episodes.length).to eq(item_count)
 end
 
@@ -36,7 +36,7 @@ Then("each response should contain different episodes") do
     alpha = @responses.keys.first
     beta  = @responses.keys.last
     
-    puts "comparing @responses[#{alpha}] and @responses[#{beta}]"
+    puts "comparing @responses[#{alpha}] and @responses[#{beta}] to ensure they are distinct..."
     expect(@responses[alpha]).not_to match_array(@responses[beta])
   end
 end

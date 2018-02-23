@@ -32,7 +32,6 @@ Scenario: radar pagination
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
 
-
 @pagination @routes
 Scenario: pagination routes
   When I visit '/platforms/radar/refresh.json?page=1'
