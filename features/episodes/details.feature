@@ -4,7 +4,7 @@ In order to get more context for the episode (tracklisting, download link)
 I want a link to the episode details when available
 
 @details
-Scenario: a platform with has_details=true with include url for the details in each episode
+Scenario: a platform with has_details=true will include a details url in episodes
   Given the platform key=nts
   And the platform has details=true in its configuration  
   And html for an episode
@@ -16,3 +16,30 @@ Scenario: a platform with has_details=true with include url for the details in e
   """
   /shows/grandmixxer/episodes/grandmixxer-22nd-february-2018
   """
+
+@details
+Scenario: a platform with has_details=false will not include a details url in episodes
+  Given the platform key=rinse
+  And html for an episode
+  """
+  <div class="borderbottom left podcast-list-item" id="uncledugs230218-mp3">
+    <div class="left w8-16">
+      <h3 class="darkgrey tstarheavyupper px15 mb8">
+  Uncle Dugs </h3>
+      <div class="listen icon soundcloud">
+        <a href="https://soundcloud.com/rinsefm/uncledugs230218" nclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'soundcloud_podcastpage', 'Podcast: Uncle Dugs');" class="bgsoundcloudorange soundcloud-link" data-airtime="11" data-air-day="2018-02-23"
+          data-artist="Uncle Dugs">&nbsp;</a>
+        <a href="http://podcast.dgen.net/rinsefm/podcast/uncledugs230218.mp3" class="bglightblue alt-link" style="display:none" data-airtime="11" data-air-day="2018-02-23" data-artist="Uncle Dugs">&nbsp;</a>
+      </div>
+      <div class="listen icon">
+        <a href="http://podcast.dgen.net/rinsefm/podcast/uncledugs230218.mp3" class="bglightblue" onclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'podcastpage', 'Podcast: Uncle Dugs');" data-airtime="11" data-air-day="2018-02-23" data-artist="Uncle Dugs">&nbsp;</a>
+      </div>
+      <div class="download icon">
+        <a href="http://podcast.dgen.net/rinsefm/podcast/uncledugs230218.mp3" download="http://podcast.dgen.net/rinsefm/podcast/uncledugs230218.mp3" target="_blank" class="bglavender" title="Right Click and Save As to Download">&nbsp;</a>
+      </div>
+    </div>
+    <!-- snip -->
+  </div>  
+  """
+  When I parse the html
+  Then the platform will not contain any details urls in its episodes 
