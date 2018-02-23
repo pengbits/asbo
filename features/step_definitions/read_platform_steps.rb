@@ -10,7 +10,6 @@ Then("the response should be a JSON representation of the platform") do
   expect(@platform.id).to   eq(@response['id'])
   expect(@platform.key).to  eq(@response['key'])
   expect(@platform.url).to  eq(@response['url'])
-  
 end
 
 Then("the response should be an error") do
