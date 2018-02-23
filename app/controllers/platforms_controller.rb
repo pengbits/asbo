@@ -4,9 +4,13 @@ class PlatformsController < ApplicationController
     render json: @platforms
   end
 
-  def show
-    platform_from_key_param
-    render_json_with_episodes
+  def show    
+    begin
+      platform_from_key_param
+      render_json_with_episodes
+    rescue ActiveRecord::RecordNotFound
+      render_error
+    end
   end
   
   def create
@@ -19,23 +23,22 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
-  # todo - handle pagination
   def refresh
-    platform_from_key_param
     opts = {}
     opts[:page] = params[:page] unless params[:page].nil?
-    @platform.refresh opts
-    
-    respond_to do |format|
-      format.json {    render_json_with_episodes}
-      format.html {redirect_to platform_path(key: @platform.key) }
+
+    begin
+      platform_from_key_param.refresh opts
+      render_json_with_episodes
+    rescue ActiveRecord::RecordNotFound
+      render_error
     end
   end
   
   private
   
   def platform_from_key_param
-    @platform = Platform.find_by_key(params[:key])
+    @platform = Platform.find_by!(:key => params[:key])
     @platform
   end
   
@@ -45,5 +48,9 @@ class PlatformsController < ApplicationController
   
   def render_json_with_episodes
     render json: @platform.to_json({:include => :episodes })
+  end
+  
+  def render_error
+    render(:status => 500, json: {'error':'Platform not found'})
   end
 end

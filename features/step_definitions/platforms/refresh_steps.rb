@@ -1,5 +1,5 @@
-Given("a Platform with these attributes") do |attrs|
-  @platform = Platform.create(JSON.parse(attrs))
+Given("this html for multiple entries") do |html|
+  @html = html
 end
 
 When("I add some episodes") do |episodes|
@@ -8,6 +8,7 @@ When("I add some episodes") do |episodes|
 end
 
 When("I refresh the Platform") do
+  @platform = @platform || @platforms.first
   @platform.refresh
 end
 

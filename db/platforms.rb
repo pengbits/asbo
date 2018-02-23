@@ -1,55 +1,62 @@
-Feature: Store scraping rules in platform
-  In order to avoid writing redundant selector/scraper code in each platform
-  I want to abstract the rules into an attribute map
-  And share the implementation across different platforms
-
-  Background:
-    Given these attribute maps for the platforms
-    """
+module PlatformData
+  def self.sample_attributes
     [{
-      "id": "1",
-      "name": "nts.live",
-      "key"  : "nts",
-      "url"  : "https://www.nts.live/recently-added",
-      "date_format" : "%d.%m.%y",
-      "attr_map" : {
-        "item" : ".nts-grid-item",
-        "name" : ".nts-grid-item__img img[alt]",
-        "image": ".nts-grid-item__img img[src]",
-        "url"  : ".nts-grid-item__img__play-btn[data-src]",
-        "date_str" : ".nts-grid-item__subtitle__left"
+      id: "1",
+      name: "nts.live",
+      key: "nts",
+      url: "https://www.nts.live/recently-added",
+      date_format: "%d.%m.%y",
+      attr_map: {
+        "item"      => ".nts-grid-item",
+        "name"      => ".nts-grid-item__img img[alt]",
+        "image"     => ".nts-grid-item__img img[src]",
+        "url"       => ".nts-grid-item__img__play-btn[data-src]",
+        "date_str"  => ".nts-grid-item__subtitle__left"
+      },
+      pagination: {    
+        "route"        => "/page/:page",
+        "itemsPerPage" => 12
       }
     },{
-      "id": "2",
-      "name": "rinse.fm",
-      "key" : "rinse",
-      "url"  : "http://rinse.fm/podcasts",
-      "date_format" : "%Y-%m-%d",
-      "attr_map" : {
-        "item" : ".podcast-list-item",
-        "name" : "h3",
-        "image": ".listen.soundcloud a[data-img-src]",
-        "url"  : ".listen.soundcloud a[href]",
-        "date_str" : ".listen.soundcloud a[data-air-day]"
+      id: "2",
+      name: "rinse.fm",
+      key: "rinse",
+      url: "http://rinse.fm/podcasts",
+      date_format: "%Y-%m-%d",
+      attr_map: {
+        "item"      => ".podcast-list-item",
+        "name"      => "h3",
+        "image"     => ".listen.soundcloud a[data-img-src]",
+        "url"       => ".listen.soundcloud a[href]",
+        "date_str"  => ".listen.soundcloud a[data-air-day]"
+      },
+      pagination: {    
+        "param"        => "page",
+        "itemsPerPage" => 60
       }
     },{
-        "id": "3",
-        "name": "radar radio",
-        "key" : "radar",
-        "url"  : "http://www.radarradio.com/podcasts",
-        "date_format" : "%e %b",
-        "attr_map" : {
-          "item"      : ".latestarticle.radarradio_podcasts",
-          "name"      : "h2[split(' – ',0)]",
-          "image"     : "img[src]",
-          "url"       : ".radarradio_podcasts_listen_button a[href]",
-          "date_str"  : "h2[split(' – ',1)]"
-        }
-      }]
-    """
-    
-    And this html for each
-    """
+      id: "3",
+      name: "radar radio",
+      key: "radar",
+      url: "http://www.radarradio.com/podcasts",
+      date_format: "%e %b",
+      attr_map: {
+        "item"      => ".latestarticle.radarradio_podcasts",
+        "name"      => "h2[split(' – ',0)]",
+        "image"     => "img[src]",
+        "url"       => ".radarradio_podcasts_listen_button a[href]",
+        "date_str"  => "h2[split(' – ',1)]"
+      },
+      pagination: {
+        "url" => "http://www.radarradio.com/wp-admin/admin-ajax.php?action=alm_query_posts&post_type=radarradio_podcasts&posts_per_page=16",
+        "param" => "pageNumber",
+        "itemsPerPage" => 16
+      }
+    }]
+  end
+  
+  def self.sample_html_entries
+    <<-END
     <div class="nts-grid-item">
       <div class="nts-grid-item__img"><img src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" data-src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 31.01.18 Radio Episode"
           class="img preload-img">
@@ -98,57 +105,18 @@ Feature: Store scraping rules in platform
     </div>
     _BREAK_
     <article class="latestarticle radarradio_podcasts">
-    	<header class="latestheader">
-    		<span><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb"><img width="2000" height="2000" src="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg 2000w, /wp-content/uploads/2018/02/Nightslugs-Feb-150x150.jpg 150w, /wp-content/uploads/2018/02/Nightslugs-Feb-300x300.jpg 300w, /wp-content/uploads/2018/02/Nightslugs-Feb-768x768.jpg 768w, /wp-content/uploads/2018/02/Nightslugs-Feb-1024x1024.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px"></a></span>
-    	</header>
-    	<section class="latestcontent">
-    		<h2><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb">Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special) – 13th Feb</a></h2>
-    		<p>
-    		</p>
-    		<div class="radarradio_podcasts_listen_button"><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb" title="Listen">Listen</a></div>
-    		<p></p>
-    	</section>
+      <header class="latestheader">
+        <span><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb"><img width="2000" height="2000" src="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="/wp-content/uploads/2018/02/Nightslugs-Feb.jpg 2000w, /wp-content/uploads/2018/02/Nightslugs-Feb-150x150.jpg 150w, /wp-content/uploads/2018/02/Nightslugs-Feb-300x300.jpg 300w, /wp-content/uploads/2018/02/Nightslugs-Feb-768x768.jpg 768w, /wp-content/uploads/2018/02/Nightslugs-Feb-1024x1024.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px"></a></span>
+      </header>
+      <section class="latestcontent">
+        <h2><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb">Night Slugs w/ Girl Unit &amp; Bok Bok (Hardbody Special) – 13th Feb</a></h2>
+        <p>
+        </p>
+        <div class="radarradio_podcasts_listen_button"><a href="/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb" title="Listen">Listen</a></div>
+        <p></p>
+      </section>
     </article>
-    """
-
-  @attr
-  Scenario: Parse NTS.live 
-    When I call create_episodes_from_html on platform 1
-    Then I should get an episode with these attributes
-      """
-      {
-        "platform_id" : 1,
-        "name":"Murlo 31.01.18 Radio Episode",
-        "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
-        "date": "2018-01-31",
-        "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"
-      }
-      """
-
-  @attr
-  Scenario: Parse rinse.fm
-    When I call create_episodes_from_html on platform 2
-    Then I should get an episode with these attributes
-      """
-      {
-        "platform_id":2,
-        "name":"Swamp 81 with Loefah \u0026 Piezo",
-        "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
-        "image":"http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png",
-        "date":"2018-02-04"
-       }
-      """
-  
-  @attr @radar
-  Scenario: Parse radarradio
-    When I call create_episodes_from_html on platform 3
-    Then I should get an episode with these attributes
-      """
-      {
-        "platform_id":3,
-        "name":"Night Slugs w/ Girl Unit & Bok Bok (Hardbody Special)",
-        "image":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
-        "url":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
-        "date":"2018-02-13"
-      }
-      """
+    END
+    .split("_BREAK_")
+  end
+end

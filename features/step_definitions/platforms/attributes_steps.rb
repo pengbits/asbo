@@ -2,23 +2,12 @@ Given("this attribute map for the platform") do |attrs|
   @platform = Platform.create(JSON.parse(attrs))
 end
 
-Given("this html") do |html|
-  @html = html
-end
-
-Given("these attribute maps for the platforms") do |attr_array|
-  @platforms = Platform.create(JSON.parse(attr_array))
-end
-
-Given("this html for each") do |string|
-  @doc = string.split(/_BREAK_\n*/)
-end
-
 When(/^I call create_episodes_from_html on platform\s*(\d+)*$/) do |index|
+  
   i = index-1
-  @platform = @platform || @platforms[i]
-  @html     = @doc ? @doc[i] : @html
-
+  @platform = @platform || get_platform(i)
+  @html     = @html     || get_html_entry(i)
+  
   @platform.create_episodes_from_html(@html)
   expect(@platform.episodes).not_to be_empty
 end
