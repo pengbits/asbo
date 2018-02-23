@@ -1,7 +1,3 @@
-Given /the platform key=(.+)$/ do |key|
-  @platform = get_platform_by_key key
-end
-
 Then("the url is correctly formatted") do
   puts @url
 end

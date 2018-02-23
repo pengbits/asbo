@@ -5,22 +5,7 @@ Feature: Filter Episodes
   
 @filter
 Scenario: filter episodes by a search term
-  Given a Platform with these attributes
-    """
-    {
-      "id": "1",
-      "name": "nts.live",
-      "url"  : "https://www.nts.live/recently-added",
-      "date_format" : "%d.%m.%y",
-      "attr_map" : {
-        "item" : ".nts-grid-item",
-        "name" : ".nts-grid-item__img img[alt]",
-        "image": ".nts-grid-item__img img[src]",
-        "url"  : ".nts-grid-item__img__play-btn[data-src]",
-        "date_str" : ".nts-grid-item__subtitle__left"
-      }
-    }
-    """
+  Given the platform key=nts
     And episodes
       |date_str|name|url|image|
       |01.02.18|From Sun City w/ Ukudada 01.02.18 Radio Episode|/shows/from-sun-city/episodes/from-sun-city-1st-february-2018|https:\/\/media.ntslive.co.uk/resize/800x800/8733c632-7e4d-4691-8220-1065a319fa77_1493251200.jpeg|

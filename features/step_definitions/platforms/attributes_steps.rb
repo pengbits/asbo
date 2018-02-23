@@ -2,10 +2,6 @@ Given("this attribute map for the platform") do |attrs|
   @platform = Platform.create(JSON.parse(attrs))
 end
 
-Given("this html for each") do |string|
-  @doc = string.split(/_BREAK_\n*/)
-end
-
 When(/^I call create_episodes_from_html on platform\s*(\d+)*$/) do |index|
   
   i = index-1

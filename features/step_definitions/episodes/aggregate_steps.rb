@@ -1,7 +1,3 @@
-Given("these platforms") do
-  @platforms = get_platforms
-end
-
 Given("these episodes") do |attr_array|
   Episode.create!(JSON.parse(attr_array))
 end
