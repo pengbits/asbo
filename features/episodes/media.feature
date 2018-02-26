@@ -3,7 +3,7 @@ As a Developer
 In order to provide better context around the media enclosure
 I want to identify them as belonging to either mixcloud or soundcloud
 
-@media
+@media @mixcloud
 Scenario: nts x mixcloud
   Given the platform key=nts
   And html for an episode
@@ -12,5 +12,20 @@ Scenario: nts x mixcloud
   """
   When I parse the html
   Then the platform will contain an episode with this media property
+  |type|url|x|
+  |mixcloud|https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/|"|
+
+
+@media @soundcloud
+Scenario: rinse x soundcloud
+  Given the platform key=rinse
+  And html for an episode
+  """
+    <div class="borderbottom left podcast-list-item" id="conducta260218"><div class="left w8-16"><h3 class="darkgrey tstarheavyupper px15 mb8">
+    Conducta </h3><div class="listen icon soundcloud"><a href="https://soundcloud.com/rinsefm/conducta260218" nclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'soundcloud_podcastpage', 'Podcast: Conducta');" class="bgsoundcloudorange soundcloud-link" data-airtime="11" data-air-day="2018-02-26"data-artist="Conducta">&nbsp;</a><a href="http://podcast.dgen.net/rinsefm/podcast/Conducta260218.mp3" class="bglightblue alt-link" style="display:none" data-airtime="11" data-air-day="2018-02-26" data-artist="Conducta">&nbsp;</a></div><div class="listen icon"><a href="http://podcast.dgen.net/rinsefm/podcast/Conducta260218.mp3" class="bglightblue" onclick="__gaTracker('send', 'event', 'openpodcastinplayer', 'podcastpage', 'Podcast: Conducta');" data-airtime="11" data-air-day="2018-02-26" data-artist="Conducta">&nbsp;</a></div><div class="download icon"><a href="http://podcast.dgen.net/rinsefm/podcast/Conducta260218.mp3" download="http://podcast.dgen.net/rinsefm/podcast/Conducta260218.mp3" target="_blank" class="bglavender" title="Right Click and Save As to Download">&nbsp;</a></div></div><!-- snip --><div class="soundcloud-player"></div>
+    </div>  
+  """
+  When I parse the html
+  Then the platform will contain an episode with this media property
   |type|url|
-  |mixcloud|https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/|
+  |soundcloud|https://soundcloud.com/rinsefm/conducta260218|
