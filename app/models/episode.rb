@@ -2,6 +2,7 @@ class Episode < ApplicationRecord
   belongs_to :platform
   validates :date, presence: true
   before_validation :parse_date
+  serialize :media
   attr_accessor :date_str
   
   def as_json(opts={})

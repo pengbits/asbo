@@ -1,4 +1,5 @@
 require 'client'
+require 'media'
 
 class Platform < ApplicationRecord
   has_many :episodes
@@ -94,7 +95,9 @@ class Platform < ApplicationRecord
         end
         unless value.nil?
           value.gsub!(/(^\n)*(\n$)*(\s$)*(^\s)*/,"")
-          ep[prop] = value
+          ep[prop] = prop == 'media' ? 
+            Media::from_url(value) : 
+            value
         end
       end
       
