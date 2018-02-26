@@ -13,7 +13,6 @@ end
 
 Then("the platform will contain an episode with this url") do |details_url|
   @ep = @platform.episodes.first
-  # puts @ep.details
   expect(@ep.details).to eq(details_url)
 end
 
