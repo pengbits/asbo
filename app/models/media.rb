@@ -1,6 +1,11 @@
 class Media
-  def self.from_str(media_str)
-    puts "Media::from_str! #{media_str}"
-    media_str
+  TYPES = %w(mixcloud soundcloud)
+  HTTP_TRIM_REGEX = /^(http|https):\/\/(www\.)*/
+  TYPES_REGEX = Regexp.new("^#{TYPES.join('|')}")
+
+  def self.from_url(url)
+    trim = url.gsub(HTTP_TRIM_REGEX, '')
+    type = TYPES_REGEX =~ trim ? trim[TYPES_REGEX] : 'unrecognized'
+    {type: type, url: url}
   end
 end

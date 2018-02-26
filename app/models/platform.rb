@@ -96,7 +96,7 @@ class Platform < ApplicationRecord
         unless value.nil?
           value.gsub!(/(^\n)*(\n$)*(\s$)*(^\s)*/,"")
           ep[prop] = prop == 'media' ? 
-            Media::from_str(value) : 
+            Media::from_url(value) : 
             value
         end
       end
