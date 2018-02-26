@@ -1,5 +1,2 @@
-we need to make a bit more of a distinction between a details page (radar), and media on sound platform such as mixcloud/soundcloud (rinse, nts) 
+alls well now, but we need tests around changing models/out of date seeds
 
-if the platform allows you to ge to the media in one-click, expose the option, but otherwise we need better names
-
-also might make sense to break up the host from the path in our urls given we are supporting multiple paths for pagination..
