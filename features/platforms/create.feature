@@ -4,21 +4,7 @@ Feature: Add a Platform
    I want to add a platform
    
    Background:
-     Given these attributes 
-     """
-     {
-       "name": "nts.live",
-       "key":"nts",
-       "url"  : "https://www.nts.live/recently-added",
-       "attr_map" : {
-         "item" : ".nts-grid-item",
-         "name" : ".nts-grid-item__img img[alt]",
-         "image": ".nts-grid-item__img img[src]",
-         "url"  : ".nts-grid-item__img__play-btn[data-src]",
-         "date_str" : ".nts-grid-item__subtitle__left"
-       }
-     }
-     """
+     Given a platform with valid attributes
      
   @platform @model
   Scenario: Add a Platform via console

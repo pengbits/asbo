@@ -12,8 +12,8 @@ Scenario: nts x mixcloud
   """
   When I parse the html
   Then the platform will contain an episode with this media property
-  |type|url|x|
-  |mixcloud|https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/|"|
+  |type|url|
+  |mixcloud|https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/|
 
 
 @media @soundcloud
