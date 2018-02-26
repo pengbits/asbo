@@ -3,8 +3,8 @@ As a User
 In order to ensure integrity of episodes
 I want to make either media or details properties required
 
-@media @details @validation
-Scenario: save episode with media and details
+# @media @details @validation
+Scenario: save an episode with media and details
   Given the platform key=nts
   Given the episode attributes
   """
@@ -23,3 +23,37 @@ Scenario: save episode with media and details
   """
   When I save the episode
   Then it should save sucessfully
+
+# @media @details @validation
+Scenario: save an episode with details only
+  Given the platform key=radar
+  Given the episode attributes
+  """
+  {
+    "name": "Sert One [Meine Nacht Takeover]",
+    "platform_id": 3,
+    "url": "/podcasts/sert-one-meine-nacht-takeover-25th-feb",
+    "image": "/wp-content/uploads/2018/02/sert-one.jpg",
+    "date_str": "26 Feb",
+    "details": "/podcasts/sert-one-meine-nacht-takeover-25th-feb"
+  }
+  """
+  When I save the episode
+  Then it should save sucessfully
+  
+  
+@media @details @validation
+Scenario: save an episode with no details or media
+  Given the platform key=radar
+  Given the episode attributes
+  """
+  {
+    "name": "Sert One [Meine Nacht Takeover]",
+    "platform_id": 3,
+    "url": "/podcasts/sert-one-meine-nacht-takeover-25th-feb",
+    "image": "/wp-content/uploads/2018/02/sert-one.jpg",
+    "date_str": "26 Feb"
+  }
+  """
+  When I save the episode
+  Then it should fail validation

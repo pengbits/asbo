@@ -5,6 +5,7 @@ class Episode < ApplicationRecord
   before_validation :parse_date
   serialize :media
   attr_accessor :date_str
+  validate :media_or_details_present
   
   def as_json(opts={})
     super(opts.merge({:except => [:created_at,:updated_at]}))
@@ -25,8 +26,14 @@ class Episode < ApplicationRecord
       str = Episode::strip_ordinal(date)
       return Date.strptime(str, date_format)
     rescue
+    end    
+  end
+  
+  private
+  def media_or_details_present
+    if media.to_s.empty? and details.to_s.empty?
+      errors.add(:base, "must provide either media or details")
     end
-    
   end
   
   def self.strip_ordinal(str)
@@ -36,4 +43,6 @@ class Episode < ApplicationRecord
     # puts "'#{str}' => '#{stripped}'"
     # stripped 
   end
+
 end
+
