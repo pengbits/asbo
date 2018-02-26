@@ -14,7 +14,7 @@ Scenario: nts x mixcloud
   Then the platform will contain an episode with this media property
   """
   {
-    type: "mixcloud",
-    url: "https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/"
+    "type": "mixcloud",
+     "url": "https://www.mixcloud.com/NTSRadio/grandmixxer-22nd-february-2018/"
   }
   """
