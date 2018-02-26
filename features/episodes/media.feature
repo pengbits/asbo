@@ -3,7 +3,7 @@ As a Developer
 In order to provide better context around the media enclosure
 I want to identify them as belonging to either mixcloud or soundcloud
 
-@details
+@media
 Scenario: nts x mixcloud
   Given the platform key=nts
   And html for an episode
