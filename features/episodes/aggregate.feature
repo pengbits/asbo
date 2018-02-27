@@ -3,8 +3,7 @@ As a User
 In order to get more episodes from the same artist or show
 I want to combine episodes from different Platforms
 
-@aggregate @episode
-Scenario: combine episodes from multiple platforms and sort by date
+Background: 
   Given these platforms
   And these episodes
   """
@@ -27,7 +26,7 @@ Scenario: combine episodes from multiple platforms and sort by date
     "image": "https://media3.ntslive.co.uk/resize/100x100/bdc6ef82-17e5-47e4-9a77-4f6f26efe011_1480636800.jpeg",
     "date_str": "06.02.18"
   }, {
-    "name": "The Marcus Nasty Show with Zed Bias, Mic Man Frost, Leda Stray \u0026 Beth ",
+    "name": "The Marcus Nasty Show with Zed Bias, Mic Man Frost, Leda Stray \u0026 Beth, Ossia ",
     "platform_id": 2,
     "media": {"type":"soundcloud", "url":"https://soundcloud.com/rinsefm/marcusnasty070218"},
     "image": "",
@@ -46,6 +45,15 @@ Scenario: combine episodes from multiple platforms and sort by date
     "date_str": "2018-02-07"
   }]
   """
+@aggregate @episode
+Scenario: episodes index includes content from multiple platforms  
   When I visit the episodes index
   Then the list should include episodes from both rinse and nts
 
+  
+@aggregate @episode @filter
+Scenario: episodes index accepts a filter param  
+  When I visit the episodes index with filter 'ossia'
+  Then the list should include episodes with 'ossia' in the name
+
+  
