@@ -11,7 +11,6 @@ Scenario: save an episode with media and details
   {
     "name": "Expansions w/ Contours & Yadava 24.02.18 Radio Episode",
     "platform_id": 1,
-    "url": "https://www.mixcloud.com/NTSRadio/expansions-w-contours-yadava-24th-february-2018/",
     "image": "https://media3.ntslive.co.uk/resize/100x100/6933eb93-5a8b-4dd5-b99c-85509d6e6a33_1519430400.jpeg",
     "date_str": "24.02.18",
     "details": "/shows/expansions-w-contours/episodes/expansions-w-contours-yadava-24th-february-2018",
@@ -32,7 +31,7 @@ Scenario: save an episode with details only
   {
     "name": "Sert One [Meine Nacht Takeover]",
     "platform_id": 3,
-    "url": "/podcasts/sert-one-meine-nacht-takeover-25th-feb",
+    "details": "/podcasts/sert-one-meine-nacht-takeover-25th-feb",
     "image": "/wp-content/uploads/2018/02/sert-one.jpg",
     "date_str": "26 Feb",
     "details": "/podcasts/sert-one-meine-nacht-takeover-25th-feb"
@@ -50,7 +49,6 @@ Scenario: save an episode with no details or media
   {
     "name": "Sert One [Meine Nacht Takeover]",
     "platform_id": 3,
-    "url": "/podcasts/sert-one-meine-nacht-takeover-25th-feb",
     "image": "/wp-content/uploads/2018/02/sert-one.jpg",
     "date_str": "26 Feb"
   }
