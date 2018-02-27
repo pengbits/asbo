@@ -3,7 +3,7 @@ As a User
 In order to get more episodes from the same artist or show
 I want to combine episodes from different Platforms
 
-@aggregate
+@aggregate @episode
 Scenario: combine episodes from multiple platforms and sort by date
   Given these platforms
   And these episodes
@@ -46,6 +46,6 @@ Scenario: combine episodes from multiple platforms and sort by date
     "date_str": "2018-02-07"
   }]
   """
-  When I view list sorted by date
+  When I visit the episodes index
   Then the list should include episodes from both rinse and nts
 
