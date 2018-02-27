@@ -357,16 +357,16 @@ Feature: Refresh Platform
     </div>
     """
     When I add some episodes
-      |name|date_str|
-      |Reverie  14.02.18 Radio Episode|14.02.18|
-      |Anu & Andy Garvey  13.02.18 Radio Episode|13.02.18|
-      |Karen O 13.02.18 Radio Episode|13.02.18|
-      |Nitetrax 13.02.18 Radio Episode|13.02.18|
-      |The Slip 13.02.18 Radio Episode|13.02.18|
-      |Optimo 13.02.18 Radio Episode|13.02.18|
-      |Zuli & Marwa 13.02.18 Radio Episode|13.02.18|
-      |Jazzman 13.02.18 Radio Episode|13.02.18|
-      |Noise In My Head w/ PLO Man  13.02.18 Radio Episode|13.02.18|
+      |name|date_str|details|
+      |Reverie  14.02.18 Radio Episode|14.02.18|http://nts.live/foo|
+      |Anu & Andy Garvey  13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Karen O 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Nitetrax 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |The Slip 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Optimo 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Zuli & Marwa 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Jazzman 13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
+      |Noise In My Head w/ PLO Man  13.02.18 Radio Episode|13.02.18|http://nts.live/foo|
    
     When I call create_episodes_from_html on platform
     Then only the new episodes are added to the platform

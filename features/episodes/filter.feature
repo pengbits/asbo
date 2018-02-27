@@ -7,7 +7,7 @@ Feature: Filter Episodes
 Scenario: filter episodes by a search term
   Given the platform key=nts
     And episodes
-      |date_str|name|url|image|
+      |date_str|name|media|image|
       |01.02.18|From Sun City w/ Ukudada 01.02.18 Radio Episode|/shows/from-sun-city/episodes/from-sun-city-1st-february-2018|https:\/\/media.ntslive.co.uk/resize/800x800/8733c632-7e4d-4691-8220-1065a319fa77_1493251200.jpeg|
       |01.02.18|Videogamemusic w/ Bugbuspiano 01.02.18 Radio Episode|/shows/videogamemusic/episodes/videogamemusic-1st-february-2018|https:\/\/media.ntslive.co.uk/resize/800x800/9a64e816-8ab9-4490-a914-66b74e3a58c8_1458086400.jpeg|
       |31.01.18|The NCA Show w/ Brassfoot 31.01.18 Radio Episode|/shows/brassfoot/episodes/the-nca-show-w-brassfoot-31st-january-2018|https:\/\/media2.ntslive.co.uk/resize/800x800/020d1450-f8f1-4541-ac29-925f829cf03f_1517443200.jpeg|

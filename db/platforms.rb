@@ -11,7 +11,6 @@ module PlatformData
         "item"      => ".nts-grid-item",
         "name"      => ".nts-grid-item__img img[alt]",
         "image"     => ".nts-grid-item__img img[src]",
-        "url"       => ".nts-grid-item__img__play-btn[data-src]",
         "media"     => ".nts-grid-item__img__play-btn[data-src]",
         "details"   => ".nts-grid-item__img__play-btn[data-permalink]",
         "date_str"  => ".nts-grid-item__subtitle__left"
@@ -31,7 +30,6 @@ module PlatformData
         "item"      => ".podcast-list-item",
         "name"      => "h3",
         "image"     => ".listen.soundcloud a[data-img-src]",
-        "url"       => ".listen.soundcloud a[href]",
         "media"     => ".listen.soundcloud a[href]",
         "date_str"  => ".listen.soundcloud a[data-air-day]"
       },
@@ -50,7 +48,6 @@ module PlatformData
         "item"      => ".latestarticle.radarradio_podcasts",
         "name"      => "h2[split(' – ',0)]",
         "image"     => "img[src]",
-        "url"       => ".radarradio_podcasts_listen_button a[href]",
         "details"   => ".radarradio_podcasts_listen_button a[href]",
         "date_str"  => "h2[split(' – ',1)]"
       },
