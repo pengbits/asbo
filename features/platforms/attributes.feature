@@ -11,9 +11,9 @@ Feature: Store scraping rules in platform
       {
         "platform_id" : 1,
         "name":"Murlo 31.01.18 Radio Episode",
+        "media":{"type":"mixcloud", "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"},
         "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
-        "date": "2018-01-31",
-        "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"
+        "date": "2018-01-31"
       }
       """
 
@@ -25,7 +25,7 @@ Feature: Store scraping rules in platform
       {
         "platform_id":2,
         "name":"Swamp 81 with Loefah \u0026 Piezo",
-        "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81",
+        "media":{"type":"soundcloud", "url":"https://soundcloud.com/rinsefm/horsemeatdisco040218swamp81"},
         "image":"http://rinse.fm/wp-content/uploads/2012/09/133_loefah_chunky_2.png",
         "date":"2018-02-04"
        }
@@ -40,7 +40,7 @@ Feature: Store scraping rules in platform
         "platform_id":3,
         "name":"Night Slugs w/ Girl Unit & Bok Bok (Hardbody Special)",
         "image":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
-        "url":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
+        "details":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
         "date":"2018-02-13"
       }
       """
