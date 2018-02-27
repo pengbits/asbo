@@ -6,6 +6,9 @@ class Media
   def self.from_url(url)
     trim = url.gsub(HTTP_TRIM_REGEX, '')
     type = TYPES_REGEX =~ trim ? trim[TYPES_REGEX] : 'unrecognized'
-    {type: type, url: url}
+      media         = {}
+      media['type'] = type
+      media['url']  = url
+    media
   end
 end
