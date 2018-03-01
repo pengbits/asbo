@@ -52,9 +52,9 @@ module PlatformData
         "date_str"  => "h2[split(' – ',1)]"
       },
       pagination: {
-        "url" => "http://www.radarradio.com/wp-admin/admin-ajax.php?action=alm_query_posts&post_type=radarradio_podcasts&posts_per_page=16",
+        "url" => "http://www.radarradio.com/wp-admin/admin-ajax.php?action=alm_query_posts&post_type=radarradio_podcasts&posts_per_page=32",
         "param" => "pageNumber",
-        "itemsPerPage" => 16
+        "itemsPerPage" => 32
       }
     }]
   end
