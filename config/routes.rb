@@ -7,5 +7,5 @@ Rails.application.routes.draw do
    get 'platforms/:key/refresh', to: 'platforms#refresh', as: 'platform_refresh'
    
    get 'episodes', to: 'episodes#index'
-
+   get 'episodes/filter/:filter', to: 'episodes#index', as: 'episodes_filtered'
 end
