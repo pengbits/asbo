@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require_relative 'platforms'
+Episode.destroy_all
+Platform.destroy_all
+Platform.create! PlatformData::sample_attributes
