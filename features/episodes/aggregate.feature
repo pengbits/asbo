@@ -49,11 +49,10 @@ Background:
 Scenario: episodes index includes content from multiple platforms  
   When I visit the episodes index
   Then the list should include episodes from both rinse and nts
-
   
 @aggregate @episode @filter
 Scenario: episodes index accepts a filter param  
-  When I visit the episodes index with filter 'ossia'
-  Then the list should include episodes with 'ossia' in the name
+  When I visit the episodes index with filter ossia
+  Then the list should include episodes with ossia in the name
 
   

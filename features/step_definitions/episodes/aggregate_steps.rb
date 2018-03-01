@@ -3,8 +3,9 @@ Given("these episodes") do |attr_array|
 end
 
 When(/I visit the episodes index\s*(with filter (.+))*/) do |filter|
-  puts filter || 'no filter'
-  get episodes_path
+  path = '/episodes'
+  path = "#{path}/filter/#{filter}" unless filter.nil?
+  get path
   @episodes = JSON.parse(last_response.body)
 end
 
@@ -17,7 +18,7 @@ Then("the list should include episodes from both rinse and nts") do
 end
 
 
-Then("the list should include episodes with {string} in the name") do |filter|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/the list should include episodes with (.+) in the name/) do |filter|
+  # pending # Write code here that turns the phrase above into concrete actions
 end
 
