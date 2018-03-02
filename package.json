@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/pengbits/asbo/issues"
   },
-  "homepage": "https://github.com/pengbits/asbo#readme"
+  "homepage": "https://github.com/pengbits/asbo#readme",
+  "devDependencies": {
+    "@neutrinojs/react": "^8.1.2",
+    "neutrino": "^8.1.2"
+  }
 }
