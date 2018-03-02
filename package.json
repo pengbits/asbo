@@ -1,0 +1,31 @@
+{
+  "name": "asbo",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "scripts": {
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "test": "neutrino test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengbits/asbo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pengbits/asbo/issues"
+  },
+  "homepage": "https://github.com/pengbits/asbo#readme",
+  "devDependencies": {
+    "@neutrinojs/react": "^8.1.2",
+    "neutrino": "^8.1.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "foreman": "^2.0.0"
+  }
+}
