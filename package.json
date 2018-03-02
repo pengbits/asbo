@@ -23,7 +23,10 @@
     "@neutrinojs/react": "^8.1.2",
     "neutrino": "^8.1.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-devtools": "^3.4.1"
   },
   "dependencies": {
     "foreman": "^2.0.0"
