@@ -4,8 +4,14 @@ import PlatformList from '../components/PlatformList'
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(`map state ${JSON.stringify(state)}`)
-  return {}
+  const {
+    platforms,
+    platform
+  } = state.platforms
+  console.log(platforms)
+  return {
+    platforms 
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
