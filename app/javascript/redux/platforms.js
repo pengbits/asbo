@@ -1,17 +1,9 @@
 // actions
+import platform_data from './platforms-data'
 const LOAD_PLATFORMS = 'LOAD_PLATFORMS'
 
 const initialState = {
-  platforms : [{
-    id: 0,
-    name: 'nts.live',
-    key: 'nts'
-  },{
-    id: 1,
-    name: 'rinse fm',
-    key: 'rinse'
-  }],
-  platform  : null
+  platforms : platform_data.slice(0)
 }
 
 // reducer
