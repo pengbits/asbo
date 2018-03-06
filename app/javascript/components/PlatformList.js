@@ -7,7 +7,9 @@ class PlatformList extends Component {
     return (<div>
       <h2>Platforms</h2>
       <ul>
-        {platforms.map(p => <PlatformListItem {...p} key={p.id}/>)}
+        {platforms.map(p => <PlatformListItem 
+          {...p} key={p.id}
+        />)}
       </ul>
     </div>)
   }
