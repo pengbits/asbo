@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
-import PlatformList from '../components/PlatformList'
+import PlatformDetails from '../components/PlatformDetails'
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {  
   const {
     platforms,
     platform
@@ -18,9 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {}
 }
 
-const PlatformListContainer = connect(
+const PlatformDetailsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PlatformList)
+)(PlatformDetails)
 
-export default PlatformListContainer
+export default PlatformDetailsContainer

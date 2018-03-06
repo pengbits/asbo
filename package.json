@@ -21,11 +21,15 @@
   "homepage": "https://github.com/pengbits/asbo#readme",
   "devDependencies": {
     "@neutrinojs/react": "^8.1.2",
+    "history": "^4.7.2",
     "neutrino": "^8.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
     "redux-devtools": "^3.4.1"
   },
   "dependencies": {

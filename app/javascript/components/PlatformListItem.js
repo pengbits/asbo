@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
+import { Link } from 'react-router-dom'
 
-const PlatformListItem = ({name,id}) => {
+const PlatformListItem = ({name,nickname,id}) => {
   return (<li id={id}>
-    <a href="#">{name}</a>
+    <Link to={`/platforms/${nickname}`}>{name}</Link>
   </li>)
 }
 

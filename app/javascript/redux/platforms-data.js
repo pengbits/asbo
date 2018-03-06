@@ -1,7 +1,7 @@
 export default [{
   "id": 1,
   "name": "nts.live",
-  "key": "nts",
+  "nickname": "nts",
   "created_at": "2018-02-27T19:10:05.186Z",
   "updated_at": "2018-02-27T19:10:05.186Z",
   "attr_map": {
@@ -22,7 +22,7 @@ export default [{
 }, {
   "id": 2,
   "name": "rinse.fm",
-  "key": "rinse",
+  "nickname": "rinse",
   "created_at": "2018-02-27T19:10:05.190Z",
   "updated_at": "2018-02-27T19:10:05.190Z",
   "attr_map": {
@@ -42,7 +42,7 @@ export default [{
 }, {
   "id": 3,
   "name": "radar radio",
-  "key": "radar",
+  "nickname": "radar",
   "created_at": "2018-02-27T19:10:05.193Z",
   "updated_at": "2018-02-27T21:50:56.518Z",
   "attr_map": {
