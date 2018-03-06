@@ -23,7 +23,9 @@ import rootReducer from './redux'
 const history = createHistory()
 
 // init dev tools & store
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const k = '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__';
+const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE']} // these get noisy
+const composeEnhancers = window[k] ? window[k](opts) : compose;
 const store = createStore(
   combineReducers({
     ...rootReducer, 

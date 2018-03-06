@@ -11,6 +11,9 @@ const LocationMiddleware = store => next => action => {
   // }
   if(typeof action =='object'){ // not true of thunks, they'll be functions
     if(action.type == '@@router/LOCATION_CHANGE'){
+      
+      // @todo extract these regexs into some kidn of map,
+      // ideally one that could be exposed to the <route> composition on index.js
       const actionPath  = (action.payload || {}).pathname.replace(/\/$/,'')
         switch(true) {
           case /platforms$/.test(actionPath):
