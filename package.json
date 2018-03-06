@@ -30,7 +30,8 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
-    "redux-devtools": "^3.4.1"
+    "redux-devtools": "^3.4.1",
+    "redux-thunk": "^2.2.0"
   },
   "dependencies": {
     "foreman": "^2.0.0"
