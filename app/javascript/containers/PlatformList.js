@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     platforms,
     platform
   } = state.platforms
-  console.log(platforms)
+
   return {
     platforms 
   }
