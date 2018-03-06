@@ -45,6 +45,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
+        <Route exact path="/" render={() => (<h2>hello there</h2>)} />
         <Route exact path="/platforms"  component={PlatformList}/>
         <Route exact path="/platforms/:nickname" component={PlatformDetails} />
       </Switch>
