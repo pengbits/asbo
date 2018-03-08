@@ -4,20 +4,23 @@ import {createAction,createActions,handleActions} from 'redux-actions'
 
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
-export const LOAD_PLATFORM   = 'LOAD_PLATFORM'
-export const SELECT_PLATFORM  = 'SELECT_PLATFORM'
+export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 
 // actions
 export const loadPlatform  = function(opts){
   return {
     type: LOAD_PLATFORM,
-    payload: new Promise((resolve,reject) => {
-      setTimeout(resolve, 125)
-    })
-      .then(function() {
-        const {nickname} = opts;
+    payload: fetch(`/api/platforms/${opts.nickname}`)
+      .then(response => {
+        if(response.ok){
+          return response.json()
+        } else {
+          throw new Error(response.statusText)
+        }
+      }).then(p => {
         return {
-          'platform': platform_data.find(p => p.nickname == nickname)
+          // key is a reserved word in react-land, map it accordingly
+          platform: {...p, nickname: p.key}
         }
       })
   }
@@ -28,25 +31,18 @@ export const loadPlatforms  = function(){
     payload: fetch(`/api/platforms`)
       .then(response => {
         if(response.ok){
-          console.log('success')
           return response.json()
         } else {
           throw new Error(response.statusText)
         }
       }).then(json => {
-        console.log(json)
         return {
-          platforms: json
+          // key is a reserved word in react-land, map it accordingly
+          platforms: json.map(p => {
+            return {...p, nickname: p.key}
+          })
         }
       })
-    // payload: new Promise((resolve,reject) => {
-    //   setTimeout(resolve, 125)
-    // })
-    //   .then(function() {
-    //     return {
-    //       'platforms': platform_data.slice(0)
-    //     }
-    //   })
   }
 }
 
