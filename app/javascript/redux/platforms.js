@@ -1,57 +1,40 @@
-// actions
-import platform_data from './platforms-data'
 import {createAction,createActions,handleActions} from 'redux-actions'
+import API  from '../api'
 
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 
 // actions
-export const loadPlatform  = function(opts){
+export const loadPlatform  = function({nickname}){
   return {
     type: LOAD_PLATFORM,
-    payload: fetch(`/api/platforms/${opts.nickname}`)
-      .then(response => {
-        if(response.ok){
-          return response.json()
-        } else {
-          throw new Error(response.statusText)
-        }
-      }).then(p => {
-        return {
-          // key is a reserved word in react-land, map it accordingly
-          platform: {...p, nickname: p.key}
-        }
-      })
+    payload: API.getPlatform({nickname}).then(json => {
+      return {
+        platform: platformAttributes(json)
+      }
+    })
   }
 }
+
 export const loadPlatforms  = function(){
   return {
     type: LOAD_PLATFORMS,
-    payload: fetch(`/api/platforms`)
-      .then(response => {
-        if(response.ok){
-          return response.json()
-        } else {
-          throw new Error(response.statusText)
-        }
-      }).then(json => {
-        return {
-          // key is a reserved word in react-land, map it accordingly
-          platforms: json.map(p => {
-            return {...p, nickname: p.key}
-          })
-        }
-      })
+    payload: API.getPlatforms().then(json => {
+      return {
+        platforms: json.map(p => {
+          return platformAttributes(p)
+        })
+      }
+    })
   }
 }
 
-// export const loadPlatforms  = createAction(LOAD_PLATFORMS);
-export const selectPlatform = createAction(SELECT_PLATFORM)
 
-
-const loadedState = {
-  platforms : platform_data.slice(0)
+// utils
+// key is a reserved word in react-land, map it accordingly
+const platformAttributes = (p) => {
+  return {...p, nickname: p.key}
 }
 
 // reducer
