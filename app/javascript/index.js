@@ -12,6 +12,11 @@ import { render } from 'react-dom'
 import { connect, Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 
+// imports:redux-async
+import thunk from 'redux-thunk';
+import promiseMiddleware from 'redux-promise-middleware'
+// import promiseMiddleware from 'redux-promise';
+
 // imports:app
 import App from './components/App'
 import PlatformList from './containers/PlatformList'
@@ -32,7 +37,12 @@ const store = createStore(
     router: routerReducer
   }),
   composeEnhancers(
-    applyMiddleware(routerMiddleware(history),LocationMiddleware)
+    applyMiddleware(
+      routerMiddleware(history),
+      LocationMiddleware,
+      promiseMiddleware(),
+      thunk
+    )
   )
 )
 // Now you can dispatch navigation actions from anywhere!

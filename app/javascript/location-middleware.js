@@ -19,7 +19,8 @@ const LocationMiddleware = store => next => action => {
           case /platforms$/.test(actionPath):
             store.dispatch(loadPlatforms())
             break
-            
+          
+          // converting to async fetch
           case /platforms\/(.+)/.test(actionPath):
             store.dispatch(selectPlatform({
               nickname: /platforms\/(.+)/.exec(actionPath)[1]

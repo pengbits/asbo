@@ -1,12 +1,28 @@
 // actions
+import platform_data from './platforms-data'
 import {createAction,createActions} from 'redux-actions'
 
-import platform_data from './platforms-data'
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const SELECT_PLATFORM  = 'SELECT_PLATFORM'
+
 // actions
-export const loadPlatforms = createAction(LOAD_PLATFORMS)
+export const loadPlatforms  = function(){
+  return function(dispatch){
+    // setTimeout(function(platform_data){
+    dispatch({
+      type: 'LOAD_PLATFORMS_PENDING'
+    })
+    setTimeout(dispatch, 125, {
+      type: 'LOAD_PLATFORMS_FULFILLED',
+      payload: {
+        platform_data
+      }
+    })
+  }
+}
+
+// export const loadPlatforms  = createAction(LOAD_PLATFORMS);
 export const selectPlatform = createAction(SELECT_PLATFORM)
 
 
@@ -22,7 +38,6 @@ export default function reducer(state={platforms:[]}, action={}){
     
     case SELECT_PLATFORM:
       const {nickname} = action.payload
-      console.log(action)
       return {
         ...state, 
         platform : nickname ? 

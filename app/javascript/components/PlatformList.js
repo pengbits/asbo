@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PlatformListItem from './PlatformListItem'
 
 class PlatformList extends Component {
+  
   render() {
     const {platforms} = this.props || []
     return (<div>
