@@ -1,6 +1,6 @@
 // actions
 import platform_data from './platforms-data'
-import {createAction,createActions} from 'redux-actions'
+import {createAction,createActions,handleActions} from 'redux-actions'
 
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
@@ -42,13 +42,19 @@ const loadedState = {
 }
 
 // reducer
+// might want to look into somethinbg like type-to-reducer
+// https://github.com/tomatau/type-to-reducer
+// or just handleActions from redux-actions
+// https://redux-actions.js.org/docs/api/handleAction.html
 export default function reducer(state={platforms:[]}, action={}){
   switch(action.type){
-    case 'LOAD_PLATFORMS_FULFILLED':
-      const {platforms} = action.payload
+    case `${LOAD_PLATFORMS}_PENDING`:
+      return state
+      
+    case `${LOAD_PLATFORMS}_FULFILLED`:
       return {
         ...state,
-        platforms
+        platforms: action.payload.platforms
       }
     
     case SELECT_PLATFORM:
