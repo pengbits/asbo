@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
   } = state.platforms
 
   return {
-    platforms 
+    platforms
   }
 }
 

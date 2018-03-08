@@ -4,14 +4,14 @@ import PlatformDetails from '../components/PlatformDetails'
 
 
 const mapStateToProps = (state, ownProps) => {  
+  const {platform} = state.platforms 
   const {
-    platforms,
-    platform
-  } = state.platforms
-
-  return {
-    platforms 
-  }
+    name,
+    nickname,
+    id,
+    url
+  } = platform || {}
+  return {name,nickname,id,url}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
