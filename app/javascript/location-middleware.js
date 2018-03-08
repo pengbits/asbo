@@ -1,7 +1,7 @@
 import {push} from 'react-router-redux'
 import {
   loadPlatforms,
-  selectPlatform
+  loadPlatform
 } from './redux/platforms'
 
 const LocationMiddleware = store => next => action => {
@@ -19,9 +19,10 @@ const LocationMiddleware = store => next => action => {
           case /platforms$/.test(actionPath):
             store.dispatch(loadPlatforms())
             break
-            
+          
+          // converting to async fetch
           case /platforms\/(.+)/.test(actionPath):
-            store.dispatch(selectPlatform({
+            store.dispatch(loadPlatform({
               nickname: /platforms\/(.+)/.exec(actionPath)[1]
             }))
             break

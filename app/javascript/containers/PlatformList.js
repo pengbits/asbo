@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
+import {loadPlatforms} from '../redux/platforms'
 import PlatformList from '../components/PlatformList'
 
 
@@ -10,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
   } = state.platforms
 
   return {
-    platforms 
+    platforms
   }
 }
 
