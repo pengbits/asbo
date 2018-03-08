@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 
 class PlatformDetails extends Component {
   render() {
-    const {name,id,url,nickname} = this.props
-    return (<div>
+    const {name,id,url,nickname,loading} = this.props
+    return loading ? <p>...</p> : ( <div>
       <h2>Platform</h2>
       <p>
         <b>name</b><br />

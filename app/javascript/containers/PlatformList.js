@@ -7,11 +7,13 @@ import PlatformList from '../components/PlatformList'
 const mapStateToProps = (state, ownProps) => {
   const {
     platforms,
-    platform
+    platform,
+    loading
   } = state.platforms
 
   return {
-    platforms
+    platforms,
+    loading
   }
 }
 

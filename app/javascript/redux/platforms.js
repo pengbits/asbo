@@ -42,21 +42,31 @@ const platformAttributes = (p) => {
 // https://github.com/tomatau/type-to-reducer
 // or just handleActions from redux-actions
 // https://redux-actions.js.org/docs/api/handleAction.html
-export default function reducer(state={platforms:[]}, action={}){
+export const initialState = {
+  platforms : [],
+  platform  : null,
+  loading: false
+}
+export default function reducer(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
-      return state
+      return {
+        ...state,
+        loading: true
+      }
       
     case `${LOAD_PLATFORM}_FULFILLED`:
       return {
         ...state,
+        loading: false,
         platform: action.payload.platform
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
       return {
         ...state,
+        loading: false,
         platforms: action.payload.platforms
       }
       
