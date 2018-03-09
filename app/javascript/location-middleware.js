@@ -19,12 +19,12 @@ const LocationMiddleware = store => next => action => {
       // ideally one that could be exposed to the <route> composition on index.js
       const actionPath  = (action.payload || {}).pathname.replace(/\/$/,'')
         switch(true) {
-          case routes[LOAD_PLATFORMS].test(actionPath):
+          case routes.regex(LOAD_PLATFORMS).test(actionPath):
             store.dispatch(loadPlatforms())
             break
           
           // converting to async fetch
-          case routes[LOAD_PLATFORM].test(actionPath):
+          case routes.regex(LOAD_PLATFORM).test(actionPath):
             store.dispatch(loadPlatform({
               // this is fairly cryptic now that regex is moved to routes.js.. 
               // perhaps we need routes[LOAD_PLATFORM].test() and routes[LOAD_PLATFORM].params().nickname ?
