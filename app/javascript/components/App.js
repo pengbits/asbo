@@ -1,10 +1,9 @@
 import React from 'react'
-import PlatformList from '../containers/PlatformList'
 
-const App = () => (
+const App = ({children}) => (
   <div>
     <h1>Asbo</h1>
-    <p>app</p>
+    {children}
   </div>
 )
 
