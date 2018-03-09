@@ -26,7 +26,6 @@ const LocationMiddleware = store => next => action => {
             break
         
           case routes.test(actionPath, NEW_PLATFORM):
-            console.log('NEW_PLATFORM found in middleware')
             store.dispatch(newPlatform())
             break
           

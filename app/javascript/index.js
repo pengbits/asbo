@@ -11,6 +11,7 @@ import { render } from 'react-dom'
 // imports:redux
 import { connect, Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 
 // imports:redux-async
 import thunk from 'redux-thunk';
@@ -32,11 +33,12 @@ const history = createHistory()
 
 // init dev tools & store
 const k = '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__';
-const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE']} // these get noisy
+const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE','@@redux-form']} // these get noisy
 const composeEnhancers = window[k] ? window[k](opts) : compose;
 const store = createStore(
   combineReducers({
     ...rootReducer, 
+    form: formReducer,
     router: routerReducer
   }),
   composeEnhancers(

@@ -5,6 +5,7 @@ import API  from '../api'
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 export const NEW_PLATFORM     = 'NEW_PLATFORM'
+export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
 
 // actions
 export const loadPlatform  = function({nickname}){
@@ -12,7 +13,7 @@ export const loadPlatform  = function({nickname}){
     type: LOAD_PLATFORM,
     payload: API.getPlatform({nickname}).then(json => {
       return {
-        platform: platformAttributes(json)
+        platform: attrsFromServer(json)
       }
     })
   }
@@ -24,7 +25,7 @@ export const loadPlatforms  = function(){
     payload: API.getPlatforms().then(json => {
       return {
         platforms: json.map(p => {
-          return platformAttributes(p)
+          return attrsFromServer(p)
         })
       }
     })
@@ -33,11 +34,25 @@ export const loadPlatforms  = function(){
 
 export const newPlatform = createAction(NEW_PLATFORM)
 
-
+export const createPlatform = function(attrs){
+  return {
+    type: CREATE_PLATFORM,
+    payload: API.createPlatform(attrs)
+    .then(json => {
+      console.log(json)
+      return {
+        platform: json
+      }
+    })
+  }
+}
 // utils
 // key is a reserved word in react-land, map it accordingly
-const platformAttributes = (p) => {
+const attrsFromServer = (p) => {
   return {...p, nickname: p.key}
+}
+const attrsForServer = (p) => {
+  return {...p, key: p.nickname}
 }
 
 // reducer
@@ -54,12 +69,14 @@ export default function reducer(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
+    case `${CREATE_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
       
     case `${LOAD_PLATFORM}_FULFILLED`:
+    case `${CREATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,
@@ -79,7 +96,7 @@ export default function reducer(state=initialState, action={}){
         loading:false,
         platform: {}
       }
-      
+    
     default: 
       return state
     break
