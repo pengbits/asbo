@@ -1,9 +1,11 @@
 import * as p from './redux/platforms'
 import PlatformList from './containers/PlatformList'
 import PlatformDetails from './containers/PlatformDetails'
+import PlatformForm from './containers/PlatformDetails'
+
 
 let map = {}
-// map action constants to regex patterns to test with
+
 map[p.LOAD_PLATFORMS]  = {
   component : PlatformList,
   regex     : /platforms$/
@@ -13,6 +15,12 @@ map[p.LOAD_PLATFORM]   = {
   component : PlatformDetails,
   regex     : /platforms\/(.+)/,
   params    : {'nickname' : 1}
+}
+
+
+map[p.NEW_PLATFORM]   = {
+  component : PlatformForm,
+  regex     : /platforms\/new/
 }
 
 const routes = {

@@ -4,7 +4,8 @@ import {
   LOAD_PLATFORMS,
   loadPlatforms,
   LOAD_PLATFORM,
-  loadPlatform
+  loadPlatform,
+  NEW_PLATFORM
 } from './redux/platforms'
 
 const LocationMiddleware = store => next => action => {
@@ -26,6 +27,10 @@ const LocationMiddleware = store => next => action => {
           case routes.test(actionPath, LOAD_PLATFORM):
             const nickname = routes.params(actionPath, LOAD_PLATFORM, 'nickname')
             store.dispatch(loadPlatform({nickname}))
+            break
+            
+          case routes.test(actionPath, NEW_PLATFORM):
+            console.log('NEW_PLATFORM found in middleware')
             break
         }
     }

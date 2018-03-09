@@ -69,6 +69,7 @@ render(
         <Route exact path="/"                    children={renderComponent(null)} />
         <Route exact path="/platforms"           children={renderComponent(p.LOAD_PLATFORMS)} />
         <Route exact path="/platforms/:nickname" children={renderComponent(p.LOAD_PLATFORM)} />
+        <Route exact path="/platforms/new"       children={renderComponent(p.NEW_PLATFORM)} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

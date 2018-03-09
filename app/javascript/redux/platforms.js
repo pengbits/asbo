@@ -4,6 +4,7 @@ import API  from '../api'
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
+export const NEW_PLATFORM     = 'NEW_PLATFORM'
 
 // actions
 export const loadPlatform  = function({nickname}){
@@ -68,6 +69,13 @@ export default function reducer(state=initialState, action={}){
         ...state,
         loading: false,
         platforms: action.payload.platforms
+      }
+      
+    case NEW_PLATFORM:
+      return {
+        ...state,
+        loading:false,
+        platform: {}
       }
       
     default: 
