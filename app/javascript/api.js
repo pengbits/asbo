@@ -9,10 +9,17 @@ class API {
   }
   
   createPlatform(attrs){
-    const opts = {method:'POST'}
-    const url = this.url(opts)
+    const url = this.url()
     console.log(`API post ${url}`)
-    return {}
+    console.log(`    body ${JSON.stringify(attrs)}`)
+
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+       'Content-Type':'application/json',
+     },
+     body: JSON.stringify(attrs)
+   })
   }
   
   get(opts={}){

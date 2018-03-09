@@ -13,7 +13,7 @@ export const loadPlatform  = function({nickname}){
     type: LOAD_PLATFORM,
     payload: API.getPlatform({nickname}).then(json => {
       return {
-        platform: platformAttributes(json)
+        platform: attrsFromServer(json)
       }
     })
   }
@@ -25,7 +25,7 @@ export const loadPlatforms  = function(){
     payload: API.getPlatforms().then(json => {
       return {
         platforms: json.map(p => {
-          return platformAttributes(p)
+          return attrsFromServer(p)
         })
       }
     })
@@ -37,12 +37,9 @@ export const newPlatform = createAction(NEW_PLATFORM)
 export const createPlatform = function(attrs){
   return {
     type: CREATE_PLATFORM,
-    payload: new Promise((resolve) => {
-      setTimeout(function(){
-        resolve({'ok':true})
-      },125)
-    })
+    payload: API.createPlatform(attrs)
     .then(json => {
+      console.log(json)
       return {
         platform: json
       }
@@ -51,8 +48,11 @@ export const createPlatform = function(attrs){
 }
 // utils
 // key is a reserved word in react-land, map it accordingly
-const platformAttributes = (p) => {
+const attrsFromServer = (p) => {
   return {...p, nickname: p.key}
+}
+const attrsForServer = (p) => {
+  return {...p, key: p.nickname}
 }
 
 // reducer
