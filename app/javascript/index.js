@@ -18,9 +18,12 @@ import promiseMiddleware from 'redux-promise-middleware'
 // import promiseMiddleware from 'redux-promise';
 
 // imports:app
-import App from './components/App'
-import PlatformList from './containers/PlatformList'
-import PlatformDetails from './containers/PlatformDetails'
+import routes from './routes'
+import * as p from './redux/platforms'
+import App from './components/app'
+
+// import PlatformList from './containers/PlatformList'
+// import PlatformDetails from './containers/PlatformDetails'
 import LocationMiddleware from './location-middleware'
 import rootReducer from './redux'
 
@@ -47,17 +50,25 @@ const store = createStore(
 )
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
-
-
+const renderComponent = (action) => {
+  if(action){
+    const Component = routes.component(action)
+    return (<App>
+      <Component />
+    </App>)
+  } else {
+    return (<App />)
+  }
+}
 
 // render the app
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" render={() => (<h2>hello there</h2>)} />
-        <Route exact path="/platforms"  component={PlatformList}/>
-        <Route exact path="/platforms/:nickname" component={PlatformDetails} />
+        <Route exact path="/"                    children={renderComponent(null)} />
+        <Route exact path="/platforms"           children={renderComponent(p.LOAD_PLATFORMS)} />
+        <Route exact path="/platforms/:nickname" children={renderComponent(p.LOAD_PLATFORM)} />
       </Switch>
     </ConnectedRouter>
   </Provider>,

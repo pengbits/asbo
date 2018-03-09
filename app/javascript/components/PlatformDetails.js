@@ -4,7 +4,7 @@ class PlatformDetails extends Component {
   render() {
     const {name,id,url,nickname,loading} = this.props
     return loading ? <p>...</p> : ( <div>
-      <h2>Platform</h2>
+      <h2>Platform Details</h2>
       <p>
         <b>name</b><br />
         {name}

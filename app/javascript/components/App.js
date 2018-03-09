@@ -1,10 +1,11 @@
 import React from 'react'
-import PlatformList from '../containers/PlatformList'
+import Nav from './Nav'
 
-const App = () => (
+const App = ({children}) => (
   <div>
     <h1>Asbo</h1>
-    <p>app</p>
+    <Nav />
+    {children}
   </div>
 )
 
