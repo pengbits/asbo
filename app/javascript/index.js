@@ -11,6 +11,7 @@ import { render } from 'react-dom'
 // imports:redux
 import { connect, Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 
 // imports:redux-async
 import thunk from 'redux-thunk';
@@ -37,6 +38,7 @@ const composeEnhancers = window[k] ? window[k](opts) : compose;
 const store = createStore(
   combineReducers({
     ...rootReducer, 
+    form: formReducer,
     router: routerReducer
   }),
   composeEnhancers(

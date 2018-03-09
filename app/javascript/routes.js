@@ -46,7 +46,6 @@ const routes = {
   
   'component':(action => {
     if(!map[action]) throw new Error(`could not map '${action}' to component`)
-    console.log(map[action].component)
     return map[action].component
   })
 }

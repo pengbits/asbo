@@ -1,26 +1,47 @@
 import React, {Component} from 'react'
+import { Field, reduxForm } from 'redux-form'
 
 class PlatformForm extends Component {
   render() {
-    const {name,id,url,nickname} = this.props
-    return (<form>
+    const { handleSubmit, load, pristine, reset, submitting } = this.props
+    return (<form onSubmit={handleSubmit}>
       <h2>New Platform</h2>
       <p>
         <b>name</b><br />
-        <input type='text' name='name' value={name} />
+        <Field 
+          component="input" 
+          type="text" 
+          name="name" 
+          placeholder="name"
+        />
       </p>
       <p>
         <b>nickname</b><br />
-        {nickname}
-        <input type='text' name='nickname' value={nickname} />
+        <Field 
+          component="input" 
+          type="text" 
+          name="nickname"  
+          placeholder="name"
+        />
       </p>
       <p>
         <b>url</b><br />
-        <input type='text' name='url' value={url} />
-      </p>
-      
+        <Field 
+          component="input" 
+          type="text" 
+          name="url"  
+          placeholder="url"
+        />
+      </p>      
+      <p>
+        <button type="submit" disabled={pristine || submitting}>
+          Submit
+        </button>
+        </p>
     </form>)
   }
 }
 
-export default PlatformForm
+export default reduxForm({
+  form: 'platform'
+})(PlatformForm)
