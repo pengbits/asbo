@@ -1,7 +1,7 @@
 import * as p from './redux/platforms'
 import PlatformList from './containers/PlatformList'
 import PlatformDetails from './containers/PlatformDetails'
-import PlatformForm from './containers/PlatformDetails'
+import PlatformForm from './containers/PlatformForm'
 
 
 let map = {}
@@ -17,7 +17,6 @@ map[p.LOAD_PLATFORM]   = {
   params    : {'nickname' : 1}
 }
 
-
 map[p.NEW_PLATFORM]   = {
   component : PlatformForm,
   regex     : /platforms\/new/
@@ -31,7 +30,9 @@ const routes = {
   }),
   
   'test' : ((path, action) => {
-    return map[action].regex.test(path)
+    const isMatch = map[action].regex.test(path)
+    console.log(`routes#test ${path}?${action} ${isMatch}`)
+    return isMatch
   }),
   
   'params' : ((path, action, param) => {
@@ -45,6 +46,7 @@ const routes = {
   
   'component':(action => {
     if(!map[action]) throw new Error(`could not map '${action}' to component`)
+    console.log(map[action].component)
     return map[action].component
   })
 }

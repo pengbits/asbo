@@ -31,6 +31,8 @@ export const loadPlatforms  = function(){
   }
 }
 
+export const newPlatform = createAction(NEW_PLATFORM)
+
 
 // utils
 // key is a reserved word in react-land, map it accordingly

@@ -4,7 +4,7 @@ class PlatformForm extends Component {
   render() {
     const {name,id,url,nickname} = this.props
     return (<form>
-      <h2>Platform Details</h2>
+      <h2>New Platform</h2>
       <p>
         <b>name</b><br />
         <input type='text' name='name' value={name} />
