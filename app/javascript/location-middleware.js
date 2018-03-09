@@ -1,6 +1,9 @@
 import {push} from 'react-router-redux'
+import routes from './routes'
 import {
+  LOAD_PLATFORMS,
   loadPlatforms,
+  LOAD_PLATFORM,
   loadPlatform
 } from './redux/platforms'
 
@@ -16,13 +19,15 @@ const LocationMiddleware = store => next => action => {
       // ideally one that could be exposed to the <route> composition on index.js
       const actionPath  = (action.payload || {}).pathname.replace(/\/$/,'')
         switch(true) {
-          case /platforms$/.test(actionPath):
+          case routes[LOAD_PLATFORMS].test(actionPath):
             store.dispatch(loadPlatforms())
             break
           
           // converting to async fetch
-          case /platforms\/(.+)/.test(actionPath):
+          case routes[LOAD_PLATFORM].test(actionPath):
             store.dispatch(loadPlatform({
+              // this is fairly cryptic now that regex is moved to routes.js.. 
+              // perhaps we need routes[LOAD_PLATFORM].test() and routes[LOAD_PLATFORM].params().nickname ?
               nickname: /platforms\/(.+)/.exec(actionPath)[1]
             }))
             break

@@ -47,17 +47,21 @@ const store = createStore(
 )
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
-
-
+const renderChildren = ({match}) => {
+  console.log(match)
+  return (<div>
+    <h2>Asbo</h2> 
+  </div>)
+}
 
 // render the app
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" render={() => (<h2>hello there</h2>)} />
-        <Route exact path="/platforms"  component={PlatformList}/>
-        <Route exact path="/platforms/:nickname" component={PlatformDetails} />
+        <Route exact path="/"                    children={renderChildren} />
+        <Route exact path="/platforms"           children={renderChildren} />
+        <Route exact path="/platforms/:nickname" children={renderChildren} />
       </Switch>
     </ConnectedRouter>
   </Provider>,
