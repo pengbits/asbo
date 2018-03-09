@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import PlatformForm from '../components/PlatformForm'
-
+import {createPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   // const {platform} = state.platforms 
@@ -17,8 +17,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onSubmit: (form) => {
-      console.log(`onSubmit ${JSON.stringify(form)}`)
+    onSubmit: (attrs) => {
+      dispatch(createPlatform(attrs))
     }
   }
 }

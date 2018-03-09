@@ -8,9 +8,16 @@ class API {
     return this.get(opts)
   }
   
+  createPlatform(attrs){
+    const opts = {method:'POST'}
+    const url = this.url(opts)
+    console.log(`API post ${url}`)
+    return {}
+  }
+  
   get(opts={}){
-    const url = opts.nickname ? `/api/platforms/${opts.nickname}` : `/api/platforms`
-    console.log(`API fetch ${url}`)
+    const url = this.url(opts)
+    console.log(`API get ${url}`)
     return fetch(url)
       .then(response => {
         if(response.ok){
@@ -22,6 +29,11 @@ class API {
         return json
       })
   }
+  
+  url(opts={}){
+    return opts.nickname ? `/api/platforms/${opts.nickname}` : `/api/platforms`
+  }
+  
 }
 
 export default new API()

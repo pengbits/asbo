@@ -5,6 +5,7 @@ import API  from '../api'
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 export const NEW_PLATFORM     = 'NEW_PLATFORM'
+export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
 
 // actions
 export const loadPlatform  = function({nickname}){
@@ -33,7 +34,21 @@ export const loadPlatforms  = function(){
 
 export const newPlatform = createAction(NEW_PLATFORM)
 
-
+export const createPlatform = function(attrs){
+  return {
+    type: CREATE_PLATFORM,
+    payload: new Promise((resolve) => {
+      setTimeout(function(){
+        resolve({'ok':true})
+      },125)
+    })
+    .then(json => {
+      return {
+        platform: json
+      }
+    })
+  }
+}
 // utils
 // key is a reserved word in react-land, map it accordingly
 const platformAttributes = (p) => {
@@ -54,12 +69,14 @@ export default function reducer(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
+    case `${CREATE_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
       
     case `${LOAD_PLATFORM}_FULFILLED`:
+    case `${CREATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,
@@ -79,7 +96,7 @@ export default function reducer(state=initialState, action={}){
         loading:false,
         platform: {}
       }
-      
+    
     default: 
       return state
     break
