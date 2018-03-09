@@ -5,7 +5,7 @@ Feature: Refresh Platform
   And scraping the latest episodes page
   
   Background: 
-    Given the platform key=nts
+    Given the platform nickname=nts
     
   @http
   Scenario: Refresh a platform without any episodes

@@ -18,7 +18,7 @@ Feature: Add a Platform
     {
       "platform" : {
         "name" : "Radar Radio",
-        "key" : "radar",
+        "nickname" : "radar",
         "url" : "http://www.radarradio.com/podcasts"
       }
     }

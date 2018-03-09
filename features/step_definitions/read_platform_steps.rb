@@ -1,14 +1,14 @@
 When("I load the platform endpoint {string}") do |url|
   get url
   @response = JSON.parse(last_response.body)
-  @key = url.split('/platforms/')[1]
+  @nickname = url.split('/platforms/')[1]
 end
 
 Then("the response should be a JSON representation of the platform") do
-  @platform = @platforms.find{|p| p.key == @key }
+  @platform = @platforms.find{|p| p.nickname == @nickname }
   expect(@platform.name).to eq(@response['name'])
   expect(@platform.id).to   eq(@response['id'])
-  expect(@platform.key).to  eq(@response['key'])
+  expect(@platform.nickname).to  eq(@response['nickname'])
   expect(@platform.url).to  eq(@response['url'])
 end
 

@@ -5,7 +5,7 @@ I want to make either media or details properties required
 
 # @media @details @validation
 Scenario: save an episode with media and details
-  Given the platform key=nts
+  Given the platform nickname=nts
   Given the episode attributes
   """
   {
@@ -25,7 +25,7 @@ Scenario: save an episode with media and details
 
 # @media @details @validation
 Scenario: save an episode with details only
-  Given the platform key=radar
+  Given the platform nickname=radar
   Given the episode attributes
   """
   {
@@ -43,7 +43,7 @@ Scenario: save an episode with details only
   
 @media @details @validation
 Scenario: save an episode with no details or media
-  Given the platform key=radar
+  Given the platform nickname=radar
   Given the episode attributes
   """
   {

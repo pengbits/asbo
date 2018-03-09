@@ -3,7 +3,7 @@ module PlatformData
     [{
       id: "1",
       name: "nts.live",
-      key: "nts",
+      nickname: "nts",
       url: "https://www.nts.live/recently-added",
       date_format: "%d.%m.%y",
       has_details: true,
@@ -22,7 +22,7 @@ module PlatformData
     },{
       id: "2",
       name: "rinse.fm",
-      key: "rinse",
+      nickname: "rinse",
       url: "http://rinse.fm/podcasts",
       date_format: "%Y-%m-%d",
       has_details: false,
@@ -40,7 +40,7 @@ module PlatformData
     },{
       id: "3",
       name: "radar radio",
-      key: "radar",
+      nickname: "radar",
       url: "http://www.radarradio.com/podcasts",
       date_format: "%e %b",
       has_details: true,

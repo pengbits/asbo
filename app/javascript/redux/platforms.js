@@ -47,12 +47,12 @@ export const createPlatform = function(attrs){
   }
 }
 // utils
-// key is a reserved word in react-land, map it accordingly
+// nickname is a reserved word in react-land, map it accordingly
 const attrsFromServer = (p) => {
-  return {...p, nickname: p.key}
+  return {...p, nickname: p.nickname}
 }
 const attrsForServer = (p) => {
-  return {...p, key: p.nickname}
+  return {...p, nickname: p.nickname}
 }
 
 // reducer

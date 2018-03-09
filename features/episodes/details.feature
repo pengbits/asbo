@@ -5,7 +5,7 @@ I want a link to the episode details when available
 
 @details
 Scenario: a platform with has_details=true will include a details url in episodes
-  Given the platform key=nts
+  Given the platform nickname=nts
   And the platform has details=true in its configuration  
   And html for an episode
   """
@@ -20,7 +20,7 @@ Scenario: a platform with has_details=true will include a details url in episode
 
 @details
 Scenario: a platform with has_details=false will not include a details url in episodes
-  Given the platform key=rinse
+  Given the platform nickname=rinse
   And html for an episode
   """
   <div class="borderbottom left podcast-list-item" id="uncledugs230218-mp3">
