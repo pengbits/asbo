@@ -16,7 +16,7 @@ class PlatformList extends Component {
       <h2>Platforms</h2>
       <ul>
         {(platforms || []).map(p => <PlatformListItem 
-          {...p} nickname={p.id}
+          {...p} key={p.id}
         />)}
       </ul>
     </div>)
