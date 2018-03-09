@@ -1,7 +1,7 @@
 FactoryBot.define do  
   
   factory :platform do
-    key "nts"
+    nickname "nts"
     name "nts live"
     
     factory :platform_with_episodes do

@@ -5,7 +5,7 @@ Feature: Filter Episodes
   
 @filter
 Scenario: filter episodes by a search term
-  Given the platform key=nts
+  Given the platform nickname=nts
     And episodes
       |date_str|name|media|image|
       |01.02.18|From Sun City w/ Ukudada 01.02.18 Radio Episode|/shows/from-sun-city/episodes/from-sun-city-1st-february-2018|https:\/\/media.ntslive.co.uk/resize/800x800/8733c632-7e4d-4691-8220-1065a319fa77_1493251200.jpeg|

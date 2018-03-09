@@ -14,8 +14,8 @@ module PlatformHelper
     Platform.create PlatformData::sample_attributes
   end
   
-  def get_platform_by_key(key)
-    get_platforms.find {|p| p.key == key }
+  def get_platform_by_nickname(nickname)
+    get_platforms.find {|p| p.nickname == nickname }
   end
   
   def get_html_entry(index=nil)

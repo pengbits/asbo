@@ -5,25 +5,25 @@ I want to include a ?page parameter in the request
 
 @pagination @param
 Scenario Outline: pagination
-  Given the platform key=<key>
+  Given the platform nickname=<nickname>
   When I call refresh with a page parameter
   Then the platform should have the correct episodes
   
   Examples:
-    |key|
+    |nickname|
     |nts|
     |rinse|
     |radar|
 
 @pagination @routes
 Scenario Outline: pagination routes
-  Given the platform key=<key>
-  When I visit '/platforms/<key>/refresh.json?page=1'
-  And  I visit '/platforms/<key>/refresh.json?page=3'
+  Given the platform nickname=<nickname>
+  When I visit '/platforms/<nickname>/refresh.json?page=1'
+  And  I visit '/platforms/<nickname>/refresh.json?page=3'
   Then each response should contain different episodes
   
   Examples:
-    |key|
+    |nickname|
     |nts|
     |rinse|
     |radar|

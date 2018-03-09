@@ -6,7 +6,7 @@ class PlatformsController < ApplicationController
 
   def show    
     begin
-      platform_from_key_param
+      platform_from_nickname_param
       render_json_with_episodes
     rescue ActiveRecord::RecordNotFound
       render_error
@@ -28,7 +28,7 @@ class PlatformsController < ApplicationController
     opts[:page] = params[:page] unless params[:page].nil?
 
     begin
-      platform_from_key_param.refresh opts
+      platform_from_nickname_param.refresh opts
       render_json_with_episodes
     rescue ActiveRecord::RecordNotFound
       render_error
@@ -37,13 +37,13 @@ class PlatformsController < ApplicationController
   
   private
   
-  def platform_from_key_param
-    @platform = Platform.find_by!(:key => params[:key])
+  def platform_from_nickname_param
+    @platform = Platform.find_by!(:nickname => params[:nickname])
     @platform
   end
   
   def platform_params
-    params.require(:platform).permit(:name,:date_format,:url,:attr_map,:key)
+    params.require(:platform).permit(:name,:date_format,:url,:attr_map,:nickname)
   end
   
   def render_json_with_episodes

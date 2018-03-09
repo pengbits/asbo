@@ -13,7 +13,7 @@ export const loadPlatform  = function({nickname}){
     type: LOAD_PLATFORM,
     payload: API.getPlatform({nickname}).then(json => {
       return {
-        platform: attrsFromServer(json)
+        platform: json
       }
     })
   }
@@ -24,9 +24,7 @@ export const loadPlatforms  = function(){
     type: LOAD_PLATFORMS,
     payload: API.getPlatforms().then(json => {
       return {
-        platforms: json.map(p => {
-          return attrsFromServer(p)
-        })
+        platforms: json.slice(0)
       }
     })
   }
@@ -39,20 +37,11 @@ export const createPlatform = function(attrs){
     type: CREATE_PLATFORM,
     payload: API.createPlatform(attrs)
     .then(json => {
-      console.log(json)
       return {
         platform: json
       }
     })
   }
-}
-// utils
-// key is a reserved word in react-land, map it accordingly
-const attrsFromServer = (p) => {
-  return {...p, nickname: p.key}
-}
-const attrsForServer = (p) => {
-  return {...p, key: p.nickname}
 }
 
 // reducer
