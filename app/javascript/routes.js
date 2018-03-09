@@ -17,20 +17,24 @@ map[p.LOAD_PLATFORM]   = {
 
 const routes = {
   map,
+  
   'regex' :(action => {
     return map[action].regex
   }),
+  
   'test' : ((path, action) => {
     return map[action].regex.test(path)
   }),
+  
   'params' : ((path, action, param) => {
     const cfg = map[action].params || {}
-    if(cfg[param]){
+    if(cfg[param] !== undefined){
       return  map[action].regex.exec(path)[cfg[param]]
     } else {
       return {}
     }
   }),
+  
   'component':(action => {
     if(!map[action]) throw new Error(`could not map '${action}' to component`)
     return map[action].component
