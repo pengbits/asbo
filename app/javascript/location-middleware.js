@@ -5,6 +5,7 @@ import {
   LOAD_PLATFORM,  loadPlatform,
   NEW_PLATFORM,   newPlatform,
   CREATE_PLATFORM,
+  DESTROY_PLATFORM
 } from './redux/platforms'
 
 const LocationMiddleware = store => next => action => {
@@ -28,8 +29,11 @@ const LocationMiddleware = store => next => action => {
             break
         }
     }
-    // this behaves like a typical rails-style redirect... just need a flash mesage?
+    // these behave like typical rails-style redirects... just need a flash mesage?
     if(action.type == `${CREATE_PLATFORM}_FULFILLED`){
+      store.dispatch(push('/platforms'))
+    }
+    if(action.type == `${DESTROY_PLATFORM}_FULFILLED`){
       store.dispatch(push('/platforms'))
     }
   }
