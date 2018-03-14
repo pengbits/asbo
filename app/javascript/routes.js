@@ -37,7 +37,7 @@ const routes = {
   
   'test' : ((path, action) => {
     const isMatch = map[action].regex.test(path)
-    console.log(`routes#test ${path}?${action} ${isMatch}`)
+    // console.log(`routes#test ${path}?${action} ${isMatch}`)
     return isMatch
   }),
   

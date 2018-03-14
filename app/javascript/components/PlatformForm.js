@@ -3,9 +3,10 @@ import { Field, reduxForm } from 'redux-form'
 
 class PlatformForm extends Component {
   render() {
-    const { handleSubmit, load, pristine, reset, submitting } = this.props
-    return (<form onSubmit={handleSubmit}>
-      <h2>New Platform</h2>
+    const {load, handleSubmit, pristine, reset, submitting, isNew } = this.props
+    return (
+      <form onSubmit={handleSubmit}>
+      <h2>{isNew ? 'New' : 'Edit'} Platform</h2>
       <p>
         <b>name</b><br />
         <Field 

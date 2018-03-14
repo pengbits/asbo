@@ -59,6 +59,18 @@ export const editPlatform = function({nickname}){
   }
 }
 
+export const updatePlatform = function(attrs) {
+  return {
+    type: UPDATE_PLATFORM,
+    payload: API.updatePlatform(attrs)
+      .then(json => {
+        return {
+          platform: json
+        }
+      })
+  }
+}
+
 export const destroyPlatform = function({nickname}){
   return {
     type: DESTROY_PLATFORM,
@@ -86,11 +98,13 @@ export default function reducer(state=initialState, action={}){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
     case `${CREATE_PLATFORM}_PENDING`:
+    case `${UPDATE_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_PLATFORM}_REJECTED`:
+    case `${UPDATE_PLATFORM}_REJECTED`:
       return {
         ...state,
         loading: false,
@@ -100,6 +114,7 @@ export default function reducer(state=initialState, action={}){
     case `${LOAD_PLATFORM}_FULFILLED`:
     case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
+    case `${UPDATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,

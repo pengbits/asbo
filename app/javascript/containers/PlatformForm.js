@@ -1,24 +1,25 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import PlatformForm from '../components/PlatformForm'
-import {createPlatform} from '../redux/platforms'
+import {createPlatform,updatePlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
-  // const {platform} = state.platforms 
-  // const {
-  //   name,
-  //   nickname,
-  //   id,
-  //   url
-  // } = platform || {}
-  // return {name,nickname,id,url}
-  return {}
+  const {platform} = state.platforms
+  const isNew = (platform || {}).id == undefined
+
+  return {
+    'initialValues' : platform,
+    isNew
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onSubmit: (attrs) => {
-      dispatch(createPlatform(attrs))
+    onSubmit: (attrs, dispatch, props) => {
+      dispatch(props.isNew ?
+        createPlatform(attrs) :
+        updatePlatform(attrs)
+      )
     }
   }
 }
