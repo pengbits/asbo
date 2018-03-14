@@ -1,5 +1,5 @@
 Given("a platform with valid attributes") do
-  @platform_attrs = get_platform_attrs(0) # {name:"RinseFM"}
+  @platform_attrs = get_platform_attrs(0) # {name:"nts"}
 end
 
 When("I save it") do
@@ -17,23 +17,21 @@ When("I make a POST request to platforms endpoint with valid JSON") do |json|
   post platforms_path, @json
 end
 
-
 When("I make a DELETE request to platform endpoint") do
   @nick = @platforms.first.nickname
   url = "/platforms/#{@nick}"
   delete url
 end
 
-When("I make a PUT request to platform endpoint") do
-  @nick = @platforms.first.nickname
-  url = "/platforms/#{@nick}"
-  @json = @attrs
-  put url, @json
+Given("these changes") do
+  @attrs = {name: 'WibblePlatform', nickname:'wibble', url: 'wibble.net'}
 end
 
-
-Then("the response should be success") do
-  pending # Write code here that turns the phrase above into concrete actions
+When("I make a PUT request to platform endpoint") do
+  @nick = @platforms.first.nickname # nts
+  url = "/platforms/#{@nick}"
+  @json = {platform: @attrs}
+  put url, @json
 end
 
 Then("I should get a valid response containing the platform") do
@@ -42,12 +40,12 @@ Then("I should get a valid response containing the platform") do
   expect(@response).to be_truthy
 end
 
-Given("these changes") do
-  @attrs = {name: 'WibblePlatform', nickname:'wibble', url: 'wibble.net'}
+Then("the platform in the response should reflect the changes") do
+  @json = JSON.parse(@response)
+  expect(@json[:name]).to      eq(@attrs['name'])
+  expect(@json[:nickname]).to  eq(@attrs['nickname'])
+  expect(@json[:url]).to       eq(@attrs['url'])
 end
 
-Then("the response should include an updated platform") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
 
 

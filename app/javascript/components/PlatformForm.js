@@ -12,20 +12,36 @@ class PlatformForm extends Component {
       <TextInput name='nickname' />
       <TextInput name='url' />       
       <Checkbox name='has_details' />
-      <p>
-        <b>Attribute Map</b><br />
-        <Field
-          name="attr_map" 
-          component="textarea" 
-          style={{
-            'fontFamily':'courier new, monospace'
-          }}
-          cols={100}
-          rows={10}
-          format={(value,name) => (JSON.stringify(value, null, 2))}
-           parse={(value,name) => (JSON.parse(value))}
-        />
-      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Selector</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>item</td>
+            <td><TextInput name='attr_map.item' /></td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td><TextInput name='attr_map.name' /></td>
+          </tr>
+          <tr>
+            <td>image</td>
+            <td><TextInput name='attr_map.image' /></td>
+          </tr>
+          <tr>
+            <td>media</td>
+            <td><TextInput name='attr_map.media' /></td>
+          </tr>
+          <tr>
+            <td>date_str</td>
+            <td><TextInput name='attr_map.date_str' /></td>
+          </tr>
+        </tbody>
+      </table>
       <p>
         <button type="submit" disabled={pristine || submitting}>
           Submit

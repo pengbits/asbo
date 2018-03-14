@@ -26,8 +26,9 @@ class PlatformsController < ApplicationController
   def update 
     begin
       platform_from_nickname_param
-      @platform.update 
-    rescue Exception
+      @platform.update platform_params
+      render json: @platform.to_json
+    rescue ActiveRecord::RecordNotFound
       render_error
     end
   end
