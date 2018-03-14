@@ -33,3 +33,17 @@ Then("I should get a valid response containing the platform") do
   puts @response
   expect(@response).to be_truthy
 end
+
+Given("these changes") do
+  @attrs = {name: 'FooPlatform', nickname:'foo', url: 'foo.net'}
+end
+
+When("I make a PUT request to platform endpoint") do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("the response should include an updated platform") do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+
