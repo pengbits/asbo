@@ -37,9 +37,7 @@ class PlatformDetails extends Component {
   
   destroy(){
     const {destroyPlatform,nickname} = this.props;
-    destroyPlatform({
-      nickname
-    })
+    confirm('Permanently delete this platform?') && destroyPlatform({nickname})
   }
 }
 
