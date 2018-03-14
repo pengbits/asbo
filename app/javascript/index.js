@@ -53,7 +53,6 @@ const store = createStore(
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
 const renderComponent = (action) => {
-  console.log(action)
   if(action){
     const Component = routes.component(action)
     return (<App>

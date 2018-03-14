@@ -48,12 +48,14 @@ export const createPlatform = function(attrs){
 }
 
 export const editPlatform = function({nickname}){
-  return function(dispatch){
-    console.log(`redux/platforms editPlatform({${nickname}})`)
-    return {
-      type: EDIT_PLATFORM,
-      payload: {}
-    }
+  return {
+    type: EDIT_PLATFORM,
+    payload: API.getPlatform({nickname})
+      .then(json => {
+        return {
+          platform: json
+        }
+      })
   }
 }
 
@@ -96,6 +98,7 @@ export default function reducer(state=initialState, action={}){
       }
       
     case `${LOAD_PLATFORM}_FULFILLED`:
+    case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
