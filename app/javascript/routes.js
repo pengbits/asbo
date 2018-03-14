@@ -22,6 +22,12 @@ map[p.NEW_PLATFORM]   = {
   regex     : /platforms\/new/
 }
 
+map[p.EDIT_PLATFORM]   = {
+  component : PlatformForm,
+  regex     : /platforms\/(.+)\/edit/,
+  params    : {'nickname' : 1}
+}
+
 const routes = {
   map,
   

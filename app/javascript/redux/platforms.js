@@ -6,6 +6,8 @@ export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 export const NEW_PLATFORM     = 'NEW_PLATFORM'
 export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
+export const EDIT_PLATFORM    = 'EDIT_PLATFORM'
+export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 
  
@@ -33,7 +35,6 @@ export const loadPlatforms  = function(){
 }
 
 export const newPlatform = createAction(NEW_PLATFORM)
-
 export const createPlatform = function(attrs){
   return {
     type: CREATE_PLATFORM,
@@ -43,6 +44,16 @@ export const createPlatform = function(attrs){
         platform: json
       }
     })
+  }
+}
+
+export const editPlatform = function({nickname}){
+  return function(dispatch){
+    console.log(`redux/platforms editPlatform({${nickname}})`)
+    return {
+      type: EDIT_PLATFORM,
+      payload: {}
+    }
   }
 }
 
