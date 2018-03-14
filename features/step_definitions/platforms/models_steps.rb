@@ -24,6 +24,14 @@ When("I make a DELETE request to platform endpoint") do
   delete url
 end
 
+When("I make a PUT request to platform endpoint") do
+  @nick = @platforms.first.nickname
+  url = "/platforms/#{@nick}"
+  @json = @attrs
+  put url, @json
+end
+
+
 Then("the response should be success") do
   pending # Write code here that turns the phrase above into concrete actions
 end
@@ -35,11 +43,7 @@ Then("I should get a valid response containing the platform") do
 end
 
 Given("these changes") do
-  @attrs = {name: 'FooPlatform', nickname:'foo', url: 'foo.net'}
-end
-
-When("I make a PUT request to platform endpoint") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @attrs = {name: 'WibblePlatform', nickname:'wibble', url: 'wibble.net'}
 end
 
 Then("the response should include an updated platform") do

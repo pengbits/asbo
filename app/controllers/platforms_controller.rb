@@ -23,6 +23,15 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
+  def update 
+    begin
+      platform_from_nickname_param
+      @platform.update 
+    rescue Exception
+      render_error
+    end
+  end
+  
   def destroy
     begin
       platform_from_nickname_param.destroy!
@@ -52,7 +61,15 @@ class PlatformsController < ApplicationController
   end
   
   def platform_params
-    params.require(:platform).permit(:name,:date_format,:url,:attr_map,:nickname)
+    params.require(:platform).permit(
+      :name,
+      :attr_map,
+      :url,
+      :date_format,
+      :pagination,
+      :has_details,
+      :nickname
+    )
   end
   
   def render_json_with_episodes
