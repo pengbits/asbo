@@ -23,7 +23,7 @@ class API {
   }
   
   updatePlatform(attrs){
-    const url = this.url()
+    const url = this.url(attrs)
     console.log(`API put ${url}`)
     console.log(`    body ${JSON.stringify(attrs)}`)
 
