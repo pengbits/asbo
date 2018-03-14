@@ -22,6 +22,20 @@ class API {
    })
   }
   
+  updatePlatform(attrs){
+    const url = this.url()
+    console.log(`API put ${url}`)
+    console.log(`    body ${JSON.stringify(attrs)}`)
+
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+       'Content-Type':'application/json',
+     },
+     body: JSON.stringify(attrs)
+   })
+  }
+  
   get(opts={}){
     const url = this.url(opts)
     console.log(`API get ${url}`)
