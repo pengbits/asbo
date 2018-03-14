@@ -23,6 +23,15 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
+  def destroy
+    begin
+      platform_from_nickname_param.destroy!
+      render json: {'success' => :true, :platform => @platform} 
+    rescue ActiveRecord::RecordNotFound
+      render_error
+    end
+  end
+  
   def refresh
     opts = {}
     opts[:page] = params[:page] unless params[:page].nil?

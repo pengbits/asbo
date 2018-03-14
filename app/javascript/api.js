@@ -37,6 +37,16 @@ class API {
       })
   }
   
+  destroyPlatform(opts={}){
+    if(!opts.nickname) throw new Error('must provide a nickname to destroy')
+    const url = this.url(opts)
+    console.log(`API delete ${url}`)
+
+    return fetch(url, {
+      method: "DELETE"
+    })
+  }
+  
   url(opts={}){
     return opts.nickname ? `/api/platforms/${opts.nickname}` : `/api/platforms`
   }

@@ -6,7 +6,9 @@ export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 export const NEW_PLATFORM     = 'NEW_PLATFORM'
 export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
+export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 
+ 
 // actions
 export const loadPlatform  = function({nickname}){
   return {
@@ -44,6 +46,18 @@ export const createPlatform = function(attrs){
   }
 }
 
+export const destroyPlatform = function({nickname}){
+  return {
+    type: DESTROY_PLATFORM,
+    payload: API.destroyPlatform({nickname})
+    .then(json => {
+      return {
+        platform: json
+      }
+    })
+  }
+}
+
 // reducer
 // might want to look into somethinbg like type-to-reducer
 // https://github.com/tomatau/type-to-reducer
@@ -62,6 +76,12 @@ export default function reducer(state=initialState, action={}){
       return {
         ...state,
         loading: true
+      }
+    case `${LOAD_PLATFORM}_REJECTED`:
+      return {
+        ...state,
+        loading: false,
+        error: true
       }
       
     case `${LOAD_PLATFORM}_FULFILLED`:

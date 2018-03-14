@@ -17,6 +17,17 @@ When("I make a POST request to platforms endpoint with valid JSON") do |json|
   post platforms_path, @json
 end
 
+
+When("I make a DELETE request to platform endpoint") do
+  @nick = @platforms.first.nickname
+  url = "/platforms/#{@nick}"
+  delete url
+end
+
+Then("the response should be success") do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then("I should get a valid response containing the platform") do
   @response = last_response.body
   puts @response
