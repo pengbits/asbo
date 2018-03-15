@@ -8,7 +8,7 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
+    rescue ActiveRecord::RecordNotFound => e
       render_error
     end
   end
@@ -27,9 +27,10 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param
       @platform.update platform_params
+      
       render json: @platform
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue StandardError => e
+      render_error e
     end
   end
   
@@ -37,8 +38,8 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param.destroy!
       render json: {'success' => :true, :platform => @platform} 
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
@@ -49,8 +50,8 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param.refresh opts
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
@@ -63,6 +64,7 @@ class PlatformsController < ApplicationController
   
   def platform_params
     params_ = params.require(:platform).permit(
+      :id,
       :name,
       :url,
       :pagination,
@@ -71,22 +73,17 @@ class PlatformsController < ApplicationController
       :has_details,
       :nickname
     )
-    # deserialize json params
-    %w(attr_map pagination).each do |p|
-      unless params_[p].nil?
-        params_[p] = JSON.parse(params_[p]) 
-      end
-    end
     
-    # puts params_
-    params_
+    
+    puts params_['attr_map']
+    params
   end
   
   def render_json_with_episodes
     render json: @platform.to_json({:include => :episodes })
   end
   
-  def render_error
-    render(:status => 500, json: {'error':'Platform not found'})
+  def render_error(e)
+    render(:status => 500, json: {'error':e.to_s})
   end
 end

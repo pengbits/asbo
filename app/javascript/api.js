@@ -37,7 +37,8 @@ class API {
   updatePlatform(attrs){
     const url = this.url(attrs)
     console.log(`API put ${url}`)
-    console.log(attrs.attr_map)
+    console.log(`API update => in\n ${JSON.stringify(attrs.attr_map)}`)
+    
     return fetch(url, {
       method: 'PUT',
       headers: {'Content-Type':'application/json'},
@@ -49,7 +50,7 @@ class API {
         throw new Error(response.statusText)
       }
     }).then(function(json){
-      console.log(json.attr_map)
+      console.log(`API update => out\n ${JSON.stringify(json.attr_map)}`)
       return json
     })
   }

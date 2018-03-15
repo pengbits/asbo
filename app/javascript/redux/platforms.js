@@ -60,7 +60,6 @@ export const editPlatform = function({nickname}){
 }
 
 export const updatePlatform = function(attrs) {
-  console.log(`updatePlatform ${attrs.nickname}`)
   return {
     type: UPDATE_PLATFORM,
     payload: API.updatePlatform(attrs)
