@@ -62,7 +62,7 @@ class PlatformsController < ApplicationController
   end
   
   def platform_params
-    params.require(:platform).permit(
+    params__ = params.require(:platform).permit(
       :name,
       :attr_map,
       :url,
@@ -71,6 +71,8 @@ class PlatformsController < ApplicationController
       :has_details,
       :nickname
     )
+    puts params__
+    params__
   end
   
   def render_json_with_episodes

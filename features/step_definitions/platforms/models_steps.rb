@@ -24,19 +24,22 @@ When("I make a DELETE request to platform endpoint") do
 end
 
 Given("these changes") do
+  attr_map_str = {
+    item:      ".wibble-grid-item",
+    name:      ".wibble-grid-item__img img[alt]",
+    image:     ".wibble-grid-item__img img[src]",
+    media:     ".wibble-grid-item__img__play-btn[data-src]",
+    details:   ".wibble-grid-item__img__play-btn[data-permalink]",
+    date_str:  ".wibble-grid-item__subtitle__left"
+  }.to_s
+  
   @attrs = {
     name: 'WibblePlatform', 
     nickname:'wibble', 
     url: 'wibble.net',
-    attr_map: {
-      "item"      => ".wibble-grid-item",
-      "name"      => ".wibble-grid-item__img img[alt]",
-      "image"     => ".wibble-grid-item__img img[src]",
-      "media"     => ".wibble-grid-item__img__play-btn[data-src]",
-      "details"   => ".wibble-grid-item__img__play-btn[data-permalink]",
-      "date_str"  => ".wibble-grid-item__subtitle__left"
-    }
+    attr_map: attr_map_str
   }
+  puts @attrs
 end
 
 When("I make a PUT request to platform endpoint") do
