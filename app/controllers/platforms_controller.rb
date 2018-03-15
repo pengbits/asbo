@@ -26,8 +26,8 @@ class PlatformsController < ApplicationController
   def update 
     begin
       platform_from_nickname_param
-      @platform.update platform_params
-      
+      @platform.attributes = platform_params
+      @platform.save!
       render json: @platform
     rescue StandardError => e
       render_error e
@@ -61,22 +61,24 @@ class PlatformsController < ApplicationController
     @platform = Platform.find_by!(:nickname => params[:nickname])
     @platform
   end
-  
+    
   def platform_params
-    params_ = params.require(:platform).permit(
-      :id,
+    sanitized = params.require(:platform).permit(
       :name,
       :url,
-      :pagination,
-      :attr_map,
       :date_format,
+      :attr_map,
+      :pagination,
       :has_details,
       :nickname
-    )
+    ).merge({
+      :attr_map => params[:platform][:attr_map].permit(:item, :name)
+    })
+    puts "\n\n________________________\n\n"
+    puts sanitized  
+    puts "\n\n________________________\n\n"
+    sanitized
     
-    
-    puts params_['attr_map']
-    params
   end
   
   def render_json_with_episodes

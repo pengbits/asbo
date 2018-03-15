@@ -34,6 +34,7 @@ Given("these changes") do
   }
 
   @attrs = {
+    id: 16,
     name: 'WibblePlatform', 
     nickname:'nts', 
     url: 'wibble.net',
@@ -57,19 +58,23 @@ end
 
 Then("the platform in the response should reflect the changes") do
   @json = JSON.parse(@response)
-  puts @json
-  # expect(@json['name']).to      eq(@attrs[:name])
-  # expect(@json['nickname']).to  eq(@attrs[:nickname])
-  # expect(@json['url']).to       eq(@attrs[:url])
 
-  # @attr_map_json = @json['attr_map']  
-  # expect(@attr_map_param.is_a?(String))
-  # expect(@attr_map_json.is_a?(Object))
+  # top level props are straightforward enough..
+  expect(@json['name']).to      eq(@attrs[:name])
+  expect(@json['nickname']).to  eq(@attrs[:nickname])
+  expect(@json['url']).to       eq(@attrs[:url])
+  
+  # the serializable props such as attr_map are trickier,
+  # have to deserialize the value coming back in the response,
+  # and then iteratre over the keys because
+  # we are dealing with symbol keys on one side, and string keys on the other..
+  expect(@attr_map_param.is_a?(String))
+  expect(@attr_map_json.is_a?(Object))
 
-  # # again dealing with symbol keys on one side, and string keys on the other..
-  # @attr_map_param.keys.each do |k|
-  #   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
-  # end
+  @attr_map_json = JSON.parse(@json['attr_map'] )
+  @attr_map_param.keys.each do |k|
+   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+  end
 
 end
 
