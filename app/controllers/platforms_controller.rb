@@ -27,7 +27,7 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param
       @platform.update platform_params
-      render json: @platform.to_json
+      render json: @platform
     rescue ActiveRecord::RecordNotFound
       render_error
     end
@@ -62,17 +62,24 @@ class PlatformsController < ApplicationController
   end
   
   def platform_params
-    params__ = params.require(:platform).permit(
+    params_ = params.require(:platform).permit(
       :name,
-      :attr_map,
       :url,
-      :date_format,
       :pagination,
+      :attr_map,
+      :date_format,
       :has_details,
       :nickname
     )
-    puts params__
-    params__
+    # deserialize json params
+    %w(attr_map pagination).each do |p|
+      unless params_[p].nil?
+        params_[p] = JSON.parse(params_[p]) 
+      end
+    end
+    
+    # puts params_
+    params_
   end
   
   def render_json_with_episodes

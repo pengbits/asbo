@@ -24,22 +24,21 @@ When("I make a DELETE request to platform endpoint") do
 end
 
 Given("these changes") do
-  attr_map_str = {
+  @attr_map_param = {
     item:      ".wibble-grid-item",
     name:      ".wibble-grid-item__img img[alt]",
     image:     ".wibble-grid-item__img img[src]",
     media:     ".wibble-grid-item__img__play-btn[data-src]",
     details:   ".wibble-grid-item__img__play-btn[data-permalink]",
     date_str:  ".wibble-grid-item__subtitle__left"
-  }.to_s
-  
+  }
+
   @attrs = {
     name: 'WibblePlatform', 
     nickname:'wibble', 
     url: 'wibble.net',
-    attr_map: attr_map_str
+    attr_map: @attr_map_param.to_json
   }
-  puts @attrs
 end
 
 When("I make a PUT request to platform endpoint") do
@@ -60,7 +59,16 @@ Then("the platform in the response should reflect the changes") do
   expect(@json['name']).to      eq(@attrs[:name])
   expect(@json['nickname']).to  eq(@attrs[:nickname])
   expect(@json['url']).to       eq(@attrs[:url])
-  expect(@json['attr_map']).to  eq(@attrs[:attr_map])
+
+  @attr_map_json = @json['attr_map']  
+  expect(@attr_map_param.is_a?(String))
+  expect(@attr_map_json.is_a?(Object))
+
+  # again dealing with symbol keys on one side, and string keys on the other..
+  @attr_map_param.keys.each do |k|
+    expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+  end
+
 end
 
 
