@@ -74,15 +74,15 @@ Then("the platform in the response should reflect the changes") do
   # have to deserialize the value coming back in the response,
   # and then iteratre over the keys because
   # we are dealing with symbol keys on one side, and string keys on the other..
-  @attr_map_json = @json['attr_map']
-  @attr_map_param.keys.each do |k|
-   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+  [:attr_map,:pagination].each do |serializable|
+    attr_hash = @update[serializable]
+    attr_json = @json[serializable.to_s]
+    
+    attr_hash.keys.each do |k|
+      expect(attr_json[k.to_s]).to eq(attr_hash[k])
+    end
   end
   
-  @pagination_json = @json['pagination']
-  @pagination_param.keys.each do |k|
-    expect(@pagination_json[k.to_s]).to eq(@pagination_param[k])
-  end
 
 end
 
