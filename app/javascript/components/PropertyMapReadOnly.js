@@ -13,7 +13,11 @@ const getEntries = (map) => {
 
 export default ({map}) => {
   return(<div>
-    <table>
+    <table border='1' cellPadding="5" style={{
+      'borderCollapse':'collapse',
+      'fontFamily':'Consolas,Courier New,monospace',
+      'fontSize':12
+    }}>
       <thead>
         <tr>
           <th>Key</th>

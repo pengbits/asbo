@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropertyMapReadOnly from './PropertyMapReadOnly'
-import RemoveWithConfirmLink from './RemoveWithConfirmLink'
 import Hint from './Hints.js'
 
 class PlatformDetails extends Component {
@@ -28,7 +27,7 @@ class PlatformDetails extends Component {
     
     return ( 
     <div className="platform-details">
-      <h2>Platform Details</h2>
+      <h2>Platform</h2>
       <p>
         <b>name</b><br />
         {name}
@@ -46,25 +45,20 @@ class PlatformDetails extends Component {
         {has_details ? 'yes' : 'no' }
       </p>
       <p>
-        <b>Attribute Map</b><br />
-        <Hint component='attr_map' />
+        <b>attribute map</b><br />
       </p>
       {attr_map && 
         <PropertyMapReadOnly map={attr_map} />
       }
       <p>
         <b>pagination</b><br />
-        <Hint component='pagination' />
       </p>
       {pagination && 
         <PropertyMapReadOnly map={pagination} />
       }
       <p className="platform-details__options">
-        <Link to='/platforms'>Back</Link>{' '}|{' '}
-        <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
-        <RemoveWithConfirmLink 
-          dispatch={destroyPlatform} dispatchArgs={{nickname}}
-        />
+        <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
+        <Link to={`/platforms`}>Back</Link>
       </p>
     </div>
     )

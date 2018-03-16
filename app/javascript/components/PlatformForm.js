@@ -9,7 +9,7 @@ import Hint from './Hints.js'
 
 class PlatformForm extends Component {
   render() {
-    const {initialValues, handleSubmit, pristine, reset, submitting, isNew, destroyPlatform } = this.props
+    const {initialValues, handleSubmit, pristine, reset, submitting, isNew } = this.props
     const {nickname} = initialValues || {}
     
     return (
@@ -38,14 +38,20 @@ class PlatformForm extends Component {
             </button>
           </p>
         </form>
-        <p className="platform-form__options">
-          <Link to={`/platforms/${nickname}`}>Back</Link>{' '}|{' '}
-          <RemoveWithConfirmLink 
-            dispatch={destroyPlatform} dispatchArgs={{nickname}}
-          />
-        </p>
+        {isNew || this.renderOptions()}
       </div>
     )
+  }
+  
+  renderOptions(){
+    const {isNew,destroyPlatform,initialValues} = this.props
+    
+    return (<p className="platform-form__options">
+      <RemoveWithConfirmLink 
+        dispatch={destroyPlatform} dispatchArgs={{nickname}}
+      /><br />
+      <Link to={`/platforms/${nickname}`}>Back</Link>
+    </p>)
   }
 }
 
