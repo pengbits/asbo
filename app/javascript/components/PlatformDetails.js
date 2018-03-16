@@ -1,10 +1,22 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import AttributeMapReadOnly from './AttributeMapReadOnly'
+import RemovePlatformLink from './forms/RemovePlatformLink'
 
 class PlatformDetails extends Component {
   render() {
-    const {name,id,url,nickname,loading,error,has_details,attr_map} = this.props
+    const {
+      name,
+      id,
+      url,
+      nickname,
+      loading,
+      error,
+      has_details,
+      attr_map,
+      destroyPlatform
+    } = this.props
+    
     if(loading){
       return <p>...</p> 
     }
@@ -35,10 +47,8 @@ class PlatformDetails extends Component {
       <p className="platform-details__options">
         <Link to='/platforms'>Back</Link>{' '}|{' '}
         <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
-        <span style={{
-          textDecoration:'underline',
-          cursor: 'pointer'
-        }} onClick={this.destroy.bind(this)}>Delete</span>
+        <RemovePlatformLink 
+          destroyPlatform={destroyPlatform} nickname={nickname}/>
       </p>
     </div>
     )
