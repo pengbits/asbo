@@ -8,7 +8,7 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
+    rescue ActiveRecord::RecordNotFound => e
       render_error
     end
   end
@@ -23,12 +23,23 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
+  def update 
+    begin
+      platform_from_nickname_param
+      @platform.attributes = platform_params
+      @platform.save!
+      render json: @platform
+    rescue StandardError => e
+      render_error e
+    end
+  end
+  
   def destroy
     begin
       platform_from_nickname_param.destroy!
       render json: {'success' => :true, :platform => @platform} 
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
@@ -39,8 +50,8 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param.refresh opts
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
@@ -50,16 +61,31 @@ class PlatformsController < ApplicationController
     @platform = Platform.find_by!(:nickname => params[:nickname])
     @platform
   end
-  
+    
   def platform_params
-    params.require(:platform).permit(:name,:date_format,:url,:attr_map,:nickname)
+    sanitized = params.require(:platform).permit(
+      :name,
+      :url,
+      :date_format,
+      :attr_map,
+      :pagination,
+      :has_details,
+      :nickname
+    ).merge({
+      :attr_map => params[:platform][:attr_map].permit(:item, :name)
+    })
+    puts "\n\n________________________\n\n"
+    puts sanitized  
+    puts "\n\n________________________\n\n"
+    sanitized
+    
   end
   
   def render_json_with_episodes
     render json: @platform.to_json({:include => :episodes })
   end
   
-  def render_error
-    render(:status => 500, json: {'error':'Platform not found'})
+  def render_error(e)
+    render(:status => 500, json: {'error':e.to_s})
   end
 end

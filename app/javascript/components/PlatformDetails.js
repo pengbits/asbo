@@ -28,7 +28,10 @@ class PlatformDetails extends Component {
       </p>
       <span className="platform-details__options">
         <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
-        <span onClick={this.destroy.bind(this)}>Delete</span>
+        <span style={{
+          textDecoration:'underline',
+          cursor: 'pointer'
+        }} onClick={this.destroy.bind(this)}>Delete</span>
       </span>
       
     </div>

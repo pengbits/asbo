@@ -53,7 +53,6 @@ const store = createStore(
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
 const renderComponent = (action) => {
-  console.log(action)
   if(action){
     const Component = routes.component(action)
     return (<App>
@@ -71,10 +70,11 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/"                    render={bindComponent()} />
-        <Route exact path="/platforms"           render={bindComponent(p.LOAD_PLATFORMS)}  />
-        <Route exact path="/platforms/new"       render={bindComponent(p.NEW_PLATFORM)}    />
-        <Route exact path="/platforms/:nickname" render={bindComponent(p.LOAD_PLATFORM)}   />
+        <Route exact path="/"                         render={bindComponent()} />
+        <Route exact path="/platforms"                render={bindComponent(p.LOAD_PLATFORMS)}  />
+        <Route exact path="/platforms/new"            render={bindComponent(p.NEW_PLATFORM)}    />
+        <Route exact path="/platforms/:nickname"      render={bindComponent(p.LOAD_PLATFORM)}   />
+        <Route exact path="/platforms/:nickname/edit" render={bindComponent(p.EDIT_PLATFORM)}   />
       </Switch>
     </ConnectedRouter>
   </Provider>,

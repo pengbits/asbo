@@ -5,6 +5,7 @@ import {
   LOAD_PLATFORM,  loadPlatform,
   NEW_PLATFORM,   newPlatform,
   CREATE_PLATFORM,
+  EDIT_PLATFORM,  editPlatform,
   DESTROY_PLATFORM
 } from './redux/platforms'
 
@@ -25,11 +26,21 @@ const LocationMiddleware = store => next => action => {
           case routes.test(actionPath, NEW_PLATFORM):
             store.dispatch(newPlatform())
             break
+  
+          case routes.test(actionPath, EDIT_PLATFORM):
+            store.dispatch(
+              editPlatform({
+                'nickname' : routes.params(actionPath, EDIT_PLATFORM, 'nickname')
+              })
+            )
+            break
           
           case routes.test(actionPath, LOAD_PLATFORM):
-            const nickname = routes.params(actionPath, LOAD_PLATFORM, 'nickname')
-            store.dispatch(loadPlatform({nickname}))
-            break
+            store.dispatch(
+              loadPlatform({
+                'nickname' : routes.params(actionPath, LOAD_PLATFORM, 'nickname')
+              })
+            )
         }
     }
     // for the create/destroy, it's more convenient to simply redirect back to the index,

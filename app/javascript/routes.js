@@ -22,6 +22,12 @@ map[p.NEW_PLATFORM]   = {
   regex     : /platforms\/new/
 }
 
+map[p.EDIT_PLATFORM]   = {
+  component : PlatformForm,
+  regex     : /platforms\/(.+)\/edit/,
+  params    : {'nickname' : 1}
+}
+
 const routes = {
   map,
   
@@ -31,7 +37,7 @@ const routes = {
   
   'test' : ((path, action) => {
     const isMatch = map[action].regex.test(path)
-    console.log(`routes#test ${path}?${action} ${isMatch}`)
+    // console.log(`routes#test ${path}?${action} ${isMatch}`)
     return isMatch
   }),
   

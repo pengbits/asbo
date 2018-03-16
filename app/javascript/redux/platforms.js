@@ -6,6 +6,8 @@ export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
 export const LOAD_PLATFORM    = 'LOAD_PLATFORM'
 export const NEW_PLATFORM     = 'NEW_PLATFORM'
 export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
+export const EDIT_PLATFORM    = 'EDIT_PLATFORM'
+export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 
  
@@ -33,7 +35,6 @@ export const loadPlatforms  = function(){
 }
 
 export const newPlatform = createAction(NEW_PLATFORM)
-
 export const createPlatform = function(attrs){
   return {
     type: CREATE_PLATFORM,
@@ -43,6 +44,30 @@ export const createPlatform = function(attrs){
         platform: json
       }
     })
+  }
+}
+
+export const editPlatform = function({nickname}){
+  return {
+    type: EDIT_PLATFORM,
+    payload: API.getPlatform({nickname})
+      .then(json => {
+        return {
+          platform: json
+        }
+      })
+  }
+}
+
+export const updatePlatform = function(attrs) {
+  return {
+    type: UPDATE_PLATFORM,
+    payload: API.updatePlatform(attrs)
+      .then(json => {
+        return {
+          platform: json
+        }
+      })
   }
 }
 
@@ -73,11 +98,13 @@ export default function reducer(state=initialState, action={}){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
     case `${CREATE_PLATFORM}_PENDING`:
+    case `${UPDATE_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_PLATFORM}_REJECTED`:
+    case `${UPDATE_PLATFORM}_REJECTED`:
       return {
         ...state,
         loading: false,
@@ -85,7 +112,9 @@ export default function reducer(state=initialState, action={}){
       }
       
     case `${LOAD_PLATFORM}_FULFILLED`:
+    case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
+    case `${UPDATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,
