@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import { Field, reduxForm } from 'redux-form'
-import TextInput from './forms//TextInput'
+import TextInput from './forms/TextInput'
 import Checkbox from './forms/Checkbox'
 import AttributeMap from './forms/AttributeMap'
 import {Link} from 'react-router-dom'
 import RemoveWithConfirmLink from './RemoveWithConfirmLink'
+import Hint from './Hints.js'
 
 class PlatformForm extends Component {
   render() {
@@ -23,15 +24,13 @@ class PlatformForm extends Component {
             parent='attr_map' 
             attrs='item,name,media,date_str'
             >
-            <em>
-              Rules for scraping the platform&apos;s html and parsing it into Episodes. Each value/selector is mapped to a property.
-            </em>
+            <Hint component='attr_map' />
           </AttributeMap>
           <AttributeMap 
             parent='pagination' 
             attrs='param,url,itemsPerPage'
           >
-            <em>pagination settings for the platform. provider either an alternate url or a param to append to the standard url, plus the number of items per page</em>
+            <Hint component='pagination' />
           </AttributeMap>
           <p>
             <button type="submit" disabled={pristine || submitting}>

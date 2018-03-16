@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropertyMapReadOnly from './PropertyMapReadOnly'
 import RemoveWithConfirmLink from './RemoveWithConfirmLink'
+import Hint from './Hints.js'
 
 class PlatformDetails extends Component {
   render() {
@@ -45,13 +46,15 @@ class PlatformDetails extends Component {
         {has_details ? 'yes' : 'no' }
       </p>
       <p>
-        <b>Property Map</b>
+        <b>Attribute Map</b><br />
+        <Hint component='attr_map' />
       </p>
       {attr_map && 
         <PropertyMapReadOnly map={attr_map} />
       }
       <p>
-        <b>pagination</b>
+        <b>pagination</b><br />
+        <Hint component='pagination' />
       </p>
       {pagination && 
         <PropertyMapReadOnly map={pagination} />
