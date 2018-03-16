@@ -32,8 +32,13 @@ Given("these changes") do
     details:   ".wibble-grid-item__img__play-btn[data-permalink]",
     date_str:  ".wibble-grid-item__subtitle__left"
   }
+  
+  @pagination_param = {
+    param: "wibblePage",
+    itemsPerPage: 32
+  }
 
-  @attrs = {
+  @update = {
     id: 16,
     name: 'WibblePlatform', 
     nickname:'nts', 
@@ -45,7 +50,7 @@ end
 When("I make a PUT request to platform endpoint") do
   @nick = @platforms.first.nickname # nts
   url = "/platforms/#{@nick}"
-  @json = {platform: @attrs}
+  @json = {platform: @update}
   puts "PUT #{url}"
   put url, @json
 end
@@ -60,9 +65,9 @@ Then("the platform in the response should reflect the changes") do
   @json = JSON.parse(@response)
 
   # top level props are straightforward enough..
-  expect(@json['name']).to      eq(@attrs[:name])
-  expect(@json['nickname']).to  eq(@attrs[:nickname])
-  expect(@json['url']).to       eq(@attrs[:url])
+  expect(@json['name']).to      eq(@update[:name])
+  expect(@json['nickname']).to  eq(@update[:nickname])
+  expect(@json['url']).to       eq(@update[:url])
   
   # the serializable props such as attr_map are trickier,
   # have to deserialize the value coming back in the response,
@@ -70,7 +75,12 @@ Then("the platform in the response should reflect the changes") do
   # we are dealing with symbol keys on one side, and string keys on the other..
   @attr_map_json = @json['attr_map']
   @attr_map_param.keys.each do |k|
-   expect( @attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+  end
+  
+  @pagination_json = @json['pagination']
+  @pagination_param.keys.each do |k|
+    expect(@pagination_json[k.to_s]).to eq(@pagination_param[k])
   end
 
 end
