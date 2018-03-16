@@ -4,7 +4,7 @@ import AttributeMapReadOnly from './AttributeMapReadOnly'
 
 class PlatformDetails extends Component {
   render() {
-    const {name,id,url,nickname,loading,error,attr_map} = this.props
+    const {name,id,url,nickname,loading,error,has_details,attr_map} = this.props
     if(loading){
       return <p>...</p> 
     }
@@ -27,14 +27,19 @@ class PlatformDetails extends Component {
         <b>url</b><br />
         <a href={url}>{url}</a>
       </p>
+      <p>
+        <b>has details</b><br />
+        {has_details ? 'yes' : 'no' }
+      </p>
       <AttributeMapReadOnly map={attr_map} />
-      <span className="platform-details__options">
+      <p className="platform-details__options">
+        <Link to='/platforms'>Back</Link>{' '}|{' '}
         <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
         <span style={{
           textDecoration:'underline',
           cursor: 'pointer'
         }} onClick={this.destroy.bind(this)}>Delete</span>
-      </span>
+      </p>
     </div>
     )
   }

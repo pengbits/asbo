@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
   const isNew = (platform || {}).id == undefined
 
   return {
-    'initialValues' : platform,
+    initialValues : platform,
     isNew
   }
 }
