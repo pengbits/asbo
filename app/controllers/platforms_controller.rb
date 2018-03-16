@@ -86,10 +86,6 @@ class PlatformsController < ApplicationController
         :itemsPerPage)
     })
     
-    puts "\n\n________________________\n\n"
-    puts sanitized[:pagination]
-    puts "\n\n________________________\n\n"
-
     sanitized
   end
   
