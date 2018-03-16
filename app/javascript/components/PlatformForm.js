@@ -22,7 +22,7 @@ class PlatformForm extends Component {
           <Checkbox name='has_details' />
           <AttributeMap 
             parent='attr_map' 
-            attrs='item,name,media,date_str'
+            attrs='item,name,image,media,date_str'
             >
             <Hint component='attr_map' />
           </AttributeMap>
