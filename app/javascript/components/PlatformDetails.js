@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import AttributeMapReadOnly from './AttributeMapReadOnly'
-import RemovePlatformLink from './forms/RemovePlatformLink'
+import RemoveWithConfirmLink from './RemoveWithConfirmLink'
 
 class PlatformDetails extends Component {
   render() {
@@ -47,8 +47,9 @@ class PlatformDetails extends Component {
       <p className="platform-details__options">
         <Link to='/platforms'>Back</Link>{' '}|{' '}
         <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
-        <RemovePlatformLink 
-          destroyPlatform={destroyPlatform} nickname={nickname}/>
+        <RemoveWithConfirmLink 
+          dispatch={destroyPlatform} dispatchArgs={{nickname}}
+        />
       </p>
     </div>
     )

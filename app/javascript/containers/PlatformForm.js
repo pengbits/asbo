@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import PlatformForm from '../components/PlatformForm'
-import {createPlatform,updatePlatform} from '../redux/platforms'
+import {createPlatform,updatePlatform,destroyPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform} = state.platforms
@@ -15,6 +15,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    destroyPlatform: ({nickname}) => {
+      dispatch(destroyPlatform({nickname}))
+    },
     onSubmit: (attrs, dispatch, props) => {
       dispatch(props.isNew ?
         createPlatform(attrs) :

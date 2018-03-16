@@ -4,10 +4,11 @@ import TextInput from './forms//TextInput'
 import Checkbox from './forms/Checkbox'
 import AttributeMap from './forms/AttributeMap'
 import {Link} from 'react-router-dom'
+import RemoveWithConfirmLink from './RemoveWithConfirmLink'
 
 class PlatformForm extends Component {
   render() {
-    const {initialValues, handleSubmit, pristine, reset, submitting, isNew } = this.props
+    const {initialValues, handleSubmit, pristine, reset, submitting, isNew, destroyPlatform } = this.props
     const {nickname} = initialValues || {}
     
     return (
@@ -27,6 +28,9 @@ class PlatformForm extends Component {
         </form>
         <p className="platform-form__options">
           <Link to={`/platforms/${nickname}`}>Back</Link>{' '}|{' '}
+          <RemoveWithConfirmLink 
+            dispatch={destroyPlatform} dispatchArgs={{nickname}}
+          />
         </p>
       </div>
     )

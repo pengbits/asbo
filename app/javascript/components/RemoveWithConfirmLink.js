@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class RemovePlatformLink extends Component {
+class RemoveWithConfirmLink extends Component {
   render() {
     return (<span style={{
       textDecoration:'underline',
@@ -10,9 +10,9 @@ class RemovePlatformLink extends Component {
   }
 
   destroy(){
-    const {destroyPlatform,nickname} = this.props;
-    confirm('Permanently delete this platform?') && destroyPlatform({nickname})
+    const {dispatch,dispatchArgs} = this.props;
+    confirm('Are you sure?') && dispatch(dispatchArgs)
   }
 }
 
-export default RemovePlatformLink
+export default RemoveWithConfirmLink
