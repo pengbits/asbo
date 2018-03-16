@@ -63,6 +63,10 @@ class PlatformsController < ApplicationController
   end
     
   def platform_params
+    puts "\n\n________________________\n\n"
+    puts params[:platform][:attr_map].is_a?(Object)  
+    puts "\n\n________________________\n\n"
+
     sanitized = params.require(:platform).permit(
       :name,
       :url,
@@ -72,11 +76,13 @@ class PlatformsController < ApplicationController
       :has_details,
       :nickname
     ).merge({
-      :attr_map => params[:platform][:attr_map].permit(:item, :name)
+      :attr_map => params[:platform][:attr_map].permit(
+        :item, 
+        :name,
+        :image,
+        :media,
+        :date_str)
     })
-    puts "\n\n________________________\n\n"
-    puts sanitized  
-    puts "\n\n________________________\n\n"
     sanitized
     
   end
