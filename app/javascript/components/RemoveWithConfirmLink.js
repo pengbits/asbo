@@ -4,6 +4,7 @@ class RemoveWithConfirmLink extends Component {
   render() {
     return (<span style={{
       textDecoration:'underline',
+      color: 'red',
       cursor: 'pointer'
     }} onClick={this.destroy.bind(this)}>Delete</span>
     )
