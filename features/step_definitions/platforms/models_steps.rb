@@ -35,7 +35,7 @@ Given("these changes") do
   
   @pagination_param = {
     param: "wibblePage",
-    itemsPerPage: 32
+    itemsPerPage: "32"
   }
 
   @update = {
@@ -43,7 +43,8 @@ Given("these changes") do
     name: 'WibblePlatform', 
     nickname:'nts', 
     url: 'wibble.net',
-    attr_map: @attr_map_param
+    attr_map: @attr_map_param,
+    pagination: @pagination_param
   }
 end
 
@@ -57,12 +58,12 @@ end
 
 Then("I should get a valid response containing the platform") do
   @response = last_response.body
-  # puts @response
-  expect(@response).to be_truthy
+  expect(@response['error']).to be_nil
 end
 
 Then("the platform in the response should reflect the changes") do
   @json = JSON.parse(@response)
+  # puts @json
 
   # top level props are straightforward enough..
   expect(@json['name']).to      eq(@update[:name])
