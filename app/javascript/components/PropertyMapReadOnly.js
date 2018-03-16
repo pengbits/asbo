@@ -13,12 +13,11 @@ const getEntries = (map) => {
 
 export default ({map}) => {
   return(<div>
-    <b>Attribute Map</b>
     <table>
       <thead>
         <tr>
-          <th>Property</th>
-          <th>Selector</th>
+          <th>Key</th>
+          <th>Value</th>
         </tr>
       </thead>
       <tbody>{getEntries(map)}</tbody>

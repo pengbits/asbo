@@ -19,7 +19,20 @@ class PlatformForm extends Component {
           <TextInput name='nickname' />
           <TextInput name='url' />       
           <Checkbox name='has_details' />
-          <AttributeMap />
+          <AttributeMap 
+            parent='attr_map' 
+            attrs='item,name,media,date_str'
+            >
+            <em>
+              Rules for scraping the platform&apos;s html and parsing it into Episodes. Each value/selector is mapped to a property.
+            </em>
+          </AttributeMap>
+          <AttributeMap 
+            parent='pagination' 
+            attrs='param,url,itemsPerPage'
+          >
+            <em>pagination settings for the platform. provider either an alternate url or a param to append to the standard url, plus the number of items per page</em>
+          </AttributeMap>
           <p>
             <button type="submit" disabled={pristine || submitting}>
               Submit

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import AttributeMapReadOnly from './AttributeMapReadOnly'
+import PropertyMapReadOnly from './PropertyMapReadOnly'
 import RemoveWithConfirmLink from './RemoveWithConfirmLink'
 
 class PlatformDetails extends Component {
@@ -14,6 +14,7 @@ class PlatformDetails extends Component {
       error,
       has_details,
       attr_map,
+      pagination,
       destroyPlatform
     } = this.props
     
@@ -43,7 +44,18 @@ class PlatformDetails extends Component {
         <b>has details</b><br />
         {has_details ? 'yes' : 'no' }
       </p>
-      <AttributeMapReadOnly map={attr_map} />
+      <p>
+        <b>Property Map</b>
+      </p>
+      {attr_map && 
+        <PropertyMapReadOnly map={attr_map} />
+      }
+      <p>
+        <b>pagination</b>
+      </p>
+      {pagination && 
+        <PropertyMapReadOnly map={pagination} />
+      }
       <p className="platform-details__options">
         <Link to='/platforms'>Back</Link>{' '}|{' '}
         <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
