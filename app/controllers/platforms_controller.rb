@@ -72,13 +72,30 @@ class PlatformsController < ApplicationController
       :has_details,
       :nickname
     ).merge({
-      :attr_map => params[:platform][:attr_map].permit(:item, :name)
+      :attr_map => nested_serialized_param(:attr_map,
+        :item, 
+        :name,
+        :image,
+        :media,
+        :details,
+        :date_str),
+      :pagination => nested_serialized_param(:pagination,
+        :param, 
+        :url,
+        :route,
+        :itemsPerPage)
     })
-    puts "\n\n________________________\n\n"
-    puts sanitized  
-    puts "\n\n________________________\n\n"
-    sanitized
     
+    sanitized
+  end
+  
+  def nested_serialized_param(name, *permitted)
+    puts "nested_serialized #{name} => #{permitted.join(",")}"
+    if params[:platform][name].nil?
+      return {}
+    else
+      return params[:platform][name].permit(permitted)
+    end
   end
   
   def render_json_with_episodes

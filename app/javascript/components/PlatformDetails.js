@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import AttributeMapReadOnly from './AttributeMapReadOnly'
-import RemoveWithConfirmLink from './RemoveWithConfirmLink'
+import PropertyMapReadOnly from './PropertyMapReadOnly'
+import Hint from './Hints.js'
 
 class PlatformDetails extends Component {
   render() {
@@ -14,6 +14,7 @@ class PlatformDetails extends Component {
       error,
       has_details,
       attr_map,
+      pagination,
       destroyPlatform
     } = this.props
     
@@ -26,7 +27,7 @@ class PlatformDetails extends Component {
     
     return ( 
     <div className="platform-details">
-      <h2>Platform Details</h2>
+      <h2>Platform</h2>
       <p>
         <b>name</b><br />
         {name}
@@ -43,13 +44,21 @@ class PlatformDetails extends Component {
         <b>has details</b><br />
         {has_details ? 'yes' : 'no' }
       </p>
-      <AttributeMapReadOnly map={attr_map} />
+      <p>
+        <b>attribute map</b><br />
+      </p>
+      {attr_map && 
+        <PropertyMapReadOnly map={attr_map} />
+      }
+      <p>
+        <b>pagination</b><br />
+      </p>
+      {pagination && 
+        <PropertyMapReadOnly map={pagination} />
+      }
       <p className="platform-details__options">
-        <Link to='/platforms'>Back</Link>{' '}|{' '}
-        <Link to={`/platforms/${nickname}/edit`}>Edit</Link>{' '}|{' '}
-        <RemoveWithConfirmLink 
-          dispatch={destroyPlatform} dispatchArgs={{nickname}}
-        />
+        <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
+        <Link to={`/platforms`}>Back</Link>
       </p>
     </div>
     )

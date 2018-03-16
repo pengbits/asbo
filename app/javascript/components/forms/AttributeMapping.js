@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import { Field } from 'redux-form'
 
-export default ({name}) => (
+export default ({parent,name}) => (
   <tr>
     <td>{name}</td>
     <td>
       <Field 
         component="input" 
         type="text" 
-        name={`attr_map.${name}`} 
-        placeholder={`attr_map.${name}`}
+        name={`${parent}.${name}`} 
+        placeholder={`${parent}.${name}`}
       />
     </td>
 </tr>

@@ -13,12 +13,15 @@ const getEntries = (map) => {
 
 export default ({map}) => {
   return(<div>
-    <b>Attribute Map</b>
-    <table>
+    <table border='1' cellPadding="5" style={{
+      'borderCollapse':'collapse',
+      'fontFamily':'Consolas,Courier New,monospace',
+      'fontSize':12
+    }}>
       <thead>
         <tr>
-          <th>Property</th>
-          <th>Selector</th>
+          <th>Key</th>
+          <th>Value</th>
         </tr>
       </thead>
       <tbody>{getEntries(map)}</tbody>

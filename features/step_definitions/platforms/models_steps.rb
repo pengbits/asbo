@@ -32,49 +32,57 @@ Given("these changes") do
     details:   ".wibble-grid-item__img__play-btn[data-permalink]",
     date_str:  ".wibble-grid-item__subtitle__left"
   }
+  
+  @pagination_param = {
+    param: "wibblePage",
+    itemsPerPage: "32"
+  }
 
-  @attrs = {
+  @update = {
     id: 16,
     name: 'WibblePlatform', 
     nickname:'nts', 
     url: 'wibble.net',
-    attr_map: @attr_map_param.to_json
+    attr_map: @attr_map_param,
+    pagination: @pagination_param
   }
 end
 
 When("I make a PUT request to platform endpoint") do
   @nick = @platforms.first.nickname # nts
   url = "/platforms/#{@nick}"
-  @json = {platform: @attrs}
+  @json = {platform: @update}
   puts "PUT #{url}"
   put url, @json
 end
 
 Then("I should get a valid response containing the platform") do
   @response = last_response.body
-  # puts @response
-  expect(@response).to be_truthy
+  expect(@response['error']).to be_nil
 end
 
 Then("the platform in the response should reflect the changes") do
   @json = JSON.parse(@response)
+  # puts @json
 
   # top level props are straightforward enough..
-  expect(@json['name']).to      eq(@attrs[:name])
-  expect(@json['nickname']).to  eq(@attrs[:nickname])
-  expect(@json['url']).to       eq(@attrs[:url])
+  expect(@json['name']).to      eq(@update[:name])
+  expect(@json['nickname']).to  eq(@update[:nickname])
+  expect(@json['url']).to       eq(@update[:url])
   
   # the serializable props such as attr_map are trickier,
   # have to deserialize the value coming back in the response,
   # and then iteratre over the keys because
   # we are dealing with symbol keys on one side, and string keys on the other..
-  expect(@attr_map_param.is_a?(String))
-  expect(@attr_map_json.is_a?(Object))
-
-  @attr_map_json = JSON.parse(@json['attr_map'] )
-  @attr_map_param.keys.each do |k|
-   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+  [:attr_map,:pagination].each do |serializable|
+    attr_hash = @update[serializable]
+    attr_json = @json[serializable.to_s]
+    
+    attr_hash.keys.each do |k|
+      expect(attr_json[k.to_s]).to eq(attr_hash[k])
+    end
   end
+  
 
 end
 
