@@ -81,6 +81,7 @@ class PlatformsController < ApplicationController
         :name,
         :image,
         :media,
+        :details,
         :date_str)
     })
     sanitized

@@ -38,7 +38,7 @@ Given("these changes") do
     name: 'WibblePlatform', 
     nickname:'nts', 
     url: 'wibble.net',
-    attr_map: @attr_map_param.to_json
+    attr_map: @attr_map_param
   }
 end
 
@@ -68,12 +68,9 @@ Then("the platform in the response should reflect the changes") do
   # have to deserialize the value coming back in the response,
   # and then iteratre over the keys because
   # we are dealing with symbol keys on one side, and string keys on the other..
-  expect(@attr_map_param.is_a?(String))
-  expect(@attr_map_json.is_a?(Object))
-
-  @attr_map_json = JSON.parse(@json['attr_map'] )
+  @attr_map_json = @json['attr_map']
   @attr_map_param.keys.each do |k|
-   expect(@attr_map_json[k.to_s]).to eq(@attr_map_param[k])
+   expect( @attr_map_json[k.to_s]).to eq(@attr_map_param[k])
   end
 
 end
