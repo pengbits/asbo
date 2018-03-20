@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from './Nav'
+import '../../stylesheets/app.scss'; 
 
 const App = ({children}) => (
   <div>

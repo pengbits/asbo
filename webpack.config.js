@@ -20,7 +20,19 @@ module.exports = {
   devServer: {
     contentBase: paths.SRC,
     port: 5000,
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Request-Method": '*',
+      "Access-Control-Allow-Headers": "'Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    },
+    proxy: {
+      "/api": {
+        target: "http://localhost:4100",
+        pathRewrite: {"^/api" : ""}
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
