@@ -7,11 +7,31 @@ $size-l : 50px;
 
 $colors-black : #000;
 $colors-white : #FFF;
-$colors-light-grey : #CCC;
+$colors-light-grey : #EEE;
+$colors-medium-grey : #CCC;
+$colors-dark-grey: #666;
+
+$typography-size-one   : 36px;
+$typography-size-two   : 28px;
+$typography-size-three : 28px;
+$typography-size-four  : 20px;
+$typography-size-five  : 16px;
+$typography-size-six   : 12px;
+
+$typography-height-one   : $typography-size-one * 1.25; 
+$typography-height-two   : $typography-size-two * 1.25;
+$typography-height-three : $typography-size-three * 1.25;
+$typography-height-four  : $typography-size-four * 1.25;
+$typography-height-five  : $typography-size-five * 1.25;
+$typography-height-six   : $typography-size-six * 1.25;
+
+$typography-body-text-size   : $typography-size-five;
+$typography-body-text-height : $typography-height-five;
 
 body {  
   font-family: "Roboto", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: $typography-body-text-size;
+  line-height: $typography-body-text-height;
 }
 
 html,body {
@@ -19,15 +39,27 @@ html,body {
 }
 
 h1,h2,h3,h4,h5 {
-  font-size: 16px;
-  line-height: 20px;
-  margin: 0;
+  font-size   : $typography-size-five;
+  line-height : $typography-height-five;
+  margin      : 0;
 }
 
 .h1 {
-  font-size: 32px;
-  line-height: 28px;
-  margin-bottom: $size-m;
+  font-size     : $typography-size-one;
+  line-height   : $typography-height-one;
+  margin-bottom :$size-m;
+}
+
+.h2 {
+  font-size     : $typography-size-two;
+  line-height   : $typography-height-two;
+  margin-bottom :$size-m;
+}
+
+.h3 {
+  font-size     : $typography-size-three;
+  line-height   : $typography-height-three;
+  margin-bottom :$size-m;
 }
 
 a {
@@ -52,6 +84,7 @@ ol.menu {
   margin-left: 0;
   padding-left:0;
 }
+
 .menu__item  {
   padding: $size-s;
   border: $colors-black solid 1px;
@@ -62,6 +95,17 @@ ol.menu {
   }
 }
 
+.btn {
+  display: inline-block;
+  border-radius: $size-s;
+  padding: $size-s $size-m;
+  background-color: $colors-light-grey;
+  
+  &:hover {
+    background-color: $colors-medium-grey;  
+    text-decoration: none;
+  }
+}
 nav {
   margin-bottom: $size-m
 }

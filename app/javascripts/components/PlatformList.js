@@ -23,7 +23,7 @@ class PlatformList extends Component {
   }
   
   renderFooter(){
-    return (<Link to='/platforms/new'>Add a Platform</Link>)
+    return (<Link className='btn btn-primary' to='/platforms/new'>Add a Platform</Link>)
   }
 }
 
