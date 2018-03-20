@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "echo 'que paso'",
+    "dev" : "webpack-dev-server",
     "build": "webpack"
   },
   "repository": {
@@ -35,7 +36,8 @@
     "redux-promise-middleware": "^5.0.0",
     "redux-thunk": "^2.2.0",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
     "foreman": "^2.0.0"
