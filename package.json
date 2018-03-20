@@ -2,11 +2,11 @@
   "name": "asbo",
   "version": "1.0.0",
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "neutrino start",
-    "build": "neutrino build",
-    "test": "neutrino test"
+    "start": "echo 'que paso'",
+    "dev": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,16 @@
   },
   "homepage": "https://github.com/pengbits/asbo#readme",
   "devDependencies": {
-    "@neutrinojs/react": "^8.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
     "history": "^4.7.2",
+    "html-webpack-plugin": "^3.0.7",
     "isomorphic-fetch": "^2.2.1",
     "neutrino": "^8.1.2",
     "react": "^16.2.0",
@@ -35,9 +43,15 @@
     "redux-form": "^7.3.0",
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.7",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
-    "foreman": "^2.0.0"
+    "foreman": "^2.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
