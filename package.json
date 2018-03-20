@@ -2,9 +2,10 @@
   "name": "asbo",
   "version": "1.0.0",
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "echo 'que paso'"
+    "start": "echo 'que paso'",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,9 @@
     "redux-form": "^7.3.0",
     "redux-promise": "^0.5.3",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "dependencies": {
     "foreman": "^2.0.0"
