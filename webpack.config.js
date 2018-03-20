@@ -42,8 +42,14 @@ module.exports = {
         loader: ExtractTextPlugin.extract({
           use: ['css-loader','sass-loader']
         }),
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          'file-loader'
+        ],
       }
-    ],
+    ]
   },
   // Enable importing JS files without specifying their's extenstion -> ADDED IN THIS STEP
   //
