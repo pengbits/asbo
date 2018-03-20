@@ -4,9 +4,7 @@
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "main": "index.js",
   "scripts": {
-    "start": "neutrino start",
-    "build": "neutrino build",
-    "test": "neutrino test"
+    "start": "echo 'que paso'"
   },
   "repository": {
     "type": "git",
@@ -20,7 +18,6 @@
   },
   "homepage": "https://github.com/pengbits/asbo#readme",
   "devDependencies": {
-    "@neutrinojs/react": "^8.1.2",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "neutrino": "^8.1.2",
