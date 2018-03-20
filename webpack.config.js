@@ -3,8 +3,8 @@ const path = require('path');
 // Constant with our paths
 const paths = {
   DIST: path.resolve(__dirname, 'dist'),
-  SRC:  path.resolve(__dirname, 'src'),
-  JS:   path.resolve(__dirname, 'src/js'),
+  SRC:  path.resolve(__dirname, 'app'),
+  JS:   path.resolve(__dirname, 'app/javascripts'),
 };
 
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Import our plugin -> ADDED IN THIS STEP
@@ -12,10 +12,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin'); //  -> ADDED I
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.JS, 'app.js'),
+  entry: path.join(paths.JS, 'index.js'),
   output: {
     path: paths.DIST,
-    filename: 'app.bundle.js'
+    filename: 'bundle.js'
   },
   // devServer: {
   //   contentBase: paths.SRC,
