@@ -17,12 +17,15 @@ module.exports = {
     path: paths.DIST,
     filename: 'bundle.js'
   },
-  // devServer: {
-  //   contentBase: paths.SRC,
-  // },
+  devServer: {
+    contentBase: paths.SRC,
+    port: 5000,
+    historyApiFallback: true
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(paths.SRC, 'index.html')
+      template: path.join(paths.SRC, 'index.html'),
+      filename: 'index.html'
     }),
     new ExtractTextPlugin('style.bundle.css')
   ],
