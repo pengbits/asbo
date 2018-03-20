@@ -1,10 +1,68 @@
-$padding : 30px;
+@import "../../node_modules/normalize.css/normalize";
 
-body {
-  background: #f9fafb;
+$size-xs: 5px;
+$size-s : 10px;
+$size-m : 20px;
+$size-l : 50px;
+
+$colors-black : #000;
+$colors-white : #FFF;
+$colors-light-grey : #CCC;
+
+body {  
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  margin: 0;
-  padding: $padding;
-  color: purple;
 }
+
+html,body {
+  height: 100%;
+}
+
+h1,h2,h3,h4,h5 {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.h1 {
+  font-size: 32px;
+  line-height: 28px;
+  margin-bottom: $size-m;
+}
+
+a {
+  color: $colors-black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.container {
+  padding: $size-m;
+}
+
+.content {
+}
+
+ul.menu,
+ol.menu {
+  list-style: none;
+  margin-left: 0;
+  padding-left:0;
+}
+.menu__item  {
+  padding: $size-s;
+  border: $colors-black solid 1px;
+  border-bottom: 0;
+  
+  &:last-child  {
+    border-bottom:  $colors-black solid 1px;
+  }
+}
+
+nav {
+  margin-bottom: $size-m
+}
+
