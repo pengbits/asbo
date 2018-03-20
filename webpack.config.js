@@ -6,7 +6,9 @@ const paths = {
   SRC:  path.resolve(__dirname, 'src'),
   JS:   path.resolve(__dirname, 'src/js'),
 };
+
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Import our plugin -> ADDED IN THIS STEP
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); //  -> ADDED IN THIS STEP
 
 // Webpack configuration
 module.exports = {
@@ -21,7 +23,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html')
-    })
+    }),
+    new ExtractTextPlugin('style.bundle.css')
   ],
   // Loaders configuration -> ADDED IN THIS STEP
   // We are telling webpack to use "babel-loader" for .js and .jsx files
@@ -34,6 +37,12 @@ module.exports = {
           'babel-loader',
         ],
       },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          use: 'css-loader',
+        }),
+      }
     ],
   },
   // Enable importing JS files without specifying their's extenstion -> ADDED IN THIS STEP
