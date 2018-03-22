@@ -17,6 +17,7 @@ module.exports = {
     path: paths.DIST,
     filename: 'bundle.js'
   },
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
     contentBase: paths.SRC,
     port: 5000,

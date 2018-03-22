@@ -3,9 +3,11 @@ import { Field } from 'redux-form'
 
 export default ({parent,name}) => (
   <tr>
-    <td>{name}</td>
+    <td>
+      <em className='form__label'>{name}</em></td>
     <td>
       <Field 
+        className="form__input" 
         component="input" 
         type="text" 
         name={`${parent}.${name}`} 

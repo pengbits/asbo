@@ -4,7 +4,7 @@ import AttributeMapping from './AttributeMapping'
 
 const AttributeMap = ({parent,attrs,children}) => (
   <div className="platform-attribute-map">
-    <b>{parent}</b><br />
+    <h4 className='h4'>{parent}</h4>
     <p>{children}</p>
     <table>
       <thead>

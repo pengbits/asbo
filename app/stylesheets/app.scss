@@ -38,10 +38,18 @@ html,body {
   height: 100%;
 }
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 h1,h2,h3,h4,h5 {
   font-size   : $typography-size-five;
   line-height : $typography-height-five;
   margin      : 0;
+  padding: 0
 }
 
 .h1 {
@@ -100,13 +108,36 @@ ol.menu {
   border-radius: $size-s;
   padding: $size-s $size-m;
   background-color: $colors-light-grey;
+  border: none;
+  outline: none;
+  cursor: pointer;
   
   &:hover {
     background-color: $colors-medium-grey;  
     text-decoration: none;
+
   }
 }
+
 nav {
   margin-bottom: $size-m
 }
 
+
+.form {
+  &__label,
+  &__input {
+    display: block;    
+    padding: $size-s $size-m;
+    width: 100%;
+    outline: 0;
+    font-style: normal;
+  }
+  
+  &__input {
+    border: $colors-light-grey solid 1px
+  }
+  &__input:focus{
+    border-color: $colors-medium-grey
+  }
+}
