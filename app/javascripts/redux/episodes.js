@@ -1,0 +1,53 @@
+import {createAction,createActions,handleActions} from 'redux-actions'
+import API  from '../api'
+
+// constants
+export const LOAD_EPISODES   = 'LOAD_EPISODES'
+export const LOAD_EPISODE    = 'LOAD_EPISODE'
+
+// actions
+export const loadEpisodes = function(){
+  return {
+    type: LOAD_EPISODES,
+    payload: API.getEpisodes().then(json => {
+      return {
+        episodes: json.slice(0)
+      }
+    })
+  }
+}
+
+
+export const initialState = {
+  episodes : [],
+  episode  : null,
+  loading: false
+}
+
+export default function reducer(state=initialState, action={}){
+  switch(action.type){
+    case `${LOAD_EPISODES}_PENDING`:
+      return {
+        ...state,
+        loading: true
+      }
+    case `${LOAD_EPISODES}_REJECTED`:
+      return {
+        ...state,
+        loading: false,
+        error: true
+      }
+      
+    case `${LOAD_EPISODES}_FULFILLED`:
+      return {
+        ...state,
+        loading: false,
+        episodes: action.payload.episodes
+      }
+      
+    
+    default: 
+      return state
+    break
+  }
+}

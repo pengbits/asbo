@@ -3,6 +3,8 @@ import PlatformList from './containers/PlatformList'
 import PlatformDetails from './containers/PlatformDetails'
 import PlatformForm from './containers/PlatformForm'
 
+import * as e from './redux/episodes'
+import EpisodeList from './components/EpisodeList'
 
 let map = {}
 
@@ -28,6 +30,11 @@ map[p.EDIT_PLATFORM]   = {
   params    : {'nickname' : 1}
 }
 
+map[e.LOAD_EPISODES] = {
+  component : EpisodeList,
+  regex     : /episodes$/
+}
+
 const routes = {
   map,
   
@@ -51,8 +58,11 @@ const routes = {
   }),
   
   'component':(action => {
-    if(!map[action]) throw new Error(`could not map '${action}' to component`)
-    return map[action].component
+    if(!map[action]) {
+      throw new Error(`could not map '${action}' to component`)
+    } else {
+      return map[action].component
+    }
   })
 }
 

@@ -21,6 +21,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 // imports:app
 import routes from './routes'
 import * as p from './redux/platforms'
+import * as e from './redux/episodes'
 import App from './components/app'
 
 // import PlatformList from './containers/PlatformList'
@@ -75,6 +76,7 @@ render(
         <Route exact path="/platforms/new"            render={bindComponent(p.NEW_PLATFORM)}    />
         <Route exact path="/platforms/:nickname"      render={bindComponent(p.LOAD_PLATFORM)}   />
         <Route exact path="/platforms/:nickname/edit" render={bindComponent(p.EDIT_PLATFORM)}   />
+        <Route exact path="/episodes"                 render={bindComponent(e.LOAD_EPISODES)}   />
       </Switch>
     </ConnectedRouter>
   </Provider>,

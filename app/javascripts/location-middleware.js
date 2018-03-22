@@ -10,6 +10,10 @@ import {
   DESTROY_PLATFORM
 } from './redux/platforms'
 
+import {
+  LOAD_EPISODES, loadEpisodes
+} from './redux/episodes'
+
 const LocationMiddleware = store => next => action => {
 
   if(typeof action =='object'){ // not true of thunks, they'll be functions
@@ -42,6 +46,10 @@ const LocationMiddleware = store => next => action => {
                 'nickname' : routes.params(actionPath, LOAD_PLATFORM, 'nickname')
               })
             )
+            
+          case routes.test(actionPath, LOAD_EPISODES):
+            store.dispatch(loadEpisodes())
+            break
         }
     }
     // for the create/destroy, it's more convenient to simply redirect back to the index,
