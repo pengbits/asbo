@@ -114,7 +114,6 @@ export default function reducer(state=initialState, action={}){
     case `${LOAD_PLATFORM}_FULFILLED`:
     case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
-    case `${UPDATE_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,

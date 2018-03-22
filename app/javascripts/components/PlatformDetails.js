@@ -45,18 +45,6 @@ class PlatformDetails extends Component {
         {has_details ? 'yes' : 'no' }
       </p>
       <p>
-        <b>attribute map</b><br />
-      </p>
-      {attr_map && 
-        <PropertyMapReadOnly map={attr_map} />
-      }
-      <p>
-        <b>pagination</b><br />
-      </p>
-      {pagination && 
-        <PropertyMapReadOnly map={pagination} />
-      }
-      <p className="platform-details__options">
         <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
         <Link to={`/platforms`}>Back</Link>
       </p>

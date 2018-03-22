@@ -4,8 +4,9 @@ import {
   LOAD_PLATFORMS, loadPlatforms,
   LOAD_PLATFORM,  loadPlatform,
   NEW_PLATFORM,   newPlatform,
-  CREATE_PLATFORM,
+  CREATE_PLATFORM, 
   EDIT_PLATFORM,  editPlatform,
+  UPDATE_PLATFORM,
   DESTROY_PLATFORM
 } from './redux/platforms'
 
@@ -45,10 +46,17 @@ const LocationMiddleware = store => next => action => {
     }
     // for the create/destroy, it's more convenient to simply redirect back to the index,
     // perhaps we could add a flash mesage of some sort?
-    if(action.type == `${CREATE_PLATFORM}_FULFILLED`){
-      store.dispatch(push('/platforms'))
+    if(action.type == `${UPDATE_PLATFORM}_FULFILLED`){
+      const {platform} = action.payload;
+      if(platform && platform.nickname){
+        store.dispatch(push(`/platforms/${platform.nickname}`))
+      } else {
+        throw new Error('update failed')
+      }
     }
-    if(action.type == `${DESTROY_PLATFORM}_FULFILLED`){
+    if(action.type == `${CREATE_PLATFORM}_FULFILLED` || 
+       action.type == `${DESTROY_PLATFORM}_FULFILLED`)
+    {
       store.dispatch(push('/platforms'))
     }
   }
