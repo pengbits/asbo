@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import EpisodeListItem from './EpisodeListItem'
 
-const EpisodeListItem = ({id,name}) => (<p>{name}</p>);
 class EpisodeList extends Component {
   render() {
     return (<div>
@@ -12,7 +12,7 @@ class EpisodeList extends Component {
   renderBody(){
     const {episodes,loading} = this.props
     return loading ? <p>...</p> : (<div>
-      <h2 className='h2'>Platforms</h2>
+      <h2 className='h2'>Episodes</h2>
       <ul className='menu'>
         {(episodes || []).map(e => <EpisodeListItem 
           {...e} key={e.id}

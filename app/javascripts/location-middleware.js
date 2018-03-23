@@ -46,6 +46,7 @@ const LocationMiddleware = store => next => action => {
                 'nickname' : routes.params(actionPath, LOAD_PLATFORM, 'nickname')
               })
             )
+            break
             
           case routes.test(actionPath, LOAD_EPISODES):
             store.dispatch(loadEpisodes())

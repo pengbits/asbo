@@ -119,6 +119,13 @@ ol.menu {
   }
 }
 
+.btn-s {
+  padding: $size-xs $size-s;
+  
+  font-size   : $typography-size-six;
+  line-height : $typography-height-six;
+}
+
 nav {
   margin-bottom: $size-m
 }

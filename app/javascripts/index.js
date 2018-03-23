@@ -71,7 +71,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/"                         render={bindComponent()} />
+        <Route exact path="/"                         render={bindComponent()}                  />
         <Route exact path="/platforms"                render={bindComponent(p.LOAD_PLATFORMS)}  />
         <Route exact path="/platforms/new"            render={bindComponent(p.NEW_PLATFORM)}    />
         <Route exact path="/platforms/:nickname"      render={bindComponent(p.LOAD_PLATFORM)}   />

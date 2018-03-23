@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import PlatformDetails from '../components/PlatformDetails'
-import {destroyPlatform} from '../redux/platforms'
+import {refreshPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform,loading,error} = state.platforms 
@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    destroyPlatform: (opts) =>{
-      dispatch(destroyPlatform(opts))
+    refreshPlatform: ({nickname}) =>{
+      dispatch(refreshPlatform({nickname}))
     }
   }
 }
