@@ -12,6 +12,26 @@ class API {
     return this.get({'kind':'episode'})
   }
   
+  getEpisode({id}){
+    if(id !== undefined){
+      const url = `/api/episodes/${id}`
+      return fetch(url)
+        .then(response => {
+          if(response.ok){
+            return response.json()
+          } else {
+            throw new Error(response.statusText)
+          }
+        }).then(function(json){
+          return json
+        })
+    }
+    else {
+      throw new Error('API#getEpisode called without id')
+    }
+  }
+  
+  
   refreshPlatform({nickname}){
     const base = this.url({nickname})
     const url  = `${base}/refresh`
@@ -87,8 +107,7 @@ class API {
     })
   }
   
-  
-  
+  // this isn't scaling well!
   url(opts={}){
     const kind = opts.kind || 'platform'
     return opts.nickname ? `/api/${kind}s/${opts.nickname}` : `/api/${kind}s`

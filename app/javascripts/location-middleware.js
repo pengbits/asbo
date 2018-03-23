@@ -11,7 +11,8 @@ import {
 } from './redux/platforms'
 
 import {
-  LOAD_EPISODES, loadEpisodes
+  LOAD_EPISODES, loadEpisodes,
+  LOAD_EPISODE,  loadEpisode
 } from './redux/episodes'
 
 const LocationMiddleware = store => next => action => {
@@ -50,6 +51,14 @@ const LocationMiddleware = store => next => action => {
             
           case routes.test(actionPath, LOAD_EPISODES):
             store.dispatch(loadEpisodes())
+            break
+          
+          case routes.test(actionPath, LOAD_EPISODE):
+            store.dispatch(
+              loadEpisode({
+                'id' : routes.params(actionPath, LOAD_EPISODE, 'id')
+              })
+            )
             break
         }
     }

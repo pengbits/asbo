@@ -16,6 +16,16 @@ export const loadEpisodes = function(){
     })
   }
 }
+export const loadEpisode = function({id}){
+  return {
+    type: LOAD_EPISODE,
+    payload: API.getEpisode({id}).then(json => {
+      return {
+        episode: json
+      }
+    })
+  }
+}
 
 
 export const initialState = {
@@ -27,11 +37,13 @@ export const initialState = {
 export default function reducer(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_EPISODES}_PENDING`:
+    case `${LOAD_EPISODE}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_EPISODES}_REJECTED`:
+    case `${LOAD_EPISODE}_REJECTED`:
       return {
         ...state,
         loading: false,
@@ -45,7 +57,14 @@ export default function reducer(state=initialState, action={}){
         episodes: action.payload.episodes
       }
       
-    
+    case `${LOAD_EPISODE}_FULFILLED`:  
+    console.log(action.payload)
+      return {
+        ...state,
+        loading: false,
+        episode: action.payload.episode
+      }
+
     default: 
       return state
     break

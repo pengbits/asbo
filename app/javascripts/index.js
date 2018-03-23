@@ -77,6 +77,7 @@ render(
         <Route exact path="/platforms/:nickname"      render={bindComponent(p.LOAD_PLATFORM)}   />
         <Route exact path="/platforms/:nickname/edit" render={bindComponent(p.EDIT_PLATFORM)}   />
         <Route exact path="/episodes"                 render={bindComponent(e.LOAD_EPISODES)}   />
+        <Route exact path="/episodes/:id"             render={bindComponent(e.LOAD_EPISODE)}    />
       </Switch>
     </ConnectedRouter>
   </Provider>,

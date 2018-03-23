@@ -5,7 +5,7 @@ import PlatformForm from './containers/PlatformForm'
 
 import * as e from './redux/episodes'
 import EpisodeList from './components/EpisodeList'
-
+import EpisodeDetails from './components/EpisodeDetails'
 let map = {}
 
 map[p.LOAD_PLATFORMS]  = {
@@ -35,6 +35,12 @@ map[e.LOAD_EPISODES] = {
   regex     : /episodes$/
 }
 
+map[e.LOAD_EPISODE] = {
+  component : EpisodeDetails,
+  regex     : /episodes\/(.+)$/,
+  params    : { 'id' : 1}
+}
+
 const routes = {
   map,
   
@@ -44,7 +50,7 @@ const routes = {
   
   'test' : ((path, action) => {
     const isMatch = map[action].regex.test(path)
-    console.log(`routes#test '${path}' =~ '${map[action].regex}' ${isMatch}`)
+    // console.log(`routes#test '${path}' =~ '${map[action].regex}' ${isMatch}`)
     return isMatch
   }),
   
