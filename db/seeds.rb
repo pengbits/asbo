@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require_relative 'platforms'
-Episode.destroy_all
+require_relative 'episodes'
+
 Platform.destroy_all
 Platform.create! PlatformData::sample_attributes
+Episode.destroy_all  
+Episode.create!  EpisodeData::sample_attributes
+puts "inserted the following\nPlatforms :#{PlatformData::sample_attributes.length}\nEpisodes  :#{EpisodeData::sample_attributes.length}" 
