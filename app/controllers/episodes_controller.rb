@@ -11,4 +11,14 @@ class EpisodesController < ApplicationController
     
     render json: @episodes
   end
+  
+  def show
+    begin
+      @episode = Episode.find params[:id]
+      render json: @episode
+    rescue ActiveRecord::RecordNotFound => e
+      render(:status => 500, json: {'error':e.to_s})
+    end
+  end
+  
 end
