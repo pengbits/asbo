@@ -110,25 +110,31 @@ ol.menu {
     border-bottom:  $colors-black solid 1px;
   }
   
-  a, span {
+  a {
     display: block;
   }
   
-  &-meta {
-    @extend .h6;
+  &__meta {
     display: inline-block;
     position: absolute;
     width: $size-l;
-    top:$size-s;
-    right:0;
+    top:0;
+    right:$size-s;
     bottom: 0;
-    text-align: center;
-    background-color: $colors-light-grey;
-    border-radius: $size-s;
-    font-style: normal;
-    text-transform: uppercase;
-    color: $colors-dark-grey;
   }
+}
+
+.flag {
+  display: inline-block;
+  margin-top: $size-xs;
+  padding: $size-xs $size-s;
+  @extend .h6;
+  text-align: center;
+  background-color: $colors-light-grey;
+  border-radius: $size-s;
+  font-style: normal;
+  text-transform: uppercase;
+  color: $colors-dark-grey;
 }
 
 .btn {

@@ -9,6 +9,9 @@ class Platform < ApplicationRecord
   
   attr_reader :client
   
+  def attributes_minimal
+    attributes.slice("id", "name","url")
+  end
 
   def initialize(opts={})
     super(opts)

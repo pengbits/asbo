@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom'
 const EpisodeListItem = ({id,name,platformName}) => (
   <li className='menu__item'>
     <Link to={`/episodes/${id}`}>{name}</Link>
-    <em className='menu__item-meta'>
-      rinse
-    </em>
+    <span className='menu__item__meta'>
+      <em className='flag'>rinse</em>
+    </span>
   </li>
 )
 

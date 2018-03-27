@@ -99,7 +99,18 @@ class PlatformsController < ApplicationController
   end
   
   def render_json_with_episodes
-    render json: @platform.to_json({:include => :episodes })
+    platform_json = @platform.attributes.merge({ :episodes => platform_episodes })
+    render json: platform_json
+  end
+  
+  def platform_episodes
+    @platform.episodes.collect do |episode|
+      episode.attributes_minimal #.merge(:platform => platform_meta)
+    end
+  end
+  
+  def platform_meta 
+    @platform.attributes_minimal
   end
   
   def render_error(e)

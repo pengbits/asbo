@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
     if params[:filter]
       @filter = params[:filter]
       @episodes = Episode.where("name like ? ", "%#{@filter}%")
-      
+    
     else
       @episodes = Episode.order(:date)
     end
