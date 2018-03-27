@@ -98,9 +98,15 @@ class Platform < ApplicationRecord
         end
         unless value.nil?
           value.gsub!(/(^\n)*(\n$)*(\s$)*(^\s)*/,"")
-          ep[prop] = prop == 'media' ? 
-            Media::from_url(value) : 
-            value
+          ep[prop] = value
+          
+          if(prop == 'media')
+            el[prop] = Media::from_url(value)
+          end
+          
+          if(prop == 'image')  
+            ep[prop] = "#{image_base}#{value}" 
+          end
         end
       end
       
@@ -112,6 +118,13 @@ class Platform < ApplicationRecord
     episodes.select do |ep| 
       ep.name.downcase.include?(query)
     end
+  end
+  
+  def image_base
+    uri    = URI(url)
+    scheme = uri.scheme
+    host   = uri.host
+    return use_relative_images ? "#{scheme}://#{host}" : ''
   end
   
   def refresh(opts={})
