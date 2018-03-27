@@ -5,7 +5,7 @@ import PlatformForm from './containers/PlatformForm'
 
 import * as e from './redux/episodes'
 import EpisodeList from './containers/EpisodeList'
-import EpisodeDetails from './components/EpisodeDetails'
+import EpisodeDetails from './containers/EpisodeDetails'
 let map = {}
 
 map[p.LOAD_PLATFORMS]  = {

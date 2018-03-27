@@ -6,6 +6,8 @@ class EpisodeDetails extends Component {
     const {
       name,
       id,
+      date,
+      image,
       platform_id,
       loading,
       error
@@ -25,9 +27,17 @@ class EpisodeDetails extends Component {
         <b>name</b><br />
         {name}
       </p>
+      {image && (<p>
+        <b>image</b><br />
+        {image}
+      </p>)}
       <p>
         <b>platform</b><br />
         {platform_id}
+      </p>
+      <p>
+        <b>date</b><br />
+        {date}
       </p>
       <p>
         <Link to={`/episodes`}>Back</Link>
