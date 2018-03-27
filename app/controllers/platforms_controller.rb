@@ -105,7 +105,7 @@ class PlatformsController < ApplicationController
   
   def platform_episodes
     @platform.episodes.collect do |episode|
-      episode.attributes_minimal #.merge(:platform => platform_meta)
+      episode.attributes_minimal.merge(:platform => platform_meta)
     end
   end
   

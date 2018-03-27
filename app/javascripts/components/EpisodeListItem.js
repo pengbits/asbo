@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 
-const EpisodeListItem = ({id,name,platformName}) => (
+const EpisodeListItem = ({id,name,platform}) => (
   <li className='menu__item'>
     <Link to={`/episodes/${id}`}>{name}</Link>
-    <span className='menu__item__meta'>
-      <em className='flag'>rinse</em>
-    </span>
+    {platform && 
+      <span className='menu__item__meta'>
+        <em className='flag'>{platform.nickname}</em>
+      </span>}
   </li>
 )
 

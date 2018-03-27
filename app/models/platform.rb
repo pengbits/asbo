@@ -10,7 +10,7 @@ class Platform < ApplicationRecord
   attr_reader :client
   
   def attributes_minimal
-    attributes.slice("id", "name","url")
+    attributes.slice("id","nickname")
   end
 
   def initialize(opts={})
