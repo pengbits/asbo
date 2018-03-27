@@ -9,7 +9,7 @@ class PlatformsController < ApplicationController
       platform_from_nickname_param
       render_json_with_episodes
     rescue ActiveRecord::RecordNotFound => e
-      render_error
+      render_error e
     end
   end
   

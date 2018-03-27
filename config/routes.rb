@@ -10,5 +10,6 @@ delete 'platforms/:nickname', to: 'platforms#destroy', as: 'delete_platform'
    get 'platforms/:nickname/refresh', to: 'platforms#refresh', as: 'platform_refresh'
    
    get 'episodes', to: 'episodes#index'
+   get 'episodes/:id', to: 'episodes#show', as: 'episode'
    get 'episodes/filter/:filter', to: 'episodes#index', as: 'episodes_filtered'
 end

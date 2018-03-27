@@ -112,6 +112,9 @@ class Platform < ApplicationRecord
   end
   
   def refresh(opts={})
+    # for platforms that use an alt url for pagination ie radar,
+    # you MUST provide a page to options or refresh fails silently..
+    opts[:page] = 1 unless opts[:page]
     puts "platform#refresh GET #{@client.url(opts[:page])}"
     @client.get opts
   end

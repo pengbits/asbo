@@ -9,7 +9,7 @@ export const CREATE_PLATFORM  = 'CREATE_PLATFORM'
 export const EDIT_PLATFORM    = 'EDIT_PLATFORM'
 export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
-
+export const REFRESH_PLATFORM = 'REFRESH_PLATFORM' // get eps for platform
  
 // actions
 export const loadPlatform  = function({nickname}){
@@ -71,6 +71,18 @@ export const updatePlatform = function(attrs) {
   }
 }
 
+export const refreshPlatform = function({nickname}) {
+  return {
+    type: REFRESH_PLATFORM,
+    payload: API.refreshPlatform({nickname})
+      .then (json => {
+        return {
+          platform: json
+        }
+      })
+  }
+}
+
 export const destroyPlatform = function({nickname}){
   return {
     type: DESTROY_PLATFORM,
@@ -114,6 +126,7 @@ export default function reducer(state=initialState, action={}){
     case `${LOAD_PLATFORM}_FULFILLED`:
     case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
+    case `${REFRESH_PLATFORM}_FULFILLED`:
       return {
         ...state,
         loading: false,

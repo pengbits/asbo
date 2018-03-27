@@ -12,8 +12,7 @@ Then("the response should be a JSON representation of the platform") do
   expect(@platform.url).to  eq(@response['url'])
 end
 
-Then("the response should be an error") do
+Then("the response should be a platform not found error") do
   expect(last_response.status).to eq(500)
-  expect(@response).to eq({"error" => "Platform not found"})
+  expect(@response).to eq({"error" => "Couldn't find Platform"})
 end
-

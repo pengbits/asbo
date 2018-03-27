@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropertyMapReadOnly from './PropertyMapReadOnly'
 import Hint from './Hints.js'
+import EpisodeListItem from './EpisodeListItem'
 
 class PlatformDetails extends Component {
   render() {
@@ -15,7 +16,8 @@ class PlatformDetails extends Component {
       has_details,
       attr_map,
       pagination,
-      destroyPlatform
+      refreshPlatform,
+      episodes
     } = this.props
     
     if(loading){
@@ -27,7 +29,7 @@ class PlatformDetails extends Component {
     
     return ( 
     <div className="platform-details">
-      <h2>Platform</h2>
+      <h2 className='h2'>Platform</h2>
       <p>
         <b>name</b><br />
         {name}
@@ -45,6 +47,16 @@ class PlatformDetails extends Component {
         {has_details ? 'yes' : 'no' }
       </p>
       <p>
+        <b>Episodes</b>{' '}{this.refreshButton()}
+      </p>
+      <p>
+        {episodes.length || "none"}<br />
+        {episodes.length && this.episodeList()}
+      </p>
+      <p>
+        &nbsp;
+      </p>
+      <p>
         <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
         <Link to={`/platforms`}>Back</Link>
       </p>
@@ -52,9 +64,23 @@ class PlatformDetails extends Component {
     )
   }
   
-  destroy(){
-    const {destroyPlatform,nickname} = this.props;
-    confirm('Permanently delete this platform?') && destroyPlatform({nickname})
+  refreshButton(){
+    return (<button className='btn btn-s' onClick={this.refreshPlatform.bind(this)}>
+      Refresh
+    </button>)
+  }
+  
+  episodeList(){
+    const {episodes} = this.props
+    
+    return (<ul className='menu'>
+      {episodes.map(e => <EpisodeListItem {...e} key={e.id} />)}
+    </ul>)
+  }
+  
+  refreshPlatform(){
+    const {nickname,refreshPlatform} = this.props;
+    refreshPlatform({nickname})
   }
 }
 
