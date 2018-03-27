@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180327200801) do
     t.text "pagination"
     t.boolean "has_details"
     t.string "nickname"
-    t.boolean "use_relative_image_paths"
+    t.boolean "use_relative_images"
   end
 
 end

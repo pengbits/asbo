@@ -101,6 +101,11 @@ class Platform < ApplicationRecord
           ep[prop] = prop == 'media' ? 
             Media::from_url(value) : 
             value
+            
+          if(prop == 'image')  
+            puts "#{image_base}#{value}" 
+            ep[prop] = "#{image_base}#{value}" 
+          end
         end
       end
       
@@ -112,6 +117,13 @@ class Platform < ApplicationRecord
     episodes.select do |ep| 
       ep.name.downcase.include?(query)
     end
+  end
+  
+  def image_base
+    uri    = URI(url)
+    scheme = uri.scheme
+    host   = uri.host
+    return use_relative_images ? "#{scheme}://#{host}" : ''
   end
   
   def refresh(opts={})

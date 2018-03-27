@@ -1,6 +1,6 @@
-Given("the platform has use_relative_image_paths={string}") do |mode|
-  @platform.use_relative_image_paths= (mode == 'true')
-  puts "#{@platform.name}.use_relative_image_paths= #{relative} "
+Given("the platform has relative_image_paths={string}") do |mode|
+  # puts @platform.episodes.first
+  @platform.use_relative_images = mode
 end
 
 Then("the platform will contain an episode with this image {string}") do |src|

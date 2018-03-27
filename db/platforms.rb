@@ -7,7 +7,7 @@ module PlatformData
       url: "https://www.nts.live/recently-added",
       date_format: "%d.%m.%y",
       has_details: true,
-      use_relative_image_paths: false,
+      use_relative_images: false,
       attr_map: {
         "item"      => ".nts-grid-item",
         "name"      => ".nts-grid-item__img img[alt]",
@@ -27,7 +27,7 @@ module PlatformData
       url: "http://rinse.fm/podcasts",
       date_format: "%Y-%m-%d",
       has_details: false,
-      use_relative_image_paths: false,
+      use_relative_images: false,
       attr_map: {
         "item"      => ".podcast-list-item",
         "name"      => "h3",
@@ -46,7 +46,7 @@ module PlatformData
       url: "http://www.radarradio.com/podcasts",
       date_format: "%e %b",
       has_details: true,
-      use_relative_image_paths: true,
+      use_relative_images: true,
       attr_map: {
         "item"      => ".latestarticle.radarradio_podcasts",
         "name"      => "h2[split(' – ',0)]",
