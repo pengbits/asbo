@@ -58,7 +58,6 @@ export default function reducer(state=initialState, action={}){
       }
       
     case `${LOAD_EPISODE}_FULFILLED`:  
-    console.log(action.payload)
       return {
         ...state,
         loading: false,
