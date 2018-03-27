@@ -12,5 +12,5 @@ Feature: View a Platform
   Scenario: fetch a platform unsuccesfully
     Given these platforms
     When I load the platform endpoint '/platforms/foo'
-    Then the response should be an error
+    Then the response should be a platform not found error
       

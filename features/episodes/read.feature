@@ -14,5 +14,5 @@ Feature: View an Episode
   @episode @http @get
   Scenario: fetch a episode unsuccesfully
      When  I load the episode endpoint with a bad id
-     Then the response should be an 'episode not found' error
+     Then the response should be an episode not found error
       
