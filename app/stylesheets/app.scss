@@ -104,7 +104,7 @@ ol.menu {
   padding: $size-s;
   border: $colors-black solid 1px;
   border-bottom: 0;
-  padding-right: $size-l;
+  padding-right: 10%;
   
   &:last-child  {
     border-bottom:  $colors-black solid 1px;
@@ -116,10 +116,11 @@ ol.menu {
   
   &__meta {
     display: inline-block;
+    text-align: right;
     position: absolute;
-    width: $size-l;
+    width: 10%;
     top:0;
-    right:$size-s;
+    right:0;
     bottom: 0;
   }
 }
@@ -127,6 +128,7 @@ ol.menu {
 .flag {
   display: inline-block;
   margin-top: $size-xs;
+  margin-right: $size-s;
   padding: $size-xs $size-s;
   @extend .h6;
   text-align: center;

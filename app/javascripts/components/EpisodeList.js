@@ -15,7 +15,7 @@ class EpisodeList extends Component {
       <h2 className='h2'>Episodes</h2>
       <ul className='menu'>
         {(episodes || []).map(e => <EpisodeListItem 
-          {...e} key={e.id}
+          {...e} platform={e.platform.nickname} key={e.id}
         />)}
       </ul>
     </div>)
