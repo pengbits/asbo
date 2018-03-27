@@ -70,6 +70,12 @@ h1,h2,h3,h4,h5 {
   margin-bottom :$size-m;
 }
 
+.h6 {
+  font-size     : $typography-size-six;
+  line-height   : $typography-height-six;
+  margin-bottom :$size-s;
+}
+
 a {
   color: $colors-black;
   text-decoration: none;
@@ -94,13 +100,43 @@ ol.menu {
 }
 
 .menu__item  {
+  position: relative;
   padding: $size-s;
   border: $colors-black solid 1px;
   border-bottom: 0;
+  padding-right: 10%;
   
   &:last-child  {
     border-bottom:  $colors-black solid 1px;
   }
+  
+  a {
+    display: block;
+  }
+  
+  &__meta {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    width: 10%;
+    top:0;
+    right:0;
+    bottom: 0;
+  }
+}
+
+.flag {
+  display: inline-block;
+  margin-top: $size-xs;
+  margin-right: $size-s;
+  padding: $size-xs $size-s;
+  @extend .h6;
+  text-align: center;
+  background-color: $colors-light-grey;
+  border-radius: $size-s;
+  font-style: normal;
+  text-transform: uppercase;
+  color: $colors-dark-grey;
 }
 
 .btn {
