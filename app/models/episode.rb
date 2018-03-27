@@ -1,7 +1,8 @@
 class Episode < ApplicationRecord
   belongs_to :platform
   validates :date, presence: true
-
+  default_scope { order('date DESC') }
+  
   before_validation :parse_date
   serialize :media
   attr_accessor :date_str

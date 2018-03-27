@@ -2,7 +2,7 @@ require 'client'
 require 'media'
 
 class Platform < ApplicationRecord
-  has_many :episodes
+  has_many  :episodes
   serialize :attr_map
   serialize :pagination
   validates :url, presence: true

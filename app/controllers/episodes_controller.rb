@@ -1,15 +1,13 @@
 class EpisodesController < ApplicationController
   def index
-    # if filter param????
-    if params[:filter]
-      @filter = params[:filter]
-      @episodes = Episode.where("name like ? ", "%#{@filter}%")
+    @filter = params[:filter]
+    @episodes = episodes_query(@filter)
     
-    else
-      @episodes = Episode.order(:date)
-    end
-    
-    render json: @episodes
+    render json: @episodes.collect{ |ep| 
+      ep.attributes_minimal.merge({
+        :platform => ep.platform.attributes_minimal
+      })
+    }
   end
   
   def show
@@ -21,4 +19,9 @@ class EpisodesController < ApplicationController
     end
   end
   
+  private
+  
+  def episodes_query(filter=nil)
+    filter.nil? ? Episode.includes(:platform).all : Episode.includes(:platform).where("name like ? ", "%#{@filter}%")
+  end
 end
