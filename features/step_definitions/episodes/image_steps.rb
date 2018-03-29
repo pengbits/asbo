@@ -3,6 +3,11 @@ Given("the platform has relative_image_paths={string}") do |mode|
   @platform.use_relative_images = mode
 end
 
+Given("the platform has this default image {string}") do |string|
+  @platform.default_image = string
+  @platform.save
+end
+
 Then("the platform will contain an episode with this image {string}") do |src|
   puts "expecting #{src}"
   @ep = @platform.episodes.find do |ep|

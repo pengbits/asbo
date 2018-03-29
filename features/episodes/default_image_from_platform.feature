@@ -3,9 +3,10 @@ As a developer
 In order to render an image for the episode even when it's not available
 I want to provide a default image from the platform
 
-    @episode @images
+    @episode @images @default
     Scenario: image is unavailable for episode
       Given the platform nickname=rinse
+      And the platform has this default image 'http://getdarker-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2006/02/27347_logo1112.png'
       And html for an episode
       """
       <div class="borderbottom left podcast-list-item" id="neptizzle290318">
@@ -27,4 +28,4 @@ I want to provide a default image from the platform
       """
       
       When I parse the html
-      Then the episode will have this fallback image 'http://getdarker-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2006/02/27347_logo1112.png'
+      Then the platform will contain an episode with this image 'http://getdarker-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2006/02/27347_logo1112.png'
