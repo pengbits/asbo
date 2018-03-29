@@ -81,6 +81,7 @@ module EpisodeData
       id: 1812,
       name: "DJ Jampak & Special Guests",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-19",
       media: {
         type: "soundcloud",
@@ -90,6 +91,7 @@ module EpisodeData
       id: 1813,
       name: "DJ Ron",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-19",
       media: {
         type: "soundcloud",
@@ -99,6 +101,7 @@ module EpisodeData
       id: 1814,
       name: "Crazy Cousinz",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-19",
       media: {
         type: "soundcloud",
@@ -108,6 +111,7 @@ module EpisodeData
       id: 1815,
       name: "Emerald interview with Berna",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-19",
       media: {
         type: "soundcloud",
@@ -117,6 +121,7 @@ module EpisodeData
       id: 1816,
       name: "DJ Boring",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-19",
       media: {
         type: "soundcloud",
@@ -217,6 +222,7 @@ module EpisodeData
       id: 1805,
       name: "Slimzee w/ Spooky, Trends, Boylan, DOK, AsifKid & Finwa",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -226,6 +232,7 @@ module EpisodeData
       id: 1806,
       name: "Grime Originals",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -235,6 +242,7 @@ module EpisodeData
       id: 1807,
       name: "Lady Leshurr",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -244,6 +252,7 @@ module EpisodeData
       id: 1808,
       name: "Dana Ruh",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -253,6 +262,7 @@ module EpisodeData
       id: 1809,
       name: "Klose One",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -262,6 +272,7 @@ module EpisodeData
       id: 1810,
       name: "Joshua James",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -271,6 +282,7 @@ module EpisodeData
       id: 1811,
       name: "Keysound",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-20",
       media: {
         type: "soundcloud",
@@ -364,6 +376,7 @@ module EpisodeData
       id: 1797,
       name: "Metalheadz with Blocks & Escher & SP:MC",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -373,6 +386,7 @@ module EpisodeData
       id: 1798,
       name: "Mall Grab with CC:DISCO",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -392,6 +406,7 @@ module EpisodeData
       id: 1800,
       name: "Joelah Noble with Iyamah",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -401,6 +416,7 @@ module EpisodeData
       id: 1801,
       name: "Sammy Porter",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -410,6 +426,7 @@ module EpisodeData
       id: 1802,
       name: "Sandboards",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -419,6 +436,7 @@ module EpisodeData
       id: 1803,
       name: "SK Vibemaker w/ Tory Lanez",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -428,6 +446,7 @@ module EpisodeData
       id: 1804,
       name: "Paleman w/ Boddika",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-21",
       media: {
         type: "soundcloud",
@@ -535,6 +554,7 @@ module EpisodeData
       id: 1792,
       name: "Lord Of The Mics with DJ Vectra & Jammin",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-22",
       media: {
         type: "soundcloud",
@@ -544,6 +564,7 @@ module EpisodeData
       id: 1793,
       name: "Hessle Audio with Pearson Sound",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-22",
       media: {
         type: "soundcloud",
@@ -553,6 +574,7 @@ module EpisodeData
       id: 1794,
       name: "Phonica Records with Thomas Gant & Oscar Abdullah",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-22",
       media: {
         type: "soundcloud",
@@ -562,6 +584,7 @@ module EpisodeData
       id: 1795,
       name: "Chicken Shop Date",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-22",
       media: {
         type: "soundcloud",
@@ -571,6 +594,7 @@ module EpisodeData
       id: 1796,
       name: "Studio Barnhus with Shakarchi & Stranéus",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-22",
       media: {
         type: "soundcloud",
@@ -657,6 +681,7 @@ module EpisodeData
       id: 1782,
       name: "Elrow with Bastian Bux featuring George Privatti Guest Mix",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -666,6 +691,7 @@ module EpisodeData
       id: 1783,
       name: "The UK Rap Show with Morgan Keyz",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -675,6 +701,7 @@ module EpisodeData
       id: 1784,
       name: "Orlando & Yayoyanoh",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -684,6 +711,7 @@ module EpisodeData
       id: 1785,
       name: "Grandmixxer",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -693,6 +721,7 @@ module EpisodeData
       id: 1786,
       name: "Selecta Suave",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -702,6 +731,7 @@ module EpisodeData
       id: 1787,
       name: "Mark Radford",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -731,6 +761,7 @@ module EpisodeData
       id: 1790,
       name: "Krywald & Farrer",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -740,6 +771,7 @@ module EpisodeData
       id: 1791,
       name: "Wen & Parris with E_tch",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-23",
       media: {
         type: "soundcloud",
@@ -847,6 +879,7 @@ module EpisodeData
       id: 1767,
       name: "Permanent Vacation Takeover: Terr",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -856,6 +889,7 @@ module EpisodeData
       id: 1768,
       name: "Permanent Vacation Takeover: Pional",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -865,6 +899,7 @@ module EpisodeData
       id: 1769,
       name: "Permanent Vacation Takeover: Tuff City Kids",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -874,6 +909,7 @@ module EpisodeData
       id: 1770,
       name: "Permanent Vacation Takeover: Konstantin Sibold",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -883,6 +919,7 @@ module EpisodeData
       id: 1771,
       name: "Permanent Vacation Takeover: Benjamin Fröhlich",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -892,6 +929,7 @@ module EpisodeData
       id: 1772,
       name: "Permanent Vacation Takeover: Aera",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -901,6 +939,7 @@ module EpisodeData
       id: 1773,
       name: "Permanent Vacation Takeover: Mount Liberation Unlimited",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -910,6 +949,7 @@ module EpisodeData
       id: 1774,
       name: "Permanent Vacation Takeover: TB",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -919,6 +959,7 @@ module EpisodeData
       id: 1775,
       name: "Permanent Vacation Takeover: Lord of the Isles",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -928,6 +969,7 @@ module EpisodeData
       id: 1776,
       name: "Permanent Vacation Takeover: Carl Gari & Abdullah Miniawy",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -937,6 +979,7 @@ module EpisodeData
       id: 1777,
       name: "Jyoty with Kerem Akdag",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -956,6 +999,7 @@ module EpisodeData
       id: 1779,
       name: "PIG",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -965,6 +1009,7 @@ module EpisodeData
       id: 1780,
       name: "Tresor",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -974,6 +1019,7 @@ module EpisodeData
       id: 1781,
       name: "Manni Dee",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-24",
       media: {
         type: "soundcloud",
@@ -1038,6 +1084,7 @@ module EpisodeData
       id: 1761,
       name: "The Grime Show with Logan Sama and Roadside G'z",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-25",
       media: {
         type: "soundcloud",
@@ -1047,6 +1094,7 @@ module EpisodeData
       id: 1762,
       name: "Amz",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-25",
       media: {
         type: "soundcloud",
@@ -1056,6 +1104,7 @@ module EpisodeData
       id: 1763,
       name: "Swamp 81 with Lamont & O$VMV$M",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-25",
       media: {
         type: "soundcloud",
@@ -1065,6 +1114,7 @@ module EpisodeData
       id: 1764,
       name: "Neptizzle",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-25",
       media: {
         type: "soundcloud",
@@ -1094,6 +1144,7 @@ module EpisodeData
       id: 1759,
       name: "Body Hammer",
       platform_id: 2,
+			image: "https://etc.levels.io/rinse-fm/logo.png",
 			date_str: "2018-03-26",
       media: {
         type: "soundcloud",
