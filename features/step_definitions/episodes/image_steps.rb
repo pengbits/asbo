@@ -9,11 +9,8 @@ Given("the platform has this default image {string}") do |string|
 end
 
 Then("the platform will contain an episode with this image {string}") do |src|
-  @ep = @platform.episodes.find do |episode|
-    # in controller...
-    # episode.attributes_minimal['image'] == src
-    # otherwise, since episode.image is not altered.. 
-    episode.image_with_fallback == src
+  @ep = @platform.episodes.find do |ep|
+    ep.image == src
   end
   expect(@ep).to be_truthy
 end

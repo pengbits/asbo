@@ -105,7 +105,7 @@ class Platform < ApplicationRecord
           end
           
           if(prop == 'image')  
-            ep[prop] = "#{image_base}#{value}" 
+            ep[prop] = value.empty? ? self.default_image : "#{image_base}#{value}" 
           end
         end
       end

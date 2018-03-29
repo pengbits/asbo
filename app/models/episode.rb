@@ -9,7 +9,7 @@ class Episode < ApplicationRecord
   validate :media_or_details_present
   
   def attributes_minimal
-    with_fallback_image(attributes.slice("id","name","url","media","image","date"))
+    attributes.slice("id","name","url","media","image","date")
   end
   
   def as_json(opts={})
@@ -34,22 +34,11 @@ class Episode < ApplicationRecord
     end    
   end
   
-  def image_with_fallback
-    with_fallback_image(attributes)['image']
-  end
-  
   private
   def media_or_details_present
     if media.to_s.empty? and details.to_s.empty?
       errors.add(:base, "must provide either media or details")
     end
-  end
-  
-  def with_fallback_image(attrs)
-    if attrs['image'].empty? && !!platform
-      attrs['image'] = platform.default_image
-    end
-    attrs
   end
   
   def self.strip_ordinal(str)
