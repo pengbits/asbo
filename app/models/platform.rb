@@ -101,7 +101,7 @@ class Platform < ApplicationRecord
           ep[prop] = value
           
           if(prop == 'media')
-            el[prop] = Media::from_url(value)
+            ep[prop] = Media::from_url(value)
           end
           
           if(prop == 'image')  
