@@ -9,7 +9,6 @@ Given("the platform has this default image {string}") do |string|
 end
 
 Then("the platform will contain an episode with this image {string}") do |src|
-  puts "expecting #{src}"
   @ep = @platform.episodes.find do |ep|
     ep.image == src
   end
