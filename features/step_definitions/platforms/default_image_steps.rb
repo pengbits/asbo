@@ -9,5 +9,4 @@ end
 Then("I should see the default image in the platform") do
   @platform = JSON.parse(@response).first
   expect(@platform['default_image']).to eq(@default_image)
-  # pending # Write code here that turns the phrase above into concrete actions
 end
