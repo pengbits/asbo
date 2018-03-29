@@ -1,9 +1,12 @@
 @import "../../node_modules/normalize.css/normalize";
 
-$size-xs: 5px;
-$size-s : 10px;
-$size-m : 20px;
-$size-l : 50px;
+$size-xxs : 2px;
+$size-xs  : 5px;
+$size-s   : 10px;
+$size-m   : 20px;
+$size-l   : 50px;
+$size-xl  : 100px;
+$size-xxl : 200px;
 
 $colors-black : #000;
 $colors-white : #FFF;
@@ -55,25 +58,37 @@ h1,h2,h3,h4,h5 {
 .h1 {
   font-size     : $typography-size-one;
   line-height   : $typography-height-one;
-  margin-bottom :$size-m;
+  margin-bottom : $size-m;
 }
 
 .h2 {
   font-size     : $typography-size-two;
   line-height   : $typography-height-two;
-  margin-bottom :$size-m;
+  margin-bottom : $size-m;
 }
 
 .h3 {
   font-size     : $typography-size-three;
   line-height   : $typography-height-three;
-  margin-bottom :$size-m;
+  margin-bottom : $size-m;
+}
+
+.h4 {
+  font-size     : $typography-size-four;
+  line-height   : $typography-height-four;
+  margin-bottom : $size-s;
+}
+
+.h5 {
+  font-size     : $typography-size-five;
+  line-height   : $typography-height-five;
+  margin-bottom : $size-s;
 }
 
 .h6 {
   font-size     : $typography-size-six;
   line-height   : $typography-height-six;
-  margin-bottom :$size-s;
+  margin-bottom : $size-s;
 }
 
 a {
@@ -122,6 +137,44 @@ ol.menu {
     top:0;
     right:0;
     bottom: 0;
+  }
+}
+
+$grid-size : ($size-xl - $size-xxs)* 2;
+
+.grid {
+  padding: 0 0 $size-xxs $size-xxs;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: $colors-dark-grey;
+  
+  &__item {
+    margin: $size-xxs $size-xxs 0 0;
+    height: $grid-size;
+    width : $grid-size;
+    background-color: $colors-medium-grey;
+  }
+}
+
+.episode-tile {
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  
+  &__title {
+    @extend .h5;
+    position: absolute;
+    bottom: $size-s;  
+    background: $colors-white;
+  }
+  
+  &__date {
+    @extend .h6;
+    position: absolute;
+    bottom: - $size-xs;
+    background: $colors-white;    
   }
 }
 
