@@ -140,20 +140,33 @@ ol.menu {
   }
 }
 
-$grid-size : ($size-xl - $size-xxs)* 2;
+$grid-size : ($size-xl - $size-xs) * 2;
 
 .grid {
-  padding: 0 0 $size-xxs $size-xxs;
+  padding: 0 0 $size-xs $size-xs;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: $colors-dark-grey;
   
   &__item {
-    margin: $size-xxs $size-xxs 0 0;
+    position: relative;
+    left: -$size-xs;
+    margin: $size-xs $size-xs 0 0;
     height: $grid-size;
     width : $grid-size;
     background-color: $colors-medium-grey;
+    cursor: pointer;
+  }
+  
+  &__mask {
+    position: absolute;
+    top:0; right:0; bottom: 0; left: 0;
+    opacity: 0.75;
+    background-color:$colors-black;
+    
+    .grid__item:hover & {
+      opacity: 0
+    }
   }
 }
 
