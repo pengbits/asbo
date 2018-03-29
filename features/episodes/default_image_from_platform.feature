@@ -27,4 +27,4 @@ I want to provide a default image from the platform
       """
       
       When I parse the html
-      Then the episode will have this image
+      Then the episode will have this fallback image 'http://getdarker-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2006/02/27347_logo1112.png'
