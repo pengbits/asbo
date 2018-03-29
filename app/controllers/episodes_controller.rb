@@ -23,5 +23,6 @@ class EpisodesController < ApplicationController
   
   def episodes_query(filter=nil)
     filter.nil? ? Episode.includes(:platform).all : Episode.includes(:platform).where("name like ? ", "%#{@filter}%")
-  end
+  end  
+
 end
