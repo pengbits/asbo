@@ -28,6 +28,7 @@ module PlatformData
       date_format: "%Y-%m-%d",
       has_details: false,
       use_relative_images: false,
+      default_image: "https://etc.levels.io/rinse-fm/logo.png",
       attr_map: {
         "item"      => ".podcast-list-item",
         "name"      => "h3",
