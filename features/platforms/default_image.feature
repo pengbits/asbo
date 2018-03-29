@@ -8,7 +8,7 @@ I want to define a default image on the platform
       
     @platform @model @images
     Scenario: Add default image
-      When I set a default image 
+      When I set the default image to 'https://etc.levels.io/rinse-fm/logo.png'
        And I save it
       Then I should see the new platform in the list 
        And I should see the default image in the platform

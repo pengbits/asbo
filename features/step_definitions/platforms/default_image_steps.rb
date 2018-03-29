@@ -1,6 +1,6 @@
-When("I set a default image") do
-  @platform_attrs[:default_image] = 'http://getdarker-cdn-2ezlhsfwy1f.stackpathdns.com/wp-content/uploads/2006/02/27347_logo1112.png'
-  @default_image = @platform_attrs[:default_image]
+When("I set the default image to {string}") do |src|
+  @platform_attrs[:default_image] = src
+  @default_image = src
 end
 
 # And I save it...
