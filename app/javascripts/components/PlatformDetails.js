@@ -10,6 +10,7 @@ class PlatformDetails extends Component {
       name,
       id,
       url,
+      default_image,
       nickname,
       loading,
       error,
@@ -45,6 +46,10 @@ class PlatformDetails extends Component {
       <p>
         <b>has details</b><br />
         {has_details ? 'yes' : 'no' }
+      </p>
+      <p>
+        <b>default_image</b><br />
+        {default_image}
       </p>
       <p>
         <b>Episodes</b>{' '}{this.refreshButton()}
