@@ -1,0 +1,186 @@
+@import "../../node_modules/normalize.css/normalize";
+
+$size-xs: 5px;
+$size-s : 10px;
+$size-m : 20px;
+$size-l : 50px;
+
+$colors-black : #000;
+$colors-white : #FFF;
+$colors-light-grey : #EEE;
+$colors-medium-grey : #CCC;
+$colors-dark-grey: #666;
+
+$typography-size-one   : 36px;
+$typography-size-two   : 28px;
+$typography-size-three : 28px;
+$typography-size-four  : 20px;
+$typography-size-five  : 16px;
+$typography-size-six   : 12px;
+
+$typography-height-one   : $typography-size-one * 1.25; 
+$typography-height-two   : $typography-size-two * 1.25;
+$typography-height-three : $typography-size-three * 1.25;
+$typography-height-four  : $typography-size-four * 1.25;
+$typography-height-five  : $typography-size-five * 1.25;
+$typography-height-six   : $typography-size-six * 1.25;
+
+$typography-body-text-size   : $typography-size-five;
+$typography-body-text-height : $typography-height-five;
+
+body {  
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: $typography-body-text-size;
+  line-height: $typography-body-text-height;
+}
+
+html,body {
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1,h2,h3,h4,h5 {
+  font-size   : $typography-size-five;
+  line-height : $typography-height-five;
+  margin      : 0;
+  padding: 0
+}
+
+.h1 {
+  font-size     : $typography-size-one;
+  line-height   : $typography-height-one;
+  margin-bottom :$size-m;
+}
+
+.h2 {
+  font-size     : $typography-size-two;
+  line-height   : $typography-height-two;
+  margin-bottom :$size-m;
+}
+
+.h3 {
+  font-size     : $typography-size-three;
+  line-height   : $typography-height-three;
+  margin-bottom :$size-m;
+}
+
+.h6 {
+  font-size     : $typography-size-six;
+  line-height   : $typography-height-six;
+  margin-bottom :$size-s;
+}
+
+a {
+  color: $colors-black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.container {
+  padding: $size-m;
+}
+
+.content {
+}
+
+ul.menu,
+ol.menu {
+  list-style: none;
+  margin-left: 0;
+  padding-left:0;
+}
+
+.menu__item  {
+  position: relative;
+  padding: $size-s;
+  border: $colors-black solid 1px;
+  border-bottom: 0;
+  padding-right: 10%;
+  
+  &:last-child  {
+    border-bottom:  $colors-black solid 1px;
+  }
+  
+  a {
+    display: block;
+  }
+  
+  &__meta {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    width: 10%;
+    top:0;
+    right:0;
+    bottom: 0;
+  }
+}
+
+.flag {
+  display: inline-block;
+  margin-top: $size-xs;
+  margin-right: $size-s;
+  padding: $size-xs $size-s;
+  @extend .h6;
+  text-align: center;
+  background-color: $colors-light-grey;
+  border-radius: $size-s;
+  font-style: normal;
+  text-transform: uppercase;
+  color: $colors-dark-grey;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: $size-s;
+  padding: $size-s $size-m;
+  background-color: $colors-light-grey;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $colors-medium-grey;  
+    text-decoration: none;
+
+  }
+}
+
+.btn-s {
+  padding: $size-xs $size-s;
+  
+  font-size   : $typography-size-six;
+  line-height : $typography-height-six;
+}
+
+nav {
+  margin-bottom: $size-m
+}
+
+
+.form {
+  &__label,
+  &__input {
+    display: block;    
+    padding: $size-s $size-m;
+    width: 100%;
+    outline: 0;
+    font-style: normal;
+  }
+  
+  &__input {
+    border: $colors-light-grey solid 1px
+  }
+  &__input:focus{
+    border-color: $colors-medium-grey
+  }
+}

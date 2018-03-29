@@ -1,11 +1,16 @@
 class Episode < ApplicationRecord
   belongs_to :platform
   validates :date, presence: true
-
+  default_scope { order('date DESC') }
+  
   before_validation :parse_date
   serialize :media
   attr_accessor :date_str
   validate :media_or_details_present
+  
+  def attributes_minimal
+    attributes.slice("id","name","url","media","image","date")
+  end
   
   def as_json(opts={})
     super(opts.merge({:except => [:created_at,:updated_at]}))

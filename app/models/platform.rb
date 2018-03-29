@@ -2,13 +2,16 @@ require 'client'
 require 'media'
 
 class Platform < ApplicationRecord
-  has_many :episodes
+  has_many  :episodes
   serialize :attr_map
   serialize :pagination
   validates :url, presence: true
   
   attr_reader :client
   
+  def attributes_minimal
+    attributes.slice("id","nickname")
+  end
 
   def initialize(opts={})
     super(opts)
@@ -95,9 +98,15 @@ class Platform < ApplicationRecord
         end
         unless value.nil?
           value.gsub!(/(^\n)*(\n$)*(\s$)*(^\s)*/,"")
-          ep[prop] = prop == 'media' ? 
-            Media::from_url(value) : 
-            value
+          ep[prop] = value
+          
+          if(prop == 'media')
+            ep[prop] = Media::from_url(value)
+          end
+          
+          if(prop == 'image')  
+            ep[prop] = value.empty? ? self.default_image : "#{image_base}#{value}" 
+          end
         end
       end
       
@@ -111,7 +120,17 @@ class Platform < ApplicationRecord
     end
   end
   
+  def image_base
+    uri    = URI(url)
+    scheme = uri.scheme
+    host   = uri.host
+    return use_relative_images ? "#{scheme}://#{host}" : ''
+  end
+  
   def refresh(opts={})
+    # for platforms that use an alt url for pagination ie radar,
+    # you MUST provide a page to options or refresh fails silently..
+    opts[:page] = 1 unless opts[:page]
     puts "platform#refresh GET #{@client.url(opts[:page])}"
     @client.get opts
   end

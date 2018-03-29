@@ -6,10 +6,10 @@ class PlatformsController < ApplicationController
 
   def show    
     begin
-      platform_from_key_param
+      platform_from_nickname_param
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
@@ -23,34 +23,97 @@ class PlatformsController < ApplicationController
     render json: @platform.to_json
   end
   
+  def update 
+    begin
+      platform_from_nickname_param
+      @platform.attributes = platform_params
+      @platform.save!
+      render json: @platform
+    rescue StandardError => e
+      render_error e
+    end
+  end
+  
+  def destroy
+    begin
+      platform_from_nickname_param.destroy!
+      render json: {'success' => :true, :platform => @platform} 
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
+    end
+  end
+  
   def refresh
     opts = {}
     opts[:page] = params[:page] unless params[:page].nil?
 
     begin
-      platform_from_key_param.refresh opts
+      platform_from_nickname_param.refresh opts
       render_json_with_episodes
-    rescue ActiveRecord::RecordNotFound
-      render_error
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
     end
   end
   
   private
   
-  def platform_from_key_param
-    @platform = Platform.find_by!(:key => params[:key])
+  def platform_from_nickname_param
+    @platform = Platform.find_by!(:nickname => params[:nickname])
     @platform
   end
-  
+    
   def platform_params
-    params.require(:platform).permit(:name,:date_format,:url,:attr_map,:key)
+    sanitized = params.require(:platform).permit(
+      :name,
+      :url,
+      :date_format,
+      :attr_map,
+      :pagination,
+      :has_details,
+      :nickname
+    ).merge({
+      :attr_map => nested_serialized_param(:attr_map,
+        :item, 
+        :name,
+        :image,
+        :media,
+        :details,
+        :date_str),
+      :pagination => nested_serialized_param(:pagination,
+        :param, 
+        :url,
+        :route,
+        :itemsPerPage)
+    })
+    
+    sanitized
+  end
+  
+  def nested_serialized_param(name, *permitted)
+    puts "nested_serialized #{name} => #{permitted.join(",")}"
+    if params[:platform][name].nil?
+      return {}
+    else
+      return params[:platform][name].permit(permitted)
+    end
   end
   
   def render_json_with_episodes
-    render json: @platform.to_json({:include => :episodes })
+    platform_json = @platform.attributes.merge({ :episodes => platform_episodes })
+    render json: platform_json
   end
   
-  def render_error
-    render(:status => 500, json: {'error':'Platform not found'})
+  def platform_episodes
+    @platform.episodes.collect do |episode|
+      episode.attributes_minimal #.merge(:platform => platform_meta)
+    end
+  end
+  
+  def platform_meta 
+    @platform.attributes_minimal
+  end
+  
+  def render_error(e)
+    render(:status => 500, json: {'error':e.to_s})
   end
 end

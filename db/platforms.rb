@@ -3,10 +3,11 @@ module PlatformData
     [{
       id: "1",
       name: "nts.live",
-      key: "nts",
+      nickname: "nts",
       url: "https://www.nts.live/recently-added",
       date_format: "%d.%m.%y",
       has_details: true,
+      use_relative_images: false,
       attr_map: {
         "item"      => ".nts-grid-item",
         "name"      => ".nts-grid-item__img img[alt]",
@@ -22,10 +23,12 @@ module PlatformData
     },{
       id: "2",
       name: "rinse.fm",
-      key: "rinse",
+      nickname: "rinse",
       url: "http://rinse.fm/podcasts",
       date_format: "%Y-%m-%d",
       has_details: false,
+      use_relative_images: false,
+      default_image: "https://etc.levels.io/rinse-fm/logo.png",
       attr_map: {
         "item"      => ".podcast-list-item",
         "name"      => "h3",
@@ -40,10 +43,11 @@ module PlatformData
     },{
       id: "3",
       name: "radar radio",
-      key: "radar",
+      nickname: "radar",
       url: "http://www.radarradio.com/podcasts",
       date_format: "%e %b",
       has_details: true,
+      use_relative_images: true,
       attr_map: {
         "item"      => ".latestarticle.radarradio_podcasts",
         "name"      => "h2[split(' – ',0)]",
