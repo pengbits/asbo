@@ -16,49 +16,6 @@ html {
   box-sizing: inherit;
 }
 
-h1,h2,h3,h4,h5 {
-  font-size   : $typography-size-five;
-  line-height : $typography-height-five;
-  margin      : 0;
-  padding: 0
-}
-
-.h1 {
-  font-size     : $typography-size-one;
-  line-height   : $typography-height-one;
-  margin-bottom : $size-m;
-}
-
-.h2 {
-  font-size     : $typography-size-two;
-  line-height   : $typography-height-two;
-  margin-bottom : $size-m;
-}
-
-.h3 {
-  font-size     : $typography-size-three;
-  line-height   : $typography-height-three;
-  margin-bottom : $size-m;
-}
-
-.h4 {
-  font-size     : $typography-size-four;
-  line-height   : $typography-height-four;
-  margin-bottom : $size-s;
-}
-
-.h5 {
-  font-size     : $typography-size-five;
-  line-height   : $typography-height-five;
-  margin-bottom : $size-s;
-}
-
-.h6 {
-  font-size     : $typography-size-six;
-  line-height   : $typography-height-six;
-  margin-bottom : $size-s;
-}
-
 a {
   color: $colors-black;
   text-decoration: none;
