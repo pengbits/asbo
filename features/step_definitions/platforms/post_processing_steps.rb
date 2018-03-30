@@ -3,5 +3,5 @@ When("I set these post-processing rules") do |json|
 end
 
 Then("It should have the post-processing rule") do
-  puts @platform
+  puts @platform.post_processing_rules
 end
