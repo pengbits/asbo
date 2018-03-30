@@ -1,0 +1,13 @@
+.flag {
+  display: inline-block;
+  margin-top: $size-xs;
+  margin-right: $size-s;
+  padding: $size-xs $size-s;
+  @extend .h6;
+  text-align: center;
+  background-color: $colors-light-grey;
+  border-radius: $size-s;
+  font-style: normal;
+  text-transform: uppercase;
+  color: $colors-dark-grey;
+}

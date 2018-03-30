@@ -1,0 +1,52 @@
+$grid-size : ($size-xl - $size-xs) * 2;
+
+.grid {
+  padding: 0 0 $size-xs $size-xs;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  &__item {
+    position: relative;
+    left: -$size-xs;
+    margin: $size-xs $size-xs 0 0;
+    height: $grid-size;
+    width : $grid-size;
+    background-color: $colors-medium-grey;
+    cursor: pointer;
+  }
+  
+  &__mask {
+    position: absolute;
+    top:0; right:0; bottom: 0; left: 0;
+    opacity: 0.75;
+    background-color:$colors-black;
+    transition-property: opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    .grid__item:hover & {
+      opacity: 0
+    }
+  }
+}
+
+.episode-tile {
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  
+  &__title {
+    @extend .h5;
+    position: absolute;
+    bottom: $size-s;  
+    background: $colors-white;
+  }
+  
+  &__date {
+    @extend .h6;
+    position: absolute;
+    bottom: - $size-xs;
+    background: $colors-white;    
+  }
+}

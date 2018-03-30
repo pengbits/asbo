@@ -1,0 +1,17 @@
+.form {
+  &__label,
+  &__input {
+    display: block;    
+    padding: $size-s $size-m;
+    width: 100%;
+    outline: 0;
+    font-style: normal;
+  }
+  
+  &__input {
+    border: $colors-light-grey solid 1px
+  }
+  &__input:focus{
+    border-color: $colors-medium-grey
+  }
+}
