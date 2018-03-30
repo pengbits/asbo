@@ -163,7 +163,9 @@ $grid-size : ($size-xl - $size-xs) * 2;
     top:0; right:0; bottom: 0; left: 0;
     opacity: 0.75;
     background-color:$colors-black;
-    
+    transition-property: opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
     .grid__item:hover & {
       opacity: 0
     }

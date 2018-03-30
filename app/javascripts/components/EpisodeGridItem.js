@@ -14,10 +14,10 @@ const EpisodeGridItem = ({id,name,image,date,platform}) => (
   <div className='grid__item' style={bg({image})}>
     <span className='grid__mask'>
     </span>
-    <div className='episode-tile'>
-      <Link className='episode-tile__title' to={`/episodes/${id}`}>{name}</Link>
+    <Link className='episode-tile' to={`/episodes/${id}`}>
+      <span className='episode-tile__title'>{name}</span>
       <span className='episode-tile__date'>{date}</span>
-    </div>
+    </Link>
   </div>
 )
 
