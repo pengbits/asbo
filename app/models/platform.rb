@@ -5,6 +5,7 @@ class Platform < ApplicationRecord
   has_many  :episodes
   serialize :attr_map
   serialize :pagination
+  serialize :post_processing_rules
   validates :url, presence: true
   
   attr_reader :client
@@ -107,11 +108,42 @@ class Platform < ApplicationRecord
           if(prop == 'image')  
             ep[prop] = value.empty? ? self.default_image : "#{image_base}#{value}" 
           end
+          
+          ep[prop] = apply_post_processing!(prop, ep[prop])
         end
       end
       
       ep
     end
+  end
+  
+  def post_processing_methods 
+    ["gsub"]
+  end
+  
+  def apply_post_processing!(prop, value)
+    if post_processing_rules.nil?
+      return value
+    end
+    
+    # allow for 1+ rules per property
+    post_processing_rules.select {|r| r['name'] == prop }.each do |rule|
+      # iterate over rule itself in case there are multiple transforms to apply..
+      value = rule.each.inject({}) do |outcome, (method,args)|
+        if(method != 'name')
+          if(!value.nil?)
+            if(post_processing_methods.include?(method))
+              puts "apply rule for #{prop}: #{method}(#{value}, #{args})"
+              outcome = value.send(:gsub, *args)
+              puts outcome  
+              outcome
+            end
+          end
+        end
+      end
+    end
+    
+    value
   end
   
   def episodes_with_name_matching(query)
