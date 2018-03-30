@@ -124,19 +124,25 @@ class Platform < ApplicationRecord
   def apply_post_processing!(prop, value)
     if post_processing_rules.nil?
       return value
-    else
-      puts "#{prop} ..."
-      rule = post_processing_rules.find {|r| r['name'] == prop }
-      if rule.nil?
-        return value
-      else
-        puts "#{rule}"
-      end
-      # outcome = rule.keys.inject({}) do |method|
-        # puts method
-        # {}
-      # end
     end
+    
+    rule = post_processing_rules.find {|r| r['name'] == prop }
+    if rule.nil?
+      return value
+    end
+    
+    rule.each.inject({}) do |outcome, (method,value)|
+      if(method != 'name')
+        puts "method = #{method}"
+        puts "value = #{value}"
+        {}
+        # puts value.send(method)
+      end
+    end
+    # outcome = rule.keys.inject({}) do |method|
+      # puts method
+      # {}
+    # end
     
   
     
