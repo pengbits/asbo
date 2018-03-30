@@ -126,13 +126,13 @@ class Platform < ApplicationRecord
       return value
     end
     
+    # allow for 1+ rules per property
     post_processing_rules.select {|r| r['name'] == prop }.each do |rule|
-      puts rule
-      # iterate over rule in case there are multiple transforms to apply..
+      # iterate over rule itself in case there are multiple transforms to apply..
       value = rule.each.inject({}) do |outcome, (method,args)|
         if(method != 'name')
           if(post_processing_methods.include?(method))
-            puts "method = `#{method}` args = `#{args}`"
+            puts "apply rule for #{prop}: #{method}(#{value}, #{args})"
             outcome = value.send(:gsub, *args)
             puts outcome  
             outcome
@@ -140,6 +140,7 @@ class Platform < ApplicationRecord
         end
       end
     end
+    
     value
   end
   

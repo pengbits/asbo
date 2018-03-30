@@ -13,4 +13,4 @@ I want to perform post-processing on the episode after it is created
     """
 
     When I parse the html
-    Then the platform will contain an episode with this image 'https://media2.ntslive.co.uk/wibble/800x800/f0cf5a5b-ea8b-4123-ae58-2b72662c6ac8_1522281600.jpeg'
+    Then the platform will contain an episode with this image 'https://media2.ntslive.co.uk/resize/800x800/f0cf5a5b-ea8b-4123-ae58-2b72662c6ac8_1522281600.jpeg'

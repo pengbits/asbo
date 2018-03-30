@@ -23,9 +23,6 @@ module PlatformData
       post_processing_rules: [{
         "name" => "image",
         "gsub" => ["100x100","800x800"]
-      },{
-        "name" => "image",
-        "gsub" => ["resize","wibble"]
       }]
     },{
       id: "2",
