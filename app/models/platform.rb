@@ -131,11 +131,13 @@ class Platform < ApplicationRecord
       # iterate over rule itself in case there are multiple transforms to apply..
       value = rule.each.inject({}) do |outcome, (method,args)|
         if(method != 'name')
-          if(post_processing_methods.include?(method))
-            puts "apply rule for #{prop}: #{method}(#{value}, #{args})"
-            outcome = value.send(:gsub, *args)
-            puts outcome  
-            outcome
+          if(!value.nil?)
+            if(post_processing_methods.include?(method))
+              puts "apply rule for #{prop}: #{method}(#{value}, #{args})"
+              outcome = value.send(:gsub, *args)
+              puts outcome  
+              outcome
+            end
           end
         end
       end
