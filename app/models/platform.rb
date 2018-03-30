@@ -118,7 +118,7 @@ class Platform < ApplicationRecord
   end
   
   def post_processing_methods 
-    ["replace"]
+    ["gsub"]
   end
   
   def apply_post_processing!(prop, value)
@@ -130,21 +130,18 @@ class Platform < ApplicationRecord
     if rule.nil?
       return value
     end
-    
-    rule.each.inject({}) do |outcome, (method,value)|
+    puts rule
+    # iterate over rule in case there are multiple transforms to apply..
+    value = rule.each.inject({}) do |outcome, (method,args)|
       if(method != 'name')
-        puts "method = #{method}"
-        puts "value = #{value}"
-        {}
-        # puts value.send(method)
+        if(post_processing_methods.include?(method))
+          puts "method = `#{method}` args = `#{args}`"
+          outcome = value.send(:gsub, *args)
+          puts outcome  
+          outcome
+        end
       end
     end
-    # outcome = rule.keys.inject({}) do |method|
-      # puts method
-      # {}
-    # end
-    
-  
     
     value
   end
