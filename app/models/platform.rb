@@ -108,11 +108,39 @@ class Platform < ApplicationRecord
           if(prop == 'image')  
             ep[prop] = value.empty? ? self.default_image : "#{image_base}#{value}" 
           end
+          
+          ep[prop] = apply_post_processing!(prop, ep[prop])
         end
       end
       
       ep
     end
+  end
+  
+  def post_processing_methods 
+    ["replace"]
+  end
+  
+  def apply_post_processing!(prop, value)
+    if post_processing_rules.nil?
+      return value
+    else
+      puts "#{prop} ..."
+      rule = post_processing_rules.find {|r| r['name'] == prop }
+      if rule.nil?
+        return value
+      else
+        puts "#{rule}"
+      end
+      # outcome = rule.keys.inject({}) do |method|
+        # puts method
+        # {}
+      # end
+    end
+    
+  
+    
+    value
   end
   
   def episodes_with_name_matching(query)

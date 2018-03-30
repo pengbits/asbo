@@ -19,7 +19,11 @@ module PlatformData
       pagination: {    
         "route"        => "/page/:page",
         "itemsPerPage" => 12
-      }
+      },
+      post_processing_rules: [{
+        "name" => "image",
+        "replace" => ["100x100","800x800"]
+      }]
     },{
       id: "2",
       name: "rinse.fm",
