@@ -5,6 +5,7 @@ class Platform < ApplicationRecord
   has_many  :episodes
   serialize :attr_map
   serialize :pagination
+  serialize :post_processing_rules
   validates :url, presence: true
   
   attr_reader :client

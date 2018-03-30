@@ -1,7 +1,8 @@
 When("I set these post-processing rules") do |json|
-  @platform_attrs[:post_processing_rules] = JSON.parse(json)
+  @rules = JSON.parse(json)
+  @platform_attrs[:post_processing_rules] = @rules
 end
 
 Then("It should have the post-processing rule") do
-  puts @platform.post_processing_rules
+  expect(@platform.post_processing_rules).to eq(@rules)
 end
