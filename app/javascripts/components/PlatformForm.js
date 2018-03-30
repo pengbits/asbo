@@ -20,6 +20,7 @@ class PlatformForm extends Component {
           <TextInput name='nickname' />
           <TextInput name='url' />       
           <Checkbox name='has_details' />
+          <TextInput name='default_image' />
           <AttributeMap 
             parent='attr_map' 
             attrs='item,name,image,media,date_str'

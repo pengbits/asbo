@@ -70,6 +70,7 @@ class PlatformsController < ApplicationController
       :attr_map,
       :pagination,
       :has_details,
+      :default_image,
       :nickname
     ).merge({
       :attr_map => nested_serialized_param(:attr_map,

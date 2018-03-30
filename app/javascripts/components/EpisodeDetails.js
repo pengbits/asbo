@@ -8,7 +8,7 @@ class EpisodeDetails extends Component {
       id,
       date,
       image,
-      platform_id,
+      platform,
       loading,
       error,
       media,
@@ -30,11 +30,14 @@ class EpisodeDetails extends Component {
         {name}
       </p>
       {image && (<p>
-        <img className='episode-image' src={image} />
+        <img className='episode-details__image' src={image} />
       </p>)}
       <p>
         <b>platform</b><br />
-        {platform_id}
+      {platform && 
+        <Link to={`/platforms/${platform.nickname}`}>
+          {platform.nickname}
+        </Link>}
       </p>
       <p>
         <b>date</b><br />
