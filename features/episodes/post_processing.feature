@@ -3,7 +3,7 @@ As a developer
 In order to edit some properties of the episode  
 I want to perform post-processing on the episode after it is created
 
-  @episode @images @post
+  @episode @images @post-processing
   Scenario: change image dimensions
     Given the platform nickname=nts
     And html for an episode
