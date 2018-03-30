@@ -1,0 +1,34 @@
+
+ul.menu,
+ol.menu {
+  list-style: none;
+  margin-left: 0;
+  padding-left:0;
+}
+
+.menu__item  {
+  position: relative;
+  padding: $size-s;
+  border: $colors-black solid 1px;
+  border-bottom: 0;
+  padding-right: 10%;
+  
+  &:last-child  {
+    border-bottom:  $colors-black solid 1px;
+  }
+  
+  a {
+    display: block;
+  }
+  
+  &__meta {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    width: 10%;
+    top:0;
+    right:0;
+    bottom: 0;
+  }
+}
+

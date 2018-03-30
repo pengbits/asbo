@@ -1,0 +1,25 @@
+
+body {  
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: $typography-body-text-size;
+  line-height: $typography-body-text-height;
+}
+
+html,body {
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+a {
+  color: $colors-black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
