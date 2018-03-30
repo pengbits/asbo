@@ -126,23 +126,20 @@ class Platform < ApplicationRecord
       return value
     end
     
-    rule = post_processing_rules.find {|r| r['name'] == prop }
-    if rule.nil?
-      return value
-    end
-    puts rule
-    # iterate over rule in case there are multiple transforms to apply..
-    value = rule.each.inject({}) do |outcome, (method,args)|
-      if(method != 'name')
-        if(post_processing_methods.include?(method))
-          puts "method = `#{method}` args = `#{args}`"
-          outcome = value.send(:gsub, *args)
-          puts outcome  
-          outcome
+    post_processing_rules.select {|r| r['name'] == prop }.each do |rule|
+      puts rule
+      # iterate over rule in case there are multiple transforms to apply..
+      value = rule.each.inject({}) do |outcome, (method,args)|
+        if(method != 'name')
+          if(post_processing_methods.include?(method))
+            puts "method = `#{method}` args = `#{args}`"
+            outcome = value.send(:gsub, *args)
+            puts outcome  
+            outcome
+          end
         end
       end
     end
-    
     value
   end
   
