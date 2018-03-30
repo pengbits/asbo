@@ -30,8 +30,7 @@ class EpisodeDetails extends Component {
         {name}
       </p>
       {image && (<p>
-        <b>image</b><br />
-        {image}
+        <img className='episode-image' src={image} />
       </p>)}
       <p>
         <b>platform</b><br />
