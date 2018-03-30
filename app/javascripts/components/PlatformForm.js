@@ -23,7 +23,7 @@ class PlatformForm extends Component {
           <TextInput name='default_image' />
           <AttributeMap 
             parent='attr_map' 
-            attrs='item,name,image,media,date_str'
+            attrs='item,name,image,media,date_str,details'
           />
           <AttributeMap 
             parent='pagination' 
