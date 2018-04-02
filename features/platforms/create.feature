@@ -11,7 +11,7 @@ Feature: Add a Platform
     When I save it
     Then I should see the new platform in the list
 
-  @platform @http @post
+  @platform @http @post @create
   Scenario: Add a Platform via POST
     When I make a POST request to platforms endpoint with valid JSON
     """
@@ -23,5 +23,5 @@ Feature: Add a Platform
       }
     }
     """
-    Then I should get a valid response containing the platform
+    Then I should get a valid response for the created platform
       
