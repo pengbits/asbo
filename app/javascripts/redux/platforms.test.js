@@ -1,5 +1,6 @@
 import * as p from './platforms';
-import API from '../__mocks__/api'
+import API from '../api'
+jest.mock('../api')
 
 const reducer = p.reducer;
 
