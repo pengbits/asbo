@@ -13,7 +13,10 @@ class Episode < ApplicationRecord
   end
   
   def as_json(opts={})
-    super(opts.merge({:except => [:created_at,:updated_at]}))
+    super(opts.merge({
+      :except => [:created_at,:updated_at],
+      :include => {platform: {only: Platform::attributes_minimal_list}}
+    }))
   end
   
   def parse_date
@@ -32,6 +35,10 @@ class Episode < ApplicationRecord
       return Date.strptime(str, date_format)
     rescue
     end    
+  end
+  
+  def with_platform_minimal
+    platform.attributes_minimal
   end
   
   private

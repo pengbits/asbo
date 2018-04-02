@@ -9,9 +9,12 @@ class Platform < ApplicationRecord
   validates :url, presence: true
   
   attr_reader :client
+  def self.attributes_minimal_list
+    ["id","nickname"]
+  end
   
   def attributes_minimal
-    attributes.slice("id","nickname")
+    attributes.slice(*Platform::attributes_minimal_list)
   end
 
   def initialize(opts={})
@@ -133,10 +136,7 @@ class Platform < ApplicationRecord
         if(method != 'name')
           if(!value.nil?)
             if(post_processing_methods.include?(method))
-              puts "apply rule for #{prop}: #{method}(#{value}, #{args})"
-              outcome = value.send(:gsub, *args)
-              puts outcome  
-              outcome
+              value.send(:gsub, *args)
             end
           end
         end
