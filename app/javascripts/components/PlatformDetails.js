@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropertyMapReadOnly from './PropertyMapReadOnly'
 import Hint from './Hints.js'
-import EpisodeListItem from './EpisodeListItem'
+import EpisodeGrid from './EpisodeGrid'
 
 class PlatformDetails extends Component {
   render() {
@@ -52,11 +52,14 @@ class PlatformDetails extends Component {
         {default_image}
       </p>
       <p>
+        <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
+      </p>
+      <p>
         <b>Episodes</b>{' '}{this.refreshButton()}
       </p>
       <p>
         {episodes.length || "none"}<br />
-        {episodes.length && this.episodeList()}
+        {episodes.length && this.episodeGrid()}
       </p>
       <p>
         &nbsp;
@@ -75,12 +78,8 @@ class PlatformDetails extends Component {
     </button>)
   }
   
-  episodeList(){
-    const {episodes} = this.props
-    
-    return (<ul className='menu'>
-      {episodes.map(e => <EpisodeListItem {...e} key={e.id} />)}
-    </ul>)
+  episodeGrid(){
+    return <EpisodeGrid episodes={this.props.episodes} />
   }
   
   refreshPlatform(){

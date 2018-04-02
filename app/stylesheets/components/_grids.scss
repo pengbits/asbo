@@ -35,17 +35,25 @@ $grid-size : ($size-xl - $size-xs) * 2;
   position: relative;
   height: 100%;
   width: 100%;
+  color: $colors-black;
+
+  &__title,
+  &__date {
+    position: absolute;
+    background: $colors-white;   
+    
+    .episode-tile:hover & {
+      text-decoration: underline;
+    } 
+  }
   
   &__title {
     @extend .h5;
-    position: absolute;
     bottom: $size-s;  
-    background: $colors-white;
   }
   
   &__date {
     @extend .h6;
-    position: absolute;
     bottom: - $size-xs;
     background: $colors-white;    
   }
