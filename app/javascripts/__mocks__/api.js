@@ -80,8 +80,23 @@ const platforms = [{
 
 const MockAPI = class {
   getPlatforms() {
+    console.log(`API.fetch /platforms`)
     return new Promise((resolve,reject) => {
-      setTimeout(resolve, 125, platforms)
+      setTimeout(resolve, 0, platforms)
+    })
+  }
+  
+  getPlatform({nickname}){
+    console.log(`API.fetch /platforms/${nickname}`)
+    const platform = platforms.find(p => p.nickname == nickname)
+    return new Promise((resolve,reject) => {
+      if(!!platform) {
+        setTimeout(resolve, 0, platform)
+      } else {
+        setTimeout(reject, 0, {
+          'error' : `Platform with nickname ${nickname} not found`
+        })
+      }
     })
   }
 }
