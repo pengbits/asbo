@@ -6,6 +6,7 @@
   "scripts": {
     "start": "echo 'que paso'",
     "dev": "webpack-dev-server",
+    "test" : "jest --watch --verbose",
     "build": "webpack"
   },
   "repository": {
@@ -31,6 +32,8 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "^3.0.7",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "^22.4.3",
+    "jest-babel": "^1.0.1",
     "neutrino": "^8.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -54,5 +57,10 @@
     "normalize.css": "^8.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "node_modules"
+    ]
   }
 }
