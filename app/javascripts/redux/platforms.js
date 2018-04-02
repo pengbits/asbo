@@ -105,7 +105,8 @@ export const initialState = {
   platform  : null,
   loading: false
 }
-export default function reducer(state=initialState, action={}){
+
+export const reducer = function(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
@@ -152,3 +153,4 @@ export default function reducer(state=initialState, action={}){
     break
   }
 }
+export default reducer
