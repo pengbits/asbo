@@ -1,16 +1,11 @@
+jest.mock('../api')
+
 // mock store setup
-import promiseMiddleware from 'redux-promise-middleware'
-import configureStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-const middlewares = [promiseMiddleware(),thunk] // add your middlewares like `redux-thunk`
-const mockStore = configureStore(middlewares)
+import mockStore from './mockStore' ;
 
 // load application code & mock the api
-import * as p from './platforms';
+import * as p from '../redux/platforms';
 const reducer = p.reducer;
-const {initialState} = p.reducer;
-import API from '../api'
-jest.mock('../api')
 
 // utils
 import {expectActions,resultingState} from './test-utils'
