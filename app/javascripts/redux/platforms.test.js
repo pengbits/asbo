@@ -8,6 +8,7 @@ const mockStore = configureStore(middlewares)
 // load application code & mock the api
 import * as p from './platforms';
 const reducer = p.reducer;
+const {initialState} = p.reducer;
 import API from '../api'
 jest.mock('../api')
 
@@ -19,27 +20,35 @@ const expectActions = (store, expected) => {
   expect(actions.map(a => a.type)).toEqual(expected);  
 }
 
+
 // begin tests
 describe('Platforms', () => {
   describe('platforms#index json', () => {
     it('is empty at startup', () => {
-      expect(p.initialState.platforms).toHaveLength(0)
+      expect(reducer().platforms).toHaveLength(0)
     })
     
-    it('contains some platforms in list after fetch', async () => {
-      const store = mockStore({});
+    it('dispatches an action to fetch the list of platforms', async () => {
+      const store = mockStore({})
       return store.dispatch(p.loadPlatforms())
-        .then(() => expectActions(store, [
+      .then(() => {
+        expectActions(store, [
           "LOAD_PLATFORMS_PENDING",
           "LOAD_PLATFORMS_FULFILLED"
-        ]))
+        ]);
+          
+        const readyState = reducer({}, store.getActions()[1])
+        const {length} = readyState.platforms;
+        console.log(`found ${length} platforms`)
+        expect(length).toBeGreaterThan(0)
+
+      })
   })
   
   describe('platforms#show json', () => {
-    it('contains a valid platform', () => {
+    it('dispatches an action to get the platform entry', () => {
       const store = mockStore({})
-      const action = p.loadPlatform({'nickname':'nts'});
-      return store.dispatch(action)
+      return store.dispatch(p.loadPlatform({'nickname':'nts'}))
         .then(() => expectActions(store, [
           "LOAD_PLATFORM_PENDING",
           "LOAD_PLATFORM_FULFILLED"
