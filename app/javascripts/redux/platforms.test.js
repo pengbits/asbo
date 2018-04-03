@@ -20,6 +20,11 @@ const expectActions = (store, expected) => {
   expect(actions.map(a => a.type)).toEqual(expected);  
 }
 
+// return state after running last action in list
+const resultingState = (store, state=null) => {
+  const actions = store.getActions().slice(0)
+  return reducer(state, actions.pop())  
+}
 
 // begin tests
 describe('Platforms', () => {
@@ -40,8 +45,7 @@ describe('Platforms', () => {
         ]);
         
         // and now look at the store to inspect its state.
-        const readyState = reducer(null, store.getActions()[1])
-        expect( readyState.platforms.length).toBeGreaterThan(0)
+        expect(resultingState(store).platforms.length).toBeGreaterThan(0)
       })
     })
   })
@@ -57,9 +61,9 @@ describe('Platforms', () => {
           "LOAD_PLATFORM_FULFILLED"
         ]);
         
-        const readyState = reducer(null, store.getActions()[1])
-        expect( readyState.platform).toBeTruthy()
-        expect( readyState.platform.nickname).toEqual(opts.nickname)
+        const state = resultingState(store)
+        expect(state.platform).toBeTruthy()
+        expect(state.platform.nickname).toEqual(opts.nickname)
       })
     })
   })
