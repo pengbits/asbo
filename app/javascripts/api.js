@@ -1,4 +1,3 @@
-
 class API {
   getPlatforms(){
     return this.get()
