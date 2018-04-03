@@ -23,6 +23,27 @@ const MockAPI = class {
     })
   }
   
+  // faking the refresh by cherry-picking episodes w/ same id
+  // and merging into the platform... this is so different from real implemntation
+  // that i wonder what value these tests even have? 
+  refreshPlatform({nickname}){
+    console.log(`API.fetch /episodes/${nickname}/refresh`)
+    const platform = platforms.find(p => p.nickname == nickname)
+    return new Promise((resolve,reject) => {
+      if(!platform) {
+        setTimeout(reject, 0, {
+          'error' : `Platform with nickname ${nickname} not found`
+        })
+      } else {
+        const platformEpisodes = episodes.filter(e => e.platform_id == platform.id)
+        setTimeout(resolve, 0, {
+          ...platform, episodes: platformEpisodes
+        })
+      }
+    })
+    
+  }
+  
   getEpisodes() {
     console.log(`API.fetch /episodes`)
     return new Promise((resolve,reject) => {

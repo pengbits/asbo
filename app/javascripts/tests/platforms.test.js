@@ -51,4 +51,21 @@ describe('Platforms', () => {
       })
     })
   })
+  
+  describe('platforms#refresh', () => {
+    it('dispatches actions for the referesh, and the list off episodes is updated', async () => {
+      const store = mockStore({})
+      const opts = {'nickname':'rinse'}
+      await store.dispatch(p.refreshPlatform(opts))
+        .then(() => {
+          expectActions(store, [
+            `${p.REFRESH_PLATFORM}_PENDING`,
+            `${p.REFRESH_PLATFORM}_FULFILLED`,
+          ])
+        })
+        
+        const state = resultingState(store, reducer)
+        console.log(state)
+    })
+  })
 })
