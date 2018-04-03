@@ -34,7 +34,7 @@ export const initialState = {
   loading: false
 }
 
-export default function reducer(state=initialState, action={}){
+export const reducer = (state=initialState, action={}) => {
   switch(action.type){
     case `${LOAD_EPISODES}_PENDING`:
     case `${LOAD_EPISODE}_PENDING`:
@@ -69,3 +69,5 @@ export default function reducer(state=initialState, action={}){
     break
   }
 }
+
+export default reducer

@@ -6,9 +6,8 @@ const middlewares = [promiseMiddleware(),thunk] // add your middlewares like `re
 const mockStore = configureStore(middlewares)
 
 // load application code & mock the api
-import * as p from './platforms';
-const reducer = p.reducer;
-const {initialState} = p.reducer;
+import * as e from './episodes';
+const reducer = e.reducer;
 import API from '../api'
 jest.mock('../api')
 
@@ -27,43 +26,42 @@ const resultingState = (store, state=null) => {
 }
 
 // begin tests
-describe('Platforms', () => {
-  describe('platforms#index', () => {
+describe('Episodes', () => {
+  describe('episodes#index', () => {
     it('is empty at startup', () => {
-      expect(reducer().platforms).toHaveLength(0)
+      expect(reducer().episodes).toHaveLength(0)
     })
     
-    it('dispatches an action to fetch the list of platforms', async () => {
+    it('dispatches an action to fetch the list of episodes', async () => {
       const store = mockStore({});
-      await store.dispatch(p.loadPlatforms())
+      await store.dispatch(e.loadEpisodes())
       .then(() => {
         // we expect to see the _PENDING and the _FULFILLED form 
         // of any async action that's fired succesfully
         expectActions(store, [
-          "LOAD_PLATFORMS_PENDING",
-          "LOAD_PLATFORMS_FULFILLED"
+          "LOAD_EPISODES_PENDING",
+          "LOAD_EPISODES_FULFILLED"
         ]);
         
         // and now look at the store to inspect its state.
-        expect(resultingState(store).platforms.length).toBeGreaterThan(0)
+        expect(resultingState(store).episodes.length).toBeGreaterThan(0)
       })
     })
   })
-  
-  describe('platforms#show', () => {
-    it('dispatches an action to get the platform entry', async () => {
+  describe('episodes#show', () => {
+    it('dispatches an action to get the episode entry', async () => {
       const store = mockStore({})
-      const opts = {'nickname':'nts'}
-      await store.dispatch(p.loadPlatform(opts))
+      const opts = {'id':'1960'}
+      await store.dispatch(e.loadEpisode(opts))
       .then(() => {
         expectActions(store, [
-          "LOAD_PLATFORM_PENDING",
-          "LOAD_PLATFORM_FULFILLED"
+          "LOAD_EPISODE_PENDING",
+          "LOAD_EPISODE_FULFILLED"
         ]);
         
         const state = resultingState(store)
-        expect(state.platform).toBeTruthy()
-        expect(state.platform.nickname).toEqual(opts.nickname)
+        expect(state.episode).toBeTruthy()
+        // expect(state.episode.id).toEqual(opts.id)
       })
     })
   })
