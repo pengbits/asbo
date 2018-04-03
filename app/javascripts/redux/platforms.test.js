@@ -11,6 +11,14 @@ const reducer = p.reducer;
 import API from '../api'
 jest.mock('../api')
 
+
+// helpers
+const expectActions = (store, expected) => {
+  const actions = store.getActions();
+  expect(actions).toHaveLength(expected.length)
+  expect(actions.map(a => a.type)).toEqual(expected);  
+}
+
 // begin tests
 describe('Platforms', () => {
   describe('platforms#index json', () => {
@@ -19,28 +27,24 @@ describe('Platforms', () => {
     })
     
     it('contains some platforms in list after fetch', async () => {
-      const data = await API.getPlatforms()
-      expect(data).toHaveLength(3)
-      // const {platforms} = await
-      // const action = p.loadPlatforms();
-      // const state  = reducer({}, action)
-      
-    })
+      const store = mockStore({});
+      return store.dispatch(p.loadPlatforms())
+        .then(() => expectActions(store, [
+          "LOAD_PLATFORMS_PENDING",
+          "LOAD_PLATFORMS_FULFILLED"
+        ]))
   })
   
-  describe('platforms#show js', () => {
-    it('contains a valid platform', async () => {
+  describe('platforms#show json', () => {
+    it('contains a valid platform', () => {
       const store = mockStore({})
       const action = p.loadPlatform({'nickname':'nts'});
       return store.dispatch(action)
-        .then(() => {
-            const actions = store.getActions()
-            expect(actions).toHaveLength(2)
-            expect(actions.map(a => a.type)).toEqual([
-              "LOAD_PLATFORM_PENDING",
-              "LOAD_PLATFORM_FULFILLED"
-            ])
-        })
+        .then(() => expectActions(store, [
+          "LOAD_PLATFORM_PENDING",
+          "LOAD_PLATFORM_FULFILLED"
+        ]))
+      })
     })
   })
 })
