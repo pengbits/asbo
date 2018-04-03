@@ -12,19 +12,8 @@ const {initialState} = p.reducer;
 import API from '../api'
 jest.mock('../api')
 
-
-// helpers
-const expectActions = (store, expected) => {
-  const actions = store.getActions();
-  expect(actions).toHaveLength(expected.length)
-  expect(actions.map(a => a.type)).toEqual(expected);  
-}
-
-// return state after running last action in list
-const resultingState = (store, state=null) => {
-  const actions = store.getActions().slice(0)
-  return reducer(state, actions.pop())  
-}
+// utils
+import {expectActions,resultingState} from './test-utils'
 
 // begin tests
 describe('Platforms', () => {
@@ -45,7 +34,7 @@ describe('Platforms', () => {
         ]);
         
         // and now look at the store to inspect its state.
-        expect(resultingState(store).platforms.length).toBeGreaterThan(0)
+        expect(resultingState(store, reducer).platforms.length).toBeGreaterThan(0)
       })
     })
   })
@@ -61,7 +50,7 @@ describe('Platforms', () => {
           "LOAD_PLATFORM_FULFILLED"
         ]);
         
-        const state = resultingState(store)
+        const state = resultingState(store, reducer)
         expect(state.platform).toBeTruthy()
         expect(state.platform.nickname).toEqual(opts.nickname)
       })

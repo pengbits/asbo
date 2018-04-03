@@ -11,19 +11,9 @@ const reducer = e.reducer;
 import API from '../api'
 jest.mock('../api')
 
+// utils
+import {expectActions,resultingState} from './test-utils'
 
-// helpers
-const expectActions = (store, expected) => {
-  const actions = store.getActions();
-  expect(actions).toHaveLength(expected.length)
-  expect(actions.map(a => a.type)).toEqual(expected);  
-}
-
-// return state after running last action in list
-const resultingState = (store, state=null) => {
-  const actions = store.getActions().slice(0)
-  return reducer(state, actions.pop())  
-}
 
 // begin tests
 describe('Episodes', () => {
@@ -43,7 +33,7 @@ describe('Episodes', () => {
         ]);
         
         // and now look at the store to inspect its state.
-        expect(resultingState(store).episodes.length).toBeGreaterThan(0)
+        expect(resultingState(store, reducer).episodes.length).toBeGreaterThan(0)
       })
     })
   })
@@ -59,7 +49,7 @@ describe('Episodes', () => {
           "LOAD_EPISODE_FULFILLED"
         ]);
         
-        const state = resultingState(store)
+        const state = resultingState(store, reducer)
         expect(state.episode).toBeTruthy()
         // expect(state.episode.id).toEqual(opts.id)
       })
