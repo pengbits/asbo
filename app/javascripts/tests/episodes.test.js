@@ -8,7 +8,7 @@ import * as e from '../redux/episodes';
 const reducer = e.reducer;
 
 // utils
-import {expectActions,resultingState} from './test-utils'
+import {expectActions,resultingState} from './utils'
 
 // begin tests
 describe('Episodes', () => {

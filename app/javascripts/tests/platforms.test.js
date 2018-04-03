@@ -8,7 +8,7 @@ import * as p from '../redux/platforms';
 const reducer = p.reducer;
 
 // utils
-import {expectActions,resultingState} from './test-utils'
+import {expectActions,resultingState} from './utils'
 
 // begin tests
 describe('Platforms', () => {
