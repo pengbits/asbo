@@ -1,19 +1,20 @@
+import platforms from './platforms'
 import episodes from './episodes'
 
 const MockAPI = class {
   getPlatforms() {
-    console.log(`API.fetch /episodes`)
+    console.log(`API.fetch /platforms`)
     return new Promise((resolve,reject) => {
-      setTimeout(resolve, 0, episodes)
+      setTimeout(resolve, 0, platforms)
     })
   }
   
   getPlatform({nickname}){
     console.log(`API.fetch /episodes/${nickname}`)
-    const episode = episodes.find(p => p.nickname == nickname)
+    const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
-      if(!!episode) {
-        setTimeout(resolve, 0, episode)
+      if(!!platform) {
+        setTimeout(resolve, 0, platform)
       } else {
         setTimeout(reject, 0, {
           'error' : `Platform with nickname ${nickname} not found`

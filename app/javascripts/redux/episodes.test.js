@@ -36,6 +36,7 @@ describe('Episodes', () => {
       const store = mockStore({});
       await store.dispatch(e.loadEpisodes())
       .then(() => {
+
         expectActions(store, [
           "LOAD_EPISODES_PENDING",
           "LOAD_EPISODES_FULFILLED"
