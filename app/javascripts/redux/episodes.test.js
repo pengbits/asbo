@@ -36,8 +36,6 @@ describe('Episodes', () => {
       const store = mockStore({});
       await store.dispatch(e.loadEpisodes())
       .then(() => {
-        // we expect to see the _PENDING and the _FULFILLED form 
-        // of any async action that's fired succesfully
         expectActions(store, [
           "LOAD_EPISODES_PENDING",
           "LOAD_EPISODES_FULFILLED"
@@ -48,6 +46,7 @@ describe('Episodes', () => {
       })
     })
   })
+  
   describe('episodes#show', () => {
     it('dispatches an action to get the episode entry', async () => {
       const store = mockStore({})
