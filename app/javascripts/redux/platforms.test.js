@@ -29,30 +29,37 @@ describe('Platforms', () => {
     })
     
     it('dispatches an action to fetch the list of platforms', async () => {
-      const store = mockStore({})
-      return store.dispatch(p.loadPlatforms())
+      const store = mockStore({});
+      await store.dispatch(p.loadPlatforms())
       .then(() => {
+        // we expect to see the _PENDING and the _FULFILLED form 
+        // of any async action that's fired succesfully
         expectActions(store, [
           "LOAD_PLATFORMS_PENDING",
           "LOAD_PLATFORMS_FULFILLED"
         ]);
-          
-        const readyState = reducer({}, store.getActions()[1])
-        const {length} = readyState.platforms;
-        console.log(`found ${length} platforms`)
-        expect(length).toBeGreaterThan(0)
-
+        
+        // and now look at the store to inspect its state.
+        const readyState = reducer(null, store.getActions()[1])
+        expect( readyState.platforms.length).toBeGreaterThan(0)
       })
+    })
   })
   
   describe('platforms#show json', () => {
-    it('dispatches an action to get the platform entry', () => {
+    it('dispatches an action to get the platform entry', async () => {
       const store = mockStore({})
-      return store.dispatch(p.loadPlatform({'nickname':'nts'}))
-        .then(() => expectActions(store, [
+      const opts = {'nickname':'nts'}
+      await store.dispatch(p.loadPlatform(opts))
+      .then(() => {
+        expectActions(store, [
           "LOAD_PLATFORM_PENDING",
           "LOAD_PLATFORM_FULFILLED"
-        ]))
+        ]);
+        
+        const readyState = reducer(null, store.getActions()[1])
+        expect( readyState.platform).toBeTruthy()
+        expect( readyState.platform.nickname).toEqual(opts.nickname)
       })
     })
   })
