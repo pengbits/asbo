@@ -1,29 +1,50 @@
+// mock store setup
+import promiseMiddleware from 'redux-promise-middleware'
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+const middlewares = [promiseMiddleware(),thunk] // add your middlewares like `redux-thunk`
+const mockStore = configureStore(middlewares)
+
+// load application code & mock the api
 import * as p from './platforms';
+const reducer = p.reducer;
 import API from '../api'
 jest.mock('../api')
 
-const reducer = p.reducer;
 
+// helpers
+const expectActions = (store, expected) => {
+  const actions = store.getActions();
+  expect(actions).toHaveLength(expected.length)
+  expect(actions.map(a => a.type)).toEqual(expected);  
+}
+
+// begin tests
 describe('Platforms', () => {
-  describe('platforms#index', () => {
-    test('there are no platforms in list at startup', () => {
+  describe('platforms#index json', () => {
+    it('is empty at startup', () => {
       expect(p.initialState.platforms).toHaveLength(0)
     })
     
-    test('there are some platforms in list after fetch', async () => {
-      const data = await API.getPlatforms()
-      expect(data).toHaveLength(3)
-      // const {platforms} = await
-      // const action = p.loadPlatforms();
-      // const state  = reducer({}, action)
-      
-    })
+    it('contains some platforms in list after fetch', async () => {
+      const store = mockStore({});
+      return store.dispatch(p.loadPlatforms())
+        .then(() => expectActions(store, [
+          "LOAD_PLATFORMS_PENDING",
+          "LOAD_PLATFORMS_FULFILLED"
+        ]))
   })
   
-  describe('platforms#show', () => {
-    test('returns a valid platform', async () => {
-      const data = await API.getPlatform({nickname:'nts'})
-      expect(data).toBeTruthy()
+  describe('platforms#show json', () => {
+    it('contains a valid platform', () => {
+      const store = mockStore({})
+      const action = p.loadPlatform({'nickname':'nts'});
+      return store.dispatch(action)
+        .then(() => expectActions(store, [
+          "LOAD_PLATFORM_PENDING",
+          "LOAD_PLATFORM_FULFILLED"
+        ]))
+      })
     })
   })
 })

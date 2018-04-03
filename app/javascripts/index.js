@@ -32,6 +32,8 @@ import rootReducer from './redux'
 // init history
 const history = createHistory()
 
+// TODO prolly need to extract store setup and move elsewhere,
+// perhaps alongside similar setup for a mockstore?
 // init dev tools & store
 const k = '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__';
 const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE','@@redux-form']} // these get noisy
