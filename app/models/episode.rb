@@ -41,6 +41,10 @@ class Episode < ApplicationRecord
     platform.attributes_minimal
   end
   
+  def details_absolute
+    details.nil? ? nil : "#{platform.absolute_prefix}#{details}"
+  end
+  
   private
   def media_or_details_present
     if media.to_s.empty? and details.to_s.empty?

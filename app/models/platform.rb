@@ -153,10 +153,14 @@ class Platform < ApplicationRecord
   end
   
   def image_base
+    return use_relative_images ? absolute_prefix : ''
+  end
+  
+  def absolute_prefix
     uri    = URI(url)
     scheme = uri.scheme
     host   = uri.host
-    return use_relative_images ? "#{scheme}://#{host}" : ''
+    "#{scheme}://#{host}" 
   end
   
   def refresh(opts={})
