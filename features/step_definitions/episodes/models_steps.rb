@@ -14,6 +14,7 @@ When(/I load the episode endpoint with a (good|bad) id/) do |mode|
 end
 
 Then("the response should be a JSON representation of the episode") do
+  puts @response
   expect(@response).to include(@ep.to_json)
 end
 

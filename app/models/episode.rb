@@ -15,6 +15,7 @@ class Episode < ApplicationRecord
   def as_json(opts={})
     super(opts.merge({
       :except => [:created_at,:updated_at],
+      :methods => [:details_absolute],
       :include => {platform: {only: Platform::attributes_minimal_list}}
     }))
   end
