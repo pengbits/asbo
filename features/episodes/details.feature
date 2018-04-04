@@ -15,7 +15,7 @@ Scenario: a platform with has_details=true will include a details url in episode
   When I parse the html
   Then the platform will contain an episode with this url
   """
-  /shows/grandmixxer/episodes/grandmixxer-22nd-february-2018
+  https://www.nts.live/shows/grandmixxer/episodes/grandmixxer-22nd-february-2018
   """
 
 @details

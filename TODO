@@ -2,6 +2,5 @@ POST PROCESSING
 - need to expose rules in form and add ability to edit/save
 
 MISC
-- radar radio eps have lost their details node
 - alls well now, but we need tests around changing models/out of date seeds
 
