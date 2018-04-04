@@ -12,7 +12,7 @@ class EpisodeDetails extends Component {
       loading,
       error,
       media,
-      details
+      details_absolute
     } = this.props
     
     if(loading){
@@ -52,8 +52,8 @@ class EpisodeDetails extends Component {
         <a href={media.url}>{media.url}</a>
       </p>)}
       
-      {details && (<p><b>details url</b><br />
-        <a href={details}>{details}</a>
+      {details_absolute && (<p><b>details url</b><br />
+        <a href={details_absolute}>{details_absolute}</a>
       </p>)}
   
       <p>

@@ -48,7 +48,7 @@ module PlatformData
       id: "3",
       name: "radar radio",
       nickname: "radar",
-      url: "http://www.radarradio.com/podcasts",
+      url: "https://www.radarradio.com/podcasts",
       date_format: "%e %b",
       has_details: true,
       use_relative_images: true,

@@ -15,6 +15,7 @@ class Episode < ApplicationRecord
   def as_json(opts={})
     super(opts.merge({
       :except => [:created_at,:updated_at],
+      :methods => [:details_absolute],
       :include => {platform: {only: Platform::attributes_minimal_list}}
     }))
   end
@@ -39,6 +40,10 @@ class Episode < ApplicationRecord
   
   def with_platform_minimal
     platform.attributes_minimal
+  end
+  
+  def details_absolute
+    details.nil? ? nil : "#{platform.absolute_prefix}#{details}"
   end
   
   private
