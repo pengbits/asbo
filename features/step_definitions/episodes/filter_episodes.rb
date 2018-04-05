@@ -18,7 +18,7 @@ Then("it should include some episodes with the search term in their name") do
 end
 
 Given("using a filter parameter {string}") do |param|
-  @filter = param
+  @filter = param.downcase!
 end
 
 When("I load the episodes endpoint") do

@@ -1,4 +1,5 @@
 jest.mock('../api')
+import mock_episodes from '../__mocks__/episodes';
 
 // mock store setup
 import mockStore from './mockStore' ;
@@ -13,6 +14,7 @@ import {expectActions,resultingState} from './utils'
 // begin tests
 describe('Episodes', () => {
   describe('episodes#index', () => {
+    
     it('is empty at startup', () => {
       expect(reducer().episodes).toHaveLength(0)
     })
@@ -30,6 +32,19 @@ describe('Episodes', () => {
         // and now look at the store to inspect its state.
         expect(resultingState(store, reducer).episodes.length).toBeGreaterThan(0)
       })
+    })
+    
+    it('setting a filter', async () => {
+      const filter  = 'sound'
+      const action1 = e.setFilter(filter)
+      const store   = mockStore();
+      
+      await store.dispatch(e.loadEpisodes({filter}))
+        .then(() => {
+          const {episodes} = resultingState(store, reducer)
+          // expect(results)
+          expect(episodes.length).not.toEqual(mock_episodes.length)
+        })
     })
   })
   

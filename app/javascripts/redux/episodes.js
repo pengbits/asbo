@@ -7,10 +7,10 @@ export const LOAD_EPISODE  = 'LOAD_EPISODE'
 export const SET_FILTER    = 'SET_FILTER'
  
 // actions
-export const loadEpisodes = function(){
+export const loadEpisodes = function(opts={}){
   return {
     type: LOAD_EPISODES,
-    payload: API.getEpisodes().then(json => {
+    payload: API.getEpisodes(opts).then(json => {
       return {
         episodes: json.slice(0)
       }
@@ -66,6 +66,13 @@ export const reducer = (state=initialState, action={}) => {
         ...state,
         loading: false,
         episode: action.payload.episode
+      }
+      
+    case SET_FILTER:
+      const filter = action.payload;
+      return {
+        ...state,
+        filter
       }
 
     default: 
