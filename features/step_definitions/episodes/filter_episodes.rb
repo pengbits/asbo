@@ -30,6 +30,7 @@ end
 
 Then("the response should include some episodes with the search term in their name") do
   @filtered = JSON.parse(@response)
+  puts @filtered
   puts "found these episodes: '%s' " % @filtered.collect{|ep| ep['name'] }.join("', '")
   expect(@filtered.length).not_to eq(@episodes.length)
   expect(@filtered.length).to be > 0
