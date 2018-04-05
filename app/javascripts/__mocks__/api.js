@@ -44,10 +44,16 @@ const MockAPI = class {
     
   }
   
-  getEpisodes() {
-    console.log(`API.fetch /episodes`)
+  getEpisodes(opts={}) {
     return new Promise((resolve,reject) => {
-      setTimeout(resolve, 0, episodes)
+      const results = !!opts.filter ? 
+        episodes.filter(e => {
+          const isMatch = e.name.toLowerCase().indexOf(opts.filter.toLowerCase()) > -1
+          return isMatch
+        }) : episodes
+      ;
+      
+      setTimeout(resolve, 0, results)
     })
   }
   

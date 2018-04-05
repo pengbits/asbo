@@ -35,15 +35,16 @@ describe('Episodes', () => {
     })
     
     it('setting a filter', async () => {
-      const filter  = 'sound'
+      const filter  = 'takeover'
       const action1 = e.setFilter(filter)
       const store   = mockStore();
       
       await store.dispatch(e.loadEpisodes({filter}))
         .then(() => {
           const {episodes} = resultingState(store, reducer)
-          // expect(results)
-          expect(episodes.length).not.toEqual(mock_episodes.length)
+          // console.log(episodes.map(ep => ep.name))
+          expect(episodes.length).toBeLessThan(mock_episodes.length)
+          expect(episodes.length).toBeGreaterThan(0)
         })
     })
   })
