@@ -2,9 +2,10 @@ import {createAction,createActions,handleActions} from 'redux-actions'
 import API  from '../api'
 
 // constants
-export const LOAD_EPISODES   = 'LOAD_EPISODES'
-export const LOAD_EPISODE    = 'LOAD_EPISODE'
-
+export const LOAD_EPISODES = 'LOAD_EPISODES'
+export const LOAD_EPISODE  = 'LOAD_EPISODE'
+export const SET_FILTER    = 'SET_FILTER'
+ 
 // actions
 export const loadEpisodes = function(){
   return {
@@ -27,11 +28,14 @@ export const loadEpisode = function({id}){
   }
 }
 
+export const setFilter = createAction(SET_FILTER)
+
 
 export const initialState = {
   episodes : [],
   episode  : null,
-  loading: false
+  filter   : null,
+  loading  : false
 }
 
 export const reducer = (state=initialState, action={}) => {
