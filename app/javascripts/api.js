@@ -1,3 +1,8 @@
+
+// todo
+// should we scrap this and the mock api class at __mocks__/api,
+// and just use axios + moxios or similar right in the reducer?
+
 class API {
   getPlatforms(){
     return this.get()

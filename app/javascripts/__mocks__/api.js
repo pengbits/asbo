@@ -1,6 +1,9 @@
 import platforms from './platforms'
 import episodes from './episodes'
 
+// todo
+// should we scrap this and the 'real' api class above,
+// and just use axios + moxios or similar right in the reducer?
 const MockAPI = class {
   getPlatforms() {
     console.log(`API.fetch /platforms`)
@@ -24,8 +27,9 @@ const MockAPI = class {
   }
   
   // faking the refresh by cherry-picking episodes w/ same id
-  // and merging into the platform... this is so different from real implemntation
-  // that i wonder what value these tests even have? 
+  // and merging into the platform... this is so different from real implementation
+  // that it's only valuable for testing the reducers, not any kind of integration
+  // and only good for that as long as the mock api is kept in sync w/ the real thing
   refreshPlatform({nickname}){
     console.log(`API.fetch /platforms/${nickname}/refresh`)
     const platform = platforms.find(p => p.nickname == nickname)
