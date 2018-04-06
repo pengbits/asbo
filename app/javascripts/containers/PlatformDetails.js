@@ -5,7 +5,11 @@ import {refreshPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform,loading,error} = state.platforms 
-  return {...platform,error,loading}
+  return {
+    ...platform,
+    error,
+    loading
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

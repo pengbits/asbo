@@ -95,6 +95,19 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
+// helpers
+const platformWithFilteredEpisodes = function(state, filter) {
+  const {episodes} = state;
+  const filtered = !!filter ? episodes.filter(e => {
+    return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+  }) : episodes.slice(0)
+  
+  return {
+    ...state,
+    episodes: filtered
+  }
+}
+
 // reducer
 // might want to look into somethinbg like type-to-reducer
 // https://github.com/tomatau/type-to-reducer
@@ -148,6 +161,13 @@ export const reducer = function(state=initialState, action={}){
         platform: {}
       }
     
+    // this probably needs to move to its own slice
+    case 'SET_FILTER':
+      return {
+        ...state,
+        platform: platformWithFilteredEpisodes(state.platform, action.payload)
+      }
+      
     default: 
       return state
     break

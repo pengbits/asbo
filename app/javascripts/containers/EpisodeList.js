@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {loadEpisodes} from '../redux/episodes'
 import EpisodeList from '../components/EpisodeList'
 
-
 const mapStateToProps = (state, ownProps) => {
   const {
     episodes,
@@ -18,7 +17,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
+  return {
+  }
 }
 
 const EpisodeListContainer = connect(

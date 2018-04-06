@@ -8,5 +8,6 @@ export const expectActions = (store, expected) => {
 // return state after running last action in list
 export const resultingState = (store, reducer, state=null) => {
   const actions = store.getActions().slice(0)
-  return reducer(state, actions.pop())  
+  const lastAction = actions.pop()
+  return reducer(state, lastAction)  
 }

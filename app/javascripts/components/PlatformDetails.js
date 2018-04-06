@@ -21,15 +21,12 @@ class PlatformDetails extends Component {
       episodes
     } = this.props
     
-    if(loading){
-      return <p>...</p> 
-    }
-    else if(error){
+    if(error){
       return <p  className='error'>An Error has occurred</p>
     }
     
     return ( 
-    <div className="platform-details">
+    <div className={`platform-details ${loading ? 'is-loading':''}`}>
       <h2 className='h2'>Platform</h2>
       <p>
         <b>name</b><br />
@@ -58,8 +55,7 @@ class PlatformDetails extends Component {
         <b>Episodes</b>{' '}{this.refreshButton()}
       </p>
       <p>
-        {episodes.length || "none"}<br />
-        {episodes.length && this.episodeGrid()}
+        {this.episodeGrid()}
       </p>
       <p>
         &nbsp;
@@ -79,7 +75,7 @@ class PlatformDetails extends Component {
   }
   
   episodeGrid(){
-    return <EpisodeGrid episodes={this.props.episodes} />
+    return <EpisodeGrid episodes={this.props.episodes || []} />
   }
   
   refreshPlatform(){

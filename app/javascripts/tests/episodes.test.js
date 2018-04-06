@@ -1,4 +1,5 @@
 jest.mock('../api')
+import mock_episodes from '../__mocks__/episodes';
 
 // mock store setup
 import mockStore from './mockStore' ;
@@ -13,6 +14,7 @@ import {expectActions,resultingState} from './utils'
 // begin tests
 describe('Episodes', () => {
   describe('episodes#index', () => {
+    
     it('is empty at startup', () => {
       expect(reducer().episodes).toHaveLength(0)
     })
@@ -30,6 +32,28 @@ describe('Episodes', () => {
         // and now look at the store to inspect its state.
         expect(resultingState(store, reducer).episodes.length).toBeGreaterThan(0)
       })
+    })
+    
+    it('setting a filter', async () => {
+      const filter = 'takeover'
+      const state = reducer({}, e.setFilter(filter))
+      const store = mockStore({})
+      await store.dispatch(e.setFilterAndFetch(filter))
+        .then(() => {
+          console.log('ready')
+          // const filteredState = resultingState(store, reducer)
+          // console.log(filteredState)
+          expectActions(store,[
+            'SET_FILTER',
+            'LOAD_EPISODES_PENDING',
+            'LOAD_EPISODES_FULFILLED'
+          ])
+          const result = resultingState(store, reducer, state)
+          console.log(result.episodes.map((ep) => ep.name))
+          expect(result.episodes.length).toBeLessThan(mock_episodes.length)
+          expect(result.episodes.length).toBeGreaterThan(0)
+          expect(result.filter).toBe(filter)
+        })
     })
   })
   

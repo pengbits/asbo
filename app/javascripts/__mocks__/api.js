@@ -10,7 +10,7 @@ const MockAPI = class {
   }
   
   getPlatform({nickname}){
-    console.log(`API.fetch /episodes/${nickname}`)
+    console.log(`API.fetch /platforms/${nickname}`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!!platform) {
@@ -27,7 +27,7 @@ const MockAPI = class {
   // and merging into the platform... this is so different from real implemntation
   // that i wonder what value these tests even have? 
   refreshPlatform({nickname}){
-    console.log(`API.fetch /episodes/${nickname}/refresh`)
+    console.log(`API.fetch /platforms/${nickname}/refresh`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -44,10 +44,17 @@ const MockAPI = class {
     
   }
   
-  getEpisodes() {
-    console.log(`API.fetch /episodes`)
+  getEpisodes(opts={}) {
+    console.log('API.fetch /episodes' + !!opts.filter ? `/filter/${opts.filter}` :'')
     return new Promise((resolve,reject) => {
-      setTimeout(resolve, 0, episodes)
+      const results = !!opts.filter ? 
+        episodes.filter(e => {
+          const isMatch = e.name.toLowerCase().indexOf(opts.filter.toLowerCase()) > -1
+          return isMatch
+        }) : episodes
+      ;
+      
+      setTimeout(resolve, 0, results)
     })
   }
   
