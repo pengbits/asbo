@@ -5,6 +5,7 @@ import mockStore from './mockStore' ;
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
+import * as e from '../redux/episodes';
 const reducer = p.reducer;
 
 // utils
@@ -64,8 +65,12 @@ describe('Platforms', () => {
           ])
         })
         
-        const state = resultingState(store, reducer)
-        console.log(state)
+        const result = resultingState(store, reducer)
+        expect(result.platform.episodes.length).toBeGreaterThan(0)
+        // now try filtering the Episodes
+        const filter = e.setFilter('takeover')
+        const filteredState = reducer(result, filter)
+        expect(filteredState.platform.episodes.length).toBeLessThan(result.platform.episodes.length)
     })
   })
 })

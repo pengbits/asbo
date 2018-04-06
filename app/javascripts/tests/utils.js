@@ -9,6 +9,5 @@ export const expectActions = (store, expected) => {
 export const resultingState = (store, reducer, state=null) => {
   const actions = store.getActions().slice(0)
   const lastAction = actions.pop()
-  console.log(`resultingState for ${lastAction.type}`)
   return reducer(state, lastAction)  
 }

@@ -1,5 +1,6 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
 import API  from '../api'
+import SET_FILTER from './episodes'
 
 // constants
 export const LOAD_PLATFORMS   = 'LOAD_PLATFORMS'
