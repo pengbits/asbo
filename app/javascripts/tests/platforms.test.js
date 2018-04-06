@@ -72,6 +72,7 @@ describe('Platforms', () => {
         // now try filtering the episodes within the same platform
         const filter = e.setFilter('takeover')
         const filteredCount = reducer(result, filter).platform.episodes.length
+        expect(filteredCount).toBeGreaterThan(0)
         expect(filteredCount).toBeLessThan(initialCount)
     })
   })

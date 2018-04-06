@@ -4,10 +4,9 @@ import PlatformDetails from '../components/PlatformDetails'
 import {refreshPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
-  const {platform,filteredEpisodes,loading,error} = state.platforms 
+  const {platform,loading,error} = state.platforms 
   return {
     ...platform,
-    episodes: filteredEpisodes || [],
     error,
     loading
   }

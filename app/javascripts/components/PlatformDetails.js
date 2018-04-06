@@ -55,8 +55,7 @@ class PlatformDetails extends Component {
         <b>Episodes</b>{' '}{this.refreshButton()}
       </p>
       <p>
-        {episodes.length || "none"}<br />
-        {episodes.length && this.episodeGrid()}
+        {this.episodeGrid()}
       </p>
       <p>
         &nbsp;
@@ -76,7 +75,7 @@ class PlatformDetails extends Component {
   }
   
   episodeGrid(){
-    return <EpisodeGrid episodes={this.props.episodes} />
+    return <EpisodeGrid episodes={this.props.episodes || []} />
   }
   
   refreshPlatform(){
