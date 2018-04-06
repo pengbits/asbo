@@ -8,6 +8,7 @@ export const SET_FILTER    = 'SET_FILTER'
  
 // actions
 export const loadEpisodes = function(opts={}){
+  console.log(`loadEpisodes ${opts.filter}`)
   return {
     type: LOAD_EPISODES,
     payload: API.getEpisodes(opts).then(json => {
@@ -28,9 +29,10 @@ export const loadEpisode = function({id}){
   }
 }
 
-export const setFilter = function(filter){
+export const setFilter = createAction(SET_FILTER)
+export const setFilterAndFetch = function(filter){
   return (dispatch, getState) => {
-    dispatch(createAction(SET_FILTER)(filter))
+    dispatch(setFilter(filter))
     return dispatch(loadEpisodes({filter}))
   }
 }
@@ -74,6 +76,7 @@ export const reducer = (state=initialState, action={}) => {
       }
       
     case SET_FILTER:
+      console.log('reducer => SET_FILTER')
       const filter = action.payload;
       return {
         ...state,

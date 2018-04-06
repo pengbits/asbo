@@ -35,20 +35,24 @@ describe('Episodes', () => {
     })
     
     it('setting a filter', async () => {
-      const filter  = 'takeover'
-      const store   = mockStore();
-      await store.dispatch(e.setFilter(filter))
+      const filter = 'takeover'
+      const state = reducer({}, e.setFilter(filter))
+      const store = mockStore({})
+      await store.dispatch(e.setFilterAndFetch(filter))
         .then(() => {
+          console.log('ready')
+          // const filteredState = resultingState(store, reducer)
+          // console.log(filteredState)
           expectActions(store,[
             'SET_FILTER',
             'LOAD_EPISODES_PENDING',
             'LOAD_EPISODES_FULFILLED'
           ])
-          
-          const {episodes} = resultingState(store, reducer)
-          console.log(episodes.map(ep => ep.name))
-          expect(episodes.length).toBeLessThan(mock_episodes.length)
-          expect(episodes.length).toBeGreaterThan(0)
+          const result = resultingState(store, reducer, state)
+          console.log(result.episodes.map((ep) => ep.name))
+          expect(result.episodes.length).toBeLessThan(mock_episodes.length)
+          expect(result.episodes.length).toBeGreaterThan(0)
+          expect(result.filter).toBe(filter)
         })
     })
   })

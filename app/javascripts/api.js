@@ -7,8 +7,8 @@ class API {
     return this.get(opts)
   }
   
-  getEpisodes(){
-    return this.get({'kind':'episode'})
+  getEpisodes(opts={}){
+    return this.get(Object.assign({}, opts, {kind:'episode'}))
   }
   
   getEpisode({id}){
@@ -109,7 +109,16 @@ class API {
   // this isn't scaling well!
   url(opts={}){
     const kind = opts.kind || 'platform'
-    return opts.nickname ? `/api/${kind}s/${opts.nickname}` : `/api/${kind}s`
+    let urlStr = `/api/${kind}s`
+    
+    if(opts.nickname && opts.kind == 'platform') {
+      urlStr += `/${opts.nickname}` 
+    }
+    
+    if(opts.filter && opts.kind == 'episode') {
+      urlStr += `/filter/${opts.filter}`
+    }
+    return urlStr
   }  
 }
 
