@@ -11,7 +11,7 @@ class EpisodeList extends Component {
   
   renderBody(){
     const {episodes,setFilter,loading} = this.props
-    return loading ? <p>...</p> : (<div>
+    return (<div className={loading ? 'is-loading':''}>
       <h2 className='h2'>Episodes</h2>
       <EpisodeGrid episodes={episodes} setFilter={setFilter} />
     </div>)

@@ -2,19 +2,22 @@ import React, {Component} from 'react'
 
 class EpisodeFilter extends Component {  
   render(){
+    const {filter} = this.props;
     return (<div className='filter'>
         <input 
           className='filter-input'
           type="text" 
           name='filter' 
           placeholder='filter'
-          onChange={this.onChange.bind(this)}
+          onChange={this.handleChange.bind(this)}
+          value={filter}
         />
     </div>)
   }
   
-  onChange(e) {
+  handleChange(e) {
     const filter = e.currentTarget.value
+    console.log(`handleChange`)
     const {setFilter} = this.props
     setFilter({filter})
   }
