@@ -31,7 +31,7 @@ export const loadEpisode = function({id}){
 export const setFilter = function(filter){
   return (dispatch, getState) => {
     dispatch(createAction(SET_FILTER)(filter))
-    return dispatch(loadEpisodes())
+    return dispatch(loadEpisodes({filter}))
   }
 }
 
