@@ -111,11 +111,11 @@ class API {
     const kind = opts.kind || 'platform'
     let urlStr = `/api/${kind}s`
     
-    if(opts.nickname && opts.kind == 'platform') {
+    if(kind == 'platform' && opts.nickname) {
       urlStr += `/${opts.nickname}` 
     }
     
-    if(opts.filter && opts.kind == 'episode') {
+    if(kind == 'episode' && opts.filter) {
       urlStr += `/filter/${opts.filter}`
     }
     return urlStr

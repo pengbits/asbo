@@ -58,8 +58,8 @@ class PlatformDetails extends Component {
         <b>Episodes</b>{' '}{this.refreshButton()}
       </p>
       <p>
-        {episodes.length || "none"}<br />
-        {episodes.length && this.episodeGrid()}
+        {episodes && episodes.length || "none"}<br />
+        {episodes && episodes.length && this.episodeGrid()}
       </p>
       <p>
         &nbsp;
