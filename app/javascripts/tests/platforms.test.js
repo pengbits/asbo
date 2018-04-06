@@ -66,11 +66,13 @@ describe('Platforms', () => {
         })
         
         const result = resultingState(store, reducer)
-        expect(result.platform.episodes.length).toBeGreaterThan(0)
-        // now try filtering the Episodes
+        const initialCount = result.platform.episodes.length
+        expect(initialCount).toBeGreaterThan(0)
+  
+        // now try filtering the episodes within the same platform
         const filter = e.setFilter('takeover')
-        const filteredState = reducer(result, filter)
-        expect(filteredState.platform.episodes.length).toBeLessThan(result.platform.episodes.length)
+        const filteredCount = reducer(result, filter).platform.episodes.length
+        expect(filteredCount).toBeLessThan(initialCount)
     })
   })
 })
