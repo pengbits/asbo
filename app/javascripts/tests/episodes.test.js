@@ -44,14 +44,12 @@ describe('Episodes', () => {
             'LOAD_EPISODES_PENDING',
             'LOAD_EPISODES_FULFILLED'
           ])
+          
+          const {episodes} = resultingState(store, reducer)
+          console.log(episodes.map(ep => ep.name))
+          expect(episodes.length).toBeLessThan(mock_episodes.length)
+          expect(episodes.length).toBeGreaterThan(0)
         })
-      //await store.dispatch(e.loadEpisodes({filter}))
-      //  .then(() => {
-      //    const {episodes} = resultingState(store, reducer)
-      //    // console.log(episodes.map(ep => ep.name))
-      //    expect(episodes.length).toBeLessThan(mock_episodes.length)
-      //    expect(episodes.length).toBeGreaterThan(0)
-      //  })
     })
   })
   
