@@ -5,9 +5,10 @@ import mock_episodes from '../__mocks__/episodes';
 import mockStore from './mockStore' ;
 
 // load application code & mock the api
+import {rootReducerCombined} from '../redux'
 import * as e from '../redux/episodes';
 const reducer = e.reducer;
-
+import {setFilter} from '../redux/filter';
 // utils
 import {expectActions,resultingState} from './utils'
 
@@ -36,7 +37,9 @@ describe('Episodes', () => {
     
     it('setting a filter', async () => {
       const filter = 'takeover'
-      const state = reducer({}, e.setFilter(filter))
+      const state = rootReducerCombined({}, setFilter(filter))
+      expect(state.filter).toBe(filter)
+    
       const store = mockStore({})
       await store.dispatch(e.setFilterAndFetch(filter))
         .then(() => {
@@ -52,7 +55,6 @@ describe('Episodes', () => {
           console.log(result.episodes.map((ep) => ep.name))
           expect(result.episodes.length).toBeLessThan(mock_episodes.length)
           expect(result.episodes.length).toBeGreaterThan(0)
-          expect(result.filter).toBe(filter)
         })
     })
   })

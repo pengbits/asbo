@@ -97,7 +97,7 @@ export const destroyPlatform = function({nickname}){
 
 // helpers
 const platformWithFilteredEpisodes = function(state, filter) {
-  const {episodes} = state;
+  const episodes = state.episodes || []
   const filtered = !!filter ? episodes.filter(e => {
     return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
   }) : episodes.slice(0)
@@ -165,7 +165,7 @@ export const reducer = function(state=initialState, action={}){
     case 'SET_FILTER':
       return {
         ...state,
-        platform: platformWithFilteredEpisodes(state.platform, action.payload)
+        platform: platformWithFilteredEpisodes((state.platform || {}), action.payload)
       }
       
     default: 
