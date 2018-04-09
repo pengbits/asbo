@@ -2,6 +2,7 @@ jest.mock('../api')
 
 // mock store setup
 import mockStore from './mockStore' ;
+import mock_episodes from '../__mocks__/episodes';
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
@@ -55,10 +56,9 @@ describe('Platforms', () => {
   })
   
   describe('platforms#refresh', () => {
-    it('dispatches actions for the referesh, and the list off episodes is updated', async () => {
+    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
       const store = mockStore({})
-      const opts = {'nickname':'rinse'}
-      await store.dispatch(p.refreshPlatform(opts))
+      await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
         .then(() => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
@@ -69,12 +69,35 @@ describe('Platforms', () => {
         const result = resultingState(store, reducer)
         const initialCount = result.platform.episodes.length
         expect(initialCount).toBeGreaterThan(0)
-  
-        // now try filtering the episodes within the same platform
-        const filter = setFilter('takeover')
-        const filteredCount = reducer(result, filter).platform.episodes.length
-        expect(filteredCount).toBeGreaterThan(0)
-        expect(filteredCount).toBeLessThan(initialCount)
     })
+    
+    it('responds to a valid filter by filtering the episode list', async () => {
+      const store = mockStore({})
+      await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
+        .then(() => {
+          const result = resultingState(store, reducer)
+          const filter = setFilter('takeover')
+          const filteredEps = reducer(result, filter).platform.episodes
+          expect(filteredEps.length).toBeGreaterThan(0)
+          expect(filteredEps.length).toBeLessThan(mock_episodes.length)
+          // confirm they are the right eps
+          const isMatch = ((ep,filter) => ep.name.toLowerCase().indexOf(filter.payload) > -1)
+          const verified = filteredEps.filter(ep => isMatch(ep, filter))
+          expect(verified.length).toBe(filteredEps.length)
+        })
+    })
+    
+    it('responds to an empty filter by returning a complete episode list', async () => {
+      const store = mockStore({})
+      await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
+        .then(() => {
+          const result = resultingState(store, reducer)
+          const filter = setFilter('')
+          const filteredEps = reducer(result, filter).platform.episodes
+          expect(filteredEps.length).toBeGreaterThan(0)
+          expect(filteredEps.length).toBe(mock_episodes.length)
+        })
+    })
+    
   })
 })

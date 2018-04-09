@@ -5,10 +5,10 @@ import Filter from '../containers/EpisodeFilter'
 class EpisodeGrid extends Component {
   
   render(){
-    const {episodes,setFilter} = this.props
+    const {episodes,onSetFilter} = this.props
     
     return (<div className='episode-grid'>
-      <Filter key='filter' />
+      <Filter key='filter' onSetFilter={onSetFilter} />
       <div className='grid'>
         {(episodes || []).map(e => <EpisodeGridItem 
           {...e} key={e.id}

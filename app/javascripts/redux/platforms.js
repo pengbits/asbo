@@ -101,7 +101,7 @@ const platformWithFilteredEpisodes = function(state, filter) {
   const filtered = !!filter ? episodes.filter(e => {
     return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
   }) : episodes.slice(0)
-  
+
   return {
     ...state,
     episodes: filtered

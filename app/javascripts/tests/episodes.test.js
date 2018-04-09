@@ -35,7 +35,7 @@ describe('Episodes', () => {
       })
     })
     
-    it('setting a filter', async () => {
+    it('setting filter to a phrase', async () => {
       const filter = 'takeover'
       const state = rootReducerCombined({}, setFilter(filter))
       expect(state.filter).toBe(filter)
@@ -43,19 +43,36 @@ describe('Episodes', () => {
       const store = mockStore({})
       await store.dispatch(e.setFilterAndFetch(filter))
         .then(() => {
-          console.log('ready')
-          // const filteredState = resultingState(store, reducer)
-          // console.log(filteredState)
+
           expectActions(store,[
             'SET_FILTER',
             'LOAD_EPISODES_PENDING',
             'LOAD_EPISODES_FULFILLED'
           ])
+
           const result = resultingState(store, reducer, state)
-          console.log(result.episodes.map((ep) => ep.name))
           expect(result.episodes.length).toBeLessThan(mock_episodes.length)
           expect(result.episodes.length).toBeGreaterThan(0)
         })
+    })
+    
+    it('setting filter to null/empty', async () => {
+      const filter = ''
+      const state = rootReducerCombined({}, setFilter(filter))
+      expect(state.filter).toBe(filter)
+      
+      const store = mockStore({})
+      await store.dispatch(e.setFilterAndFetch(filter))
+        .then(() => {
+          expectActions(store, [
+            'SET_FILTER',
+            'LOAD_EPISODES_PENDING',
+            'LOAD_EPISODES_FULFILLED'
+          ])
+        })
+        
+        const result = resultingState(store, reducer, state)
+        expect(result.episodes.length).toEqual(mock_episodes.length)
     })
   })
   

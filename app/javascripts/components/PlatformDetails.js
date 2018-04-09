@@ -75,7 +75,7 @@ class PlatformDetails extends Component {
   }
   
   episodeGrid(){
-    return <EpisodeGrid episodes={this.props.episodes || []} />
+    return <EpisodeGrid episodes={this.props.episodes || []} onSetFilter='render' />
   }
   
   refreshPlatform(){
