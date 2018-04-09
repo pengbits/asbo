@@ -49,7 +49,8 @@ const MockAPI = class {
   }
   
   getEpisodes(opts={}) {
-    console.log('API.fetch /episodes' + !!opts.filter ? `/filter/${opts.filter}` :'')
+    console.log(opts)
+    console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
     return new Promise((resolve,reject) => {
       const results = !!opts.filter ? 
         episodes.filter(e => {
