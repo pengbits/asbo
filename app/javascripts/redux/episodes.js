@@ -1,14 +1,13 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
 import API  from '../api'
+import {setFilter} from './filter'
 
 // constants
 export const LOAD_EPISODES = 'LOAD_EPISODES'
 export const LOAD_EPISODE  = 'LOAD_EPISODE'
-export const SET_FILTER    = 'SET_FILTER'
- 
+
 // actions
 export const loadEpisodes = function(opts={}){
-  console.log(`loadEpisodes ${opts.filter}`)
   return {
     type: LOAD_EPISODES,
     payload: API.getEpisodes(opts).then(json => {
@@ -29,10 +28,11 @@ export const loadEpisode = function({id}){
   }
 }
 
-export const setFilter = createAction(SET_FILTER)
 export const setFilterAndFetch = function(filter){
   return (dispatch, getState) => {
-    dispatch(setFilter(filter))
+    // set the filter on its own slice so it's saved in state
+    dispatch(setFilter(filter));
+    // pass the filter to the api call so we can get filtered eps back
     return dispatch(loadEpisodes({filter}))
   }
 }
@@ -75,14 +75,6 @@ export const reducer = (state=initialState, action={}) => {
         episode: action.payload.episode
       }
       
-    case SET_FILTER:
-      console.log('reducer => SET_FILTER')
-      const filter = action.payload;
-      return {
-        ...state,
-        filter
-      }
-
     default: 
       return state
     break

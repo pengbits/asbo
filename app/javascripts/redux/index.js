@@ -3,10 +3,11 @@ import platforms from './platforms'
 import episodes from './episodes'
 import filter from './filter'
 
-const rootReducer = {
+export const rootReducer = {
   platforms,
   filter,
   episodes
 }
 
+export const rootReducerCombined = combineReducers(rootReducer)
 export default rootReducer

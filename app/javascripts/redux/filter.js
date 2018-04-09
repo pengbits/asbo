@@ -7,7 +7,7 @@ export const SET_FILTER    = 'SET_FILTER'
 export const setFilter = createAction(SET_FILTER)
 
 // reducer
-export const reducer = (state=null, action={}) => {
+export const filter = (state=null, action={}) => {
   switch(action.type){
     case SET_FILTER:
       return action.payload
@@ -16,3 +16,5 @@ export const reducer = (state=null, action={}) => {
       return state
   }
 }
+
+export default filter

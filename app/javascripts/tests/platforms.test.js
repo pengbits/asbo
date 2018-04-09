@@ -6,6 +6,7 @@ import mockStore from './mockStore' ;
 // load application code & mock the api
 import * as p from '../redux/platforms';
 import * as e from '../redux/episodes';
+import {setFilter} from '../redux/filter'
 const reducer = p.reducer;
 
 // utils
@@ -70,7 +71,7 @@ describe('Platforms', () => {
         expect(initialCount).toBeGreaterThan(0)
   
         // now try filtering the episodes within the same platform
-        const filter = e.setFilter('takeover')
+        const filter = setFilter('takeover')
         const filteredCount = reducer(result, filter).platform.episodes.length
         expect(filteredCount).toBeGreaterThan(0)
         expect(filteredCount).toBeLessThan(initialCount)
