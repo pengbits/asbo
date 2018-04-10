@@ -81,9 +81,7 @@ describe('Platforms', () => {
       const action = p.setFilterAndFetch({filter,platform:{nickname}});
       await store.dispatch(action)
         .then(() => {
-          const result = store.getActions().reduce((state, action) => {
-            return rootReducer(state, action)
-          }, {})
+          const result = resultingState(store, rootReducer)
           const filteredEps = result.platforms.platform.episodes
           expect(filteredEps.length).toBeGreaterThan(0)
           expect(filteredEps.length).toBeLessThan(episodesForPlatform.length)
