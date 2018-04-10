@@ -6,14 +6,14 @@ import episodes from './episodes'
 // and just use axios + moxios or similar right in the reducer?
 const MockAPI = class {
   getPlatforms() {
-    console.log(`API.fetch /platforms`)
+    // console.log(`API.fetch /platforms`)
     return new Promise((resolve,reject) => {
       setTimeout(resolve, 0, platforms)
     })
   }
   
   getPlatform({nickname}){
-    console.log(`API.fetch /platforms/${nickname}`)
+    // console.log(`API.fetch /platforms/${nickname}`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!!platform) {
@@ -31,7 +31,7 @@ const MockAPI = class {
   // that it's only valuable for testing the reducers, not any kind of integration
   // and only good for that as long as the mock api is kept in sync w/ the real thing
   refreshPlatform({nickname}){
-    console.log(`API.fetch /platforms/${nickname}/refresh`)
+    // console.log(`API.fetch /platforms/${nickname}/refresh`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -49,7 +49,7 @@ const MockAPI = class {
   }
   
   getEpisodes(opts={}) {
-    console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
+    // console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
     return new Promise((resolve,reject) => {
       const results = !!opts.filter ? 
         episodes.filter(e => {
@@ -63,7 +63,7 @@ const MockAPI = class {
   }
   
   getEpisode({id}) {
-    console.log(`/api/episodes/${id}`)
+    // console.log(`/api/episodes/${id}`)
     const episode = episodes.find(p => p.id == id)
     return new Promise((resolve,reject) => {
       if(!!episode) {

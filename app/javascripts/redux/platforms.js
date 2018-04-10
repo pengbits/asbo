@@ -1,4 +1,5 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
+import {setFilter, SET_FILTER} from './filter'
 import API  from '../api'
 
 // constants
@@ -70,6 +71,20 @@ export const updatePlatform = function(attrs) {
       })
   }
 }
+export const setFilterAndFetch = function(opts={}){
+  return (dispatch, getState) => {
+    // set the filter on its own slice so it's saved in state
+    dispatch(setFilter(opts.filter));
+    // get a fresh list of episodes to apply the filter to,
+    // by refreshing the platform .. unfornately we need the nickname 
+    // for that api call, and while we should be able to retreive with getState,
+    // its not happening in the test context so allowing it to be passed in via opts param
+    const {platform} = getState()
+    const {nickname} = (platform || opts.platform)
+    console.log(`setFilterAndFetch called, so refesh ${nickname}`);
+    return dispatch(refreshPlatform({nickname}))
+  }
+}
 
 export const refreshPlatform = function({nickname}) {
   return {
@@ -95,16 +110,22 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-// helpers
-const platformWithFilteredEpisodes = function(state, filter) {
-  const episodes = state.episodes || []
-  const filtered = !!filter ? episodes.filter(e => {
-    return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-  }) : episodes.slice(0)
+const platform = function(state={}, action) {
+  if(action.type == SET_FILTER){
+    console.log(`filtering...`)
+    const episodes = state.episodes || []
+    const {filter} = action.payload || {}
+    const filtered = !!filter ? episodes.filter(e => {
+      return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+    }) : episodes.slice(0)
 
-  return {
-    ...state,
-    episodes: filtered
+    return {
+      ...state,
+      episodes: filtered
+    }
+    
+  } else {
+    return {...action.payload.platform}
   }
 }
 
@@ -115,7 +136,7 @@ const platformWithFilteredEpisodes = function(state, filter) {
 // https://redux-actions.js.org/docs/api/handleAction.html
 export const initialState = {
   platforms : [],
-  platform  : null,
+  platform  : {},
   loading: false
 }
 
@@ -144,7 +165,7 @@ export const reducer = function(state=initialState, action={}){
       return {
         ...state,
         loading: false,
-        platform: action.payload.platform
+        platform: platform((state || {}).platform, action)
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
@@ -161,11 +182,10 @@ export const reducer = function(state=initialState, action={}){
         platform: {}
       }
     
-    // this probably needs to move to its own slice
-    case 'SET_FILTER':
+    case SET_FILTER:
       return {
         ...state,
-        platform: platformWithFilteredEpisodes((state.platform || {}), action.payload)
+        platform: platform((state || {}).platform, action)
       }
       
     default: 
