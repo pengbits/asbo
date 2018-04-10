@@ -9,7 +9,7 @@ import * as p from '../redux/platforms';
 import * as e from '../redux/episodes';
 import {setFilter,SET_FILTER} from '../redux/filter'
 const reducer = p.reducer;
-import {rootReducerCombined} from '../redux';
+import {rootReducer} from '../redux';
 
 // utils
 import {expectActions,resultingState} from './utils'

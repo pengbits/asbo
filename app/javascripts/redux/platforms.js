@@ -112,7 +112,6 @@ export const destroyPlatform = function({nickname}){
 
 const platform = function(state={}, action) {
   if(action.type == SET_FILTER){
-    console.log(`filtering...`)
     const episodes = state.episodes || []
     const {filter} = action.payload || {}
     const filtered = !!filter ? episodes.filter(e => {
