@@ -112,14 +112,14 @@ export const destroyPlatform = function({nickname}){
 
 const platform = function(state={}, action={}, parentState={}) {
   const episodes = state.episodes || []
-  const {filter} = parentState
-  console.log(`platforms.platform filter=${filter}`)
+  const filter   = action.type  == SET_FILTER ? action.payload : parentState.filter
+  
   const filtered = !!filter ? episodes.filter(e => {
     return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
   }) : episodes.slice(0)
 
   return {
-    ...state, 
+    ...state,
     episodes: filtered
   }
 }

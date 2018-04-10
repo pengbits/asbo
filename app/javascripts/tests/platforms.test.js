@@ -33,7 +33,7 @@ describe('Platforms', () => {
         ]);
         
         // and now look at the store to inspect its state.
-        // expect(resultingState(store, reducer).platforms.length).toBeGreaterThan(0)
+        expect(resultingState(store, reducer).platforms.length).toBeGreaterThan(0)
       })
     })
   })
@@ -51,8 +51,7 @@ describe('Platforms', () => {
         
         const state = resultingState(store, reducer)
         expect(state.platform).toBeTruthy()
-        console.log(state.platform)
-        // expect(state.platform.nickname).toEqual(opts.nickname)
+        expect(state.platform.nickname).toEqual(opts.nickname)
       })
     })
   })
@@ -79,30 +78,17 @@ describe('Platforms', () => {
     
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       const store = mockStore({})
-      await store.dispatch(p.setFilterAndFetch({filter,platform:{nickname}}))
+      const action = p.setFilterAndFetch({filter,platform:{nickname}});
+      await store.dispatch(action)
         .then(() => {
-          const result  = resultingState(store, reducer)
-          console.log(`found ${result.platform.episodes.length} episodes`)
+          const result = store.getActions().reduce((state, action) => {
+            return rootReducer(state, action)
+          }, {})
+          const filteredEps = result.platforms.platform.episodes
+          expect(filteredEps.length).toBeGreaterThan(0)
+          expect(filteredEps.length).toBeLessThan(episodesForPlatform.length)
+
         })
-          // 
-          // const filteredResult = (store.getActions().slice(-3)).reduce((state, action) => {
-            // console.log(action.type)
-            // console.log(state)
-            // const edit = rootReducerCombined(state, action)
-            // return edit
-          // }, store.getState())
-          // const result  = resultingState(store, rootReducerCombined)
-          // console.log(result)
-          // const filteredEps = reducer(result, filter).platform.episodes
-
-          // console.log(`filter on ${filter} ${filteredEps.length}`)
-          // console.log(filteredEps.map(ep => ep.name).join("\n"))
-        
-          // // confirm they are the right eps
-          // const isMatch = ((ep,filter) => ep.name.toLowerCase().indexOf(filter) > -1)
-          // const verified = filteredEps.filter(ep => isMatch(ep, filter))
-          // expect(verified.length).toBe(filteredEps.length)
-
     })
     
     // it('responds to an empty filter by returning a complete episode list', async () => {
