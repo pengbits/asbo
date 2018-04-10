@@ -19,3 +19,12 @@ Then("the response should be a platform not found error") do
   expect(last_response.status).to eq(500)
   expect(@response).to eq({"error" => "Couldn't find Platform"})
 end
+
+Then("the response should be the platform with an array of matching episodes") do
+  @platform = @platforms.find{|p| p.nickname == @nickname }
+  puts @platform.nickname
+  puts @response['episodes'].length
+  puts @response.is_a?(Hash)
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+

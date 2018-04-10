@@ -8,5 +8,9 @@ Scenario: filter a platform's episodes by a search term
   Given these platforms
     And some episodes in the db
     And using a filter parameter 'Sound'
-   When I load the platform endpoint
-   Then the response should include some episodes with the search term in their name
+   When I load the platform endpoint 
+   """
+   {"nickname": "rinse"}
+   """
+   Then the response should be a JSON representation of the platform
+    And the response should include some episodes with the search term in their name
