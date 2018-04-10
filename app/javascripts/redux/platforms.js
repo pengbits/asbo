@@ -135,7 +135,7 @@ export const initialState = {
   loading: false
 }
 
-export const reducer = function(state=initialState, action={}, parentState={}){
+export const reducer = function(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
@@ -160,7 +160,7 @@ export const reducer = function(state=initialState, action={}, parentState={}){
       return {
         ...state,
         loading: false,
-        platform: platform(action.payload.platform, action, parentState)
+        platform: action.payload.platform
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
@@ -180,7 +180,7 @@ export const reducer = function(state=initialState, action={}, parentState={}){
     case SET_FILTER:
       return {
         ...state,
-        platform: platform(state.platform, action, parentState)
+        platform: state.platform //(state.platform, action, parentState)
       }
       
     default: 
