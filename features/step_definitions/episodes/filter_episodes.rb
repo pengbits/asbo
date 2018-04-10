@@ -31,7 +31,8 @@ end
 Then("the response should include some episodes with the search term in their name") do
   @complete = @response.is_a?(Hash) ? @platform.episodes : @episodes
   @filtered = @response.is_a?(Hash) ? @response['episodes'] : @response 
-  puts "found these episodes: '%s' " % @filtered.collect{|ep| ep['name'] }.join("', '")
+  # puts "found these episodes: '%s' " % @filtered.collect{|ep| ep['name'] }.join("', '")
+  puts "found #{@filtered.length} episodes with filter='#{@filter}'" 
   expect(@filtered.length).not_to eq(@complete.length)
   expect(@filtered.length).to be > 0
 end

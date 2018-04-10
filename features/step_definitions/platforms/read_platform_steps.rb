@@ -1,7 +1,9 @@
 When("I load the platform endpoint") do |attrs|
   platform = JSON.parse(attrs)
   @nickname = platform['nickname']
-  url = platform_path(:nickname => @nickname)
+  @filter   = platform['filter'] unless platform['filter'].nil?
+  puts "filter: #{@filter}"
+  url = platform_path(:nickname => @nickname, :filter => @filter)
   puts url
   get url
   @response = JSON.parse(last_response.body)
