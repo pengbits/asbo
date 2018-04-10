@@ -1,7 +1,10 @@
-When("I load the platform endpoint {string}") do |url|
+When("I load the platform endpoint") do |attrs|
+  platform = JSON.parse(attrs)
+  @nickname = platform['nickname']
+  url = platform_path(:nickname => @nickname)
+  puts url
   get url
   @response = JSON.parse(last_response.body)
-  @nickname = url.split('/platforms/')[1]
 end
 
 Then("the response should be a JSON representation of the platform") do
