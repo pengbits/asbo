@@ -57,10 +57,11 @@ describe('Platforms', () => {
   })
   
   describe('platforms#refresh', () => {
-    
+    let episodesForPlatform;
+    const nickname = 'rinse'
     it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
       const store = mockStore({})
-      await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
+      await store.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
@@ -69,30 +70,19 @@ describe('Platforms', () => {
         })
         
         const result = resultingState(store, reducer)
-        const initialCount = result.platform.episodes.length
-        expect(initialCount).toBeGreaterThan(0)
+        episodesForPlatform = result.platform.episodes
+        expect(episodesForPlatform.length).toBeGreaterThan(0)
     })
 
     const filter  = 'takeover'
     
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       const store = mockStore({})
-      await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
+      await store.dispatch(p.setFilterAndFetch({filter,platform:{nickname}}))
         .then(() => {
-          const result  = resultingState(store, rootReducerCombined)
-          const action  = p.setFilterAndFetch({
-            platform: {...result.platforms.platform},
-            filter
-          })
-          return store.dispatch(action)
-        }).then(() => {
-          expectActions(store, [
-            `${p.REFRESH_PLATFORM}_PENDING`,
-            `${p.REFRESH_PLATFORM}_FULFILLED`,
-            `${SET_FILTER}`,
-            `${p.REFRESH_PLATFORM}_PENDING`,
-            `${p.REFRESH_PLATFORM}_FULFILLED`,
-          ])
+          const result  = resultingState(store, reducer)
+          console.log(`found ${result.platform.episodes.length} episodes`)
+        })
           // 
           // const filteredResult = (store.getActions().slice(-3)).reduce((state, action) => {
             // console.log(action.type)
@@ -111,7 +101,7 @@ describe('Platforms', () => {
           // const isMatch = ((ep,filter) => ep.name.toLowerCase().indexOf(filter) > -1)
           // const verified = filteredEps.filter(ep => isMatch(ep, filter))
           // expect(verified.length).toBe(filteredEps.length)
-        })
+
     })
     
     // it('responds to an empty filter by returning a complete episode list', async () => {
