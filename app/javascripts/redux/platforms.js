@@ -110,21 +110,17 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-const platform = function(state={}, action) {
-  if(action.type == SET_FILTER){
-    const episodes = state.episodes || []
-    const {filter} = action.payload || {}
-    const filtered = !!filter ? episodes.filter(e => {
-      return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-    }) : episodes.slice(0)
+const platform = function(state={}, action={}, parentState={}) {
+  const episodes = state.episodes || []
+  const {filter} = parentState
+  console.log(`platforms.platform filter=${filter}`)
+  const filtered = !!filter ? episodes.filter(e => {
+    return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+  }) : episodes.slice(0)
 
-    return {
-      ...state,
-      episodes: filtered
-    }
-    
-  } else {
-    return {...action.payload.platform}
+  return {
+    ...state, 
+    episodes: filtered
   }
 }
 
@@ -139,7 +135,7 @@ export const initialState = {
   loading: false
 }
 
-export const reducer = function(state=initialState, action={}){
+export const reducer = function(state=initialState, action={}, parentState={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
@@ -164,7 +160,7 @@ export const reducer = function(state=initialState, action={}){
       return {
         ...state,
         loading: false,
-        platform: platform((state || {}).platform, action)
+        platform: platform(action.payload.platform, action, parentState)
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
@@ -184,7 +180,7 @@ export const reducer = function(state=initialState, action={}){
     case SET_FILTER:
       return {
         ...state,
-        platform: platform((state || {}).platform, action)
+        platform: platform(state.platform, action, parentState)
       }
       
     default: 
