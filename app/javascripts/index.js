@@ -27,7 +27,7 @@ import App from './components/app'
 // import PlatformList from './containers/PlatformList'
 // import PlatformDetails from './containers/PlatformDetails'
 import LocationMiddleware from './location-middleware'
-import rootReducer from './redux'
+import reducers from './redux'
 
 // init history
 const history = createHistory()
@@ -40,7 +40,7 @@ const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE','@@redux-form']} 
 const composeEnhancers = window[k] ? window[k](opts) : compose;
 const store = createStore(
   combineReducers({
-    ...rootReducer, 
+    ...reducers, 
     form: formReducer,
     router: routerReducer
   }),
