@@ -75,21 +75,31 @@ describe('Platforms', () => {
         expect(count).toBe(forPlatform({nickname}).length)
     })
 
-    const filter  = 'takeover'
-    
+
+    const filter = 'takeover'
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
-      const store = mockStore({})
-      // set filter
-      store.dispatch(setFilter(filter))
+      let stores=[],states=[]
+      
+      // set the filter
+      stores[0] = mockStore({})
+      stores[0].dispatch(setFilter(filter))
+      states[0] = resultingState(stores[0], combinedRootReducer)
+      expect(states[0].filter).toBe(filter)
+      
       // refresh the platform
-      const action = p.refreshPlatform({nickname,filter});
-      await store.dispatch(action)
+      stores[1] = mockStore(states[0])
+      await stores[1].dispatch(p.refreshPlatform({nickname}))
         .then(() => {
-          console.log('ready')
-          const result = resultingState(store, reducer)
-          const count = result.platform.episodes.length
+          states[1] = resultingState(stores[1], combinedRootReducer)
+          const filteredEps = states[1].platforms.platform.episodes
+          const count = filteredEps.length
+          console.log(`found ${count} filtered eps in ${nickname}`)
+          console.log(filteredEps.map(ep => ep.name))
+          expect(count).toBeGreaterThan(0)
           expect(count).toBeLessThan(forPlatform({nickname}).length)
+          
         })
+
     })
     
     // it('responds to an empty filter by returning a complete episode list', async () => {

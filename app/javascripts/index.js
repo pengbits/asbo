@@ -27,6 +27,7 @@ import App from './components/app'
 // import PlatformList from './containers/PlatformList'
 // import PlatformDetails from './containers/PlatformDetails'
 import LocationMiddleware from './location-middleware'
+// import FilterOnPlatformRefresh from './filter-episodes-on-platform-refresh-middleware.js'
 import rootReducer from './redux'
 
 // init history

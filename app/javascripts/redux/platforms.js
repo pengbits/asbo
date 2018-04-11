@@ -89,14 +89,17 @@ export const updatePlatform = function(attrs) {
 
 // need middleware to pass the current filter to this API call!!
 export const refreshPlatform = function({nickname}) {
-  return {
-    type: REFRESH_PLATFORM,
-    payload: API.refreshPlatform({nickname})
-      .then (json => {
-        return {
-          platform: json
-        }
-      })
+  return (dispatch, getState) => {
+    const {filter} = getState()
+    return dispatch({
+      type: REFRESH_PLATFORM,
+      payload: API.refreshPlatform({nickname,filter})
+        .then (json => {
+          return {
+            platform: json
+          }
+        })
+    })
   }
 }
 
