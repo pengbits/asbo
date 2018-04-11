@@ -19,7 +19,7 @@ Scenario Outline: pagination
 Scenario Outline: pagination routes
   Given the platform nickname=<nickname>
   When I visit '/platforms/<nickname>/refresh?page=1'
-  And  I visit '/platforms/<nickname>/refresh?page=3'
+  And  I visit '/platforms/<nickname>/refresh/page/3'
   Then each response should contain different episodes
   
   Examples:
