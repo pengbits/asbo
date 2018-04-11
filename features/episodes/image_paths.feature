@@ -3,7 +3,7 @@ As a developer
 In order to render an image for the episode when available 
 I want to prefix relative paths with the platform's base path
 
-  @episode @images
+  @episode @images @absolute
   Scenario: image is absolute
     Given the platform nickname=nts
     And the platform has relative_image_paths='false'
@@ -36,4 +36,4 @@ I want to prefix relative paths with the platform's base path
       """
 
       When I parse the html
-      Then the platform will contain an episode with this image 'http://www.radarradio.com/wp-content/uploads/2018/03/RADAR-RUN-IT-8-FOOZOOL.png'
+      Then the platform will contain an episode with this image 'https://www.radarradio.com/wp-content/uploads/2018/03/RADAR-RUN-IT-8-FOOZOOL.png'
