@@ -5,9 +5,9 @@ export const expectActions = (store, expected) => {
   expect(actions.map(a => a.type)).toEqual(expected);  
 }
 
-// return state after running last action in list
-export const resultingState = (store, reducer, state=null) => {
-  const actions = store.getActions().slice(0)
-  const lastAction = actions.pop()
-  return reducer(state, lastAction)  
+// return state by running actions through the reducer
+export const resultingState = (store, reducer, state) => {
+  return store.getActions().reduce((state, action) => {
+   return reducer(state, action)
+  }, {})
 }

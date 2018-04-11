@@ -105,7 +105,11 @@ class PlatformsController < ApplicationController
   end
   
   def platform_episodes
-    @platform.episodes.collect do |episode|
+    episodes = !!params[:filter] ? 
+      @platform.episodes_with_name_matching(params[:filter]) :
+      @platform.episodes
+      
+    episodes.collect do |episode|
       episode.attributes_minimal #.merge(:platform => platform_meta)
     end
   end

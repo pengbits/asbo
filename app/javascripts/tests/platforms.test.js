@@ -2,12 +2,14 @@ jest.mock('../api')
 
 // mock store setup
 import mockStore from './mockStore' ;
+import episode_data, {forPlatform} from '../__mocks__/episodes';
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
 import * as e from '../redux/episodes';
-import {setFilter} from '../redux/filter'
+import {setFilter,SET_FILTER} from '../redux/filter'
 const reducer = p.reducer;
+import {combinedRootReducer} from '../redux';
 
 // utils
 import {expectActions,resultingState} from './utils'
@@ -55,10 +57,11 @@ describe('Platforms', () => {
   })
   
   describe('platforms#refresh', () => {
-    it('dispatches actions for the referesh, and the list off episodes is updated', async () => {
+    let episodesForPlatform;
+    const nickname = 'rinse'
+    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
       const store = mockStore({})
-      const opts = {'nickname':'rinse'}
-      await store.dispatch(p.refreshPlatform(opts))
+      await store.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
@@ -67,14 +70,50 @@ describe('Platforms', () => {
         })
         
         const result = resultingState(store, reducer)
-        const initialCount = result.platform.episodes.length
-        expect(initialCount).toBeGreaterThan(0)
-  
-        // now try filtering the episodes within the same platform
-        const filter = setFilter('takeover')
-        const filteredCount = reducer(result, filter).platform.episodes.length
-        expect(filteredCount).toBeGreaterThan(0)
-        expect(filteredCount).toBeLessThan(initialCount)
+        const count = result.platform.episodes.length
+        expect(count).toBeGreaterThan(0)
+        expect(count).toBe(forPlatform({nickname}).length)
     })
+
+
+    const filter = 'takeover'
+    it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
+      let stores=[],states=[]
+      
+      // set the filter
+      stores[0] = mockStore({})
+      stores[0].dispatch(setFilter(filter))
+      states[0] = resultingState(stores[0], combinedRootReducer)
+      expect(states[0].filter).toBe(filter)
+      
+      // refresh the platform
+      stores[1] = mockStore(states[0])
+      await stores[1].dispatch(p.refreshPlatform({nickname}))
+        .then(() => {
+          states[1] = resultingState(stores[1], combinedRootReducer)
+          const filteredEps = states[1].platforms.platform.episodes
+          const count = filteredEps.length
+          console.log(`found ${count} filtered eps in ${nickname}`)
+          console.log(filteredEps.map(ep => ep.name))
+          expect(count).toBeGreaterThan(0)
+          expect(count).toBeLessThan(forPlatform({nickname}).length)  
+        })
+    })
+    
+    // it('responds to an empty filter by returning a complete episode list', async () => {
+    //   const store = mockStore({})
+    //   await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
+    //     .then(() => {
+    //       const result = resultingState(store, reducer)
+    //       const filter = setFilter('')
+    //       // this array is being destructively filtered, it's never refreshed if you clear the filter?
+    //       // so either you need a totally diff implementation, ie refresh platform each time,
+    //       // or you need to copy the eps into a different slice ie a `visibleEpisodes`
+    //       const filteredEps = reducer(result, filter).platform.episodes
+    //       expect(filteredEps.length).toBeGreaterThan(0)
+    //       expect(filteredEps.length).toBe(episode_data.length)
+    //     })
+    // })
+    
   })
 })

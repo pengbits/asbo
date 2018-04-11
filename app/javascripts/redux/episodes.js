@@ -41,7 +41,6 @@ export const setFilterAndFetch = function(filter){
 export const initialState = {
   episodes : [],
   episode  : null,
-  filter   : null,
   loading  : false
 }
 

@@ -25,12 +25,14 @@ When("I load the episodes endpoint") do
   url = @filter.nil? ? episodes_path : episodes_filtered_path(:filter => @filter)
   puts "GET #{url}"
   get url
-  @response = last_response.body
+  @response = JSON.parse(last_response.body)
 end
 
 Then("the response should include some episodes with the search term in their name") do
-  @filtered = JSON.parse(@response)
-  puts "found these episodes: '%s' " % @filtered.collect{|ep| ep['name'] }.join("', '")
-  expect(@filtered.length).not_to eq(@episodes.length)
+  @complete = @response.is_a?(Hash) ? @platform.episodes : @episodes
+  @filtered = @response.is_a?(Hash) ? @response['episodes'] : @response 
+  # puts "found these episodes: '%s' " % @filtered.collect{|ep| ep['name'] }.join("', '")
+  puts "found #{@filtered.length} episodes with filter='#{@filter}'" 
+  expect(@filtered.length).not_to eq(@complete.length)
   expect(@filtered.length).to be > 0
 end

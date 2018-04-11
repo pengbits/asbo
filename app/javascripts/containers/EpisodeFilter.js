@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import EpisodeFilter from '../components/EpisodeFilter'
-import {setFilterAndFetch} from '../redux/episodes'
+import {setFilter} from '../redux/filter'
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -14,12 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    setFilter: ({filter}) => {
-      console.log(`dispatch setFilterAndFetch ${filter}`)
-      dispatch(setFilterAndFetch(filter))
-    }
-  }
+  return {}
 }
 
 const EpisodeFilterContainer = connect(

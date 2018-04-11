@@ -59,7 +59,8 @@
     "foreman": "^2.0.0",
     "normalize.css": "^8.0.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "reduce-reducers": "^0.1.2"
   },
   "jest": {
     "testPathIgnorePatterns": [

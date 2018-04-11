@@ -1,4 +1,5 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
+import {setFilter, SET_FILTER} from './filter'
 import API  from '../api'
 
 // constants
@@ -71,15 +72,25 @@ export const updatePlatform = function(attrs) {
   }
 }
 
+// export const setFilterAndFetch = function(opts={}){
+//   return (dispatch, getState) => {
+//     dispatch(setFilter(opts.filter));
+//     return dispatch(refreshPlatform(opts.nickname}))
+//   }
+// }
+
 export const refreshPlatform = function({nickname}) {
-  return {
-    type: REFRESH_PLATFORM,
-    payload: API.refreshPlatform({nickname})
-      .then (json => {
-        return {
-          platform: json
-        }
-      })
+  return (dispatch, getState) => {
+    const {filter} = getState()
+    return dispatch({
+      type: REFRESH_PLATFORM,
+      payload: API.refreshPlatform({nickname,filter})
+        .then (json => {
+          return {
+            platform: json
+          }
+        })
+    })
   }
 }
 
@@ -95,13 +106,14 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-// helpers
-const platformWithFilteredEpisodes = function(state, filter) {
+const platform = function(state={}, action={}, parentState={}) {
   const episodes = state.episodes || []
+  const filter   = action.type  == SET_FILTER ? action.payload : parentState.filter
+  
   const filtered = !!filter ? episodes.filter(e => {
     return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
   }) : episodes.slice(0)
-  
+
   return {
     ...state,
     episodes: filtered
@@ -115,7 +127,7 @@ const platformWithFilteredEpisodes = function(state, filter) {
 // https://redux-actions.js.org/docs/api/handleAction.html
 export const initialState = {
   platforms : [],
-  platform  : null,
+  platform  : {},
   loading: false
 }
 
@@ -161,11 +173,10 @@ export const reducer = function(state=initialState, action={}){
         platform: {}
       }
     
-    // this probably needs to move to its own slice
-    case 'SET_FILTER':
+    case SET_FILTER:
       return {
         ...state,
-        platform: platformWithFilteredEpisodes((state.platform || {}), action.payload)
+        platform: state.platform //(state.platform, action, parentState)
       }
       
     default: 

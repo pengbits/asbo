@@ -1,19 +1,19 @@
 import platforms from './platforms'
-import episodes from './episodes'
+import episodes, {forPlatform} from './episodes'
 
 // todo
 // should we scrap this and the 'real' api class above,
 // and just use axios + moxios or similar right in the reducer?
 const MockAPI = class {
   getPlatforms() {
-    console.log(`API.fetch /platforms`)
+    // console.log(`API.fetch /platforms`)
     return new Promise((resolve,reject) => {
       setTimeout(resolve, 0, platforms)
     })
   }
   
   getPlatform({nickname}){
-    console.log(`API.fetch /platforms/${nickname}`)
+    // console.log(`API.fetch /platforms/${nickname}`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!!platform) {
@@ -30,8 +30,8 @@ const MockAPI = class {
   // and merging into the platform... this is so different from real implementation
   // that it's only valuable for testing the reducers, not any kind of integration
   // and only good for that as long as the mock api is kept in sync w/ the real thing
-  refreshPlatform({nickname}){
-    console.log(`API.fetch /platforms/${nickname}/refresh`)
+  refreshPlatform({nickname,filter}){
+    console.log(`API.fetch /platforms/${nickname}/refresh` + (!!filter ? `?filter='${filter}` : ''))
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -39,9 +39,9 @@ const MockAPI = class {
           'error' : `Platform with nickname ${nickname} not found`
         })
       } else {
-        const platformEpisodes = episodes.filter(e => e.platform_id == platform.id)
+        const matches = forPlatform({nickname}).filter(e => this.isMatchingEpisode(e, filter))
         setTimeout(resolve, 0, {
-          ...platform, episodes: platformEpisodes
+          ...platform, episodes: matches
         })
       }
     })
@@ -49,22 +49,14 @@ const MockAPI = class {
   }
   
   getEpisodes(opts={}) {
-    console.log(opts)
-    console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
+    // console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
     return new Promise((resolve,reject) => {
-      const results = !!opts.filter ? 
-        episodes.filter(e => {
-          const isMatch = e.name.toLowerCase().indexOf(opts.filter.toLowerCase()) > -1
-          return isMatch
-        }) : episodes
-      ;
-      
-      setTimeout(resolve, 0, results)
+      setTimeout(resolve, 0, this.filteredEpisodes(opts))
     })
   }
   
   getEpisode({id}) {
-    console.log(`/api/episodes/${id}`)
+    // console.log(`/api/episodes/${id}`)
     const episode = episodes.find(p => p.id == id)
     return new Promise((resolve,reject) => {
       if(!!episode) {
@@ -75,6 +67,17 @@ const MockAPI = class {
         })
       }
     })
+  }
+  
+  private
+  
+  filteredEpisodes({filter}) {
+    console.log(`API.filteredEpisodes ${filter}`)
+    return episodes.filter(e => this.isMatchingEpisode(e, filter))
+  }
+  
+  isMatchingEpisode(episode, filter) {
+    return !filter || episode.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
   }
 }
 export default new MockAPI()

@@ -17,9 +17,8 @@ class EpisodeFilter extends Component {
   
   handleChange(e) {
     const filter = e.currentTarget.value
-    console.log(`handleChange`)
-    const {setFilter} = this.props
-    setFilter({filter})
+    const {onSetFilter} = this.props
+    onSetFilter({filter})
   }
 }
 

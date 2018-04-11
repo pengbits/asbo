@@ -36,9 +36,9 @@ class API {
   }
   
   
-  refreshPlatform({nickname}){
+  refreshPlatform({nickname,filter}){
     const base = this.url({nickname})
-    const url  = `${base}/refresh`
+    const url  = `${base}/refresh` + (!!filter ? `?filter=${filter}` : '')
     console.log(`API get ${url}`)
     return fetch(url)
       .then(response => {
