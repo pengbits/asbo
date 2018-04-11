@@ -96,10 +96,8 @@ describe('Platforms', () => {
           console.log(`found ${count} filtered eps in ${nickname}`)
           console.log(filteredEps.map(ep => ep.name))
           expect(count).toBeGreaterThan(0)
-          expect(count).toBeLessThan(forPlatform({nickname}).length)
-          
+          expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
-
     })
     
     // it('responds to an empty filter by returning a complete episode list', async () => {

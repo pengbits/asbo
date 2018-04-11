@@ -14,6 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    onSetFilter: ({filter}) => {
+      console.log(`Platform.dispatch#onSetFilter ${filter}`)
+    },
     refreshPlatform: ({nickname}) =>{
       dispatch(refreshPlatform({nickname}))
     }

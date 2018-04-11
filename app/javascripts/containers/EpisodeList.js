@@ -18,6 +18,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
+    onSetFilter: ({filter}) => {
+      console.log(`EpisodesList.dispatch#onSetFilter ${filter}`)
+    }
   }
 }
 
