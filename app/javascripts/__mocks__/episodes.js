@@ -1,4 +1,4 @@
-export default [{
+export const episodes = [{
   "id": 1960,
   "name": "Beirut Daze w/ Ernesto Chahoud & JJ Whitefield  01.04.18 Radio Episode",
   "platform_id": 1,
@@ -1643,3 +1643,7 @@ export default [{
     "nickname": "rinse"
   }
 }]
+export default episodes;
+export const forPlatform = ({nickname}) => {
+  return episodes.filter(ep => ep.platform && ep.platform.nickname == nickname)
+}

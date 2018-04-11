@@ -2,14 +2,14 @@ jest.mock('../api')
 
 // mock store setup
 import mockStore from './mockStore' ;
-import mock_episodes from '../__mocks__/episodes';
+import episode_data, {forPlatform} from '../__mocks__/episodes';
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
 import * as e from '../redux/episodes';
 import {setFilter,SET_FILTER} from '../redux/filter'
 const reducer = p.reducer;
-import {rootReducer} from '../redux';
+import {combinedRootReducer} from '../redux';
 
 // utils
 import {expectActions,resultingState} from './utils'
@@ -70,22 +70,25 @@ describe('Platforms', () => {
         })
         
         const result = resultingState(store, reducer)
-        episodesForPlatform = result.platform.episodes
-        expect(episodesForPlatform.length).toBeGreaterThan(0)
+        const count = result.platform.episodes.length
+        expect(count).toBeGreaterThan(0)
+        expect(count).toBe(forPlatform({nickname}).length)
     })
 
     const filter  = 'takeover'
     
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       const store = mockStore({})
-      const action = p.setFilterAndFetch({filter,platform:{nickname}});
+      // set filter
+      store.dispatch(setFilter(filter))
+      // refresh the platform
+      const action = p.refreshPlatform({nickname});
       await store.dispatch(action)
         .then(() => {
-          const result = resultingState(store, rootReducer)
-          const filteredEps = result.platforms.platform.episodes
-          expect(filteredEps.length).toBeGreaterThan(0)
-          expect(filteredEps.length).toBeLessThan(episodesForPlatform.length)
-
+          console.log('ready')
+          const result = resultingState(store, reducer)
+          const count = result.platform.episodes.length
+          expect(count).toBeLessThan(forPlatform({nickname}).length)
         })
     })
     
@@ -100,7 +103,7 @@ describe('Platforms', () => {
     //       // or you need to copy the eps into a different slice ie a `visibleEpisodes`
     //       const filteredEps = reducer(result, filter).platform.episodes
     //       expect(filteredEps.length).toBeGreaterThan(0)
-    //       expect(filteredEps.length).toBe(mock_episodes.length)
+    //       expect(filteredEps.length).toBe(episode_data.length)
     //     })
     // })
     

@@ -5,7 +5,7 @@ import mock_episodes from '../__mocks__/episodes';
 import mockStore from './mockStore' ;
 
 // load application code & mock the api
-import {rootReducer} from '../redux'
+import {combinedRootReducer} from '../redux'
 import * as e from '../redux/episodes';
 const reducer = e.reducer;
 import {setFilter} from '../redux/filter';
@@ -26,7 +26,7 @@ describe('Episodes', () => {
       .then(() => {
 
         expectActions(store, [
-          "LOAD_EPISODES_PENDING",
+          "LOAD_EPISODES_PENDING",  
           "LOAD_EPISODES_FULFILLED"
         ]);
         
@@ -37,7 +37,7 @@ describe('Episodes', () => {
     
     it('setting filter to a phrase', async () => {
       const filter = 'takeover'
-      const state = rootReducer({}, setFilter(filter))
+      const state = combinedRootReducer({}, setFilter(filter))
       expect(state.filter).toBe(filter)
     
       const store = mockStore({})
@@ -58,7 +58,7 @@ describe('Episodes', () => {
     
     it('setting filter to null/empty', async () => {
       const filter = ''
-      const state = rootReducer({}, setFilter(filter))
+      const state = combinedRootReducer({}, setFilter(filter))
       expect(state.filter).toBe(filter)
       
       const store = mockStore({})
