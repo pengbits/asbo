@@ -71,21 +71,23 @@ export const updatePlatform = function(attrs) {
       })
   }
 }
-export const setFilterAndFetch = function(opts={}){
-  return (dispatch, getState) => {
-    // set the filter on its own slice so it's saved in state
-    dispatch(setFilter(opts.filter));
-    // get a fresh list of episodes to apply the filter to,
-    // by refreshing the platform .. unfornately we need the nickname 
-    // for that api call, and while we should be able to retreive with getState,
-    // its not happening in the test context so allowing it to be passed in via opts param
-    const {platform} = getState()
-    const {nickname} = (platform || opts.platform)
-    console.log(`setFilterAndFetch called, so refesh ${nickname}`);
-    return dispatch(refreshPlatform({nickname}))
-  }
-}
+// holding off ont this
+// export const setFilterAndFetch = function(opts={}){
+//   return (dispatch, getState) => {
+//     // set the filter on its own slice so it's saved in state
+//     dispatch(setFilter(opts.filter));
+//     // get a fresh list of episodes to apply the filter to,
+//     // by refreshing the platform .. unfornately we need the nickname 
+//     // for that api call, and while we should be able to retreive with getState,
+//     // its not happening in the test context so allowing it to be passed in via opts param
+//     const {platform} = getState()
+//     const {nickname} = (platform || opts.platform)
+//     console.log(`setFilterAndFetch called, so refesh ${nickname}`);
+//     return dispatch(refreshPlatform({nickname}))
+//   }
+// }
 
+// need middleware to pass the current filter to this API call!!
 export const refreshPlatform = function({nickname}) {
   return {
     type: REFRESH_PLATFORM,

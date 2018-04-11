@@ -82,7 +82,7 @@ describe('Platforms', () => {
       // set filter
       store.dispatch(setFilter(filter))
       // refresh the platform
-      const action = p.refreshPlatform({nickname});
+      const action = p.refreshPlatform({nickname,filter});
       await store.dispatch(action)
         .then(() => {
           console.log('ready')
