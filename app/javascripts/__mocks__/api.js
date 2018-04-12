@@ -72,7 +72,6 @@ const MockAPI = class {
   private
   
   filteredEpisodes({filter}) {
-    console.log(`API.filteredEpisodes ${filter}`)
     return episodes.filter(e => this.isMatchingEpisode(e, filter))
   }
   
