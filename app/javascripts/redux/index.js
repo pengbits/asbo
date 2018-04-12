@@ -2,11 +2,13 @@ import { combineReducers } from 'redux'
 import platforms from './platforms' 
 import episodes from './episodes'
 import filter from './filter'
+import pagination from './pagination'
 
 export const rootReducer = {
   platforms,
   filter,
-  episodes
+  episodes,
+  pagination
 }
 
 // 2/2 gather sub-reducers up into a single reducer containing the individual state slices,

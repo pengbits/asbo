@@ -101,8 +101,8 @@ describe('Platforms', () => {
       const store1 = mockStore({})
       await store1.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
-          const state1 = resultingState(store1, reducer)
-          const count  = state1.platform.episodes.length
+          const state1 = resultingState(store1, combinedRootReducer)
+          const count  = state1.platforms.platform.episodes.length
           expect(count).toBeGreaterThan(0)
         })
     })
