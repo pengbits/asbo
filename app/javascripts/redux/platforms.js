@@ -106,7 +106,7 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-// reducer
+// reducers
 // might want to look into somethinbg like type-to-reducer
 // https://github.com/tomatau/type-to-reducer
 // or just handleActions from redux-actions
@@ -116,6 +116,7 @@ export const initialState = {
   platform  : {},
   loading: false
 }
+
 
 export const reducer = function(state=initialState, action={}){
   switch(action.type){
@@ -139,10 +140,11 @@ export const reducer = function(state=initialState, action={}){
     case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
     case `${REFRESH_PLATFORM}_FULFILLED`:
+      const {platform} = action.payload
       return {
         ...state,
         loading: false,
-        platform: action.payload.platform
+        platform: {...platform, episodes:[]} // force us to use the episodes in episodes reducer
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
@@ -157,12 +159,6 @@ export const reducer = function(state=initialState, action={}){
         ...state,
         loading:false,
         platform: {}
-      }
-    
-    case SET_FILTER:
-      return {
-        ...state,
-        platform: state.platform //(state.platform, action, parentState)
       }
       
     default: 
