@@ -106,20 +106,6 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-const platform = function(state={}, action={}, parentState={}) {
-  const episodes = state.episodes || []
-  const filter   = action.type  == SET_FILTER ? action.payload : parentState.filter
-  
-  const filtered = !!filter ? episodes.filter(e => {
-    return e.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
-  }) : episodes.slice(0)
-
-  return {
-    ...state,
-    episodes: filtered
-  }
-}
-
 // reducer
 // might want to look into somethinbg like type-to-reducer
 // https://github.com/tomatau/type-to-reducer

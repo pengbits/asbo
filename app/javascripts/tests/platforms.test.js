@@ -69,8 +69,8 @@ describe('Platforms', () => {
           ])
         })
         
-        const result = resultingState(store, reducer)
-        const count = result.platform.episodes.length
+        const result = resultingState(store, combinedRootReducer)
+        const count = result.episodes.episodes.length
         expect(count).toBeGreaterThan(0)
         expect(count).toBe(forPlatform({nickname}).length)
     })
@@ -89,9 +89,10 @@ describe('Platforms', () => {
       await store2.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           const state2 = resultingState(store2, combinedRootReducer)
-          const eps    = state2.platforms.platform.episodes
+          const eps = state2.episodes.episodes
+          // const eps    = state2.episodes
           const count  = eps.length
-          
+          // 
           expect(count).toBeGreaterThan(0)
           expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
@@ -102,8 +103,6 @@ describe('Platforms', () => {
       await store1.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           const state1 = resultingState(store1, combinedRootReducer)
-          const count  = state1.platforms.platform.episodes.length
-          expect(count).toBeGreaterThan(0)
         })
     })
     
