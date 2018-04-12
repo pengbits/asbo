@@ -6,8 +6,10 @@ import {refreshPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform,loading,error} = state.platforms 
+  const {episodes} = state.episodes
   return {
     ...platform,
+    episodes,
     error,
     loading
   }

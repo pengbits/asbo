@@ -1,7 +1,7 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
 import API  from '../api'
 import {setFilter} from './filter'
-
+import {LOAD_PLATFORM, REFRESH_PLATFORM} from './platforms'
 // constants
 export const LOAD_EPISODES = 'LOAD_EPISODES'
 export const LOAD_EPISODE  = 'LOAD_EPISODE'
@@ -72,6 +72,14 @@ export const reducer = (state=initialState, action={}) => {
         ...state,
         loading: false,
         episode: action.payload.episode
+      }
+      
+    case `${LOAD_PLATFORM}_FULFILLED`:
+    case `${REFRESH_PLATFORM}_FULFILLED`:
+      return {
+        ...state,
+        loading: false,
+        episodes: action.payload.platform.episodes
       }
       
     default: 
