@@ -81,7 +81,8 @@ export const updatePlatform = function(attrs) {
 
 export const refreshPlatform = function({nickname}) {
   return (dispatch, getState) => {
-    const {filter} = getState()
+    const {filter,currentPage} = getState()
+    console.log(`refreshPlatform currentPage:${currentPage}`)
     return dispatch({
       type: REFRESH_PLATFORM,
       payload: API.refreshPlatform({nickname,filter})

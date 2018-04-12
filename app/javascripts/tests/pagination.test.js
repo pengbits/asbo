@@ -1,9 +1,10 @@
 jest.mock('../api')
 import mockStore from './mockStore' ;
+import {resultingState} from './utils';
 
 import {
   pagination,
-  requestPage, REQUEST_PAGE,
+  setPage, SET_PAGE,
   reducer
 } from '../redux/pagination'
 
@@ -16,16 +17,14 @@ describe('Pagination', () => {
   })
   
   describe('pages', () => {
-    it('can responds to requestPage action', async () => {
+    it('can responds to setPage action', () => {
       const store = mockStore()
-      await store.dispatch(requestPage({
-        page: 2,
-        resource: 'platform',
-        nickname: 'rinse'
+      store.dispatch(setPage({
+        page: 2
       }))
-        .then(() => {
-          console.log('page back')
-        })
+      const result = resultingState(store, reducer)
+      expect(result.currentPage).toBe(2)
     })
   })
+  
 })
