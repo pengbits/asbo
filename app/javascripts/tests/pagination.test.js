@@ -14,10 +14,7 @@ describe('Pagination', () => {
     it('is set to 1 at init', () => {
       expect(reducer().currentPage).toBe(1)
     })
-  })
-  
-  describe('pages', () => {
-    it('can responds to setPage action', () => {
+    it('can be changed by setPage action', () => {
       const store = mockStore()
       store.dispatch(setPage({
         page: 2
@@ -26,5 +23,4 @@ describe('Pagination', () => {
       expect(result.currentPage).toBe(2)
     })
   })
-  
 })

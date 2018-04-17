@@ -2,12 +2,13 @@ jest.mock('../api')
 
 // mock store setup
 import mockStore from './mockStore' ;
-import episode_data, {forPlatform} from '../__mocks__/episodes';
+import episode_data, {pagedEpisodes, forPlatform} from '../__mocks__/episodes';
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
 import * as e from '../redux/episodes';
 import {setFilter,SET_FILTER} from '../redux/filter'
+import {setPage, SET_PAGE} from '../redux/pagination'
 const reducer = p.reducer;
 import {combinedRootReducer} from '../redux';
 
@@ -90,19 +91,33 @@ describe('Platforms', () => {
         .then(() => {
           const state2 = resultingState(store2, combinedRootReducer)
           const eps = state2.episodes.episodes
-          // const eps    = state2.episodes
           const count  = eps.length
-          // 
+
           expect(count).toBeGreaterThan(0)
           expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
     })
     
-    it('returns different episodes for each page param', async () => {
+    
+    it('passes the current page to the api when refreshing ', async () => {
+      // set the page
       const store1 = mockStore({})
-      await store1.dispatch(p.refreshPlatform({nickname}))
+      store1.dispatch(setPage({'page': 2}))
+      const state1 = resultingState(store1, combinedRootReducer)
+      const {currentPage} = state1.pagination
+      expect(currentPage).toBe(2)
+      
+      console.log(pagedEpisodes(1))
+      // refresh the platform
+      const store2 = mockStore(state1)
+      await store2.dispatch(p.refreshPlatform({nickname,page:currentPage}))
         .then(() => {
-          const state1 = resultingState(store1, combinedRootReducer)
+          const state2 = resultingState(store2, combinedRootReducer)
+          const eps = state2.episodes.episodes
+          // const eps    = state2.episodes
+          const count  = eps.length
+          // 
+          expect(count).toBeGreaterThan(0)
         })
     })
     
