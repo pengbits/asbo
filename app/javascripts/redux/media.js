@@ -9,7 +9,8 @@ export const STOP_MEDIA = 'PLAY_MEDIA'
 export const initialState = {
   url : null,
   isPlaying : false,
-  type: null
+  type: null,
+  embed: null
 }
 
 export const initMedia = createAction(INIT_MEDIA)
