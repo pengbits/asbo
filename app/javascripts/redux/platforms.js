@@ -81,10 +81,13 @@ export const updatePlatform = function(attrs) {
 
 export const refreshPlatform = function({nickname}) {
   return (dispatch, getState) => {
-    const {filter} = getState()
+    const {filter,pagination} = getState()
+    const {currentPage} = pagination || {};
+    const page = currentPage || 1
+    console.log(`refreshPlatform page:${page}`)
     return dispatch({
       type: REFRESH_PLATFORM,
-      payload: API.refreshPlatform({nickname,filter})
+      payload: API.refreshPlatform({nickname,filter,page})
         .then (json => {
           return {
             platform: json

@@ -1,5 +1,5 @@
 import platforms from './platforms'
-import episodes, {forPlatform} from './episodes'
+import episodes, {pagedEpisodesForPlatform,forPlatform} from './episodes'
 
 // todo
 // should we scrap this and the 'real' api class above,
@@ -30,8 +30,8 @@ const MockAPI = class {
   // and merging into the platform... this is so different from real implementation
   // that it's only valuable for testing the reducers, not any kind of integration
   // and only good for that as long as the mock api is kept in sync w/ the real thing
-  refreshPlatform({nickname,filter}){
-    console.log(`API.fetch /platforms/${nickname}/refresh` + (!!filter ? `?filter='${filter}` : ''))
+  refreshPlatform({nickname,filter,page}){
+    console.log(`API.fetch /platforms/${nickname}/refresh ${JSON.stringify({filter,page})}`);
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -39,7 +39,7 @@ const MockAPI = class {
           'error' : `Platform with nickname ${nickname} not found`
         })
       } else {
-        const matches = forPlatform({nickname}).filter(e => this.isMatchingEpisode(e, filter))
+        const matches = pagedEpisodesForPlatform({nickname,page}).filter(e => this.isMatchingEpisode(e, filter))
         setTimeout(resolve, 0, {
           ...platform, episodes: matches
         })

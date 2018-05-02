@@ -13,17 +13,15 @@ Scenario Outline: pagination
     |nickname|
     |nts|
     |rinse|
-    |radar|
 
 @pagination @routes
 Scenario Outline: pagination routes
   Given the platform nickname=<nickname>
-  When I visit '/platforms/<nickname>/refresh.json?page=1'
-  And  I visit '/platforms/<nickname>/refresh.json?page=3'
+  When I visit '/platforms/<nickname>/refresh?page=1'
+  And  I visit '/platforms/<nickname>/refresh/page/3'
   Then each response should contain different episodes
   
   Examples:
     |nickname|
     |nts|
     |rinse|
-    |radar|

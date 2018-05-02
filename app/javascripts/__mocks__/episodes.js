@@ -1642,8 +1642,34 @@ export const episodes = [{
     "id": 2,
     "nickname": "rinse"
   }
-}]
+}];
+
+const chunk = (arr, len) => {
+  let chunks = [], i = 0, n = arr.length;
+  while (i < n) {
+    chunks.push(arr.slice(i, i += len));
+  }
+
+  return chunks;
+}
+
+
 export default episodes;
+
+export const pagedEpisodes = (eps=null, page=null) => {
+  const paged = chunk((eps || episodes), 10)
+  const len = paged.length
+  const getKey = (i => `page${i}`)
+  return paged.reduce((store, page, i) => {
+      let entry = {}; entry[getKey(i)] = page
+    return Object.assign(store, entry)
+  },{})
+}
+
 export const forPlatform = ({nickname}) => {
   return episodes.filter(ep => ep.platform && ep.platform.nickname == nickname)
+}
+
+export const pagedEpisodesForPlatform = ({nickname,page=1}) => {
+  return pagedEpisodes(forPlatform({nickname}))[`page${page}`]
 }

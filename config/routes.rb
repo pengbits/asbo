@@ -8,6 +8,7 @@ delete 'platforms/:nickname', to: 'platforms#destroy', as: 'delete_platform'
 
   # this should prolly be PUT or POST since it creates episodes but platform exists
    get 'platforms/:nickname/refresh', to: 'platforms#refresh', as: 'platform_refresh'
+   get 'platforms/:nickname/refresh/page/:page', to: 'platforms#refresh', as: 'platform_refresh_paginated'
    
    get 'episodes', to: 'episodes#index'
    get 'episodes/:id', to: 'episodes#show', as: 'episode'
