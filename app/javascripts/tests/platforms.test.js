@@ -72,7 +72,7 @@ describe('Platforms', () => {
         
         const result = resultingState(store, combinedRootReducer)
         const count = result.episodes.episodes.length
-        console.log(result.episodes.episodes.map(ep => ep.name))
+        // console.log(result.episodes.episodes.map(ep => ep.name))
         expect(count).toBeGreaterThan(0)
         expect(count).toBe(pagedEpisodesForPlatform({nickname}).length)
     })
@@ -121,8 +121,6 @@ describe('Platforms', () => {
           // 
           expect(count).toBeGreaterThan(0)
           const expected = pagedEpisodesForPlatform({nickname,page})
-          console.log(expected.length)
-          console.log(count)
         })
     })
     
