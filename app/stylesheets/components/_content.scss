@@ -1,0 +1,23 @@
+.content {
+}
+
+.content {
+  &__primary,
+  &__secondary {
+    padding: $size-m;
+    outline: purple solid 1px
+  }
+  
+  &__primary {
+    height: 85vh;
+    margin-bottom: 20vh;
+    overflow: auto;
+  }
+  
+  &__secondary {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 15vh;
+  }
+}
