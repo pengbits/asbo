@@ -1,14 +1,13 @@
 import mockStore from './mockStore' ;
-import {resultingState} from './utils';
+import {expectActions, resultingState} from './utils';
 import reducer  from '../redux/media';
 
 import {
   initMedia,
-  INIT_MEDIA,
   startMedia, 
-  START_MEDIA,
   stopMedia,
-  STOP_MEDIA
+  fetchEmbed,
+  FETCH_EMBED
 } from '../redux/media'
 
 describe('Media', () => {
@@ -28,14 +27,21 @@ describe('Media', () => {
   })
   
   describe('embed', () => {
-    it('can retrieve the embed code from the url', () => {
+    it('can fetch the embed code from the url', async () => {
       const store = mockStore()
-      store.dispatch(initMedia({
+      await store.dispatch(fetchEmbed({
         type: 'soundcloud',
         url: 'https://api.soundcloud.com/tracks/428105211'
       }))
-      const result = resultingState(store, reducer)
-      expect(result.embed).toBeTruthy()
+      .then(() => {
+        expectActions(store, [
+          `${FETCH_EMBED}_PENDING`,
+          `${FETCH_EMBED}_FULFILLED`
+        ]);
+        const result = resultingState(store, reducer)
+        expect(result.embed.toBeTruthy)
+      })
+      
     })
   })
   
