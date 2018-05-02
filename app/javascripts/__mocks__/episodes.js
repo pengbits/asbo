@@ -1653,20 +1653,23 @@ const chunk = (arr, len) => {
   return chunks;
 }
 
-export const pagedEpisodes = (page=null) => {
-  const paged = chunk(episodes, 10)
+
+export default episodes;
+
+export const pagedEpisodes = (eps=null, page=null) => {
+  const paged = chunk((eps || episodes), 10)
   const len = paged.length
   const getKey = (i => `page${i}`)
-  const map =  paged.reduce((store, page, i) => {
+  return paged.reduce((store, page, i) => {
       let entry = {}; entry[getKey(i)] = page
     return Object.assign(store, entry)
   },{})
-  return !!page ? map[getKey(page)] : map
 }
 
-export default episodes;
 export const forPlatform = ({nickname}) => {
   return episodes.filter(ep => ep.platform && ep.platform.nickname == nickname)
 }
 
-// export const forPlatformByPage = {nickname,page}
+export const pagedEpisodesForPlatform = ({nickname,page=1}) => {
+  return pagedEpisodes(forPlatform({nickname}))[`page${page}`]
+}

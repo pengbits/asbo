@@ -2,7 +2,7 @@ jest.mock('../api')
 
 // mock store setup
 import mockStore from './mockStore' ;
-import episode_data, {pagedEpisodes, forPlatform} from '../__mocks__/episodes';
+import episode_data, {pagedEpisodesForPlatform, forPlatform} from '../__mocks__/episodes';
 
 // load application code & mock the api
 import * as p from '../redux/platforms';
@@ -104,13 +104,12 @@ describe('Platforms', () => {
       const store1 = mockStore({})
       store1.dispatch(setPage({'page': 2}))
       const state1 = resultingState(store1, combinedRootReducer)
-      const {currentPage} = state1.pagination
-      expect(currentPage).toBe(2)
+      const page = state1.pagination.currentPage
+      expect(page).toBe(2)
       
-      console.log(pagedEpisodes(1))
       // refresh the platform
       const store2 = mockStore(state1)
-      await store2.dispatch(p.refreshPlatform({nickname,page:currentPage}))
+      await store2.dispatch(p.refreshPlatform({nickname,page}))
         .then(() => {
           const state2 = resultingState(store2, combinedRootReducer)
           const eps = state2.episodes.episodes
@@ -118,6 +117,9 @@ describe('Platforms', () => {
           const count  = eps.length
           // 
           expect(count).toBeGreaterThan(0)
+          const expected = pagedEpisodesForPlatform({nickname,page})
+          console.log(expected.length)
+          console.log(count)
         })
     })
     

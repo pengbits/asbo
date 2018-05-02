@@ -13,7 +13,6 @@ Scenario Outline: pagination
     |nickname|
     |nts|
     |rinse|
-    |radar|
 
 @pagination @routes
 Scenario Outline: pagination routes
@@ -26,4 +25,3 @@ Scenario Outline: pagination routes
     |nickname|
     |nts|
     |rinse|
-    |radar|
