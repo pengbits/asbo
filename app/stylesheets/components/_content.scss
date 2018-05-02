@@ -4,13 +4,12 @@
 .content {
   &__primary,
   &__secondary {
-    padding: $size-m;
     outline: purple solid 1px
   }
   
   &__primary {
-    height: 85vh;
-    margin-bottom: 20vh;
+    padding: $size-m;
+    margin-bottom: 180px;
     overflow: auto;
   }
   
@@ -18,6 +17,6 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 15vh;
+    height: 180px;
   }
 }
