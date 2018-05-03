@@ -1,3 +1,4 @@
+jest.mock('../embed')
 import mockStore from './mockStore' ;
 import {expectActions, resultingState} from './utils';
 import reducer  from '../redux/media';
@@ -38,8 +39,9 @@ describe('Media', () => {
           `${FETCH_EMBED}_PENDING`,
           `${FETCH_EMBED}_FULFILLED`
         ]);
-        const result = resultingState(store, reducer)
-        expect(result.embed.toBeTruthy)
+        const {embed} = resultingState(store, reducer)
+        expect(embed).toBeTruthy()
+        console.log(embed)
       })
       
     })
