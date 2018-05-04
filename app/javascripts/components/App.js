@@ -3,7 +3,7 @@ import Nav from './Nav'
 import '../../stylesheets/app.scss'
 
 const App = ({children}) => {
-  const multiRegion = children.length && children.length == 2;
+  const multiRegion = children && children.length && children.length == 2;
   const primary     = multiRegion ? children[0] : children
   const secondary   = multiRegion ? children[1] : null
   
