@@ -21,7 +21,7 @@ class API {
     if(type !== 'soundcloud') throw new Error(`${type} is not a supported embed type`)
     if(!url) throw new Error('url not provided')
     
-    return fetch('/api/media/resolve', {
+    return fetch('/api/media', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({'media': {type,url}})

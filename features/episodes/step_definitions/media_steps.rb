@@ -9,14 +9,15 @@ Given("I have a media object with a url and a valid type") do
     url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/438286137&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
     type: "soundcloud"
   }
-  puts @media
 end
 
 When("I post the attributes to the media endpoint") do
-  pending # Write code here that turns the phrase above into concrete actions
+  post "/media", @media
+  @response = last_response.body
 end
 
 Then("I will get an embed back") do
-  pending # Write code here that turns the phrase above into concrete actions
+  # pending # Write code here that turns the phrase above into concrete actions
+  puts @response
 end
 
