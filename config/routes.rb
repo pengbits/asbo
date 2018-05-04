@@ -13,4 +13,6 @@ delete 'platforms/:nickname', to: 'platforms#destroy', as: 'delete_platform'
    get 'episodes', to: 'episodes#index'
    get 'episodes/:id', to: 'episodes#show', as: 'episode'
    get 'episodes/filter/:filter', to: 'episodes#index', as: 'episodes_filtered'
+
+   post 'media', to: 'media#fetch_embed', as: 'fetch_media_embed'
 end

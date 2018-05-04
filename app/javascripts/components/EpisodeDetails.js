@@ -49,7 +49,7 @@ class EpisodeDetails extends Component {
       </p>)}
   
       {media && (<p><b>media url</b><br />
-        <a href={media.url}>{media.url}</a>
+        <a href={media.url} onClick={this.fetchEmbed.bind(this)}>{media.url}</a>
       </p>)}
       
       {details_absolute && (<p><b>details url</b><br />
@@ -61,6 +61,14 @@ class EpisodeDetails extends Component {
       </p>
     </div>
     )
+  }
+  
+  fetchEmbed(e){
+    const {media, fetchEmbed} = this.props;
+    const {url,type} = media;
+
+    e.preventDefault()
+    fetchEmbed({url,type})
   }
 }
 

@@ -3,12 +3,14 @@ import platforms from './platforms'
 import episodes from './episodes'
 import filter from './filter'
 import pagination from './pagination'
+import media from './media'
 
 export const rootReducer = {
   platforms,
   filter,
   episodes,
-  pagination
+  pagination,
+  media
 }
 
 // 2/2 gather sub-reducers up into a single reducer containing the individual state slices,

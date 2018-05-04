@@ -57,9 +57,13 @@ const store = createStore(
 // store.dispatch(push('/foo'))
 const renderComponent = (action) => {
   if(action){
-    const Component = routes.component(action)
+    const PrimaryComponent    = routes.component(action)
+    const SecondaryComponent  = routes.component(action, {secondary:true})
+
     return (<App>
-      <Component />
+      <PrimaryComponent />{!!SecondaryComponent && 
+        <SecondaryComponent />
+      }
     </App>)
   } else {
     return (<App />)
