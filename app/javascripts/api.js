@@ -16,6 +16,28 @@ class API {
     return this.get(Object.assign({}, opts, {kind:'episode'}))
   }
   
+  getMediaEmbed({url,type}){
+    if(!type) throw new Error('must provide a type')
+    if(type !== 'soundcloud') throw new Error(`${type} is not a supported embed type`)
+    if(!url) throw new Error('url not provided')
+    
+    return fetch('/api/media/resolve', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({'media': {type,url}})
+    })
+      .then(response => {
+        if(response.ok){
+          return response.json()
+        } else {
+          throw new Error(response.statusText)
+        }
+      }).then(function(json){
+        return json
+      })
+
+  }
+  
   getEpisode({id}){
     if(id !== undefined){
       const url = `/api/episodes/${id}`

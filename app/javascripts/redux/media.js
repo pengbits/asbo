@@ -1,4 +1,4 @@
-import {getEmbedFromRemoteAPI} from '../embed'
+import API from '../api'
 import {createAction,createActions,handleActions} from 'redux-actions'
 
 
@@ -23,7 +23,7 @@ export const stopMedia = createAction(STOP_MEDIA)
 export const fetchEmbed = function({url,type}){
   return {
     type: FETCH_EMBED,
-    payload: getEmbedFromRemoteAPI({url,type})
+    payload: API.getMediaEmbed({url,type})
   }
 }
 
