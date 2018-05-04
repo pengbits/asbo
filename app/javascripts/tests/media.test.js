@@ -39,10 +39,10 @@ describe('Media', () => {
           `${FETCH_EMBED}_PENDING`,
           `${FETCH_EMBED}_FULFILLED`
         ]);
-        console.log(resultingState(store,reducer))
-        // const {embed} = resultingState(store, reducer)
-        // expect(embed).toBeTruthy()
-        // console.log(embed)
+
+        const {embed} = resultingState(store, reducer)
+        expect(embed).toBeTruthy()
+        expect(embed.html).toContain('<iframe width="100%"')
       })
       
     })
