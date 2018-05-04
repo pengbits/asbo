@@ -66,7 +66,7 @@ class EpisodeDetails extends Component {
   fetchEmbed(e){
     const {media, fetchEmbed} = this.props;
     const {url,type} = media;
-  console.log(type)
+
     e.preventDefault()
     fetchEmbed({url,type})
   }
