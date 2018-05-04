@@ -6,8 +6,18 @@ end
 
 Given("I have a media object with a url and a valid type") do
   @media = {
-    url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/438286137&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
-    type: "soundcloud"
+    media: {
+      url: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/438286137&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
+      type: "soundcloud"
+    }
+  }
+end
+
+Given("I have a media object with a url and an invalid type") do
+  @media = {
+    media: {
+      type: "foo"
+    }
   }
 end
 
@@ -19,5 +29,9 @@ end
 Then("I will get an embed back") do
   # pending # Write code here that turns the phrase above into concrete actions
   puts @response
+end
+
+Then("I will get an error") do
+  
 end
 
