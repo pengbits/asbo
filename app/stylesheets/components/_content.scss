@@ -9,8 +9,11 @@
   
   &__primary {
     padding: $size-m;
-    margin-bottom: 180px;
     overflow: auto;
+    
+    .content--with-secondary & {
+      margin-bottom: 180px;
+    }
   }
   
   &__secondary {
