@@ -1,6 +1,16 @@
 class MediaController < ApplicationController
   def fetch_embed
-    Embed::fetch(media_params[:type], media_params[:url])
+    @embed = Embed.new
+    begin 
+      @json = @embed.fetch(media_params[:type], media_params[:url])
+      render json: @json
+      
+    rescue RuntimeError => e
+      render json: {
+        status: 500,
+        error: e.message
+      }
+    end
   end
   
   private
