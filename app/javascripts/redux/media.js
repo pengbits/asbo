@@ -20,11 +20,10 @@ export const initMedia = createAction(INIT_MEDIA)
 export const playMedia = createAction(PLAY_MEDIA)
 export const stopMedia = createAction(STOP_MEDIA)
 
-export const fetchEmbed = function(cfg){
-  const {url} = cfg
+export const fetchEmbed = function({url,type}){
   return {
     type: FETCH_EMBED,
-    payload: getEmbedFromRemoteAPI({url})
+    payload: getEmbedFromRemoteAPI({url,type})
   }
 }
 

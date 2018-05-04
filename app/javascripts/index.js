@@ -59,12 +59,10 @@ const renderComponent = (action) => {
   if(action){
     const PrimaryComponent = routes.component(action)
     const SecondaryComponent = routes.component(action, {secondary:true})
-    if(SecondaryComponent){
-      console.log('found secondary')
-    }
+
     return (<App>
-      <PrimaryComponent />{SecondaryComponent && 
-        <SecondaryComponent />
+      <PrimaryComponent />{
+        !!SecondaryComponent && <SecondaryComponent />
       }
     </App>)
   } else {
