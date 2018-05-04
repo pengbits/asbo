@@ -34,6 +34,7 @@ map[p.EDIT_PLATFORM]   = {
 
 map[e.LOAD_EPISODES] = {
   component : EpisodeList,
+  secondary : Media,
   regex     : /episodes$/
 }
 
@@ -65,11 +66,14 @@ const routes = {
     }
   }),
   
-  'component':(action => {
+  'component':((action, opts={}) => {
+    const {secondary} = opts
+    console.log(`${secondary}`)
     if(!map[action]) {
       throw new Error(`could not map '${action}' to component`)
     } else {
-      return map[action].component
+      const k = secondary ? 'secondary' : 'component'
+      return map[action][k]
     }
   })
 }

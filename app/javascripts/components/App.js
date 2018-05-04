@@ -12,11 +12,11 @@ const App = ({children}) => {
       <div className="content__primary">
         <h1 className='h1'>Asbo</h1>
         <Nav />
-        {primary}
+        {children}
       </div>
-      {secondary && 
-      <div className="content__secondary">{secondary}</div>
-      }
+      <div className="content__secondary">
+        {secondary}
+      </div>
     </div>
   </div>)
 }
