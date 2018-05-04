@@ -1,4 +1,5 @@
 import platforms from './platforms'
+import embed from './embed'
 import episodes, {pagedEpisodesForPlatform,forPlatform} from './episodes'
 
 // todo
@@ -65,6 +66,16 @@ const MockAPI = class {
         setTimeout(reject, 0, {
           'error' : `Episode with id ${id} not found`
         })
+      }
+    })
+  }
+  
+  getMediaEmbed({type,url}){
+    return new Promise((resolve,reject) => {
+      if(!!type && type == 'soundcloud' && !!url){
+        setTimeout(resolve, 0, {foo:true})
+      } else {
+        setTimeout(reject, 0, {'error':'must provide valid type and url'})
       }
     })
   }

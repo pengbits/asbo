@@ -16,6 +16,25 @@ class API {
     return this.get(Object.assign({}, opts, {kind:'episode'}))
   }
   
+  getEpisode({id}){
+    if(id !== undefined){
+      const url = `/api/episodes/${id}`
+      return fetch(url)
+        .then(response => {
+          if(response.ok){
+            return response.json()
+          } else {
+            throw new Error(response.statusText)
+          }
+        }).then(function(json){
+          return json
+        })
+    }
+    else {
+      throw new Error('API#getEpisode called without id')
+    }
+  }
+  
   getMediaEmbed({url,type}){
     if(!type) throw new Error('must provide a type')
     if(type !== 'soundcloud') throw new Error(`${type} is not a supported embed type`)
@@ -37,26 +56,6 @@ class API {
       })
 
   }
-  
-  getEpisode({id}){
-    if(id !== undefined){
-      const url = `/api/episodes/${id}`
-      return fetch(url)
-        .then(response => {
-          if(response.ok){
-            return response.json()
-          } else {
-            throw new Error(response.statusText)
-          }
-        }).then(function(json){
-          return json
-        })
-    }
-    else {
-      throw new Error('API#getEpisode called without id')
-    }
-  }
-  
   
   refreshPlatform({nickname,filter}){
     const base = this.url({nickname})
