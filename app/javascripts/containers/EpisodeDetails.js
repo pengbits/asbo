@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import EpisodeDetails from '../components/EpisodeDetails'
 import {refreshEpisode} from '../redux/episodes'
+import {fetchEmbed} from '../redux/media'
 
 const mapStateToProps = (state, ownProps) => {  
   const {episode,loading,error} = state.episodes 
@@ -9,7 +10,11 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {}
+  return {
+    fetchEmbed: ({url,type}) => {
+      dispatch(fetchEmbed({url,type}))
+    }
+  }
 }
 
 const EpisodeDetailsContainer = connect(

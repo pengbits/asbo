@@ -1,4 +1,5 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
+import {setFilter, SET_FILTER} from './filter'
 import API  from '../api'
 
 // constants
@@ -71,15 +72,28 @@ export const updatePlatform = function(attrs) {
   }
 }
 
+// export const setFilterAndFetch = function(opts={}){
+//   return (dispatch, getState) => {
+//     dispatch(setFilter(opts.filter));
+//     return dispatch(refreshPlatform(opts.nickname}))
+//   }
+// }
+
 export const refreshPlatform = function({nickname}) {
-  return {
-    type: REFRESH_PLATFORM,
-    payload: API.refreshPlatform({nickname})
-      .then (json => {
-        return {
-          platform: json
-        }
-      })
+  return (dispatch, getState) => {
+    const {filter,pagination} = getState()
+    const {currentPage} = pagination || {};
+    const page = currentPage || 1
+    console.log(`refreshPlatform page:${page}`)
+    return dispatch({
+      type: REFRESH_PLATFORM,
+      payload: API.refreshPlatform({nickname,filter,page})
+        .then (json => {
+          return {
+            platform: json
+          }
+        })
+    })
   }
 }
 
@@ -95,17 +109,19 @@ export const destroyPlatform = function({nickname}){
   }
 }
 
-// reducer
+// reducers
 // might want to look into somethinbg like type-to-reducer
 // https://github.com/tomatau/type-to-reducer
 // or just handleActions from redux-actions
 // https://redux-actions.js.org/docs/api/handleAction.html
 export const initialState = {
   platforms : [],
-  platform  : null,
+  platform  : {},
   loading: false
 }
-export default function reducer(state=initialState, action={}){
+
+
+export const reducer = function(state=initialState, action={}){
   switch(action.type){
     case `${LOAD_PLATFORM}_PENDING`:
     case `${LOAD_PLATFORMS}_PENDING`:
@@ -127,10 +143,11 @@ export default function reducer(state=initialState, action={}){
     case `${EDIT_PLATFORM}_FULFILLED`:
     case `${CREATE_PLATFORM}_FULFILLED`:
     case `${REFRESH_PLATFORM}_FULFILLED`:
+      const {platform} = action.payload
       return {
         ...state,
         loading: false,
-        platform: action.payload.platform
+        platform: {...platform, episodes:[]} // force us to use the episodes in episodes reducer
       }
   
     case `${LOAD_PLATFORMS}_FULFILLED`:
@@ -146,9 +163,10 @@ export default function reducer(state=initialState, action={}){
         loading:false,
         platform: {}
       }
-    
+      
     default: 
       return state
     break
   }
 }
+export default reducer

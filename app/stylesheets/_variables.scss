@@ -1,0 +1,33 @@
+
+$size-xxs : 2px;
+$size-xs  : 5px;
+$size-s   : 10px;
+$size-m   : 20px;
+$size-l   : 50px;
+$size-xl  : 100px;
+$size-xxl : 200px;
+
+$colors-black : #000;
+$colors-white : #FFF;
+$colors-light-grey : #EEE;
+$colors-medium-grey : #CCC;
+$colors-dark-grey: #666;
+$colors-pale-blue: #0099ff;
+
+$typography-size-one   : 36px;
+$typography-size-two   : 28px;
+$typography-size-three : 28px;
+$typography-size-four  : 20px;
+$typography-size-five  : 16px;
+$typography-size-six   : 12px;
+
+$typography-height-one   : $typography-size-one * 1.25; 
+$typography-height-two   : $typography-size-two * 1.25;
+$typography-height-three : $typography-size-three * 1.25;
+$typography-height-four  : $typography-size-four * 1.25;
+$typography-height-five  : $typography-size-five * 1.25;
+$typography-height-six   : $typography-size-six * 1.25;
+
+$typography-body-text-size   : $typography-size-five;
+$typography-body-text-height : $typography-height-five;
+

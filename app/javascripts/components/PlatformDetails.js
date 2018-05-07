@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropertyMapReadOnly from './PropertyMapReadOnly'
 import Hint from './Hints.js'
-import EpisodeListItem from './EpisodeListItem'
+import EpisodeGrid from './EpisodeGrid'
 
 class PlatformDetails extends Component {
   render() {
@@ -21,15 +21,12 @@ class PlatformDetails extends Component {
       episodes
     } = this.props
     
-    if(loading){
-      return <p>...</p> 
-    }
-    else if(error){
+    if(error){
       return <p  className='error'>An Error has occurred</p>
     }
     
     return ( 
-    <div className="platform-details">
+    <div className={`platform-details ${loading ? 'is-loading':''}`}>
       <h2 className='h2'>Platform</h2>
       <p>
         <b>name</b><br />
@@ -52,11 +49,13 @@ class PlatformDetails extends Component {
         {default_image}
       </p>
       <p>
+        <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
+      </p>
+      <p>
         <b>Episodes</b>{' '}{this.refreshButton()}
       </p>
       <p>
-        {episodes.length || "none"}<br />
-        {episodes.length && this.episodeList()}
+        {this.episodeGrid()}
       </p>
       <p>
         &nbsp;
@@ -75,17 +74,19 @@ class PlatformDetails extends Component {
     </button>)
   }
   
-  episodeList(){
+  episodeGrid(){
     const {episodes} = this.props
-    
-    return (<ul className='menu'>
-      {episodes.map(e => <EpisodeListItem {...e} key={e.id} />)}
-    </ul>)
+    return <EpisodeGrid episodes={episodes || []} onSetFilter={this.onSetFilter.bind(this)} />
   }
   
   refreshPlatform(){
     const {nickname,refreshPlatform} = this.props;
     refreshPlatform({nickname})
+  }
+  
+  onSetFilter({filter}){
+    const {nickname} = this.props
+    this.props.setFilterAndRefresh({nickname,filter})
   }
 }
 

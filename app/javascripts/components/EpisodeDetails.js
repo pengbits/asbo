@@ -8,11 +8,11 @@ class EpisodeDetails extends Component {
       id,
       date,
       image,
-      platform_id,
+      platform,
       loading,
       error,
       media,
-      details
+      details_absolute
     } = this.props
     
     if(loading){
@@ -30,12 +30,14 @@ class EpisodeDetails extends Component {
         {name}
       </p>
       {image && (<p>
-        <b>image</b><br />
-        {image}
+        <img className='episode-details__image' src={image} />
       </p>)}
       <p>
         <b>platform</b><br />
-        {platform_id}
+      {platform && 
+        <Link to={`/platforms/${platform.nickname}`}>
+          {platform.nickname}
+        </Link>}
       </p>
       <p>
         <b>date</b><br />
@@ -50,8 +52,8 @@ class EpisodeDetails extends Component {
         <a href={media.url}>{media.url}</a>
       </p>)}
       
-      {details && (<p><b>details url</b><br />
-        <a href={details}>{details}</a>
+      {details_absolute && (<p><b>details url</b><br />
+        <a href={details_absolute}>{details_absolute}</a>
       </p>)}
   
       <p>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import EpisodeListItem from './EpisodeListItem'
+import EpisodeGrid from './EpisodeGrid'
 
 class EpisodeList extends Component {
   render() {
@@ -10,14 +10,10 @@ class EpisodeList extends Component {
   }
   
   renderBody(){
-    const {episodes,loading} = this.props
-    return loading ? <p>...</p> : (<div>
+    const {episodes,loading,onSetFilter} = this.props
+    return (<div className={loading ? 'is-loading':''}>
       <h2 className='h2'>Episodes</h2>
-      <ul className='menu'>
-        {(episodes || []).map(e => <EpisodeListItem 
-          {...e} platform={e.platform.nickname} key={e.id}
-        />)}
-      </ul>
+      <EpisodeGrid episodes={episodes} onSetFilter={onSetFilter} />
     </div>)
   }
 }

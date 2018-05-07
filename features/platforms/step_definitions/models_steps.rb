@@ -18,7 +18,8 @@ When("I make a POST request to platforms endpoint with valid JSON") do |json|
 end
 
 When("I make a DELETE request to platform endpoint") do
-  @nick = @platforms.first.nickname
+  @platform = @platforms.first
+  @nick = @platform.nickname
   url = "/platforms/#{@nick}"
   delete url
 end
@@ -56,9 +57,11 @@ When("I make a PUT request to platform endpoint") do
   put url, @json
 end
 
-Then("I should get a valid response containing the platform") do
-  @response = last_response.body
+Then("I should get a valid response for the created platform") do
+  @response = JSON.parse(last_response.body)
+
   expect(@response['error']).to be_nil
+  expect(@response['name']).to eq(@json['platform']['name'])
 end
 
 Then("the platform in the response should reflect the changes") do
@@ -82,8 +85,14 @@ Then("the platform in the response should reflect the changes") do
       expect(attr_json[k.to_s]).to eq(attr_hash[k])
     end
   end
-  
+end
 
+Then("I should get a valid response for the deleted platform") do
+  @response = JSON.parse(last_response.body)
+
+  expect(@response['error']).to be_nil
+  expect(@response['success']).to be_truthy
+  expect(@response['platform']['name']).to eq(@platform.name)
 end
 
 

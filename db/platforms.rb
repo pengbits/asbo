@@ -19,7 +19,11 @@ module PlatformData
       pagination: {    
         "route"        => "/page/:page",
         "itemsPerPage" => 12
-      }
+      },
+      post_processing_rules: [{
+        "name" => "image",
+        "gsub" => ["100x100","800x800"]
+      }]
     },{
       id: "2",
       name: "rinse.fm",
@@ -44,7 +48,7 @@ module PlatformData
       id: "3",
       name: "radar radio",
       nickname: "radar",
-      url: "http://www.radarradio.com/podcasts",
+      url: "https://www.radarradio.com/podcasts",
       date_format: "%e %b",
       has_details: true,
       use_relative_images: true,

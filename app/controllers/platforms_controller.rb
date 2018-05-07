@@ -70,6 +70,7 @@ class PlatformsController < ApplicationController
       :attr_map,
       :pagination,
       :has_details,
+      :default_image,
       :nickname
     ).merge({
       :attr_map => nested_serialized_param(:attr_map,
@@ -104,7 +105,11 @@ class PlatformsController < ApplicationController
   end
   
   def platform_episodes
-    @platform.episodes.collect do |episode|
+    episodes = !!params[:filter] ? 
+      @platform.episodes_with_name_matching(params[:filter]) :
+      @platform.episodes
+      
+    episodes.collect do |episode|
       episode.attributes_minimal #.merge(:platform => platform_meta)
     end
   end

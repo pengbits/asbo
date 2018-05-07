@@ -30,17 +30,3 @@ Feature: Store scraping rules in platform
         "date":"2018-02-04"
        }
       """
-  
-  @attr @radar
-  Scenario: Parse radarradio
-    When I call create_episodes_from_html on platform 3
-    Then I should get an episode with these attributes
-      """
-      {
-        "platform_id":3,
-        "name":"Night Slugs w/ Girl Unit & Bok Bok (Hardbody Special)",
-        "image":"/wp-content/uploads/2018/02/Nightslugs-Feb.jpg",
-        "details":"/podcasts/night-slugs-w-girl-unit-bok-bok-hardbody-special-13th-feb",
-        "date":"2018-02-13"
-      }
-      """

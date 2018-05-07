@@ -1,2 +1,6 @@
-alls well now, but we need tests around changing models/out of date seeds
+POST PROCESSING
+- need to expose rules in form and add ability to edit/save
+
+MISC
+- alls well now, but we need tests around changing models/out of date seeds
 

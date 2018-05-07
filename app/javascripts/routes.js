@@ -6,6 +6,8 @@ import PlatformForm from './containers/PlatformForm'
 import * as e from './redux/episodes'
 import EpisodeList from './containers/EpisodeList'
 import EpisodeDetails from './containers/EpisodeDetails'
+
+import Media from './containers/Media'
 let map = {}
 
 map[p.LOAD_PLATFORMS]  = {
@@ -37,6 +39,7 @@ map[e.LOAD_EPISODES] = {
 
 map[e.LOAD_EPISODE] = {
   component : EpisodeDetails,
+  secondary : Media,
   regex     : /episodes\/(.+)$/,
   params    : { 'id' : 1}
 }
@@ -63,11 +66,12 @@ const routes = {
     }
   }),
   
-  'component':(action => {
+  'component':((action, opts={}) => {
     if(!map[action]) {
       throw new Error(`could not map '${action}' to component`)
     } else {
-      return map[action].component
+      const k = opts.secondary ? 'secondary' : 'component'
+      return map[action][k]
     }
   })
 }

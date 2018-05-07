@@ -1,4 +1,8 @@
 
+// todo
+// should we scrap this and the mock api class at __mocks__/api,
+// and just use axios + moxios or similar right in the reducer?
+
 class API {
   getPlatforms(){
     return this.get()
@@ -8,8 +12,8 @@ class API {
     return this.get(opts)
   }
   
-  getEpisodes(){
-    return this.get({'kind':'episode'})
+  getEpisodes(opts={}){
+    return this.get(Object.assign({}, opts, {kind:'episode'}))
   }
   
   getEpisode({id}){
@@ -31,10 +35,32 @@ class API {
     }
   }
   
+  getMediaEmbed({url,type}){
+    if(!type) throw new Error('must provide a type')
+    if(!['soundcloud','mixcloud'].includes(type)) throw new Error(`${type} is not a supported embed type`)
+    if(!url) throw new Error('url not provided')
+
+    console.log(`API get /api/media`)
+    return fetch('/api/media', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({'media': {type,url}})
+    })
+      .then(response => {
+        if(response.ok){
+          return response.json()
+        } else {
+          throw new Error(response.statusText)
+        }
+      }).then(function(json){
+        return json
+      })
+
+  }
   
-  refreshPlatform({nickname}){
+  refreshPlatform({nickname,filter}){
     const base = this.url({nickname})
-    const url  = `${base}/refresh`
+    const url  = `${base}/refresh` + (!!filter ? `?filter=${filter}` : '')
     console.log(`API get ${url}`)
     return fetch(url)
       .then(response => {
@@ -110,7 +136,16 @@ class API {
   // this isn't scaling well!
   url(opts={}){
     const kind = opts.kind || 'platform'
-    return opts.nickname ? `/api/${kind}s/${opts.nickname}` : `/api/${kind}s`
+    let urlStr = `/api/${kind}s`
+    
+    if(kind == 'platform' && opts.nickname) {
+      urlStr += `/${opts.nickname}` 
+    }
+    
+    if(kind == 'episode' && opts.filter) {
+      urlStr += `/filter/${opts.filter}`
+    }
+    return urlStr
   }  
 }
 

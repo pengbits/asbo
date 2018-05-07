@@ -13,11 +13,11 @@ end
 
 Then("the platform will contain an episode with this url") do |details_url|
   @ep = @platform.episodes.first
-  expect(@ep.details).to eq(details_url)
+  expect(@ep.details_absolute).to eq(details_url)
 end
 
 Then("the platform will not contain any details urls in its episodes") do
   expect(@platform.episodes).not_to be_empty
-  @eps_with_details = @platform.episodes.select {|ep| ep.details }
+  @eps_with_details = @platform.episodes.select {|ep| ep.details_absolute }
   expect(@eps_with_details).to be_empty
 end

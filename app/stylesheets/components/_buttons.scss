@@ -1,0 +1,25 @@
+
+
+.btn {
+  display: inline-block;
+  border-radius: $size-s;
+  padding: $size-s $size-m;
+  background-color: $colors-light-grey;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: $colors-black;
+  
+  &:hover {
+    background-color: $colors-medium-grey;  
+    text-decoration: none;
+
+  }
+}
+
+.btn-s {
+  padding: $size-xs $size-s;
+  
+  font-size   : $typography-size-six;
+  line-height : $typography-height-six;
+}

@@ -27,11 +27,14 @@ import App from './components/app'
 // import PlatformList from './containers/PlatformList'
 // import PlatformDetails from './containers/PlatformDetails'
 import LocationMiddleware from './location-middleware'
+import MediaMiddleware from './media-middleware'
 import rootReducer from './redux'
 
 // init history
 const history = createHistory()
 
+// TODO prolly need to extract store setup and move elsewhere,
+// perhaps alongside similar setup for a mockstore?
 // init dev tools & store
 const k = '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__';
 const opts = {'actionsBlacklist' : ['@@router/LOCATION_CHANGE','@@redux-form']} // these get noisy
@@ -46,6 +49,7 @@ const store = createStore(
     applyMiddleware(
       routerMiddleware(history),
       LocationMiddleware,
+      MediaMiddleware,
       promiseMiddleware(),
       thunk
     )
@@ -55,9 +59,13 @@ const store = createStore(
 // store.dispatch(push('/foo'))
 const renderComponent = (action) => {
   if(action){
-    const Component = routes.component(action)
+    const PrimaryComponent    = routes.component(action)
+    const SecondaryComponent  = routes.component(action, {secondary:true})
+
     return (<App>
-      <Component />
+      <PrimaryComponent />{!!SecondaryComponent && 
+        <SecondaryComponent />
+      }
     </App>)
   } else {
     return (<App />)

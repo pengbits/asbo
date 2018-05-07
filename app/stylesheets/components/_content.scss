@@ -1,0 +1,25 @@
+.content {
+}
+
+.content {
+  &__primary,
+  &__secondary {
+  }
+  
+  &__primary {
+    padding: $size-m;
+    overflow: auto;
+    
+    .content--with-secondary & {
+      margin-bottom: 120px;
+    }
+  }
+  
+  &__secondary {
+    position: fixed;
+    bottom: 0;
+    background: #FFF;
+    width: 100%;
+    height: 120px;
+  }
+}
