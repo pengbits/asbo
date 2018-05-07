@@ -27,6 +27,7 @@ import App from './components/app'
 // import PlatformList from './containers/PlatformList'
 // import PlatformDetails from './containers/PlatformDetails'
 import LocationMiddleware from './location-middleware'
+import MediaMiddleware from './media-middleware'
 import rootReducer from './redux'
 
 // init history
@@ -48,6 +49,7 @@ const store = createStore(
     applyMiddleware(
       routerMiddleware(history),
       LocationMiddleware,
+      MediaMiddleware,
       promiseMiddleware(),
       thunk
     )
