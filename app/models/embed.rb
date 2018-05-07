@@ -14,12 +14,8 @@ class Embed
       raise "must provide url to Embed#fetch"
     end
     
-    @response = resolve_embed_from_url(type, url)
-    if @response.code == 200 
-      return @response.body
-    else
-      raise "#{@response.error}"
-    end
+    resolve_embed_from_url(type, url)
+      
   end
   
   private
@@ -27,10 +23,22 @@ class Embed
   def resolve_embed_from_url(type, url)
     case type
       when 'soundcloud'
-        return HTTParty.get "http://soundcloud.com/oembed?format=json&url=#{url}&iframe=true"
+        response =  HTTParty.get "http://soundcloud.com/oembed?format=json&url=#{url}&iframe=true"
+        if response.code == 200
+          return @response.body
+        else
+          raise "#{@response.error}"
+        end
       when 'mixcloud'
-        raise "mixcloud not supported yet, sorry"
+        mixcloud_embed(url)
     end
+  end
+  
+  def mixcloud_embed(url)
+    path =  Media::from_url(url)['path']
+    path_escaped = URI.escape(path, "/:")
+
+    { html: "<iframe width=\"100%\" height=\"120\" src=\"https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=#{path_escaped}\" frameborder=\"0\" ></iframe>" }
   end
   
 end

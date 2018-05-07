@@ -71,9 +71,10 @@ const MockAPI = class {
   }
   
   getMediaEmbed({type,url}){
+    const valid_types = ['soundcloud','mixcloud']
     return new Promise((resolve,reject) => {
-      if(!!type && type == 'soundcloud' && !!url){
-        setTimeout(resolve, 0, embed)
+      if(!!type && valid_types.includes(type) && !!url){
+        setTimeout(resolve, 0, embed[type])
       } else {
         setTimeout(reject, 0, {'error':'must provide valid type and url'})
       }
