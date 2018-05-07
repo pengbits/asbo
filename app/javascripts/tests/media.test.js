@@ -28,7 +28,7 @@ describe('Media', () => {
   })
   
   describe('embed', () => {
-    it('can fetch the embed code from the url', async () => {
+    it('can fetch the embed code from a soundcloud url', async () => {
       const store = mockStore()
       await store.dispatch(fetchEmbed({
         type: 'soundcloud',
@@ -42,10 +42,28 @@ describe('Media', () => {
 
         const {embed} = resultingState(store, reducer)
         expect(embed).toBeTruthy()
+        console.log(embed.html)
         expect(embed.html).toContain('<iframe width="100%"')
       })
+    })
+    
+    it('can fetch the embed code from a mixcloud url', async () => {
+      const store = mockStore()
+      await store.dispatch(fetchEmbed({
+        type: 'mixcloud',
+        url: 'https://www.mixcloud.com/NTSRadio/edits-w-kelman-duran-3rd-may-2018/'
+      }))
+        .then(() => {
+          expectActions(store, [
+            `${FETCH_EMBED}_PENDING`,
+            `${FETCH_EMBED}_FULFILLED`
+          ]);
       
+          const {embed} = resultingState(store, reducer)
+          expect(embed).toBeTruthy()
+          console.log(embed.html)
+          expect(embed.html).toContain('<iframe width="100%"')
+      })
     })
   })
-  
 })
