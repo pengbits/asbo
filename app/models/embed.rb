@@ -25,9 +25,9 @@ class Embed
       when 'soundcloud'
         response =  HTTParty.get "http://soundcloud.com/oembed?format=json&url=#{url}&iframe=true"
         if response.code == 200
-          return @response.body
+          return response.body
         else
-          raise "#{@response.error}"
+          raise "#{response.error}"
         end
       when 'mixcloud'
         mixcloud_embed(url)
