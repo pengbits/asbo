@@ -13,13 +13,11 @@ end
 When("I post the attributes to the media endpoint") do
   post "/media", @media
   @response = last_response.body
-  puts @response
   @json = JSON.parse(@response)
 end
 
 Then("I will get this embed back") do |html|
   # pending # Write code here that turns the phrase above into concrete actions
-  puts @json['html']
   expect(@json['html']).to be_truthy
   expect(@json['html']).to eq(html)
 end
