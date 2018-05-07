@@ -40,7 +40,7 @@ export const reducer = function(state=initialState, action={}){
       
     case `${FETCH_EMBED}_FULFILLED`:
       let {html} = action.payload
-      html = html.replace('height="400"','height="166"')
+      html = html.replace('height="400"','height="120"')
       return {
         ...state,
         embed: {
