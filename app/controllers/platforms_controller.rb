@@ -91,7 +91,7 @@ class PlatformsController < ApplicationController
   end
   
   def nested_serialized_param(name, *permitted)
-    puts "nested_serialized #{name} => #{permitted.join(",")}"
+    #puts "nested_serialized #{name} => #{permitted.join(",")}"
     if params[:platform][name].nil?
       return {}
     else
