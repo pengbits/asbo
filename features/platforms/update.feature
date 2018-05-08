@@ -8,5 +8,4 @@ Feature: Update a Platform
      Given these platforms
        And these changes
       When I make a PUT request to platform endpoint
-      Then I should get a valid response containing the platform
-       And the platform in the response should reflect the changes
+      Then the platform in the response should reflect the changes
