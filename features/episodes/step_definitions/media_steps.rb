@@ -1,7 +1,9 @@
 
 Then("the platform will contain an episode with this media property") do |media|
-  @ep = @platform.episodes.first
-  expect(@ep.media).to eq(media.hashes.first)
+  episode = @platform.episodes.first
+
+  expect(episode.media['url']).to  eq(media.hashes.first['url'])
+  expect(episode.media['type']).to eq(media.hashes.first['type'])
 end
 
 Given("I have a media object") do |attrs|
