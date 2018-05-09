@@ -40,29 +40,29 @@ describe('Platforms', () => {
   })
   
   describe('platforms#show', () => {
-    it('dispatches an action to get the platform entry', async () => {
+    
+    const getPlatform = ({nickname}) => {
       const store = mockStore({})
-      const opts = {'nickname':'nts'}
-      await store.dispatch(p.loadPlatform(opts))
+      return store.dispatch(p.loadPlatform({nickname}))
       .then(() => {
         expectActions(store, [
           "LOAD_PLATFORM_PENDING",
           "LOAD_PLATFORM_FULFILLED"
         ]);
-        
-        const state = resultingState(store, reducer)
+        return resultingState(store, reducer)
+      })
+    }
+    
+    it('dispatches an action to get the platform entry', async () => {
+      const opts = {'nickname':'nts'}
+      await getPlatform(opts).then((state) => {
         expect(state.platform).toBeTruthy()
-        expect(state.platform.nickname).toEqual(opts.nickname)
+        expect(state.platform.nickname).toEqual(opts.nickname)          
       })
     })
     
     it('populates the episodes reducer with the contents of the platform response', async() => {
-      const store = mockStore({})
-      const opts = {'nickname':'rinse'}
-      const action = p.loadPlatform(opts)
-      await store.dispatch(action)
-      .then(() => {
-        const state = resultingState(store, combinedRootReducer)
+      await getPlatform({'nickname':'rinse'}).then((state) => {
         expect(state.platforms.platform.episodes).toHaveLength(0)
         expect(state.episodes.episodes).toHaveLength(10)
       })
