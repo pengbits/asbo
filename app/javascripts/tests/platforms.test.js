@@ -39,25 +39,24 @@ describe('Platforms', () => {
     })
   })
   
-  describe('platforms#show', () => {
-    
-    const getPlatform = ({nickname}) => {
-      const store = mockStore({})
-      return store.dispatch(p.loadPlatform({nickname}))
-      .then(() => {
-        expectActions(store, [
-          "LOAD_PLATFORM_PENDING",
-          "LOAD_PLATFORM_FULFILLED"
-        ]);
-        return resultingState(store, reducer)
-      })
-    }
-    
+  const getPlatform = ({nickname}) => {
+    const store = mockStore({})
+    return store.dispatch(p.loadPlatform({nickname}))
+    .then(() => {
+      expectActions(store, [
+        "LOAD_PLATFORM_PENDING",
+        "LOAD_PLATFORM_FULFILLED"
+      ]);
+      return resultingState(store, combinedRootReducer)
+    })
+  }
+  
+  describe('platforms#show', () => {  
     it('dispatches an action to get the platform entry', async () => {
       const opts = {'nickname':'nts'}
       await getPlatform(opts).then((state) => {
-        expect(state.platform).toBeTruthy()
-        expect(state.platform.nickname).toEqual(opts.nickname)          
+        expect(state.platforms.platform).toBeTruthy()
+        expect(state.platforms.platform.nickname).toEqual(opts.nickname)          
       })
     })
     
@@ -70,47 +69,65 @@ describe('Platforms', () => {
   })
   
   describe('platforms#refresh', () => {
-    let episodesForPlatform;
-    const nickname = 'rinse'
-    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
+    const refreshPlatform = ({nickname}) => {
       const store = mockStore({})
-      await store.dispatch(p.refreshPlatform({nickname}))
+      return store.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`,
           ])
+          return resultingState(store, combinedRootReducer)
         })
-        
-        const result = resultingState(store, combinedRootReducer)
-        const count = result.episodes.episodes.length
-        // console.log(result.episodes.episodes.map(ep => ep.name))
+    }
+    
+    const nickname = 'rinse'
+    const opts = {nickname}
+    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
+      await refreshPlatform(opts).then((state) => {
+        const count = state.episodes.episodes.length
         expect(count).toBeGreaterThan(0)
-        expect(count).toBe(pagedEpisodesForPlatform({nickname}).length)
+        expect(count).toBe(pagedEpisodesForPlatform(opts).length)
+      })
+    })
+    
+    it('knows when the refresh did not yield any new episodes', async () => {
+      let lastCount
+      await getPlatform({'nickname':'rinse'}).then((state) => {
+        lastCount = state.episodes.episodes.length
+        expect(lastCount).toBeGreaterThan(0)
+      }).then(() => {
+        return refreshPlatform(opts)
+      }).then((state) => {
+        const newCount = state.episodes.episodes.length
+        if(lastCount == newCount){
+          console.log('no new episodes found in refresh, try a different page')
+        }
+      })
     })
 
 
     const filter = 'takeover'
+    /* out of date mocks...
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       // set the filter
       const store1 = mockStore({})
       store1.dispatch(setFilter(filter))
       const state1 = resultingState(store1, combinedRootReducer)
       expect(state1.filter).toBe(filter)
-      
+    
       // refresh the platform
       const store2 = mockStore(state1)
-      await store2.dispatch(p.refreshPlatform({nickname}))
+      await store2.dispatch(p.refreshPlatform(opts))
         .then(() => {
           const state2 = resultingState(store2, combinedRootReducer)
           const eps = state2.episodes.episodes
           const count  = eps.length
-
+    
           // expect(count).toBeGreaterThan(0)
           // expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
-    })
-    
+    })*/
     
     it('passes the current page to the api when refreshing', async () => {
       // set the page
