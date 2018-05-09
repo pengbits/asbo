@@ -18,7 +18,8 @@ class PlatformDetails extends Component {
       attr_map,
       pagination,
       refreshPlatform,
-      episodes
+      episodes,
+      currentPage
     } = this.props
     
     if(error){
@@ -69,25 +70,32 @@ class PlatformDetails extends Component {
   }
   
   refreshButton(){
+    const {nextPage} = this.props;
+    
     return (<button className='btn btn-s' onClick={this.refreshPlatform.bind(this)}>
       Refresh
     </button>)
   }
   
   episodeGrid(){
-    const {episodes} = this.props
-    return <EpisodeGrid episodes={episodes || []} onSetFilter={this.onSetFilter.bind(this)} />
+    const {episodes,currentPage} = this.props
+    return <EpisodeGrid 
+      episodes={episodes || []}
+      currentPage={currentPage}
+      onSetFilter={this.onSetFilter.bind(this)} 
+    />
   }
   
   refreshPlatform(){
-    const {nickname,refreshPlatform} = this.props;
-    refreshPlatform({nickname})
+    const {nextPage,nickname} = this.props;
+    this.props.setPageAndRefresh({nickname,page:nextPage})
   }
   
   onSetFilter({filter}){
     const {nickname} = this.props
     this.props.setFilterAndRefresh({nickname,filter})
   }
+  
 }
 
 export default PlatformDetails

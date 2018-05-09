@@ -55,6 +55,18 @@ describe('Platforms', () => {
         expect(state.platform.nickname).toEqual(opts.nickname)
       })
     })
+    
+    it('populates the episodes reducer with the contents of the platform response', async() => {
+      const store = mockStore({})
+      const opts = {'nickname':'rinse'}
+      const action = p.loadPlatform(opts)
+      await store.dispatch(action)
+      .then(() => {
+        const state = resultingState(store, combinedRootReducer)
+        expect(state.platforms.platform.episodes).toHaveLength(0)
+        expect(state.episodes.episodes).toHaveLength(10)
+      })
+    })
   })
   
   describe('platforms#refresh', () => {
@@ -78,8 +90,6 @@ describe('Platforms', () => {
     })
 
 
-    // this currtently filters within the page of episodes.. which is not that valuable..
-    // it would be better to filter the eps, and then return slices of that data..
     const filter = 'takeover'
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       // set the filter
@@ -102,7 +112,7 @@ describe('Platforms', () => {
     })
     
     
-    it('passes the current page to the api when refreshing ', async () => {
+    it('passes the current page to the api when refreshing', async () => {
       // set the page
       const store1 = mockStore({})
       store1.dispatch(setPage({'page': 2}))
@@ -123,21 +133,5 @@ describe('Platforms', () => {
           const expected = pagedEpisodesForPlatform({nickname,page})
         })
     })
-    
-    // it('responds to an empty filter by returning a complete episode list', async () => {
-    //   const store = mockStore({})
-    //   await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
-    //     .then(() => {
-    //       const result = resultingState(store, reducer)
-    //       const filter = setFilter('')
-    //       // this array is being destructively filtered, it's never refreshed if you clear the filter?
-    //       // so either you need a totally diff implementation, ie refresh platform each time,
-    //       // or you need to copy the eps into a different slice ie a `visibleEpisodes`
-    //       const eps = reducer(result, filter).platform.episodes
-    //       expect(eps.length).toBeGreaterThan(0)
-    //       expect(eps.length).toBe(episode_data.length)
-    //     })
-    // })
-    
   })
 })

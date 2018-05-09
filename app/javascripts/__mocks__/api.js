@@ -18,7 +18,10 @@ const MockAPI = class {
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!!platform) {
-        setTimeout(resolve, 0, platform)
+        setTimeout(resolve, 0, {
+          ...platform,
+          episodes: pagedEpisodesForPlatform({nickname})
+        })
       } else {
         setTimeout(reject, 0, {
           'error' : `Platform with nickname ${nickname} not found`
