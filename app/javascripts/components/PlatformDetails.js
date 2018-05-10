@@ -53,7 +53,7 @@ class PlatformDetails extends Component {
         <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
       </p>
       <p>
-        <b>Episodes</b>{' '}{this.refreshButton()}
+        <b>Episodes</b>{' '}{this.refreshButton()}{' '}{this.deleteEpisodesButton()}
       </p>
       <p>
         {this.episodeGrid()}
@@ -77,6 +77,12 @@ class PlatformDetails extends Component {
     </button>)
   }
   
+  deleteEpisodesButton(){
+    return (<button className='btn btn-s' onClick={this.deleteEpisodes.bind(this)}>
+      Delete
+    </button>)
+  }
+  
   episodeGrid(){
     const {episodes,currentPage} = this.props
     return <EpisodeGrid 
@@ -89,6 +95,13 @@ class PlatformDetails extends Component {
   refreshPlatform(){
     const {nextPage,nickname} = this.props;
     this.props.setPageAndRefresh({nickname,page:nextPage})
+  }
+  
+  deleteEpisodes(){
+    const {deleteEpisodesForPlatform,nickname} = this.props
+    if(confirm('Delete all episodes for this platform?')){
+      deleteEpisodesForPlatform({nickname})
+    }
   }
   
   onSetFilter({filter}){

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PlatformDetails from '../components/PlatformDetails'
 import {setFilter} from '../redux/filter'
 import {setPage} from '../redux/pagination'
-import {refreshPlatform} from '../redux/platforms'
+import {refreshPlatform, deleteEpisodes} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform,loading,error} = state.platforms;
@@ -27,6 +27,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     
     refreshPlatform: ({nickname}) => {
       dispatch(refreshPlatform({nickname}))
+    },
+    
+    deleteEpisodesForPlatform: ({nickname}) => {
+      dispatch(deleteEpisodes({nickname}))
     },
     
     setFilterAndRefresh: ({nickname,filter}) => {
