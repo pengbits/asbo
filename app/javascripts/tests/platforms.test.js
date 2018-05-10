@@ -77,7 +77,8 @@ describe('Platforms', () => {
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`,
           ])
-          return {state:resultingState(store, combinedRootReducer), store}
+          const state = resultingState(store, combinedRootReducer)
+          return {state, store: mockStore(state)}
         })
     }
     
@@ -93,21 +94,24 @@ describe('Platforms', () => {
     
     it('knows when the refresh did not yield any new episodes', async () => {
       let lastCount
+      // get initial platform
       await getPlatform({'nickname':'rinse'}).then((state) => {
         lastCount = state.episodes.episodes.length
         expect(lastCount).toBeGreaterThan(0)
-      }).then(() => {
-        return refreshPlatform(opts)
-      }).then(({state,store}) => {
-        const newCount = state.episodes.episodes.length
-        if(lastCount == newCount){
-          expectActions(store, [
+        return state
+      // refresh the platform
+      }).then((state) => {
+        const store = mockStore(state)
+        return store.dispatch(p.refreshPlatform({nickname}))
+        .then(() => {
+          const newCount = resultingState(store, combinedRootReducer).episodes.episodes.length
+          let actions = [
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`
-            // ,
-            // `${p.REFRESH_PLATFORM_NO_NEW_EPISODES}`,
-          ])
-        }
+          ]
+          if(newCount == lastCount) actions.push(`${p.REFRESH_PLATFORM_NO_NEW_EPISODES}`)
+          expectActions(store, actions)
+        })
       })
     })
 

@@ -4,7 +4,8 @@ import { REFRESH_PLATFORM, REFRESH_PLATFORM_NO_NEW_EPISODES } from './redux/plat
 const RefreshMiddleware = store => next => action => {
   if(typeof action =='object'){
     if(action.type == `${REFRESH_PLATFORM}_FULFILLED`){
-      const lastCount  = store.getState().episodes.episodes.length
+      const state      = store.getState().episodes ? store.getState().episodes.episodes : []
+      const lastCount  = state.length
       console.log(`|refresh middleware| before update: ${lastCount}`)
       const nextAction = next(action)
       const nextState  = combinedRootReducer({}, nextAction)
