@@ -44,8 +44,14 @@ class Platform < ApplicationRecord
       eps = @doc.css(attr_map['item']).collect do |item| 
         episode_attrs(item)
       end.select do |item|
+        # it might actually be useful to keep a tally of the episodes
+        # that came back from the fetch that were rejected because they are in the collection
+        # if we want to provide the client w/ more context than simply empty or not...
+        # currently we have do a lot of work to infer it the refresh yield new episodes or not,
+        # in the case of incrementing the page for the next request ...
         episode_not_in_collection? item
       end
+      
       episodes.create(eps)
       episodes
     end

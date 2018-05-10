@@ -7,18 +7,21 @@ import episodes, {pagedEpisodesForPlatform,forPlatform} from './episodes'
 // and just use axios + moxios or similar right in the reducer?
 const MockAPI = class {
   getPlatforms() {
-    // console.log(`API.fetch /platforms`)
+    // console.log(`mockAPI.fetch /platforms`)
     return new Promise((resolve,reject) => {
       setTimeout(resolve, 0, platforms)
     })
   }
   
   getPlatform({nickname}){
-    // console.log(`API.fetch /platforms/${nickname}`)
+    // console.log(`mockAPI.fetch /platforms/${nickname}`)
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!!platform) {
-        setTimeout(resolve, 0, platform)
+        setTimeout(resolve, 0, {
+          ...platform,
+          episodes: pagedEpisodesForPlatform({nickname})
+        })
       } else {
         setTimeout(reject, 0, {
           'error' : `Platform with nickname ${nickname} not found`
@@ -31,8 +34,11 @@ const MockAPI = class {
   // and merging into the platform... this is so different from real implementation
   // that it's only valuable for testing the reducers, not any kind of integration
   // and only good for that as long as the mock api is kept in sync w/ the real thing
+  
+  // in the real api, filter is passed to backend so repsonse contains a sub-set of total items..
+  // in the mock api, the filter is just post-processing in the callback
   refreshPlatform({nickname,filter,page}){
-    console.log(`API.fetch /platforms/${nickname}/refresh ${JSON.stringify({filter,page})}`);
+    console.log(`mockAPI.fetch /platforms/${nickname}/refresh ${JSON.stringify({filter,page})}`);
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -40,7 +46,10 @@ const MockAPI = class {
           'error' : `Platform with nickname ${nickname} not found`
         })
       } else {
-        const matches = pagedEpisodesForPlatform({nickname,page}).filter(e => this.isMatchingEpisode(e, filter))
+        const totalEps = pagedEpisodesForPlatform({nickname,page})
+        //console.log(`mockAPI total eps: ${totalEps.length}`)
+        //console.log(totalEps.map(ep => ep.name))
+        const matches = totalEps.filter(e => this.isMatchingEpisode(e, filter))
         setTimeout(resolve, 0, {
           ...platform, episodes: matches
         })
@@ -50,7 +59,7 @@ const MockAPI = class {
   }
   
   getEpisodes(opts={}) {
-    // console.log('API.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
+    // console.log('mockAPI.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
     return new Promise((resolve,reject) => {
       setTimeout(resolve, 0, this.filteredEpisodes(opts))
     })

@@ -27,7 +27,7 @@ class API {
             throw new Error(response.statusText)
           }
         }).then(function(json){
-          return json
+        return json
         })
     }
     else {
@@ -57,11 +57,14 @@ class API {
       })
 
   }
-  
-  refreshPlatform({nickname,filter}){
+
+  // in the real api, filter is passed to backend so repsonse contains a sub-set of total items..
+  // in the mock api, the filter is just post-processing in the callback
+  refreshPlatform({nickname,filter,page}){
     const base = this.url({nickname})
-    const url  = `${base}/refresh` + (!!filter ? `?filter=${filter}` : '')
-    console.log(`API get ${url}`)
+    const url  = `${base}/refresh/page/` + (page || 1) + (!!filter ? `?filter=${filter}` : '')
+
+    console.log(`API GET ${url}`)
     return fetch(url)
       .then(response => {
         if(response.ok){
@@ -140,6 +143,10 @@ class API {
     
     if(kind == 'platform' && opts.nickname) {
       urlStr += `/${opts.nickname}` 
+    }
+    
+    if(kind == 'platform' && opts.page){
+      urlStr += `/page/${opts.page}`
     }
     
     if(kind == 'episode' && opts.filter) {
