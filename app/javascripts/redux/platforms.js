@@ -84,7 +84,7 @@ export const refreshPlatform = function({nickname}) {
     const {filter,pagination} = getState()
     const {currentPage} = pagination || {};
     const page = currentPage || 1
-    console.log(`refreshPlatform page:${page}`)
+    console.log(`refreshPlatform ${JSON.stringify({filter,page})}`)
     return dispatch({
       type: REFRESH_PLATFORM,
       payload: API.refreshPlatform({nickname,filter,page})

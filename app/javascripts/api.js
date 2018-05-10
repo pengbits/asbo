@@ -57,7 +57,9 @@ class API {
       })
 
   }
-  
+
+  // in the real api, filter is passed to backend so repsonse contains a sub-set of total items..
+  // in the mock api, the filter is just post-processing in the callback
   refreshPlatform({nickname,filter,page}){
     const base = this.url({nickname})
     const url  = `${base}/refresh/page/` + (page || 1) + (!!filter ? `?filter=${filter}` : '')

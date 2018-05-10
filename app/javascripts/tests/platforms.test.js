@@ -107,15 +107,14 @@ describe('Platforms', () => {
     })
 
 
-    const filter = 'takeover'
-    /* out of date mocks...
+    const filter = 'grime'
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       // set the filter
       const store1 = mockStore({})
       store1.dispatch(setFilter(filter))
       const state1 = resultingState(store1, combinedRootReducer)
       expect(state1.filter).toBe(filter)
-    
+
       // refresh the platform
       const store2 = mockStore(state1)
       await store2.dispatch(p.refreshPlatform(opts))
@@ -123,11 +122,10 @@ describe('Platforms', () => {
           const state2 = resultingState(store2, combinedRootReducer)
           const eps = state2.episodes.episodes
           const count  = eps.length
-    
-          // expect(count).toBeGreaterThan(0)
-          // expect(count).toBeLessThan(forPlatform({nickname}).length)  
+          console.log(`found filtered eps ${eps.length}`)
+          expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
-    })*/
+    })
     
     it('passes the current page to the api when refreshing', async () => {
       // set the page
