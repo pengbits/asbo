@@ -11,7 +11,7 @@ class EpisodeGrid extends Component {
       onSetFilter
     } = this.props
 
-    console.log(`EpisodeGrid currentPage:${currentPage}`)
+    // console.log(`EpisodeGrid currentPage:${currentPage}`)
     return (<div className='episode-grid'>
       <Filter key='filter' onSetFilter={onSetFilter} />
       <div className='grid'>

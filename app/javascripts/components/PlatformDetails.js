@@ -6,6 +6,25 @@ import EpisodeGrid from './EpisodeGrid'
 
 class PlatformDetails extends Component {
   render() {
+    const {error,loading} = this.props
+    
+    if(error){
+      return <p  className='error'>An Error has occurred</p>
+    }
+    
+    return ( 
+    <div className='platform-details'>
+      <h2 className='h2'>Platform</h2>
+      {loading ? 
+        this.loadMask() : this.renderBody()}
+    </div>)
+  }  
+  
+  loadMask(){
+    return(<div className="loadmask" />)
+  }
+  
+  renderBody(){
     const {
       name,
       id,
@@ -22,13 +41,7 @@ class PlatformDetails extends Component {
       currentPage
     } = this.props
     
-    if(error){
-      return <p  className='error'>An Error has occurred</p>
-    }
-    
-    return ( 
-    <div className={`platform-details ${loading ? 'is-loading':''}`}>
-      <h2 className='h2'>Platform</h2>
+    return (<div className="platform-details__body">
       <p>
         <b>name</b><br />
         {name}
@@ -87,8 +100,9 @@ class PlatformDetails extends Component {
   }
   
   refreshPlatform(){
-    const {nextPage,nickname} = this.props;
-    this.props.setPageAndRefresh({nickname,page:nextPage})
+    const {episodes,currentPage,nextPage,nickname} = this.props;
+    // maybe client should not have to increment and provide nextPage? 
+    this.props.setPageAndRefresh({nickname,page:(episodes.length ? nextPage : currentPage)  })
   }
   
   onSetFilter({filter}){
