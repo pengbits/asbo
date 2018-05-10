@@ -77,14 +77,14 @@ describe('Platforms', () => {
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`,
           ])
-          return resultingState(store, combinedRootReducer)
+          return {state:resultingState(store, combinedRootReducer), store}
         })
     }
     
     const nickname = 'rinse'
     const opts = {nickname}
     it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
-      await refreshPlatform(opts).then((state) => {
+      await refreshPlatform(opts).then(({state}) => {
         const count = state.episodes.episodes.length
         expect(count).toBeGreaterThan(0)
         expect(count).toBe(pagedEpisodesForPlatform(opts).length)
@@ -98,10 +98,15 @@ describe('Platforms', () => {
         expect(lastCount).toBeGreaterThan(0)
       }).then(() => {
         return refreshPlatform(opts)
-      }).then((state) => {
+      }).then(({state,store}) => {
         const newCount = state.episodes.episodes.length
         if(lastCount == newCount){
-          console.log('no new episodes found in refresh, try a different page')
+          expectActions(store, [
+            `${p.REFRESH_PLATFORM}_PENDING`,
+            `${p.REFRESH_PLATFORM}_FULFILLED`
+            //,
+            //`${p.REFRESH_PLATFORM_INEFFECTIVE}`,
+          ])
         }
       })
     })
