@@ -9,11 +9,11 @@ import Hint from './Hints.js'
 
 class PlatformForm extends Component {
   render() {
-    const {initialValues, handleSubmit, pristine, reset, submitting, isNew } = this.props
+    const {initialValues, handleSubmit, pristine, reset, submitting, loading, isNew } = this.props
     const {nickname} = initialValues || {}
     
     return (
-      <div className="form-container">
+      <div className={`form-container ${submitting || loading ? ' form-container--loading' : ''}`}>
         <form onSubmit={handleSubmit}>
           <h2 className='h2'>{isNew ? 'New' : 'Edit'} Platform</h2>
           <TextInput name='name' />

@@ -1,8 +1,13 @@
-.platform-details {
+.platform-details,
+.platform-list {
   &--loading {
-    background: transparent no-repeat url(/assets/google-load.svg) center center;
-    & > p {
+    background: transparent no-repeat url(/assets/google-load.svg) center 150px;
+    p, ul {
       opacity: 0.125
     }
   }
+}
+
+.platform-list--loading {
+  min-height: 300px;
 }

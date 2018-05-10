@@ -89,9 +89,10 @@ class API {
           throw new Error(response.statusText)
         }
       }).then(function(json){
-        return new Promise((resolve) => {
-          setTimeout(resolve, 1000, json)
-        })
+        return json
+        // return new Promise((resolve) => {
+        //   setTimeout(resolve, 2000, json)
+        // })
       })
   }
   

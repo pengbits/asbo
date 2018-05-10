@@ -27,7 +27,7 @@ class PlatformDetails extends Component {
     }
     
     return ( 
-    <div className={`platform-details ${loading ? 'is-loading':''}`}>
+    <div className={`platform-details ${loading ? 'platform-details--loading':''}`}>
       <h2 className='h2'>Platform</h2>
       <p>
         <b>name</b><br />
