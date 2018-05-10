@@ -90,6 +90,9 @@ class API {
         }
       }).then(function(json){
         return json
+        // return new Promise((resolve) => {
+        //   setTimeout(resolve, 2000, json)
+        // })
       })
   }
   

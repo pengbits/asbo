@@ -128,12 +128,14 @@ export const reducer = function(state=initialState, action={}){
     case `${LOAD_PLATFORMS}_PENDING`:
     case `${CREATE_PLATFORM}_PENDING`:
     case `${UPDATE_PLATFORM}_PENDING`:
+    case `${REFRESH_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_PLATFORM}_REJECTED`:
     case `${UPDATE_PLATFORM}_REJECTED`:
+    case `${REFRESH_PLATFORM}_REJECTED`:
       return {
         ...state,
         loading: false,

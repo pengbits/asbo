@@ -12,7 +12,7 @@ class PlatformList extends Component {
   
   renderBody(){
     const {platforms,loading} = this.props
-    return loading ? <p>...</p> : (<div>
+    return (<div className={`platform-list ${loading ? 'platform-list--loading' : ''}`}>
       <h2 className='h2'>Platforms</h2>
       <ul className='menu'>
         {(platforms || []).map(p => <PlatformListItem 
