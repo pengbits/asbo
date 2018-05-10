@@ -11,7 +11,8 @@ export const EDIT_PLATFORM    = 'EDIT_PLATFORM'
 export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 export const REFRESH_PLATFORM = 'REFRESH_PLATFORM' // get eps for platform
- 
+export const REFRESH_PLATFORM_NO_NEW_EPISODES = 'REFRESH_PLATFORM_NO_NEW_EPISODES' // did not yeild new eps
+
 // actions
 export const loadPlatform  = function({nickname}){
   return {

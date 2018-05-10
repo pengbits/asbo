@@ -104,8 +104,8 @@ describe('Platforms', () => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`
-            //,
-            //`${p.REFRESH_PLATFORM_INEFFECTIVE}`,
+            // ,
+            // `${p.REFRESH_PLATFORM_NO_NEW_EPISODES}`,
           ])
         }
       })
