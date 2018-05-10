@@ -1,0 +1,8 @@
+.platform-details {
+  &--loading {
+    background: transparent no-repeat url(/assets/google-load.svg) center center;
+    & > p {
+      opacity: 0.125
+    }
+  }
+}
