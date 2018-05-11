@@ -45,7 +45,7 @@ class PlatformsController < ApplicationController
   
   def delete_episodes
     begin
-      platform_from_nickname_param.destroy!
+      platform_from_nickname_param
       @platform.episodes.delete_all
       render json: {
         :success => :true, 
