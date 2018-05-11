@@ -2,7 +2,7 @@ require 'client'
 require 'media'
 
 class Platform < ApplicationRecord
-  has_many  :episodes
+  has_many  :episodes, :dependent => :delete_all
   serialize :attr_map
   serialize :pagination
   serialize :post_processing_rules

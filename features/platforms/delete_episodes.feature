@@ -8,6 +8,4 @@ Feature: Delete Episodes for Platform
     Given these platforms
     And some episodes in the db
     When I make a DELETE request to the platform's episodes endpoint
-    Then the response should be a JSON representation of the platform
-
-  
+    Then the platform in the response should not contain any episodes

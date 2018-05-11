@@ -96,4 +96,9 @@ Then("I should get a valid response for the deleted platform") do
 end
 
 
+Then("the platform in the response should not contain any episodes") do
+  @response = JSON.parse(last_response.body)
 
+  expect(@response['success']).to be_truthy
+  expect(@response['platform']['episodes'].length).to eq 0
+end
