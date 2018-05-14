@@ -9,3 +9,4 @@ Feature: Delete Episodes for Platform
     And some episodes in the db
     When I make a DELETE request to the platform's episodes endpoint
     Then the platform in the response should not contain any episodes
+    And the platform should still exist

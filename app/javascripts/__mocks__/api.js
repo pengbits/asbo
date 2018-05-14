@@ -58,6 +58,13 @@ const MockAPI = class {
     
   }
   
+  deleteEpisodes({nickname}){
+    return this.getPlatform({nickname})
+      .then(platform => {
+        return {...platform, episodes:[]}
+      })
+  }
+    
   getEpisodes(opts={}) {
     // console.log('mockAPI.fetch /episodes' + (!!opts.filter ? `/filter/${opts.filter}` :''))
     return new Promise((resolve,reject) => {
