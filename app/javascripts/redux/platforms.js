@@ -12,6 +12,7 @@ export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 export const REFRESH_PLATFORM = 'REFRESH_PLATFORM' // get eps for platform
 export const REFRESH_PLATFORM_NO_NEW_EPISODES = 'REFRESH_PLATFORM_NO_NEW_EPISODES' // did not yeild new eps
+export const DELETE_EPISODES  = 'DELETE_EPISODES'
 
 // actions
 export const loadPlatform  = function({nickname}){
@@ -70,6 +71,18 @@ export const updatePlatform = function(attrs) {
           platform: json
         }
       })
+  }
+}
+
+export const deleteEpisodes = function({nickname}) {
+  return {
+    type: DELETE_EPISODES,
+    payload: API.deleteEpisodes({nickname})
+    .then(json => {
+      return {
+        platform: json
+      }
+    })
   }
 }
 

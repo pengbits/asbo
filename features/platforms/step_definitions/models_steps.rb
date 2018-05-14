@@ -94,6 +94,3 @@ Then("I should get a valid response for the deleted platform") do
   expect(@response['success']).to be_truthy
   expect(@response['platform']['name']).to eq(@platform.name)
 end
-
-
-

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'platforms', to: 'platforms#create', as: 'create_platform'
   
    get 'platforms/:nickname', to: 'platforms#show', as: 'platform'
+delete 'platforms/:nickname/episodes', to: 'platforms#delete_episodes', as: 'delete_platform_episodes'
 delete 'platforms/:nickname', to: 'platforms#destroy', as: 'delete_platform'
    put 'platforms/:nickname', to: 'platforms#update', as: 'update_platform'
 

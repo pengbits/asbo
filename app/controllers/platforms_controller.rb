@@ -43,6 +43,19 @@ class PlatformsController < ApplicationController
     end
   end
   
+  def delete_episodes
+    begin
+      platform_from_nickname_param
+      @platform.episodes.delete_all
+      render json: {
+        :success => :true, 
+        :platform => platform_with_episodes
+      } 
+    rescue ActiveRecord::RecordNotFound => e
+      render_error e
+    end
+  end
+  
   def refresh
     opts = {}
     opts[:page] = params[:page] unless params[:page].nil?
@@ -100,8 +113,11 @@ class PlatformsController < ApplicationController
   end
   
   def render_json_with_episodes
-    platform_json = @platform.attributes.merge({ :episodes => platform_episodes })
-    render json: platform_json
+    render json: platform_with_episodes
+  end
+  
+  def platform_with_episodes
+    @platform.attributes.merge({ :episodes => platform_episodes })
   end
   
   def platform_episodes

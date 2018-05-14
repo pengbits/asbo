@@ -7,8 +7,11 @@ import mockStore from './mockStore' ;
 // load application code & mock the api
 import {combinedRootReducer} from '../redux'
 import * as e from '../redux/episodes';
+import {deleteEpisodes} from '../redux/platforms'
 const reducer = e.reducer;
 import {setFilter} from '../redux/filter';
+// import {combinedRootReducer} from '../redux';
+
 // utils
 import {expectActions,resultingState} from './utils'
 
@@ -91,6 +94,19 @@ describe('Episodes', () => {
         expect(state.episode).toBeTruthy()
         // expect(state.episode.id).toEqual(opts.id)
       })
+    })
+  })
+  
+  describe('platform#delete_episodes', () => {
+    it('purges all episodes from state', async () => {
+      const store = mockStore({})
+      await store.dispatch(deleteEpisodes({nickname:'rinse'}))
+      .then(() => {
+          expectActions(store, [
+            `DELETE_EPISODES_PENDING`,
+            `DELETE_EPISODES_FULFILLED`
+          ])
+        })
     })
   })
 })

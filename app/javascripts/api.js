@@ -129,9 +129,20 @@ class API {
     })
   }
     
-  destroyPlatform(opts={}){
-    if(!opts.nickname) throw new Error('must provide a nickname to destroy')
-    const url = this.url(opts)
+  destroyPlatform({nickname}){
+    if(!nickname) throw new Error('must provide a nickname to destroy')
+    const url = this.url({nickname})
+    console.log(`API delete ${url}`)
+
+    return fetch(url, {
+      method: "DELETE"
+    })
+  }
+  
+  deleteEpisodes({nickname}){
+    if(!nickname) throw new Error('must provide a nickname to delere episodes')
+    const url = this.url({nickname}) + '/episodes'
+    
     console.log(`API delete ${url}`)
 
     return fetch(url, {

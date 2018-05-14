@@ -158,4 +158,8 @@ describe('Platforms', () => {
         })
     })
   })
+  
+  describe('platforms#delete_episodes', () => {
+    // see episodes tests
+  })
 })
