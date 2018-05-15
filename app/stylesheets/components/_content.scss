@@ -7,8 +7,12 @@
   }
   
   &__primary {
-    padding: $size-m;
+    padding: $size-s;
     overflow: auto;
+
+    @include from-desktop {
+      padding: $size-m;
+    }
     
     .content--with-secondary & {
       margin-bottom: 120px;

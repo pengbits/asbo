@@ -1,10 +1,10 @@
 @import "../../node_modules/normalize.css/normalize";
-
 @import "./variables";
+@import "../../node_modules/sass-mq/mq";
 @import "./elements";
 @import "./typography";
 @import "./forms";
-
+@import "./breakpoints";
 @import "./components/container";
 @import "./components/content";
 @import "./components/buttons";
