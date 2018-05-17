@@ -30,7 +30,7 @@ class Client
     page.nil? ? @base_url : paginate(page)
   end
   
-  # pagination rules could be her 
+  # pagination rules could be either
   # - params to append to url
   # {"param" : "page"}
   # - a route (a path to add to the url)

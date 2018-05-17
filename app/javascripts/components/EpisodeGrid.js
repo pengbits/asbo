@@ -5,8 +5,13 @@ import Filter from '../containers/EpisodeFilter'
 class EpisodeGrid extends Component {
   
   render(){
-    const {episodes,onSetFilter} = this.props
-    
+    const {
+      episodes,
+      currentPage,
+      onSetFilter
+    } = this.props
+
+    // console.log(`EpisodeGrid currentPage:${currentPage}`)
     return (<div className='episode-grid'>
       <Filter key='filter' onSetFilter={onSetFilter} />
       <div className='grid'>

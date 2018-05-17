@@ -5,10 +5,12 @@ import {createPlatform,updatePlatform,destroyPlatform} from '../redux/platforms'
 
 const mapStateToProps = (state, ownProps) => {  
   const {platform} = state.platforms
+  const {loading} = platform
   const isNew = (platform || {}).id == undefined
 
   return {
     initialValues : platform,
+    loading,
     isNew
   }
 }

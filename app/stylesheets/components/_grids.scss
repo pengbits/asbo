@@ -1,31 +1,45 @@
 $grid-size : ($size-xl - $size-xs) * 2;
 
-.grid {
-  padding: 0 0 $size-xs $size-xs;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.grid {  
+  @include from-desktop {
+    padding: 0 0 $size-xs $size-xs;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
   
   &__item {
     position: relative;
-    left: -$size-xs;
-    margin: $size-xs $size-xs 0 0;
+    margin-bottom: $size-xs;
     height: $grid-size;
-    width : $grid-size;
-    background-color: $colors-medium-grey;
+    width: 100%;
     cursor: pointer;
+        
+    @include from-desktop {
+      background-color: $colors-medium-grey;
+      left: -$size-xs;
+      margin: $size-xs $size-xs 0 0;
+      height: $grid-size;
+      width : $grid-size;
+    }
   }
   
   &__mask {
+    display: block;
     position: absolute;
     top:0; right:0; bottom: 0; left: 0;
-    opacity: 0.75;
+    opacity: 0.5;
     background-color:$colors-black;
-    transition-property: opacity;
-    transition-duration: 0.25s;
-    transition-timing-function: ease;
-    .grid__item:hover & {
-      opacity: 0
+    
+    @include from-desktop {
+      opacity: 0.75;
+      transition-property: opacity;
+      transition-duration: 0.25s;
+      transition-timing-function: ease;
+      .grid__item:hover & {
+        opacity: 0
+      }
+      
     }
   }
 }

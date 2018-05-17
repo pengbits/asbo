@@ -1,7 +1,12 @@
 import {createAction,createActions,handleActions} from 'redux-actions'
 import API  from '../api'
 import {setFilter} from './filter'
-import {LOAD_PLATFORM, REFRESH_PLATFORM} from './platforms'
+import {
+  LOAD_PLATFORM, 
+  REFRESH_PLATFORM,
+  DELETE_EPISODES
+} from './platforms'
+
 // constants
 export const LOAD_EPISODES = 'LOAD_EPISODES'
 export const LOAD_EPISODE  = 'LOAD_EPISODE'
@@ -48,12 +53,14 @@ export const reducer = (state=initialState, action={}) => {
   switch(action.type){
     case `${LOAD_EPISODES}_PENDING`:
     case `${LOAD_EPISODE}_PENDING`:
+    case `${DELETE_EPISODES}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_EPISODES}_REJECTED`:
     case `${LOAD_EPISODE}_REJECTED`:
+    case `${DELETE_EPISODES}_REJECTED`:
       return {
         ...state,
         loading: false,
@@ -61,6 +68,7 @@ export const reducer = (state=initialState, action={}) => {
       }
       
     case `${LOAD_EPISODES}_FULFILLED`:
+    case `${DELETE_EPISODES}_FULFILLED`:
       return {
         ...state,
         loading: false,

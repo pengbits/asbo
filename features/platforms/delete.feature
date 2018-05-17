@@ -6,5 +6,5 @@ Feature: Delete a Platform
   Scenario: delete a platform succesfully
     Given these platforms
     When I make a DELETE request to platform endpoint
-    Then I should get a valid response containing the deleted platform
+    Then I should get a valid response for the deleted platform
     

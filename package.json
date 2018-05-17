@@ -1,6 +1,6 @@
 {
   "name": "asbo",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "main": "app.js",
   "scripts": {
@@ -62,7 +62,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "reduce-reducers": "^0.1.2",
-    "redux-paginator": "^1.0.6"
+    "redux-paginator": "^1.0.6",
+    "sass-mq": "^4.0.2"
   },
   "jest": {
     "testPathIgnorePatterns": [

@@ -18,7 +18,8 @@ class PlatformDetails extends Component {
       attr_map,
       pagination,
       refreshPlatform,
-      episodes
+      episodes,
+      currentPage
     } = this.props
     
     if(error){
@@ -26,7 +27,7 @@ class PlatformDetails extends Component {
     }
     
     return ( 
-    <div className={`platform-details ${loading ? 'is-loading':''}`}>
+    <div className={`platform-details ${loading ? 'platform-details--loading':''}`}>
       <h2 className='h2'>Platform</h2>
       <p>
         <b>name</b><br />
@@ -52,7 +53,7 @@ class PlatformDetails extends Component {
         <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
       </p>
       <p>
-        <b>Episodes</b>{' '}{this.refreshButton()}
+        <b>Episodes</b>{' '}{this.refreshButton()}{' '}{this.deleteEpisodesButton()}
       </p>
       <p>
         {this.episodeGrid()}
@@ -69,25 +70,45 @@ class PlatformDetails extends Component {
   }
   
   refreshButton(){
+    const {nextPage} = this.props;
+    
     return (<button className='btn btn-s' onClick={this.refreshPlatform.bind(this)}>
       Refresh
     </button>)
   }
   
+  deleteEpisodesButton(){
+    return (<button className='btn btn-s' onClick={this.deleteEpisodes.bind(this)}>
+      Delete
+    </button>)
+  }
+  
   episodeGrid(){
-    const {episodes} = this.props
-    return <EpisodeGrid episodes={episodes || []} onSetFilter={this.onSetFilter.bind(this)} />
+    const {episodes,currentPage} = this.props
+    return <EpisodeGrid 
+      episodes={episodes || []}
+      currentPage={currentPage}
+      onSetFilter={this.onSetFilter.bind(this)} 
+    />
   }
   
   refreshPlatform(){
-    const {nickname,refreshPlatform} = this.props;
-    refreshPlatform({nickname})
+    const {nextPage,nickname} = this.props;
+    this.props.setPageAndRefresh({nickname,page:nextPage})
+  }
+  
+  deleteEpisodes(){
+    const {deleteEpisodesForPlatform,nickname} = this.props
+    if(confirm('Delete all episodes for this platform?')){
+      deleteEpisodesForPlatform({nickname})
+    }
   }
   
   onSetFilter({filter}){
     const {nickname} = this.props
     this.props.setFilterAndRefresh({nickname,filter})
   }
+  
 }
 
 export default PlatformDetails

@@ -11,7 +11,9 @@ export const EDIT_PLATFORM    = 'EDIT_PLATFORM'
 export const UPDATE_PLATFORM  = 'UPDATE_PLATFORM'
 export const DESTROY_PLATFORM = 'DESTROY_PLATFORM'
 export const REFRESH_PLATFORM = 'REFRESH_PLATFORM' // get eps for platform
- 
+export const REFRESH_PLATFORM_NO_NEW_EPISODES = 'REFRESH_PLATFORM_NO_NEW_EPISODES' // did not yeild new eps
+export const DELETE_EPISODES  = 'DELETE_EPISODES'
+
 // actions
 export const loadPlatform  = function({nickname}){
   return {
@@ -72,6 +74,18 @@ export const updatePlatform = function(attrs) {
   }
 }
 
+export const deleteEpisodes = function({nickname}) {
+  return {
+    type: DELETE_EPISODES,
+    payload: API.deleteEpisodes({nickname})
+    .then(json => {
+      return {
+        platform: json
+      }
+    })
+  }
+}
+
 // export const setFilterAndFetch = function(opts={}){
 //   return (dispatch, getState) => {
 //     dispatch(setFilter(opts.filter));
@@ -84,7 +98,7 @@ export const refreshPlatform = function({nickname}) {
     const {filter,pagination} = getState()
     const {currentPage} = pagination || {};
     const page = currentPage || 1
-    console.log(`refreshPlatform page:${page}`)
+    console.log(`refreshPlatform ${JSON.stringify({filter,page})}`)
     return dispatch({
       type: REFRESH_PLATFORM,
       payload: API.refreshPlatform({nickname,filter,page})
@@ -127,12 +141,14 @@ export const reducer = function(state=initialState, action={}){
     case `${LOAD_PLATFORMS}_PENDING`:
     case `${CREATE_PLATFORM}_PENDING`:
     case `${UPDATE_PLATFORM}_PENDING`:
+    case `${REFRESH_PLATFORM}_PENDING`:
       return {
         ...state,
         loading: true
       }
     case `${LOAD_PLATFORM}_REJECTED`:
     case `${UPDATE_PLATFORM}_REJECTED`:
+    case `${REFRESH_PLATFORM}_REJECTED`:
       return {
         ...state,
         loading: false,

@@ -1,0 +1,11 @@
+@mixin from-mobile {
+  @include mq($from: mobile){  
+    @content;
+  }
+}
+
+@mixin from-desktop {
+  @include mq($from: desktop){  
+    @content;
+  }
+}

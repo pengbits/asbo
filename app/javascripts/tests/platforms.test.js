@@ -39,70 +39,104 @@ describe('Platforms', () => {
     })
   })
   
-  describe('platforms#show', () => {
+  const getPlatform = ({nickname}) => {
+    const store = mockStore({})
+    return store.dispatch(p.loadPlatform({nickname}))
+    .then(() => {
+      expectActions(store, [
+        "LOAD_PLATFORM_PENDING",
+        "LOAD_PLATFORM_FULFILLED"
+      ]);
+      return resultingState(store, combinedRootReducer)
+    })
+  }
+  
+  describe('platforms#show', () => {  
     it('dispatches an action to get the platform entry', async () => {
-      const store = mockStore({})
       const opts = {'nickname':'nts'}
-      await store.dispatch(p.loadPlatform(opts))
-      .then(() => {
-        expectActions(store, [
-          "LOAD_PLATFORM_PENDING",
-          "LOAD_PLATFORM_FULFILLED"
-        ]);
-        
-        const state = resultingState(store, reducer)
-        expect(state.platform).toBeTruthy()
-        expect(state.platform.nickname).toEqual(opts.nickname)
+      await getPlatform(opts).then((state) => {
+        expect(state.platforms.platform).toBeTruthy()
+        expect(state.platforms.platform.nickname).toEqual(opts.nickname)          
+      })
+    })
+    
+    it('populates the episodes reducer with the contents of the platform response', async() => {
+      await getPlatform({'nickname':'rinse'}).then((state) => {
+        expect(state.platforms.platform.episodes).toHaveLength(0)
+        expect(state.episodes.episodes).toHaveLength(10)
       })
     })
   })
   
   describe('platforms#refresh', () => {
-    let episodesForPlatform;
-    const nickname = 'rinse'
-    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
+    const refreshPlatform = ({nickname}) => {
       const store = mockStore({})
-      await store.dispatch(p.refreshPlatform({nickname}))
+      return store.dispatch(p.refreshPlatform({nickname}))
         .then(() => {
           expectActions(store, [
             `${p.REFRESH_PLATFORM}_PENDING`,
             `${p.REFRESH_PLATFORM}_FULFILLED`,
           ])
+          const state = resultingState(store, combinedRootReducer)
+          return {state, store: mockStore(state)}
         })
-        
-        const result = resultingState(store, combinedRootReducer)
-        const count = result.episodes.episodes.length
-        // console.log(result.episodes.episodes.map(ep => ep.name))
+    }
+    
+    const nickname = 'rinse'
+    const opts = {nickname}
+    it('dispatches actions for the refresh, and the list of episodes is updated', async () => {
+      await refreshPlatform(opts).then(({state}) => {
+        const count = state.episodes.episodes.length
         expect(count).toBeGreaterThan(0)
-        expect(count).toBe(pagedEpisodesForPlatform({nickname}).length)
+        expect(count).toBe(pagedEpisodesForPlatform(opts).length)
+      })
+    })
+    
+    it('knows when the refresh did not yield any new episodes', async () => {
+      let lastCount
+      // get initial platform
+      await getPlatform({'nickname':'rinse'}).then((state) => {
+        lastCount = state.episodes.episodes.length
+        expect(lastCount).toBeGreaterThan(0)
+        return state
+      // refresh the platform
+      }).then((state) => {
+        const store = mockStore(state)
+        return store.dispatch(p.refreshPlatform({nickname}))
+        .then(() => {
+          const newCount = resultingState(store, combinedRootReducer).episodes.episodes.length
+          let actions = [
+            `${p.REFRESH_PLATFORM}_PENDING`,
+            `${p.REFRESH_PLATFORM}_FULFILLED`
+          ]
+          if(newCount == lastCount) actions.push(`${p.REFRESH_PLATFORM_NO_NEW_EPISODES}`)
+          expectActions(store, actions)
+        })
+      })
     })
 
 
-    // this currtently filters within the page of episodes.. which is not that valuable..
-    // it would be better to filter the eps, and then return slices of that data..
-    const filter = 'takeover'
+    const filter = 'grime'
     it('responds to a valid filter by refreshing the platform and filtering the episode list', async () => {
       // set the filter
       const store1 = mockStore({})
       store1.dispatch(setFilter(filter))
       const state1 = resultingState(store1, combinedRootReducer)
       expect(state1.filter).toBe(filter)
-      
+
       // refresh the platform
       const store2 = mockStore(state1)
-      await store2.dispatch(p.refreshPlatform({nickname}))
+      await store2.dispatch(p.refreshPlatform(opts))
         .then(() => {
           const state2 = resultingState(store2, combinedRootReducer)
           const eps = state2.episodes.episodes
           const count  = eps.length
-
-          // expect(count).toBeGreaterThan(0)
-          // expect(count).toBeLessThan(forPlatform({nickname}).length)  
+          console.log(`found filtered eps ${eps.length}`)
+          expect(count).toBeLessThan(forPlatform({nickname}).length)  
         })
     })
     
-    
-    it('passes the current page to the api when refreshing ', async () => {
+    it('passes the current page to the api when refreshing', async () => {
       // set the page
       const store1 = mockStore({})
       store1.dispatch(setPage({'page': 2}))
@@ -123,21 +157,9 @@ describe('Platforms', () => {
           const expected = pagedEpisodesForPlatform({nickname,page})
         })
     })
-    
-    // it('responds to an empty filter by returning a complete episode list', async () => {
-    //   const store = mockStore({})
-    //   await store.dispatch(p.refreshPlatform({'nickname':'rinse'}))
-    //     .then(() => {
-    //       const result = resultingState(store, reducer)
-    //       const filter = setFilter('')
-    //       // this array is being destructively filtered, it's never refreshed if you clear the filter?
-    //       // so either you need a totally diff implementation, ie refresh platform each time,
-    //       // or you need to copy the eps into a different slice ie a `visibleEpisodes`
-    //       const eps = reducer(result, filter).platform.episodes
-    //       expect(eps.length).toBeGreaterThan(0)
-    //       expect(eps.length).toBe(episode_data.length)
-    //     })
-    // })
-    
+  })
+  
+  describe('platforms#delete_episodes', () => {
+    // see episodes tests
   })
 })

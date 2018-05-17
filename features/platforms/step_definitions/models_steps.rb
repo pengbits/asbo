@@ -65,8 +65,8 @@ Then("I should get a valid response for the created platform") do
 end
 
 Then("the platform in the response should reflect the changes") do
+  @response = last_response.body
   @json = JSON.parse(@response)
-  # puts @json
 
   # top level props are straightforward enough..
   expect(@json['name']).to      eq(@update[:name])
@@ -75,8 +75,8 @@ Then("the platform in the response should reflect the changes") do
   
   # the serializable props such as attr_map are trickier,
   # have to deserialize the value coming back in the response,
-  # and then iteratre over the keys because
-  # we are dealing with symbol keys on one side, and string keys on the other..
+  # and then iterate over the keys because we are dealing with symbol keys 
+  # on one side, and string keys on the other..
   [:attr_map,:pagination].each do |serializable|
     attr_hash = @update[serializable]
     attr_json = @json[serializable.to_s]
@@ -94,6 +94,3 @@ Then("I should get a valid response for the deleted platform") do
   expect(@response['success']).to be_truthy
   expect(@response['platform']['name']).to eq(@platform.name)
 end
-
-
-
