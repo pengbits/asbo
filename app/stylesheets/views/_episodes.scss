@@ -1,4 +1,9 @@
 .episode-list {
+  .filter-input {
+    margin-bottom: $size-s;
+    padding: $size-s;
+    outline: #ccc solid 2px;
+  }
   
   &--loading {
     background: transparent no-repeat url(/assets/google-load.svg) center 150px;
@@ -9,9 +14,11 @@
     }
   }
 }
+
 .episode-details {
   &__image {
     max-width: 500px;
+    width: 100%;
     height: auto;
   }
 }
