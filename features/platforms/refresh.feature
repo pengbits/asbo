@@ -16,6 +16,7 @@ Feature: Refresh Platform
   Scenario: Refresh a platform that already has some episodes
     Given this html for multiple entries
     """
+    <!-- outdated markup! -->
     <div class="nts-grid clearfix">
       <div class="nts-grid-item-container">
         <div class="nts-grid-item">
