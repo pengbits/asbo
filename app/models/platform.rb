@@ -24,6 +24,7 @@ class Platform < ApplicationRecord
   end
   
   after_find do
+    initialize_last_page
     init_client
   end
   
@@ -187,12 +188,13 @@ class Platform < ApplicationRecord
     end
   end
   
-  def increment_last_page!
-    if last_page.nil?  
-      self.last_page = 1
-    else 
-      self.last_page += 1
+  def initialize_last_page 
+    if self.last_page.nil?
+      self.last_page = 0
     end
-    
+  end
+  
+  def increment_last_page!
+    self.last_page += 1
   end
 end
