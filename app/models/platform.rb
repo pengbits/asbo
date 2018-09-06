@@ -196,5 +196,6 @@ class Platform < ApplicationRecord
   
   def increment_last_page!
     self.last_page += 1
+    save
   end
 end
