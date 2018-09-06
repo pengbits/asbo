@@ -378,6 +378,6 @@ Feature: Refresh Platform
   
   @http @nts @pagination
   Scenario: Remember the last page captured in refresh
-    Given the platform's lastPage property is '2'
-    When I refresh the Platform
-    Then the platform's lastPage property is incremented
+    Given the platform has a lastPage
+     When I refresh the Platform
+     Then the platform's lastPage is incremented
