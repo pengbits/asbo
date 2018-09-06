@@ -180,9 +180,19 @@ class Platform < ApplicationRecord
   def ready(result)
     puts "platform#ready"
     if result[:success]
+      increment_last_page!
       return create_episodes_from_html result[:body]
     else
       raise "#{result[:code]} error\n #{result[:message]} "
     end
+  end
+  
+  def increment_last_page!
+    if last_page.nil?  
+      self.last_page = 1
+    else 
+      self.last_page += 1
+    end
+    
   end
 end

@@ -27,12 +27,12 @@ Then("only the new episodes are added to the platform") do |uniques|
   expect(slice).to match_array(uniques.hashes)
 end
 
-Given("the platform has a last_page") do
-  @platform.last_page = 1
+Given("the platform's last_page is {int}") do |p|
+  @platform.last_page = p
 end
 
 
-Then("the platform's last_page is incremented") do 
-  expect(@platform.last_page).to eq(2)
+Then("the platform's last_page is incremented to {int}") do |p| 
+  expect(@platform.last_page).to eq(p)
 end
 

@@ -378,6 +378,6 @@ Feature: Refresh Platform
   
   @http @nts @pagination
   Scenario: Remember the last page captured in refresh
-    Given the platform has a last_page
+    Given the platform's last_page is 2
      When I refresh the Platform
-     Then the platform's last_page is incremented
+     Then the platform's last_page is incremented to 3
