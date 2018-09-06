@@ -24,6 +24,7 @@ class Platform < ApplicationRecord
   end
   
   after_find do
+    initialize_last_page
     init_client
   end
   
@@ -180,9 +181,21 @@ class Platform < ApplicationRecord
   def ready(result)
     puts "platform#ready"
     if result[:success]
+      increment_last_page!
       return create_episodes_from_html result[:body]
     else
       raise "#{result[:code]} error\n #{result[:message]} "
     end
+  end
+  
+  def initialize_last_page 
+    if self.last_page.nil?
+      self.last_page = 0
+    end
+  end
+  
+  def increment_last_page!
+    self.last_page += 1
+    save
   end
 end

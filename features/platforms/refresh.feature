@@ -375,3 +375,9 @@ Feature: Refresh Platform
       |Ted Draws - 1997 Special 13.02.18 Radio Episode|13.02.18|
       |Obongjayar 13.02.18 Radio Episode|13.02.18|
       |Nabihah Iqbal  13.02.18 Radio Episode|13.02.18|
+  
+  @http @nts @pagination
+  Scenario: Remember the last page captured in refresh
+    Given the platform's last_page is 2
+     When I refresh the Platform
+     Then the platform's last_page is incremented to 3
