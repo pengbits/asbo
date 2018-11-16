@@ -68,19 +68,20 @@ describe('Platforms', () => {
     })
   })
   
+  const refreshPlatform = ({nickname}) => {
+    const store = mockStore({})
+    return store.dispatch(p.refreshPlatform({nickname}))
+      .then(() => {
+        expectActions(store, [
+          `${p.REFRESH_PLATFORM}_PENDING`,
+          `${p.REFRESH_PLATFORM}_FULFILLED`,
+        ])
+        const state = resultingState(store, combinedRootReducer)
+        return {state, store: mockStore(state)}
+      })
+  }
+
   describe('platforms#refresh', () => {
-    const refreshPlatform = ({nickname}) => {
-      const store = mockStore({})
-      return store.dispatch(p.refreshPlatform({nickname}))
-        .then(() => {
-          expectActions(store, [
-            `${p.REFRESH_PLATFORM}_PENDING`,
-            `${p.REFRESH_PLATFORM}_FULFILLED`,
-          ])
-          const state = resultingState(store, combinedRootReducer)
-          return {state, store: mockStore(state)}
-        })
-    }
     
     const nickname = 'rinse'
     const opts = {nickname}
@@ -156,6 +157,33 @@ describe('Platforms', () => {
           expect(count).toBeGreaterThan(0)
           const expected = pagedEpisodesForPlatform({nickname,page})
         })
+    })
+  })
+  
+  
+  describe('lastPage', () => {
+    it('is incremented when after api returns a page of episodes', (done) => {
+      const opts = {'nickname':'rinse'}
+      
+      let lastPageBefore,
+      lastPageAfter,
+      refreshedState
+      
+      // 1. get a platform
+      getPlatform(opts).then((state1) => {
+        lastPageBefore = state1.platforms.platform.last_page
+      })
+      .then(() => {
+      // 2. get a page of episodes
+        return refreshPlatform(opts).then((xhr) => {
+          refreshedState = xhr.state
+        })
+      }).then(() => {
+      // 3. compare last_page before and after
+        lastPageAfter = refreshedState.platforms.platform.last_page
+        expect(lastPageAfter).toBeGreaterThan(lastPageBefore)
+        return done()
+      })
     })
   })
   
