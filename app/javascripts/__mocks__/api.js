@@ -14,8 +14,9 @@ const MockAPI = class {
   }
   
   getPlatform({nickname}){
-    // console.log(`mockAPI.fetch /platforms/${nickname}`)
-    const platform = platforms.find(p => p.nickname == nickname)
+    console.log(`mockAPI.fetch /platforms/${nickname}`)
+    let platform = platforms.find(p => p.nickname == nickname)
+    
     return new Promise((resolve,reject) => {
       if(!!platform) {
         setTimeout(resolve, 0, {
@@ -38,7 +39,7 @@ const MockAPI = class {
   // in the real api, filter is passed to backend so repsonse contains a sub-set of total items..
   // in the mock api, the filter is just post-processing in the callback
   refreshPlatform({nickname,filter,page}){
-    console.log(`mockAPI.fetch /platforms/${nickname}/refresh ${JSON.stringify({filter,page})}`);
+    // console.log(`mockAPI.fetch /platforms/${nickname}/refresh ${JSON.stringify({filter,page})}`);
     const platform = platforms.find(p => p.nickname == nickname)
     return new Promise((resolve,reject) => {
       if(!platform) {
@@ -51,7 +52,9 @@ const MockAPI = class {
         //console.log(totalEps.map(ep => ep.name))
         const matches = totalEps.filter(e => this.isMatchingEpisode(e, filter))
         setTimeout(resolve, 0, {
-          ...platform, episodes: matches
+          ...platform, 
+          last_page: (platform.last_page + 1),
+          episodes: matches
         })
       }
     })
