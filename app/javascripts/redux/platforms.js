@@ -109,7 +109,7 @@ export const refreshPlatform = function({nickname}) {
             platform: json
           }
         })
-      }
+      })
   }
   
 }

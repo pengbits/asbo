@@ -82,17 +82,18 @@ describe('Episodes', () => {
   describe('episodes#show', () => {
     it('dispatches an action to get the episode entry', async () => {
       const store = mockStore({})
-      const opts = {'id':'1960'}
+      const opts = {'id':1960}
       await store.dispatch(e.loadEpisode(opts))
       .then(() => {
         expectActions(store, [
           "LOAD_EPISODE_PENDING",
+          "FETCH_EMBED_PENDING",
           "LOAD_EPISODE_FULFILLED"
         ]);
         
         const state = resultingState(store, reducer)
         expect(state.episode).toBeTruthy()
-        // expect(state.episode.id).toEqual(opts.id)
+        expect(state.episode.id).toEqual(opts.id)
       })
     })
   })
