@@ -27,7 +27,8 @@ export default [{
       "100x100",
       "800x800"
     ]
-  }]
+  }],
+  "last_page" : 0
 },
 {
   "id": 2,
@@ -51,7 +52,8 @@ export default [{
   "nickname": "rinse",
   "use_relative_images": false,
   "default_image": "https://etc.levels.io/rinse-fm/logo.png",
-  "post_processing_rules": null
+  "post_processing_rules": null,
+  "last_page" : 3
 }, {
   "id": 3,
   "name": "radar radio",
@@ -75,5 +77,6 @@ export default [{
   "nickname": "radar",
   "use_relative_images": true,
   "default_image": null,
-  "post_processing_rules": null
+  "post_processing_rules": null,
+  "last_page" : 2
 }]
