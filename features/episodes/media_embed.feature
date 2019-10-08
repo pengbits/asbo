@@ -13,7 +13,7 @@ Scenario: fetch a soundcloud embed
   When I post the attributes to the media endpoint
   Then I will get this embed back
   """
-  <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F438267681&show_artwork=true"></iframe>
+  <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F438267681&show_artwork=true"></iframe>
   """
   
 @media @soundcloud @embed @error

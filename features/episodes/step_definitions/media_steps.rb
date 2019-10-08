@@ -10,12 +10,14 @@ Given("I have a media object") do |attrs|
   @media = {
     media: JSON.parse(attrs)
   }
+  puts @media
 end
 
 When("I post the attributes to the media endpoint") do
   post "/media", @media
   @response = last_response.body
   @json = JSON.parse(@response)
+  puts @json
 end
 
 Then("I will get this embed back") do |html|
