@@ -14,8 +14,8 @@ Feature: Handle Dates
   @date @ordinal @radar
   Scenario: Parse dates for Radar
     Given this date '23rd Feb'
-    And this implicit year '2018'
+    And this implicit year '2019'
     And this date format '%e %b'
     When I set the date_str for the episode
-    Then episode.date.to_s will be '2018-02-23'
+    Then episode.date.to_s will be '2019-02-23'
   
