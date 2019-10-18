@@ -9,12 +9,12 @@ module PlatformData
       has_details: true,
       use_relative_images: false,
       attr_map: {
-        "item"      => ".nts-grid-item",
-        "name"      => ".nts-grid-item__img img[alt]",
-        "image"     => ".nts-grid-item__img img[src]",
-        "media"     => ".nts-grid-item__img__play-btn[data-src]",
-        "details"   => ".nts-grid-item__img__play-btn[data-permalink]",
-        "date_str"  => ".nts-grid-item__subtitle__left"
+        "item"      => ".nts-grid-v2-item",
+        "name"      => ".nts-grid-v2-item__header__title",
+        "image"     => ".nts-grid-picture__img[src]",
+        "media"     => ".nts-grid-picture__overlay.mixcloud-btn[data-src]",
+        "date_str"  => ".nts-grid-v2-item__header span:first-child",
+        "details"   => ".nts-grid-picture__overlay.mixcloud-btn[data-permalink]"
       },
       pagination: {    
         "route"        => "/page/:page",
