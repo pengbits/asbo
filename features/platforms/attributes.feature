@@ -3,17 +3,17 @@ Feature: Store scraping rules in platform
   I want to abstract the rules into an attribute map
   And share the implementation across different platforms
 
-  @attr
+  @attr @nts @platform
   Scenario: Parse NTS.live 
     When I call create_episodes_from_html on platform 1
     Then I should get an episode with these attributes
       """
       {
         "platform_id" : 1,
-        "name":"Murlo 31.01.18 Radio Episode",
-        "media":{"type":"mixcloud", "url":"https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/"},
-        "image":"https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
-        "date": "2018-01-31"
+        "name":"Murlo 18.07.18 Radio Episode",
+        "media":{"type":"mixcloud", "url":"https://www.mixcloud.com/NTSRadio/murlo-18th-july-2018/", "path":"/NTSRadio/murlo-18th-july-2018/"},
+        "image":"https://media.ntslive.co.uk/resize/400x400/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg",
+        "date": "2018-07-18"
       }
       """
 

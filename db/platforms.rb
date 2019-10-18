@@ -10,7 +10,7 @@ module PlatformData
       use_relative_images: false,
       attr_map: {
         "item"      => ".nts-grid-v2-item",
-        "name"      => ".nts-grid-v2-item__header__title",
+        "name"      => ".nts-grid-picture__img[alt]",
         "image"     => ".nts-grid-picture__img[src]",
         "media"     => ".nts-grid-picture__overlay.mixcloud-btn[data-src]",
         "date_str"  => ".nts-grid-v2-item__header span:first-child",
@@ -69,33 +69,21 @@ module PlatformData
   
   def self.sample_html_entries
     <<-END
-    <div class="nts-grid-item">
-      <div class="nts-grid-item__img"><img src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" data-src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 31.01.18 Radio Episode"
-          class="img preload-img">
-        <div class="nts-grid-item__img__overlay">
-          <div class="nts-grid-item__img__play-btn mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/" data-permalink="/shows/murlo/episodes/murlo-31st-january-2018"><span class="nts-grid-item__img__play-btn__text"><span class="icon icon-play text-bold"></span></span>
-          </div>
-        </div>
-      </div>
-      <div class="nts-grid-item__img nts-grid-item__img--link nts-app" data-href="/shows/murlo/episodes/murlo-31st-january-2018"><img src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" data-src="https://media.ntslive.co.uk/resize/800x800/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 31.01.18 Radio Episode"
-          class="img preload-img"></div>
-      <a href="/shows/murlo/episodes/murlo-31st-january-2018" class="nts-app nts-link nts-link--nohover">
-        <div class="nts-grid-item__header text-bold nts-link nts-link--highlighted">
-          <div class="nts-grid-item__title">Murlo</div>
-          <div class="nts-grid-item__subtitle">
-            <p class="nts-grid-item__subtitle__left">31.01.18</p>
-            <p class="nts-grid-item__subtitle__right">LDN</p>
-          </div>
-        </div>
-      </a>
-      <div class="nts-grid-item__footer">
-        <div class="nts-grid-item__genres"> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event" data-tag-id="caribbean-dancehall" href="/explore/genre/caribbean-dancehall">Dancehall</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event"
-            data-tag-id="ukdance-ukgarage" href="/explore/genre/ukdance-ukgarage">Garage</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event" data-tag-id="ukdance-grime" href="/explore/genre/ukdance-grime">Grime</a> <a class="genre-tag nts-app nts-link nts-link--highlighted genre-search-click-event"
-            data-tag-id="caribbean-soca" href="/explore/genre/caribbean-soca">Soca</a> </div>
-        <div class="nts-grid-item__action-btns">
-          <button class="nts-btn mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-31st-february-2018/" data-permalink="/shows/murlo/episodes/murlo-31st-january-2018"><span class="icon icon-play text-bold"></span></button> <a class="nts-app nts-btn" href="/shows/murlo/episodes/murlo-31st-january-2018">TRACKLIST</a></div>
-      </div>
-    </div>
+    <article class="nts-grid-v2-item ">
+      <div class="nts-grid-v2-item__content">
+        <div class="nts-grid-picture"><img class="nts-grid-picture__img" src="https://media.ntslive.co.uk/resize/400x400/24463c4a-6d6d-48d7-9026-62c9af3b996f_1456963200.jpeg" alt="Murlo 18.07.18 Radio Episode">
+          <div role="button" tabindex="0" class="nts-grid-picture__overlay mixcloud-btn" data-src="https://www.mixcloud.com/NTSRadio/murlo-18th-july-2018/" data-permalink="/shows/murlo/episodes/murlo-18th-july-2018" data-event-label=""><svg
+              class="nts-icon nts-icon--l nts-icon--overlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+              <title>Play</title>
+            </svg></div>
+        </div><a class="nts-grid-v2-item__header nts-app" href="/shows/murlo/episodes/murlo-18th-july-2018"><span>18.07.18</span><span>LDN</span>
+          <div class="nts-grid-v2-item__header__title">Murlo</div>
+        </a>
+        <div class="nts-grid-v2-item__footer"><a class="nts-tag nts-app" data-tag-id="newclub-reggaeton" href="/explore/genre/newclub-reggaeton">Reggaeton</a><a class="nts-tag nts-app" data-tag-id="caribbean-bashment"
+            href="/explore/genre/caribbean-bashment">Bashment</a><a class="nts-tag nts-app" data-tag-id="caribbean-dancehall" href="/explore/genre/caribbean-dancehall">Dancehall</a><a class="nts-tag nts-app" data-tag-id="ukdance-grime"
+            href="/explore/genre/ukdance-grime">Grime</a></div>
+      </div><a class="nts-grid-v2-item__extra nts-app nts-link" href="/shows/murlo/episodes/murlo-18th-july-2018">Tracklist</a>
+    </article>
     _BREAK_
     <div class="borderbottom left podcast-list-item" id="swamp81040218">
       <div class="left w8-16">
