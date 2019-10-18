@@ -7,7 +7,7 @@ Feature: Refresh Platform
   Background: 
     Given the platform nickname=nts
     
-  @http
+  @http @empty
   Scenario: Refresh a platform without any episodes
     When I refresh the Platform
     Then the episodes list should contain some episodes
