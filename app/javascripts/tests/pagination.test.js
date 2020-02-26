@@ -11,8 +11,8 @@ import {
 describe('Pagination', () => {
   
   describe('currentPage', () => {
-    it('is set to 1 at init', () => {
-      expect(reducer().currentPage).toBe(1)
+    it('is set to 0 at init', () => {
+      expect(reducer().currentPage).toBe(0)
     })
     it('can be changed by setPage action', () => {
       const store = mockStore()

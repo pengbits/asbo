@@ -1,24 +1,7 @@
-# README
+asbo:
+an aggregator of a few London-based internet radio stations - using Nokogiri to scrape the html where needed, caching the resulting objects in a local db 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+backend is in rails, front-end is in react/redux 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+to start the backend api and the client, use the following command:
+$ foreman start

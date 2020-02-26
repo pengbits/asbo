@@ -7,7 +7,7 @@ Feature: Refresh Platform
   Background: 
     Given the platform nickname=nts
     
-  @http
+  @http @empty
   Scenario: Refresh a platform without any episodes
     When I refresh the Platform
     Then the episodes list should contain some episodes
@@ -16,6 +16,7 @@ Feature: Refresh Platform
   Scenario: Refresh a platform that already has some episodes
     Given this html for multiple entries
     """
+    <!-- outdated markup! -->
     <div class="nts-grid clearfix">
       <div class="nts-grid-item-container">
         <div class="nts-grid-item">
@@ -374,3 +375,9 @@ Feature: Refresh Platform
       |Ted Draws - 1997 Special 13.02.18 Radio Episode|13.02.18|
       |Obongjayar 13.02.18 Radio Episode|13.02.18|
       |Nabihah Iqbal  13.02.18 Radio Episode|13.02.18|
+  
+  @http @nts @pagination
+  Scenario: Remember the last page captured in refresh
+    Given the platform's last_page is 2
+     When I refresh the Platform
+     Then the platform's last_page is incremented to 3

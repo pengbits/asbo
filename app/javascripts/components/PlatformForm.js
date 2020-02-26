@@ -11,7 +11,7 @@ class PlatformForm extends Component {
   render() {
     const {initialValues, handleSubmit, pristine, reset, submitting, loading, isNew } = this.props
     const {nickname} = initialValues || {}
-    
+    console.log(initialValues)
     return (
       <div className={`form-container ${submitting || loading ? ' form-container--loading' : ''}`}>
         <form onSubmit={handleSubmit}>
@@ -29,6 +29,7 @@ class PlatformForm extends Component {
             parent='pagination' 
             attrs='param,url,itemsPerPage'
           />
+        <TextInput name='date_format' />
           <p>
             <button className='btn btn-primary' type="submit" disabled={pristine || submitting}>
               Submit

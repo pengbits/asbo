@@ -19,6 +19,7 @@ class PlatformDetails extends Component {
       pagination,
       refreshPlatform,
       episodes,
+      last_page,
       currentPage
     } = this.props
     
@@ -53,7 +54,8 @@ class PlatformDetails extends Component {
         <Link to={`/platforms/${nickname}/edit`}>Edit Platform</Link><br />
       </p>
       <p>
-        <b>Episodes</b>{' '}{this.refreshButton()}{' '}{this.deleteEpisodesButton()}
+        <b>Episodes</b>{' '}{this.refreshButton()}{' '}{this.deleteEpisodesButton()}<br />
+        <em>Last page fetched: {last_page} </em>
       </p>
       <p>
         {this.episodeGrid()}

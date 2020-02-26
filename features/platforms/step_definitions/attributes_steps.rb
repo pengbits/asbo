@@ -17,8 +17,14 @@ Then("I should get an episode with these attributes") do |attrs|
   @platform = @platform || @platforms.find {|p|p.id == attrs['platform_id']}
   @episode  = @platform.episodes.first
   # iterate over attributes so we can specify date format for comparison
+  # puts @episode.attributes
   @ep_attrs = @episode.attributes.merge({
     "date" => @episode.attributes['date'].to_s
   })
+  # @episode.attributes.each do |pair|
+    # key = pair.first
+    # val = pair.last
+    # puts "#{key} => #{val} == #{@attrs[key]} ?"
+  # end
   expect(@ep_attrs).to include(@attrs)
 end

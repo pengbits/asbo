@@ -103,12 +103,15 @@ export const refreshPlatform = function({nickname}) {
       type: REFRESH_PLATFORM,
       payload: API.refreshPlatform({nickname,filter,page})
         .then (json => {
+          // handle with middleware or chaining?
+          console.log(`|platforms| on refresh, set last_page to ${json.last_page +1}`)
           return {
             platform: json
           }
         })
-    })
+      })
   }
+  
 }
 
 export const destroyPlatform = function({nickname}){

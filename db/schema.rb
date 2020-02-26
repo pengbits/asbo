@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330142948) do
+ActiveRecord::Schema.define(version: 20180906153751) do
 
   create_table "episodes", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180330142948) do
     t.boolean "use_relative_images"
     t.string "default_image"
     t.text "post_processing_rules"
+    t.integer "last_page"
   end
 
 end

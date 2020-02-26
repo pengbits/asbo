@@ -10,6 +10,7 @@ end
 
 Then("the platform will contain an episode with this image {string}") do |src|
   @ep = @platform.episodes.find do |ep|
+    puts ep.image
     ep.image == src
   end
   expect(@ep).to be_truthy

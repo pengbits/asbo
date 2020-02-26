@@ -47,6 +47,7 @@ class PlatformsController < ApplicationController
     begin
       platform_from_nickname_param
       @platform.episodes.delete_all
+      @platform.update(last_page: 0)
       render json: {
         :success => :true, 
         :platform => platform_with_episodes
